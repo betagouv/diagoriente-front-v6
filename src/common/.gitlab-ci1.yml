@@ -1,0 +1,19 @@
+stages:
+  - deploy
+deploy-front-v5-submodule:
+  stage: deploy
+  environment: upgrade-prod
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install rsync openssh-client zip unzip -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n \tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - 'echo -e "Host * " >> ~/.ssh/config'
+
+  script:
+    - ssh root@51.75.235.166 "cd /var/www/upgrade-submodule/diagoriente5-sub-module/ && git fetch --all && git reset --hard origin/upgrade && git pull origin upgrade "
+
+  only:
+    - upgrade
+  when: always

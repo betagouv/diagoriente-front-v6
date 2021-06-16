@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'ocean';
+  src: url('./assets/fonts/ocean-six.ttf');
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/Montserrat-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat-bold';
+  src: url('./assets/fonts/Montserrat-Bold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat-semi';
+  src: url('./assets/fonts/Montserrat-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Montserrat-italic';
+  src: url('./assets/fonts/Montserrat-LightItalic.ttf');
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Montserrat';
+  background-color: #f5f6fb;
+}
+
+* {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+button:focus {
+  outline: none;
+}
+
+.apexcharts-tooltip {
+  transform: scale(0.75);
+  @media (max-width: 900px) {
+    transform: scale(1);
+  }
+}
