@@ -32,7 +32,8 @@
     "@typescript-eslint/semi": ["error", "always"],
     "max-len": [1, 120],
     "prefer-template": "error",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "prettier/prettier": "warn"
   },
   "env": {
     "node": true
