@@ -9,6 +9,7 @@ import LoginContainer from 'containers/LoginContainer';
 import RegisterContainer from 'containers/RegisterContainer';
 import { usePosthog } from '../common/hooks/usePosthog';
 import { useMyAnalyticsProfile } from '../requests/analytics';
+import OnBoardingContainer from './OnBoardingContainer/OnBoardingContainer';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -40,6 +41,7 @@ const RootContainer = () => {
           <Route exact path="/" component={HomeContainer} />
           <Route footer path="/login" exact component={LoginContainer} />
           <Route footer path="/register" exact component={RegisterContainer} />
+          <Route path="/onboarding" exact component={OnBoardingContainer} />
         </Switch>
       </SnackBarContext.Provider>
     </UserContext.Provider>
