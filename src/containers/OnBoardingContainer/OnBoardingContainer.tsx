@@ -15,13 +15,11 @@ type ButtonWithPopoverProps = {
   popover?: string;
 };
 
-// eslint-disable-next-line react/prop-types
 const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover, children }) => {
   const [popoverShow, setPopoverShow] = useState(false);
   const btnRef = React.createRef<any>();
   const popoverRef = React.createRef<any>();
   const openPopover = () => {
-    // @ts-ignore
     createPopper(btnRef.current, popoverRef.current, {
       placement: 'top',
       modifiers: [
@@ -48,15 +46,12 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
             <button
               type="button"
               className="focus:ring-0 focus:outline-none"
-              onClick={() => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                popoverShow ? closePopover() : openPopover();
-              }}
+              onClick={() => (popoverShow ? closePopover() : openPopover())}
             >
               <img className="pl-4" src={OnBoardingPictoHelpSvg} alt="Picto Help" />
             </button>
           </div>
-          <div className={clsx(popoverShow ? '' : 'hidden', 'block z-50')} style={{ width: '90%' }} ref={popoverRef}>
+          <div className={clsx(!popoverShow && 'hidden', 'block z-50')} style={{ width: '90%' }} ref={popoverRef}>
             <div className="bg-white border-0 font-normal leading-normal text-sm  text-left no-underline break-words rounded-lg">
               <button
                 onClick={closePopover}
@@ -160,7 +155,9 @@ const ChoiceComponent = () => {
                 <ButtonWithPopover popover="Garder des enfants, des animaux, aider un voisin, organiser un événement...">
                   personnelles
                 </ButtonWithPopover>
-                <ButtonWithPopover popover="Service civique, bénévolat, vie associative...">d'engagement</ButtonWithPopover>
+                <ButtonWithPopover popover="Service civique, bénévolat, vie associative...">
+                  d'engagement
+                </ButtonWithPopover>
               </div>
             </div>
             <div>
@@ -177,7 +174,11 @@ const ChoiceComponent = () => {
             </button>
           </div>
           <h2 className="font-bold text-lena-blue-dark text-lg w-4/5 mb-6">Explication de comment ça marche</h2>
-          <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor expedita facere ipsum laudantium quam? Adipisci aperiam corporis dolorem ea eius et excepturi inventore libero magnam natus nostrum odio officia, officiis placeat quam quia quis reiciendis sequi soluta voluptates!</p>
+          <p className="mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor expedita facere ipsum laudantium quam?
+            Adipisci aperiam corporis dolorem ea eius et excepturi inventore libero magnam natus nostrum odio officia,
+            officiis placeat quam quia quis reiciendis sequi soluta voluptates!
+          </p>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, iure.</p>
         </div>
       )}
