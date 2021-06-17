@@ -1,6 +1,4 @@
-import React, {
-  Suspense, lazy, ComponentType, ComponentProps,
-} from 'react';
+import React, { Suspense, lazy, ComponentType, ComponentProps } from 'react';
 import Loader from 'components/Layout/loader/loader';
 
 export default function <T extends ComponentType<any>>(path: () => Promise<{ default: T }>) {

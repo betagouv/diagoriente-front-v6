@@ -3,9 +3,7 @@ import UserContext from 'common/contexts/UserContext';
 import DrawerContext from 'common/contexts/DrawerContext';
 
 import { encodeUri } from 'common/utils/url';
-import {
-  Route as BaseRoute, Redirect, RouteProps as BaseRouteProps, useLocation,
-} from 'react-router-dom';
+import { Route as BaseRoute, Redirect, RouteProps as BaseRouteProps, useLocation } from 'react-router-dom';
 /* import PrivateHeader from 'components/Layout/Header/Header';
  */ import PrivateDrawer from 'components/Layout/Drawer/Drawer';
 
@@ -23,9 +21,7 @@ export interface RouteProps extends BaseRouteProps {
 
 // u can add extra props to customise/add headers/footers/sidebars...
 
-const Route = ({
-  protected: protectedProp, footer, header, authorizedRole, ...rest
-}: RouteProps) => {
+const Route = ({ protected: protectedProp, footer, header, authorizedRole, ...rest }: RouteProps) => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const { user } = useContext(UserContext);
