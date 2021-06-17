@@ -3,7 +3,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { client } from 'common/requests/client';
 
-import RootContainer from 'containers/routeContainer';
+import './index.css';
+
+import RootContainer from 'containers/RootContainer';
 
 function App() {
   return (

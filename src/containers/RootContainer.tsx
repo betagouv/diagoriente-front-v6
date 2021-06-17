@@ -4,9 +4,9 @@ import UserContext from 'common/contexts/UserContext';
 import useRoot from 'common/hooks/useRoot';
 import Route from 'components/ui/Route';
 import SnackBarContext, { snackbarState, snackbarReducer } from 'common/contexts/SnackbarContext';
-import HomeContainer from 'containers/homeContainer/homeContainer';
-import LoginContainer from 'containers/loginContainer';
-import RegisterContainer from 'containers/registerContainer';
+import HomeContainer from 'containers/HomeContainer/HomeContainer';
+import LoginContainer from 'containers/LoginContainer';
+import RegisterContainer from 'containers/RegisterContainer';
 import { usePosthog } from '../common/hooks/usePosthog';
 import { useMyAnalyticsProfile } from '../requests/analytics';
 

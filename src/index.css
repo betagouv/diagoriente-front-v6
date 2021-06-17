@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: local('Atkinson Hyperlegible Regular'), local('Atkinson-Hyperlegible-Regular'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: local('Atkinson Hyperlegible Bold'), local('Atkinson-Hyperlegible-Bold'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: local('Atkinson Hyperlegible Bold Italic'), local('Atkinson-Hyperlegible-BoldItalic'),
+      url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: local('Atkinson Hyperlegible Italic'), local('Atkinson-Hyperlegible-Italic'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+}

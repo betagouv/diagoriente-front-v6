@@ -4,8 +4,6 @@ import {
 } from 'formik';
 import { validateEmail, validatePassword } from 'common/utils/validation';
 
-import style from './style.module.scss';
-
 const LoginContainer = () => {
   const initialValues = { email: '', password: '' };
   const validateForm = (values: { email: string; password: string }) => {
@@ -23,7 +21,7 @@ const LoginContainer = () => {
     return errors;
   };
   return (
-    <div className={style.container}>
+    <div>
       <span>Login</span>
       <div>
         <Formik
