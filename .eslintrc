@@ -1,7 +1,7 @@
 {
   "plugins": ["prettier"],
   "parser": "@typescript-eslint/parser",
-  "extends": ["plugin:react/recommended", "airbnb-typescript"],
+  "extends": ["plugin:react/recommended", "airbnb-typescript", "plugin:prettier/recommended"],
   "rules": {
     "react/button-has-type": 0,
     "arrow-parens": [
@@ -31,7 +31,8 @@
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],
     "max-len": [1, 120],
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "react/no-unescaped-entities": "off"
   },
   "env": {
     "node": true
