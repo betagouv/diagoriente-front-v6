@@ -2,6 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'common/utils/classNames';
 import { Transition } from 'react-transition-group';
+import CrossSvg from "assets/images/svg/picto/cross_turquoise.svg";
 import style from './style.module.scss';
 
 interface IProps {
@@ -31,7 +32,7 @@ const ModalContainer = ({
   body,
   backdropClassName,
   withoutClose,
-  close,
+  close
 }: IProps) =>
   createPortal(
     <>
@@ -70,13 +71,13 @@ const ModalContainer = ({
             >
               {!withoutClose && (
                 <div className={style.headerModal} onClick={onClose}>
-                  {/* <img
-                    src={CloseIcon}
+                  <img
+                    src={CrossSvg}
                     alt=" "
                     height={24}
                     width={26}
                     className={classNames(style.closeButton, close)}
-                  /> */}
+                  />
                 </div>
               )}
               <div className={classNames(style.modalBody, body)}>{children}</div>

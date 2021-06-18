@@ -10,7 +10,7 @@ export type ModalProps = {
   variant?: 'primary' | 'secondary';
 };
 
-export const ProgressBar: FunctionComponent<ModalProps> = ({
+const ModalComponent: FunctionComponent<ModalProps> = ({
   open,
   variant = 'primary',
   onClose,
@@ -29,10 +29,10 @@ export const ProgressBar: FunctionComponent<ModalProps> = ({
         className={clsx('modal-overlay absolute w-full h-full top-0 left-0 bg-gray-900 opacity-100')}
       />
       <div
-        style={{ height: isMobile ? '95%' : 'auto' }}
+        style={{ height: 'auto', maxHeight: "95%" }}
         className={clsx(
           'rounded-lg z-50 relative',
-          !isMobile ? 'w-1/2 mx-auto' : 'm-5',
+          !isMobile ? 'w-1/2 mx-auto' : 'm-5 w-full',
           variant === 'primary' && 'bg-white',
           variant === 'secondary' && 'bg-lena-turquoise-light',
         )}
@@ -61,4 +61,4 @@ export const ProgressBar: FunctionComponent<ModalProps> = ({
   );
 };
 
-export default ProgressBar;
+export default ModalComponent;
