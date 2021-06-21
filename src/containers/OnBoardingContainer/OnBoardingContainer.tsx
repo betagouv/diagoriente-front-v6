@@ -41,11 +41,14 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
       <div className="flex flex-wrap">
         {popoverShow && <div className="fixed bg-lena-blue-dark bg-opacity-50 z-10 w-full h-full top-0 left-0" />}
         <div className="w-full text-center">
-          <div ref={btnRef} className={clsx('flex mb-5', popoverShow && 'z-30 relative')}>
-            <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md">{children}</button>
+          <div ref={btnRef} className={clsx('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
+            <button className="bg-lena-blue w-full text-white font-bold md:w-72 py-3 rounded-md">{children}</button>
+            <div className="md:w-72 hidden md:block w-full mx-auto text-lena-blue-dark italic text-sm mt-2">
+              {popover}
+            </div>
             <button
               type="button"
-              className="focus:ring-0 focus:outline-none"
+              className="focus:ring-0 focus:outline-none md:hidden"
               onClick={() => (popoverShow ? closePopover() : openPopover())}
             >
               <img className="pl-4" src={OnBoardingPictoHelpSvg} alt="Picto Help" />
@@ -83,7 +86,7 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => (
       backgroundSize: 'cover',
     }}
   >
-    <div className="flex flex-col justify-center h-full items-center text-center mx-5 space-y-20">
+    <div className="md:container md:mx-auto flex flex-col justify-center h-full items-center text-center mx-5 space-y-20">
       <div>
         <h6 className="text-white text-xl font-normal mb-1">Bienvenue sur</h6>
         <img
@@ -94,19 +97,17 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => (
         />
         <span className="italic block text-white text-xl">Trouvez le métier fait pour vous !</span>
       </div>
-      <div className="w-full">
+      <div className="w-full md:w-auto md:flex md:flex-col">
         <button
           onClick={() => onClick.call(null)}
-          className="bg-white rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm mb-4"
+          className="bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14 block text-lena-blue-dark font-bold text-sm mb-4"
         >
           Je ne sais pas vers quel métier m'orienter
           <br />
           Je veux me réorienter
         </button>
-        <button className="bg-white rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm">
-          J'ai une idée précise du métier
-          <br />
-          que je recherche
+        <button className="bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm">
+          J'ai une idée précise du métier que je recherche
         </button>
         <span className="text-white inline-block mt-10">Comment ça marche ?</span>
       </div>
@@ -147,8 +148,8 @@ const ChoiceComponent = () => {
         <div className="text-center mt-14 mx-5 h-full">
           <div className="space-y-10">
             <div>
-              <h2>Je renseigne mes expériences...</h2>
-              <div className="mt-5">
+              <h2 className="text-lena-blue-dark font-bold text-lg">Je commence par renseigner mes expériences...</h2>
+              <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
                 <ButtonWithPopover popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence.">
                   professionnelles
                 </ButtonWithPopover>
@@ -166,7 +167,7 @@ const ChoiceComponent = () => {
           </div>
         </div>
       ) : (
-        <div className="mx-8 mt-7">
+        <div className="mx-8 mt-7 md:container md:mx-auto">
           <div className="mb-7">
             <button onClick={() => setShowHelp(false)} className="flex items-center focus:ring-0 focus:outline-none">
               <img src={ArrowLeftSvg} alt="Arrow Left Icon" />

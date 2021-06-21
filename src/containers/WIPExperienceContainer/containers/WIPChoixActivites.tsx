@@ -11,7 +11,7 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   const [text, setText] = useState(String);
 
   const handleSend = () => {
-    if(text.length > 0) {
+    if (text.length > 0) {
       onSend.call(null, text);
       onClose.call(null);
     }
@@ -33,10 +33,16 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
       <span className="text-sm text-lena-pink mt-2 block">
         {140 - text.length} caractère{140 - text.length > 1 && 's'} restant{140 - text.length > 1 && 's'}
       </span>
-      <button onClick={handleSend} className="mt-6 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg">
+      <button
+        onClick={handleSend}
+        className="mt-6 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg"
+      >
         Valider
       </button>
-      <button onClick={() => onClose.call(null)} className="mt-2 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg">
+      <button
+        onClick={() => onClose.call(null)}
+        className="mt-2 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg"
+      >
         Annuler
       </button>
     </div>
@@ -91,7 +97,7 @@ const WipChoixActivites: FunctionComponent = () => {
     <ParcoursLayout>
       {!showNewActivity ? (
         <>
-          <div className="relative min-h-full">
+          <div className="relative min-h-full md:min-h-0">
             <div className="text-lena-blue-dark">
               Dans le cadre de la boulangerie, quelles sont les <strong>activités</strong> que vous pratiquez ?
             </div>

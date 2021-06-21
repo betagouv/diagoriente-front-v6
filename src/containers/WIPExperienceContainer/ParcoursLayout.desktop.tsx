@@ -8,7 +8,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
   const isDesktop = useMediaQuery('md');
 
   return (
-    <div className="min-h-screen h-full flex flex-col">
+    <div className="min-h-screen h-full flex flex-col relative">
       {isDesktop && <AppHeader />}
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col">
@@ -21,7 +21,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex">{children}</div>
+        <div className="w-full flex flex-col container p-14">{children}</div>
       </div>
     </div>
   );
