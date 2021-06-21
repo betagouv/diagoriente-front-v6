@@ -4,7 +4,7 @@ import ParcoursLayout from "../ParcoursLayout";
 
 const WipAddActivityDone: FunctionComponent = () => (
   <ParcoursLayout>
-    <div className="bg-lena-blue-darkest min-h-screen flex flex-col flex-1">
+    <div className="bg-lena-blue-darkest min-h-screen md:min-h-0 flex flex-col flex-1">
       <div className="text-white flex flex-col flex-1 items-center justify-center">
         <div className="container flex flex-col items-center justify-center space-y-8">
           <div className="text-2xl font-bold">Merci !</div>
