@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import clsx from 'clsx';
 import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 export type ModalProps = {
   open: boolean;
@@ -21,18 +22,21 @@ const ModalComponent: FunctionComponent<ModalProps> = ({
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
 
+  const mediaQueryMD = useMediaQuery("md");
+
   return !open ? null : (
-    <div className={clsx('fixed w-full h-full flex items-center justify-center top-0 left-0')}>
+    <div className={clsx('fixed w-full h-full flex items-center justify-center top-0 left-0 md:absolute')}>
       <div
         onClick={() => onClose?.call(null)}
         style={{ backgroundColor: 'rgba(1, 26, 94, .2)' }}
-        className={clsx('modal-overlay absolute w-full h-full top-0 left-0 bg-gray-900 opacity-100')}
+        className={clsx('modal-overlay absolute md:fixed w-full  h-full top-0 left-0 bg-gray-900 opacity-100')}
       />
       <div
         style={{ height: 'auto', maxHeight: "95%" }}
         className={clsx(
           'rounded-lg z-50 relative',
-          !isMobile ? 'w-1/2 mx-auto' : 'm-5 w-full',
+          !isMobile ? 'w-1/2 mx-auto' : 'm-5',
+          mediaQueryMD ? "w-1/2" : "w-full",
           variant === 'primary' && 'bg-white',
           variant === 'secondary' && 'bg-lena-turquoise-light',
         )}

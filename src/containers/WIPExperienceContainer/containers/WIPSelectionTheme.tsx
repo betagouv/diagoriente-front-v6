@@ -6,6 +6,7 @@ import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
 import ParcoursLayout from '../ParcoursLayout';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 type JobTag = {
   id: number | undefined;
@@ -15,9 +16,7 @@ type JobTag = {
 const SearchJobTag: FunctionComponent<JobTag> = ({ id, tags, children }) => {
   return (
     <div>
-      <button
-        className={clsx('focus-:ring-0 focus:outline-none w-full px-7 py-1 text-left flex justify-between')}
-      >
+      <button className={clsx('focus-:ring-0 focus:outline-none w-full px-7 py-1 text-left flex justify-between')}>
         {children}
       </button>
       <ul className="px-7 py-1 list-inside">
@@ -185,22 +184,99 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
   );
 };
 
+const DomainList: FunctionComponent = () => {
+  const [domains, setDomains] = useState<Domains>();
+  const [domainHelp, setDomainHelp] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    setDomains({
+      domains: [
+        {
+          id: 1,
+          name: 'Cordonnier',
+          jobs: ['test', 'lol', 'hello word'],
+        },
+        {
+          id: 2,
+          name: 'Soins esthétiques et corporels',
+          jobs: [
+            'J’accueille une clientèle',
+            'Je propose un service et/ou un produit adapté',
+            'Je nettoie et je prépare le corps, le visage',
+          ],
+        },
+      ],
+      tags: [
+        {
+          id: 1,
+          name: '#lol',
+          tags: ['lol', 'mdr'],
+        },
+        {
+          id: 2,
+          name: '#coucou',
+          tags: ['dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go',],
+        },
+      ],
+    });
+  }, [domains]);
+
+  return (
+    <div style={{ boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)', maxHeight: "calc(100vh - 42vh)" }} className="border border-lena-lightgray rounded-md overflow-y-auto">
+      <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
+        <strong>Métiers</strong>
+      </div>
+      {typeof domains !== 'undefined' &&
+        domains.domains.map((domain) => (
+          <SearchJobDomain
+            onActive={(e: number | undefined) => setDomainHelp(e)}
+            idActive={domainHelp}
+            key={domain.id}
+            id={domain.id}
+            jobs={domain.jobs}
+          >
+            {domain.name}
+          </SearchJobDomain>
+        ))}
+      <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
+        <strong>Tags</strong>
+      </div>
+      {typeof domains !== 'undefined' &&
+        domains.tags.map((domain) => (
+          <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
+            {domain.name}
+          </SearchJobTag>
+        ))}
+    </div>
+  );
+};
+
 const WipSelectionTheme: FunctionComponent = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const mediaQueryMD = useMediaQuery('md');
   return !showSearch ? (
     <ParcoursLayout>
-      <div className="flex flex-col items-center justify-start space-y-8">
-        <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4">
-          <PictoExpPro />
-          <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
+      <div className="flex flex-col items-center justify-start space-y-8 md:p-14">
+        <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5">
+          <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
+            <PictoExpPro />
+            <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
+          </div>
+          <div className="text-lena-blue-dark">Décrivez en quelques mots votre expérience professionnelle :</div>
+          <div className="w-3/4">
+            <input
+              onClick={() => mediaQueryMD === false && setShowSearch(true)}
+              type="text"
+              className="border-red-400 rounded-md w-full"
+              placeholder="Vente de fleurs"
+            />
+          </div>
+          <div className="w-full">
+            {mediaQueryMD &&
+              <DomainList />
+            }
+          </div>
         </div>
-        <div className="text-lena-blue-dark">Décrivez en quelques mots votre expérience professionnelle :</div>
-        <input
-          onClick={() => setShowSearch(true)}
-          type="text"
-          className="border-red-400 rounded-md w-full"
-          placeholder="Vente de fleurs"
-        />
       </div>
     </ParcoursLayout>
   ) : (

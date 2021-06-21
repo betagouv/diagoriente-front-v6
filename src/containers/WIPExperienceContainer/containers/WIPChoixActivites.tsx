@@ -96,7 +96,7 @@ const WipChoixActivites: FunctionComponent = () => {
   return (
     <ParcoursLayout>
       {!showNewActivity ? (
-        <div className="p-14">
+        <div className="md:p-14">
           <div className="relative min-h-full md:min-h-0">
             <div className="text-lena-blue-dark">
               Dans le cadre de la boulangerie, quelles sont les <strong>activités</strong> que vous pratiquez ?
@@ -104,7 +104,7 @@ const WipChoixActivites: FunctionComponent = () => {
             <div className="italic mt-2">Plusieurs choix possibles</div>
           </div>
           <div className="w-full mt-8 relative mb-24">
-            <div className="md:grid md:grid-cols-2 gap-4">
+            <div className="md:grid md:grid-cols-2 gap-4 space-y-3 md:space-y-0">
               {activities.map((acti) => (
                 <SelectorTest onClick={(e) => handleCheck(acti.id, e)} checked={verifyIfCheck(acti.id)}>
                   {acti.name}

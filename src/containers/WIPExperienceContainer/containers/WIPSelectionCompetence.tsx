@@ -145,7 +145,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
 
   return (
     <ParcoursLayout>
-      <div className="flex flex-col items-center justify-start space-y-8">
+      <div className="flex flex-col items-center justify-start space-y-8 md:p-14 relative">
         <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-40 w-40 space-y-2 p-4">
           <PictoSorganiserSvg />
           <div className="text-center text-lena-gray-dark text-xl">S'organiser</div>
@@ -156,7 +156,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
           </div>
           <div className="italic mt-2">Plusieurs choix possibles</div>
         </div>
-        <div className="w-full flex flex-col space-y-2">
+        <div className="w-full md:w-1/2 flex flex-col space-y-2">
           {skills &&
             skills.map((skill) => (
               <SelectorTest key={skill.id} onClick={(e) => handleCheck(skill, e)} checked={verifyIfCheck(skill.id)}>

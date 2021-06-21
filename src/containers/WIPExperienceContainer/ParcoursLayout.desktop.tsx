@@ -41,7 +41,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col">{children}</div>
+        <div className="w-full flex flex-col md:relative">{children}</div>
       </div>
     </div>
   );
