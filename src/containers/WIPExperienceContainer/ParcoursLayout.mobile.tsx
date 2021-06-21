@@ -12,7 +12,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
           <UserProfileIcon />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-start flex-1">{children}</div>
+      <div className="container flex flex-col items-center justify-start mt-16 flex-1">{children}</div>
     </div>
   );
 };
