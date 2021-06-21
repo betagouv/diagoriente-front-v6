@@ -7,8 +7,10 @@ import SnackBarContext, { snackbarState, snackbarReducer } from 'common/contexts
 import HomeContainer from './HomeContainer/HomeContainer';
 import LoginContainer from './LoginContainer';
 import RegisterContainer from './RegisterContainer';
-import OnBoardingContainer from './OnBoardingContainer/OnBoardingContainer';
+import OnBoardingContainer from './OnBoardingContainer';
 import WipExperienceContainer from './WIPExperienceContainer/WIPExperienceContainer';
+import ProfileContainer from './ProfileContainer';
+import PageNotFoundContainer from './PageNotFoundContainer';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -21,10 +23,13 @@ const RootContainer = () => {
       <SnackBarContext.Provider value={{ state, dispatch }}>
         <Switch>
           <Route exact path="/" component={HomeContainer} />
-          <Route footer path="/login" exact component={LoginContainer} />
-          <Route footer path="/register" exact component={RegisterContainer} />
-          <Route path="/onboarding" exact component={OnBoardingContainer} />
-          <Route footer path="/experience" component={WipExperienceContainer} />
+          <Route exact path="/login" component={LoginContainer} />
+          <Route exact path="/register" component={RegisterContainer} />
+          <Route exact path="/onboarding" component={OnBoardingContainer} />
+          <Route exact path="/profile" component={ProfileContainer} />
+          <Route path="/experience" component={WipExperienceContainer} />
+          <Route exact path="/404" component={PageNotFoundContainer} />
+          <Route component={PageNotFoundContainer} />
         </Switch>
       </SnackBarContext.Provider>
     </UserContext.Provider>
