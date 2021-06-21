@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import AppLayout from 'layouts/AppLayout';
 import Illustration from 'assets/images/illu_01.png';
+import ParcoursLayout from '../ParcoursLayout';
 
 const WipAddExperienceDone: FunctionComponent = () => (
-  <AppLayout>
+  <ParcoursLayout>
     <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center">
       <div className="container flex flex-col items-center justify-center text-center space-y-8">
         <div className="text-2xl font-bold">Merci !</div>
@@ -28,7 +29,7 @@ const WipAddExperienceDone: FunctionComponent = () => (
         </div>
       </div>
     </div>
-  </AppLayout>
+  </ParcoursLayout>
 );
 
 export default WipAddExperienceDone;
