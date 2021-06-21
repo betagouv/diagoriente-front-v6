@@ -18,7 +18,7 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   };
 
   return (
-    <div>
+    <div className="p-14">
       <h3 className="text-lena-blue-dark mb-7">
         Si elle n’est pas dans la liste, décrivez vous-même <strong>une activité</strong> que vous pratiquez :
       </h3>
@@ -96,31 +96,35 @@ const WipChoixActivites: FunctionComponent = () => {
   return (
     <ParcoursLayout>
       {!showNewActivity ? (
-        <>
+        <div className="p-14">
           <div className="relative min-h-full md:min-h-0">
             <div className="text-lena-blue-dark">
               Dans le cadre de la boulangerie, quelles sont les <strong>activités</strong> que vous pratiquez ?
             </div>
             <div className="italic mt-2">Plusieurs choix possibles</div>
           </div>
-          <div className="w-full mt-8 space-y-3 relative mb-24">
-            {activities.map((acti) => (
-              <SelectorTest onClick={(e) => handleCheck(acti.id, e)} checked={verifyIfCheck(acti.id)}>
-                {acti.name}
-              </SelectorTest>
-            ))}
-            <div className="flex justify-center">
+          <div className="w-full mt-8 relative mb-24">
+            <div className="md:grid md:grid-cols-2 gap-4">
+              {activities.map((acti) => (
+                <SelectorTest onClick={(e) => handleCheck(acti.id, e)} checked={verifyIfCheck(acti.id)}>
+                  {acti.name}
+                </SelectorTest>
+              ))}
+            </div>
+            <div className="flex justify-center md:mt-10">
               <button onClick={() => setShowNewActivity(true)} className="text-lena-blue-dark font-bold mt-2">
                 Ajouter une activité non listée
               </button>
             </div>
           </div>
-          <div className="fixed bottom-0 left-0 right-0">
-            <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg">
-              Valider
-            </button>
+          <div className="flex justify-center">
+            <div className="fixed bottom-0 left-0 right-0 md:relative">
+              <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg">
+                Valider
+              </button>
+            </div>
           </div>
-        </>
+        </div>
       ) : (
         <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />
       )}

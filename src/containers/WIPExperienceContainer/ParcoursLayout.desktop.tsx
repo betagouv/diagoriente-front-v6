@@ -21,7 +21,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col container p-14">{children}</div>
+        <div className="w-full flex flex-col">{children}</div>
       </div>
     </div>
   );
