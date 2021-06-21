@@ -18,7 +18,7 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   };
 
   return (
-    <div className="p-14">
+    <div className="md:p-14 2xl:w-1/2 mx-auto">
       <h3 className="text-lena-blue-dark mb-7">
         Si elle n’est pas dans la liste, décrivez vous-même <strong>une activité</strong> que vous pratiquez :
       </h3>
@@ -104,7 +104,7 @@ const WipChoixActivites: FunctionComponent = () => {
             <div className="italic mt-2">Plusieurs choix possibles</div>
           </div>
           <div className="w-full mt-8 relative mb-24">
-            <div className="md:grid md:grid-cols-2 gap-4 space-y-3 md:space-y-0">
+            <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
               {activities.map((acti) => (
                 <SelectorTest onClick={(e) => handleCheck(acti.id, e)} checked={verifyIfCheck(acti.id)}>
                   {acti.name}
