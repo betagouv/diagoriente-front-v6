@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const AppHeader: FunctionComponent = () => {
   return (
-    <header className="bg-white flex flex-row justify-between px-8 py-4">
+    <header className="bg-white flex flex-row justify-between px-8 py-4 shadow-md">
       <div className="flex flex-row items-center justify-center space-x-6">
         <Link to="/">
           <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="w-40 lg:w-52" />
