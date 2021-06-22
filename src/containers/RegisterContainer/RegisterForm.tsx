@@ -6,8 +6,8 @@ import FormComment from "components/Register/FormComment";
 import { useFormik } from "formik";
 import clsx from "clsx";
 import * as Yup from 'yup';
-
-const passwordRegex = new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/);
+import { regexPassword } from "../../utils/validation";
+import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from "../../common/utils/validation";
 
 const RegisterForm: FunctionComponent = () => {
   const formik = useFormik({
@@ -23,7 +23,7 @@ const RegisterForm: FunctionComponent = () => {
       firstName: Yup.string().required('Ce champ est obligatoire'),
       lastName: Yup.string().required('Ce champ est obligatoire'),
       email: Yup.string().email('Votre adresse e-mail est invalide').required('Ce champ est obligatoire'),
-      password: Yup.string().matches(passwordRegex, "Votre mot de passe est invalide").required("Ce champ est obligatoire"),
+      password: Yup.string().matches(regexPassword, "Votre mot de passe est invalide").required("Ce champ est obligatoire"),
       city: Yup.string().required("Ce champ est obligatoire"),
     }),
     onSubmit: (values) => {
@@ -94,12 +94,24 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel />
             <FormComment>
-              <div>Votre mot de passe doit comporter 6 caractères minimum, dont :</div>
+              <div>Votre mot de passe doit comporter <span className={
+                clsx(
+                  formik.values.password.length >= 6 && "text-lena-blue"
+                )
+              }>6 caractères minimum</span>, dont :</div>
               <ul className="list-disc ml-4 mt-1">
-                <li className="font-bold">1 majuscule</li>
-                <li className="font-bold">1 minuscule</li>
-                <li className="font-bold">1 chiffre</li>
-                <li className="font-bold">1 caractère spécial</li>
+                <li className={clsx(
+                  hasUppercase(formik.values.password)? "text-lena-blue" : "font-bold"
+                )}>1 majuscule</li>
+                <li className={clsx(
+                  hasLowercase(formik.values.password) ? "text-lena-blue" : "font-bold"
+                )}>1 minuscule</li>
+                <li className={clsx(
+                  hasNumber(formik.values.password)? "text-lena-blue" : "font-bold"
+                )}>1 chiffre</li>
+                <li className={clsx(
+                  hasSpecial(formik.values.password) ? "text-lena-blue" : "font-bold"
+                )}>1 caractère spécial</li>
               </ul>
             </FormComment>
           </FormControl>
