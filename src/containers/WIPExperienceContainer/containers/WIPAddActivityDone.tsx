@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import Illustration from "assets/svg/illu_01.svg";
-import ParcoursLayout from "../ParcoursLayout";
+import React, { FunctionComponent } from 'react';
+import Illustration from 'assets/svg/illu_01.svg';
+import ParcoursLayout from '../ParcoursLayout';
 
 const WipAddActivityDone: FunctionComponent = () => (
   <ParcoursLayout>
-    <div className="bg-lena-blue-darkest min-h-screen md:min-h-0 flex flex-col flex-1">
+    <div className="bg-lena-blue-darkest flex flex-col flex-1">
       <div className="text-white flex flex-col flex-1 items-center justify-center">
         <div className="container flex flex-col items-center justify-center space-y-8">
           <div className="text-2xl font-bold">Merci !</div>
@@ -16,8 +16,7 @@ const WipAddActivityDone: FunctionComponent = () => (
             activités.
           </div>
           <div className="fixed bottom-0 left-0 right-0 md:relative">
-            <button
-              className="md:px-14 md:rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg">
+            <button className="md:px-14 md:rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg">
               Sélectionner les compétences
             </button>
           </div>

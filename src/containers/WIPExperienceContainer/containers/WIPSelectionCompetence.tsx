@@ -38,8 +38,7 @@ const ModalChoice: FunctionComponent<Choice> = ({ open, onClose, onSend, data })
                 onSelect={() => {
                   onSend.call(null, level);
                   onClose.call(null);
-                }
-                }
+                }}
                 selected={false}
                 starReverse
                 text_normal="Niveau"
@@ -133,7 +132,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
   };
 
   const handleAddLevel = (value: Levels) => {
-    if(skillSelected) {
+    if (skillSelected) {
       const skill = {
         id: skillSelected.id,
         name: skillSelected.name,
@@ -156,7 +155,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
           </div>
           <div className="italic mt-2">Plusieurs choix possibles</div>
         </div>
-        <div className="w-full md:w-1/2 flex flex-col space-y-2">
+        <div className="flex flex-col space-y-2">
           {skills &&
             skills.map((skill) => (
               <SelectorTest key={skill.id} onClick={(e) => handleCheck(skill, e)} checked={verifyIfCheck(skill.id)}>

@@ -2,15 +2,12 @@ import React, { FunctionComponent } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
 import AppHeader from '../../layouts/AppHeader';
-import useMediaQuery from '../../hooks/useMediaQuery';
 import { ReactComponent as PictoExpPro } from '../../assets/svg/exp_professional.svg';
 
 const ParcoursLayout: FunctionComponent = ({ children }) => {
-  const isDesktop = useMediaQuery('md');
-
   return (
     <div className="min-h-screen h-full flex flex-col relative">
-      {isDesktop && <AppHeader />}
+      <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col">
           <ProgressBar value={20} />
@@ -28,9 +25,10 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
                 </div>
                 <div>
                   <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
-                  <ul className="list-disc">
+                  <ul className="list-disc list-inside">
                     <li>Activité A</li>
                     <li>Activité B</li>
+                    <li>Activité C</li>
                   </ul>
                 </div>
               </div>

@@ -215,14 +215,38 @@ const DomainList: FunctionComponent = () => {
         {
           id: 2,
           name: '#coucou',
-          tags: ['dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go','dia', 'go',],
+          tags: [
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+            'dia',
+            'go',
+          ],
         },
       ],
     });
   }, [domains]);
 
   return (
-    <div style={{ boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)', maxHeight: "calc(100vh - 42vh)" }} className="border border-lena-lightgray rounded-md overflow-y-auto">
+    <div
+      style={{ boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)', maxHeight: 'calc(100vh - 42vh)' }}
+      className="border border-lena-lightgray rounded-md overflow-y-auto"
+    >
       <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
         <strong>Métiers</strong>
       </div>
@@ -271,11 +295,7 @@ const WipSelectionTheme: FunctionComponent = () => {
               placeholder="Vente de fleurs"
             />
           </div>
-          <div className="w-full">
-            {mediaQueryMD &&
-              <DomainList />
-            }
-          </div>
+          <div className="w-full">{mediaQueryMD && <DomainList />}</div>
         </div>
       </div>
     </ParcoursLayout>

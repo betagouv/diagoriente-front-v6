@@ -4,7 +4,7 @@ import WipAddExperienceDone from './containers/WIPAddExperienceDone';
 import WipSelectionTheme from './containers/WIPSelectionTheme';
 import WipChoixActivites from './containers/WIPChoixActivites';
 import WipSelectionCompetence from './containers/WIPSelectionCompetence';
-import WipDomainSelect from "./containers/WIPDomainSelect";
+import WipDomainSelect from './containers/WIPDomainSelect';
 import WipAddActivityDone from './containers/WIPAddActivityDone';
 
 const WipExperienceContainer: FunctionComponent = () => {
