@@ -1,36 +1,41 @@
-import React, { FunctionComponent } from 'react';
-import InputComponent from 'components/Register/Input';
-import Checkbox from 'components/Register/Checkbox';
-import { FormControl, FormLabel } from 'components/Register/FormController';
-import FormComment from 'components/Register/FormComment';
-import { useFormik } from 'formik';
-import clsx from 'clsx';
-import * as Yup from 'yup';
-import { regexPassword } from '../../utils/validation';
-import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from '../../common/utils/validation';
+import React, { FunctionComponent } from "react";
+import InputComponent from "components/Register/Input";
+import Checkbox from "components/Register/Checkbox";
+import { FormControl, FormLabel } from "components/Register/FormController";
+import FormComment from "components/Register/FormComment";
+import { useFormik } from "formik";
+import clsx from "clsx";
+import * as Yup from "yup";
+import { regexPassword } from "../../utils/validation";
+import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from "../../common/utils/validation";
 
 const RegisterForm: FunctionComponent = () => {
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      city: '',
-      codeGroup: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      city: "",
+      codeGroup: ""
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required(),
-      lastName: Yup.string().required(),
-      email: Yup.string().email().required(),
+      firstName: Yup.string()
+        .required(),
+      lastName: Yup.string()
+        .required(),
+      email: Yup.string()
+        .email()
+        .required(),
       password: Yup.string()
-        .matches(regexPassword, 'Votre mot de passe est invalide')
-        .required('Ce champ est obligatoire'),
-      city: Yup.string().required(),
+        .matches(regexPassword, "Votre mot de passe est invalide")
+        .required("Ce champ est obligatoire"),
+      city: Yup.string()
+        .required()
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-    },
+    }
   });
 
   return (
@@ -43,6 +48,7 @@ const RegisterForm: FunctionComponent = () => {
               isInvalid={!!formik.errors.firstName}
               value={formik.values.firstName}
               onChange={formik.handleChange}
+
               id="firstName"
               name="firstName"
               type="text"
@@ -50,7 +56,7 @@ const RegisterForm: FunctionComponent = () => {
             />
           </FormControl>
         </div>
-        {formik.errors.firstName ? (
+        {formik.touched.firstName && formik.errors.firstName ? (
           <div className="mb-4">
             <FormControl>
               <FormLabel />
@@ -60,7 +66,7 @@ const RegisterForm: FunctionComponent = () => {
             </FormControl>
           </div>
         ) : null}
-        <div className={clsx(formik.errors.lastName ? 'mb-2' : 'mb-7')}>
+        <div className={clsx(formik.errors.lastName && formik.touched.lastName ? "mb-" : "mb-7")}>
           <FormControl>
             <FormLabel htmlFor="lastName">Nom de famille *</FormLabel>
             <InputComponent
@@ -74,7 +80,7 @@ const RegisterForm: FunctionComponent = () => {
             />
           </FormControl>
         </div>
-        {formik.errors.lastName ? (
+        {formik.touched.lastName && formik.errors.lastName ? (
           <div className="mb-7">
             <FormControl>
               <FormLabel />
@@ -99,12 +105,12 @@ const RegisterForm: FunctionComponent = () => {
             />
           </FormControl>
         </div>
-        {formik.errors.lastName ? (
+        {formik.touched.email && formik.errors.email ? (
           <div className="mb-3">
             <FormControl>
               <FormLabel />
               <FormComment>
-                <div className="text-lena-pink">{formik.errors.lastName}</div>
+                <div className="text-lena-pink">{formik.errors.email}</div>
               </FormComment>
             </FormControl>
           </div>
@@ -128,21 +134,23 @@ const RegisterForm: FunctionComponent = () => {
             <FormLabel />
             <FormComment>
               <div>
-                Votre mot de passe doit comporter{' '}
-                <span className={clsx(formik.values.password.length >= 6 && 'text-lena-blue')}>
+                Votre mot de passe doit comporter{" "}
+                <span className={clsx(formik.values.password.length >= 6 ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
                   6 caractères minimum
                 </span>
                 , dont :
               </div>
               <ul className="list-disc ml-4 mt-1">
-                <li className={clsx(hasUppercase(formik.values.password) ? 'text-lena-blue' : 'font-bold')}>
+                <li className={clsx(hasUppercase(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
                   1 majuscule
                 </li>
-                <li className={clsx(hasLowercase(formik.values.password) ? 'text-lena-blue' : 'font-bold')}>
+                <li className={clsx(hasLowercase(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
                   1 minuscule
                 </li>
-                <li className={clsx(hasNumber(formik.values.password) ? 'text-lena-blue' : 'font-bold')}>1 chiffre</li>
-                <li className={clsx(hasSpecial(formik.values.password) ? 'text-lena-blue' : 'font-bold')}>
+                <li className={clsx(hasNumber(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>1
+                  chiffre
+                </li>
+                <li className={clsx(hasSpecial(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
                   1 caractère spécial
                 </li>
               </ul>
@@ -161,7 +169,7 @@ const RegisterForm: FunctionComponent = () => {
             />
           </FormControl>
         </div>
-        {formik.errors.city ? (
+        {formik.touched.city && formik.errors.city ? (
           <div className="mb-3">
             <FormControl>
               <FormLabel />
