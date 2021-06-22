@@ -18,10 +18,10 @@ const RegisterContainer = () => (
         </div>
       </div>
       <div
-        className="bg-lena-blue h-full hidden xl:block"
+        className="bg-lena-blue h-full hidden xl:flex items-center"
         style={{ width: 568, background: `url(${BgRegister}) no-repeat center`, backgroundSize: 'cover' }}
       >
-        <div className="invisible xl:visible absolute top-0 right-0">
+        <div className="invisible xl:visible relative">
           <img placeholder="blurred" src={HeroRegister} alt="Illustration" />
         </div>
       </div>

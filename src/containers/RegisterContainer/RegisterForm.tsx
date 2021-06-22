@@ -106,7 +106,7 @@ const RegisterForm: FunctionComponent = () => {
           </FormControl>
         </div>
         {formik.touched.email && formik.errors.email ? (
-          <div className="mb-3">
+          <div className="mb-2">
             <FormControl>
               <FormLabel />
               <FormComment>
@@ -115,7 +115,7 @@ const RegisterForm: FunctionComponent = () => {
             </FormControl>
           </div>
         ) : null}
-        <div className="mb-3">
+        <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="password">Mot de passe *</FormLabel>
             <InputComponent
@@ -129,7 +129,7 @@ const RegisterForm: FunctionComponent = () => {
             />
           </FormControl>
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <FormControl>
             <FormLabel />
             <FormComment>
@@ -157,7 +157,7 @@ const RegisterForm: FunctionComponent = () => {
             </FormComment>
           </FormControl>
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="city">Ville de résidence</FormLabel>
             <InputComponent
@@ -170,7 +170,7 @@ const RegisterForm: FunctionComponent = () => {
           </FormControl>
         </div>
         {formik.touched.city && formik.errors.city ? (
-          <div className="mb-3">
+          <div className="mb-2">
             <FormControl>
               <FormLabel />
               <FormComment>
@@ -179,7 +179,7 @@ const RegisterForm: FunctionComponent = () => {
             </FormControl>
           </div>
         ) : null}
-        <div className="mb-3">
+        <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="codeGroup">Code groupe</FormLabel>
             <InputComponent
