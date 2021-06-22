@@ -5,14 +5,14 @@ import ProgressBar from 'components/design-system/ProgressBar';
 const ParcoursLayout: FunctionComponent = ({ children }) => {
   return (
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
-      <div className="sticky top-0 shadow-md">
+      <div className="sticky top-0 shadow-md z-50">
         <ProgressBar value={20} />
         <div className="p-2 bg-lena-lightgray flex flex-row items-center justify-between">
           <div>[!!WIP!!] Breadcrumb EXP...</div>
           <UserProfileIcon />
         </div>
       </div>
-      <div className="container flex flex-col items-center justify-start mt-16 flex-1">{children}</div>
+      <div className="flex flex-col items-center justify-start flex-1">{children}</div>
     </div>
   );
 };

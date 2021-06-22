@@ -118,7 +118,7 @@ const WipChoixActivites: FunctionComponent = () => {
   return (
     <ParcoursLayout>
       {!showNewActivity ? (
-        <div className="md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
+        <div className="container py-8 md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
           <div className="relative min-h-full md:min-h-0">
             <div className="text-lena-blue-dark">
               Dans le cadre de la boulangerie, quelles sont les <strong>activités</strong> que vous pratiquez ?

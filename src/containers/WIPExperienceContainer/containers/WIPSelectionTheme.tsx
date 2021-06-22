@@ -272,7 +272,7 @@ const WipSelectionTheme: FunctionComponent = () => {
   const mediaQueryMD = useMediaQuery('md');
   return !showSearch ? (
     <ParcoursLayout>
-      <div className="flex flex-col items-center justify-start space-y-8 md:p-14">
+      <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5">
           <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
             <PictoExpPro />
