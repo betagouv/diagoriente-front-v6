@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import AppLayout from 'layouts/AppLayout';
 import Illustration from 'assets/images/illu_01.png';
 import ParcoursLayout from '../ParcoursLayout';
 
@@ -24,7 +23,7 @@ const WipAddExperienceDone: FunctionComponent = () => (
             Être recommandé.e
           </button>
           <div className="text-center">
-            <button className="font-bold text-lg mt-3">Passer cette étape</button>
+            <button className="font-bold text-lg mt-3 focus:ring-0, focus:outline-none">Passer cette étape</button>
           </div>
         </div>
       </div>

@@ -7,6 +7,8 @@ import { useFormik } from "formik";
 import clsx from "clsx";
 import * as Yup from 'yup';
 
+const passwordRegex = new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/);
+
 const RegisterForm: FunctionComponent = () => {
   const formik = useFormik({
     initialValues: {
@@ -21,7 +23,7 @@ const RegisterForm: FunctionComponent = () => {
       firstName: Yup.string().required('Ce champ est obligatoire'),
       lastName: Yup.string().required('Ce champ est obligatoire'),
       email: Yup.string().email('Votre adresse e-mail est invalide').required('Ce champ est obligatoire'),
-      password: Yup.string().min(6, "Votre mot de passe doit comporter 6 caractères minimum").required("Ce champ est obligatoire"),
+      password: Yup.string().matches(passwordRegex, "Votre mot de passe est invalide").required("Ce champ est obligatoire"),
       city: Yup.string().required("Ce champ est obligatoire"),
     }),
     onSubmit: (values) => {
