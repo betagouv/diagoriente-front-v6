@@ -15,9 +15,6 @@ const RegisterContainer = () => (
         </div>
         <div className="flex flex-col items-center justify-center gap-y-8 w-full mb-10 md:mb-0">
           <RegisterForm />
-          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">
-            Finaliser mon inscription
-          </button>
         </div>
       </div>
       <div
