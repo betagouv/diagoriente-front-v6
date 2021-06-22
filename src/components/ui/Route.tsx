@@ -15,11 +15,11 @@ const Route = ({ protected: protectedProp, authorizedRole, ...rest }: RouteProps
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const { user } = useContext(UserContext);
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const isAuthPage = location.pathname === '/connexion' || location.pathname === '/inscription';
 
   if (protectedProp) {
     if (!user && authorizedRole === 'user') {
-      return <Redirect to={`/login${encodeUri({ from: window.location.pathname + window.location.search })}`} />;
+      return <Redirect to={`/connexion${encodeUri({ from: window.location.pathname + window.location.search })}`} />;
     }
     if (user && !user?.isActive) {
       return <Redirect to="/" />;

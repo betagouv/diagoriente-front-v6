@@ -23,10 +23,10 @@ const RootContainer = () => {
       <SnackBarContext.Provider value={{ state, dispatch }}>
         <Switch>
           <Route exact path="/" component={HomeContainer} />
-          <Route exact path="/login" component={LoginContainer} />
-          <Route exact path="/register" component={RegisterContainer} />
-          <Route exact path="/onboarding" component={OnBoardingContainer} />
-          <Route exact path="/profile" component={ProfileContainer} />
+          <Route exact path="/connexion" component={LoginContainer} />
+          <Route exact path="/inscription" component={RegisterContainer} />
+          <Route exact path="/bienvenue" component={OnBoardingContainer} />
+          <Route exact path="/profil" component={ProfileContainer} />
           <Route path="/experience" component={WipExperienceContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />

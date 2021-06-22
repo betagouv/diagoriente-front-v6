@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { validateEmail, validatePassword } from 'common/utils/validation';
+import AppLayout from '../../layouts/AppLayout';
 
 const LoginContainer = () => {
   const initialValues = { email: '', password: '' };
@@ -19,7 +20,7 @@ const LoginContainer = () => {
     return errors;
   };
   return (
-    <div>
+    <AppLayout>
       <span>Login</span>
       <div>
         <Formik
@@ -45,7 +46,7 @@ const LoginContainer = () => {
           )}
         </Formik>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

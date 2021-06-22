@@ -1,11 +1,14 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import LogoDiagoriente from 'assets/images/logo/diagoriente.svg';
 import LogoRepublique from 'assets/images/logo/republique.png';
 import LogoBetagouv from 'assets/images/logo/betagouv.svg';
 import IconProfile from 'assets/svg/user_profile.svg';
 import { Link } from 'react-router-dom';
+import UserContext from '../common/contexts/UserContext';
 
 const AppHeader: FunctionComponent = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <header className="bg-white flex flex-row justify-between px-8 py-4 shadow-md">
       <div className="flex flex-row items-center justify-center space-x-6">
@@ -16,9 +19,11 @@ const AppHeader: FunctionComponent = () => {
         <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" className="h-6" />
       </div>
       <div>
-        <Link to="/profil">
-          <img src={IconProfile} width={32} height={32} alt="Profil utilisateur" />
-        </Link>
+        {user && (
+          <Link to="/profil">
+            <img src={IconProfile} width={32} height={32} alt="Profil utilisateur" />
+          </Link>
+        )}
       </div>
     </header>
   );
