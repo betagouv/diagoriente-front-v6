@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ParcoursLayout from '../ParcoursLayout';
 import SelectorTest from '../../../components/design-system/SelectorTest';
 
@@ -50,19 +51,35 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
 };
 
 const WipChoixActivites: FunctionComponent = () => {
+  const history = useHistory();
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>([]);
-  const [activities, setActivity] = useState<Array<any>>([
-    {
-      id: 1,
-      name: 'yolo',
-    },
-    {
-      id: 2,
-      name: 'mpim',
-    },
-    { id: 3, name: 'ptezzedr' },
-    { id: 4, name: 'ptdsdsdr' },
-    { id: 5, name: 'ptedr' },
+  const [activities, setActivity] = useState<{ id: number; name: string; extra?: boolean }[]>([
+    { id: 1, name: 'Activité A' },
+    { id: 2, name: 'Activité B' },
+    { id: 3, name: 'Activité C' },
+    { id: 4, name: 'Activité D' },
+    { id: 5, name: 'Activité E' },
+    { id: 6, name: 'Activité F' },
+    { id: 7, name: 'Activité G' },
+    { id: 8, name: 'Activité H' },
+    { id: 9, name: 'Activité I' },
+    { id: 10, name: 'Activité J' },
+    { id: 11, name: 'Activité K' },
+    { id: 12, name: 'Activité L' },
+    { id: 13, name: 'Activité M' },
+    { id: 14, name: 'Activité N' },
+    { id: 15, name: 'Activité O' },
+    { id: 16, name: 'Activité P' },
+    { id: 17, name: 'Activité Q' },
+    { id: 18, name: 'Activité R' },
+    { id: 19, name: 'Activité S' },
+    { id: 20, name: 'Activité T' },
+    { id: 21, name: 'Activité U' },
+    { id: 22, name: 'Activité V' },
+    { id: 23, name: 'Activité W' },
+    { id: 24, name: 'Activité X' },
+    { id: 25, name: 'Activité Y' },
+    { id: 26, name: 'Activité Z' },
   ]);
   const [showNewActivity, setShowNewActivity] = useState(false);
 
@@ -89,8 +106,13 @@ const WipChoixActivites: FunctionComponent = () => {
     const min = Math.ceil(10000000);
     const max = Math.floor(999999999999);
     const newId = Math.floor(Math.random() * (max - min)) + min;
-    setActivity([...activities, { id: newId, name: value }]);
+    setActivity([...activities, { id: newId, name: value, extra: true }]);
     setActivitiesChecked([...activitiesChecked, newId]);
+  };
+
+  const handleValidateActivites = () => {
+    // TODO: Implement form logic
+    history.push('/experience/activites/done');
   };
 
   return (
@@ -105,9 +127,13 @@ const WipChoixActivites: FunctionComponent = () => {
           </div>
           <div className="w-full mt-8 relative mb-24">
             <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
-              {activities.map((acti) => (
-                <SelectorTest onClick={(e) => handleCheck(acti.id, e)} checked={verifyIfCheck(acti.id)}>
-                  {acti.name}
+              {activities.map((activity) => (
+                <SelectorTest
+                  key={activity.id}
+                  onClick={(e) => handleCheck(activity.id, e)}
+                  checked={verifyIfCheck(activity.id)}
+                >
+                  {activity.name}
                 </SelectorTest>
               ))}
             </div>
@@ -119,7 +145,10 @@ const WipChoixActivites: FunctionComponent = () => {
           </div>
           <div className="flex justify-center">
             <div className="fixed bottom-0 left-0 right-0 md:relative">
-              <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg">
+              <button
+                onClick={handleValidateActivites}
+                className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+              >
                 Valider
               </button>
             </div>

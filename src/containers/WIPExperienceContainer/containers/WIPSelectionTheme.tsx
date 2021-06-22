@@ -23,7 +23,7 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ id, tags, children }) => {
         {tags &&
           tags.map((tag, index) => (
             <li
-              key={id}
+              key={tag}
               className={clsx(
                 'px-5 py-1 whitespace-nowrap overflow-ellipsis overflow-hidden border-t bg-opacity-50 border-lena-lightgray2',
                 tags.length - 1 === index && 'border-b',
@@ -289,7 +289,7 @@ const WipSelectionTheme: FunctionComponent = () => {
           <div className="text-lena-blue-dark">Décrivez en quelques mots votre expérience professionnelle :</div>
           <div className="w-3/4">
             <input
-              onClick={() => mediaQueryMD === false && setShowSearch(true)}
+              onClick={() => !mediaQueryMD && setShowSearch(true)}
               type="text"
               className="border-red-400 rounded-md w-full"
               placeholder="Vente de fleurs"

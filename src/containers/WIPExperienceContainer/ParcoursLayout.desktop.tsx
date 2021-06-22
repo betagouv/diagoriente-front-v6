@@ -9,7 +9,7 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
     <div className="min-h-screen h-full flex flex-col relative">
       <AppHeader />
       <div className="flex flex-row flex-1">
-        <div className="w-96 bg-lena-lightgray flex flex-col">
+        <div className="w-96 bg-lena-lightgray flex flex-col sticky top-0 left-0">
           <ProgressBar value={20} />
           <div className="flex flex-col items-center justify-between flex-grow px-2 py-8">
             <div className="flex flex-col space-y-8">

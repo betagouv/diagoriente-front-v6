@@ -4,8 +4,7 @@ import Star from './Star';
 
 export type CardLevelProps = {
   selected: boolean;
-  text_normal: string;
-  text_bold: string;
+  text: React.ReactNode;
   opacity: boolean;
   star: number;
   starReverse?: boolean;
@@ -17,8 +16,7 @@ const CardLevel: FunctionComponent<CardLevelProps> = ({
   starReverse = false,
   onSelect,
   star = 1,
-  text_normal,
-  text_bold,
+  text,
   opacity = false,
   children,
 }) => {
@@ -43,11 +41,7 @@ const CardLevel: FunctionComponent<CardLevelProps> = ({
         </div>
         <div className="flex-grow">
           <div className="mb-2 flex items-center justify-between flex-grow">
-            <div className="flex items-center">
-              <span>
-                {text_normal} <strong>{text_bold}</strong>
-              </span>
-            </div>
+            <div className="flex items-center">{text}</div>
             <div>
               <Star reverse={starReverse} star={star} />
             </div>
