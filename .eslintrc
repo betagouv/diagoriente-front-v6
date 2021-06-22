@@ -11,6 +11,17 @@
         "requireForBlockBody": false
       }
     ],
+    "jsx-a11y/label-has-associated-control": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "jsx-a11y/label-has-for": [ "error", {
+      "required": {
+        "some": [ "nesting", "id"  ]
+      }
+    }],
+    "no-nested-ternary": "off",
     "camelcase": "off",
     "prefer-arrow-callback": 0,
     "func-names": 0,
