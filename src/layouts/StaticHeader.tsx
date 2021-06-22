@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useState } from "react";
-import { Link } from "react-router-dom";
-import UIButtonComponent from "components/Register/Button";
-import LogoDiago from "assets/images/logo/diagoriente-white.svg";
-import LogoRepublique from "assets/images/logo/republique.png";
-import { ReactComponent as LogoBeta } from "assets/images/logo/betagouv-white.svg";
-import CrossIcon from "assets/svg/cross.svg";
-import MenuIcon from "assets/svg/menu.svg";
-import LoginIcon from "assets/svg/user.svg";
+import React, { FunctionComponent, useState } from 'react';
+import { Link } from 'react-router-dom';
+import UIButtonComponent from 'components/Register/Button';
+import LogoDiago from 'assets/images/logo/diagoriente-white.svg';
+import LogoRepublique from 'assets/images/logo/republique.png';
+import { ReactComponent as LogoBeta } from 'assets/images/logo/betagouv-white.svg';
+import CrossIcon from 'assets/svg/cross.svg';
+import MenuIcon from 'assets/svg/menu.svg';
+import LoginIcon from 'assets/svg/user.svg';
 
 const NavDivider: FunctionComponent = () => {
   return <div className="border border-white rotate-90 h-4 w-0" />;
@@ -31,7 +31,7 @@ const StaticHeader: FunctionComponent = () => {
                 <LogoBeta />
               </div>
             </div>
-            <div aria-label={open ? "Fermer le menu" : "Ouvrir le menu"} className="xl:hidden focus:outline-none">
+            <div aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'} className="xl:hidden focus:outline-none">
               {open ? (
                 <div className="cursor-pointer select-none" onClick={() => setOpen(false)}>
                   <img src={CrossIcon} alt="Cross Icon" />
@@ -57,7 +57,10 @@ const StaticHeader: FunctionComponent = () => {
                 </Link>
                 <div className="flex flex-row space-x-4">
                   <UIButtonComponent borderSize="lg" variant="outline-secondary">
-                    <a className="flex flex-row justify-center items-center space-x-2" href={`${process.env.GATSBY_APPV5_URL}/login`}>
+                    <a
+                      className="flex flex-row justify-center items-center space-x-2"
+                      href={`${process.env.GATSBY_APPV5_URL}/login`}
+                    >
                       <span>Connexion</span>
                       <img src={LoginIcon} alt="Login Icon" />
                     </a>
@@ -72,10 +75,10 @@ const StaticHeader: FunctionComponent = () => {
         </header>
         <div
           onClick={() => setOpen(false)}
-          className={`${open ? "block" : "hidden"} fixed -inset-x-0 w-full h-full z-50 block xl:hidden`}
-          style={{ backgroundColor: "rgba(0,0,0,.6)" }}
+          className={`${open ? 'block' : 'hidden'} fixed -inset-x-0 w-full h-full z-50 block xl:hidden`}
+          style={{ backgroundColor: 'rgba(0,0,0,.6)' }}
         >
-          <div className="bg-lena-blue pro:bg-lena-blue-dark" style={{ transition: "all 2s" }}>
+          <div className="bg-lena-blue pro:bg-lena-blue-dark" style={{ transition: 'all 2s' }}>
             <div className="border-t border-white border-opacity-20">
               <div className="container flex flex-col space-y-4">
                 <ul className="pt-3 pb-3 flex flex-col space-y-4">

@@ -10,7 +10,7 @@ const AppHeader: FunctionComponent = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <header className="bg-white flex flex-row justify-between px-8 py-4 shadow-md">
+    <header className="bg-white flex flex-row justify-between px-8 py-4 shadow-md sticky top-0 z-50">
       <div className="flex flex-row items-center justify-center space-x-6">
         <Link to="/">
           <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="w-40 lg:w-52" />

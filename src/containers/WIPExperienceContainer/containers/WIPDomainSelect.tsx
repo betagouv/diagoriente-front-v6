@@ -5,13 +5,13 @@ import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professio
 const WipDomainSelect: FunctionComponent = () => {
   return (
     <ParcoursLayout>
-      <div className="md:p-14">
+      <div className="container py-8 md:p-14">
         <div className="flex flex-col items-center justify-start w-full">
-          <div className="flex flex-col justify-center items-center h-56 w-56 space-y-2 p-4">
+          <div className="flex flex-col justify-center items-center h-56 w-56 space-y-2">
             <PictoExpPro />
           </div>
           <div className="mb-5 text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
-          <div className="bg-lena-blue-lightest font-bold md:w-auto px-24 w-full text-center py-3 rounded-md">
+          <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
             Soins esthétique et corporels
           </div>
         </div>

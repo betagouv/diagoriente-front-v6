@@ -11,12 +11,14 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col sticky top-0 left-0">
           <ProgressBar value={20} />
-          <div className="flex flex-col items-center justify-between flex-grow px-2 py-8">
-            <div className="flex flex-col space-y-8">
-              <div className="flex flex-col justify-center items-center bg-white rounded-full h-56 w-56 space-y-2 p-4">
-                <PictoExpPro />
-                <div className="text-center text-lena-blue-dark font-bold text-xl">
-                  Mes expériences professionnelles
+          <div className="flex flex-col justify-between flex-grow">
+            <div className="flex flex-col space-y-8 p-8">
+              <div className="flex items-center justify-center">
+                <div className="flex flex-col justify-center items-center bg-white rounded-full h-44 w-44 xl:h-56 xl:w-56 space-y-2">
+                  <PictoExpPro className="w-12 h-12 xl:w-16 xl:h-16" />
+                  <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
+                    Mes expériences professionnelles
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col space-y-4">
@@ -33,9 +35,9 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
                 </div>
               </div>
             </div>
-            <div className="p-4 text-sm italic rounded bg-lena-turquoise-light">
+            <div className="p-4 text-sm italic rounded bg-lena-turquoise-light text-justify">
               Cette expérience est modifiable à tout moment dans votre profil, accessible en cliquant sur l’icône :
-              <img className="inline mx-2" src={IconeProfil} height={32} width={32} alt="Profil utilisateur" />
+              <img className="inline mx-2" src={IconeProfil} height={24} width={24} alt="Profil utilisateur" />
             </div>
           </div>
         </div>
