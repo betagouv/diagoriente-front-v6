@@ -1,4 +1,4 @@
-import React, { FunctionComponent, InputHTMLAttributes } from "react";
+import React, { FunctionComponent, InputHTMLAttributes } from 'react';
 
 type Props = {
   label: string | React.ReactNode;

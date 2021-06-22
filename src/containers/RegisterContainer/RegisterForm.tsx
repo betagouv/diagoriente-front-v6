@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from "react";
-import InputComponent from "components/Register/Input";
-import Checkbox from "components/Register/Checkbox";
-import { FormControl, FormLabel } from "components/Register/FormController";
-import FormComment from "components/Register/FormComment";
+import React, { FunctionComponent } from 'react';
+import InputComponent from 'components/Register/Input';
+import Checkbox from 'components/Register/Checkbox';
+import { FormControl, FormLabel } from 'components/Register/FormController';
+import FormComment from 'components/Register/FormComment';
 
 const RegisterForm: FunctionComponent = () => {
   return (
@@ -62,11 +62,8 @@ const RegisterForm: FunctionComponent = () => {
           required={true}
           label={
             <>
-              J'accepte les{" "}
-              <span className="text-lena-blue-dark font-bold">
-                conditions d'utilisation
-              </span>{" "}
-              de Diagoriente
+              J'accepte les <span className="text-lena-blue-dark font-bold">conditions d'utilisation</span> de
+              Diagoriente
             </>
           }
         />

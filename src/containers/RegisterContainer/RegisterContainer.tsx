@@ -1,8 +1,8 @@
 import React from 'react';
-import HeroRegister from "assets/illu/hero-register.png";
-import BgRegister from "assets/images/bg/bg-register.png";
+import HeroRegister from 'assets/illu/hero-register.png';
+import BgRegister from 'assets/images/bg/bg-register.png';
 import RegisterForm from './RegisterForm';
-import StaticHeader from "../../layouts/StaticHeader";
+import StaticHeader from '../../layouts/StaticHeader';
 
 const RegisterContainer = () => (
   <div>
@@ -15,10 +15,15 @@ const RegisterContainer = () => (
         </div>
         <div className="flex flex-col items-center justify-center gap-y-8 w-full mb-10 md:mb-0">
           <RegisterForm />
-          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">Finaliser mon inscription</button>
+          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">
+            Finaliser mon inscription
+          </button>
         </div>
       </div>
-      <div className="bg-lena-blue h-full hidden xl:block" style={{ width: 568, background: `url(${BgRegister}) no-repeat center`, backgroundSize: "cover" }}>
+      <div
+        className="bg-lena-blue h-full hidden xl:block"
+        style={{ width: 568, background: `url(${BgRegister}) no-repeat center`, backgroundSize: 'cover' }}
+      >
         <div className="invisible xl:visible absolute top-0 right-0">
           <img placeholder="blurred" src={HeroRegister} alt="Illustration" />
         </div>
