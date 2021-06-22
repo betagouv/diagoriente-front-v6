@@ -18,6 +18,7 @@ const SelectorTest: FunctionComponent<SelectorTestProps> = ({ checked = false, o
       <div className="flex flex-row items-start space-x-4">
         <input
           type="checkbox"
+          readOnly
           checked={checked}
           className={clsx(
             'border border-lena-lightgray2 checked:border-white checkbox-lena-blue',

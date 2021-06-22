@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Illustration from 'assets/images/illu_01.png';
-import ParcoursLayout from '../ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 const WipAddExperienceDone: FunctionComponent = () => (
   <ParcoursLayout>

@@ -1,23 +1,47 @@
-import React, { FunctionComponent } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import WipAddExperienceDone from './containers/WIPAddExperienceDone';
+import React, { FunctionComponent, useContext, useState } from 'react';
 import WipSelectionTheme from './containers/WIPSelectionTheme';
+import {
+  EParcoursStep,
+  LocalExperienceType,
+  LocalParcoursActivity,
+  LocalParcoursCompetence,
+  NewExperienceContext,
+} from '../../contexts/NewExperienceContext';
+import WipAddActivityDone from './containers/WIPAddActivityDone';
 import WipChoixActivites from './containers/WIPChoixActivites';
 import WipSelectionCompetence from './containers/WIPSelectionCompetence';
-import WipDomainSelect from './containers/WIPDomainSelect';
-import WipAddActivityDone from './containers/WIPAddActivityDone';
+import WipAddExperienceDone from './containers/WIPAddExperienceDone';
 
 const WipExperienceContainer: FunctionComponent = () => {
+  const { step: parcoursStep } = useContext(NewExperienceContext);
+  const [step, setStep] = useState<EParcoursStep>(EParcoursStep.ACTIVITIES);
+  const [experienceType, setExperienceType] = useState<LocalExperienceType>('personal');
+  const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
+  const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
+
+  const renderStep = () => {
+    switch (step) {
+      case EParcoursStep.THEME:
+        return <WipSelectionTheme />;
+      case EParcoursStep.ACTIVITIES:
+        return <WipChoixActivites />;
+      case EParcoursStep.ACTIVITIES_DONE:
+        return <WipAddActivityDone />;
+      case EParcoursStep.COMPETENCES:
+        return <WipSelectionCompetence />;
+      case EParcoursStep.DONE:
+        return <WipAddExperienceDone />;
+      default:
+        return <div>Une erreur est survenue.</div>;
+    }
+  };
+
   return (
-    <Switch>
-      <Route exact path="/experience/theme" component={WipSelectionTheme} />
-      <Route exact path="/experience/domain" component={WipDomainSelect} />
-      <Route exact path="/experience/activites" component={WipChoixActivites} />
-      <Route exact path="/experience/activites/done" component={WipAddActivityDone} />
-      <Route exact path="/experience/competences" component={WipSelectionCompetence} />
-      <Route exact path="/experience/done" component={WipAddExperienceDone} />
-      <Route render={() => <Redirect to="/experience/theme" />} />
-    </Switch>
+    <NewExperienceContext.Provider
+      value={{ step, setStep, experienceType, activities, setActivities, competences, setCompetences }}
+    >
+      {renderStep()}
+    </NewExperienceContext.Provider>
   );
 };
 

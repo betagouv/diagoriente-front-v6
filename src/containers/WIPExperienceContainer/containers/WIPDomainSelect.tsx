@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import ParcoursLayout from '../ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professional.svg';
 
 const WipDomainSelect: FunctionComponent = () => {

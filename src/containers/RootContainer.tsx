@@ -27,7 +27,7 @@ const RootContainer = () => {
           <Route exact path="/inscription" component={RegisterContainer} />
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
           <Route exact path="/profil" component={ProfileContainer} />
-          <Route path="/experience" component={WipExperienceContainer} />
+          <Route exact path="/experience" component={WipExperienceContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />
         </Switch>

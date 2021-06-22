@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import InputComponent from "components/Register/Input";
-import Checkbox from "components/Register/Checkbox";
-import { FormControl, FormLabel } from "components/Register/FormController";
-import FormComment from "components/Register/FormComment";
-import { useFormik } from "formik";
-import clsx from "clsx";
+import React, { FunctionComponent } from 'react';
+import InputComponent from 'components/Register/Input';
+import Checkbox from 'components/Register/Checkbox';
+import { FormControl, FormLabel } from 'components/Register/FormController';
+import FormComment from 'components/Register/FormComment';
+import { useFormik } from 'formik';
+import clsx from 'clsx';
 import * as Yup from 'yup';
 
 const passwordRegex = new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/);
@@ -12,23 +12,23 @@ const passwordRegex = new RegExp(/^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&
 const RegisterForm: FunctionComponent = () => {
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      city: "",
-      codeGroup: ""
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      city: '',
+      codeGroup: '',
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required('Ce champ est obligatoire'),
-      lastName: Yup.string().required('Ce champ est obligatoire'),
-      email: Yup.string().email('Votre adresse e-mail est invalide').required('Ce champ est obligatoire'),
-      password: Yup.string().matches(passwordRegex, "Votre mot de passe est invalide").required("Ce champ est obligatoire"),
-      city: Yup.string().required("Ce champ est obligatoire"),
+      firstName: Yup.string().required(),
+      lastName: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().matches(passwordRegex, 'Votre mot de passe est invalide').required(),
+      city: Yup.string().required(),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-    }
+    },
   });
 
   return (
@@ -37,57 +37,88 @@ const RegisterForm: FunctionComponent = () => {
         <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="firstName">Prénom *</FormLabel>
-            <InputComponent isInvalid={!!formik.errors.firstName} value={formik.values.firstName} onChange={formik.handleChange} id="firstName"
-                            name="firstName" type="text" placeholder="ex : Léna" />
+            <InputComponent
+              isInvalid={!!formik.errors.firstName}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder="ex : Léna"
+            />
           </FormControl>
         </div>
-        {formik.errors.firstName ? <div className="mb-4">
-          <FormControl>
-            <FormLabel />
-            <FormComment>
-              <div className="text-lena-pink">{formik.errors.firstName}</div>
-            </FormComment>
-          </FormControl>
-        </div> : null}
-        <div className={
-          clsx(
-            formik.errors.lastName ? "mb-2" : "mb-7"
-          )
-        }>
+        {formik.errors.firstName ? (
+          <div className="mb-4">
+            <FormControl>
+              <FormLabel />
+              <FormComment>
+                <div className="text-lena-pink">{formik.errors.firstName}</div>
+              </FormComment>
+            </FormControl>
+          </div>
+        ) : null}
+        <div className={clsx(formik.errors.lastName ? 'mb-2' : 'mb-7')}>
           <FormControl>
             <FormLabel htmlFor="lastName">Nom de famille *</FormLabel>
-            <InputComponent isInvalid={!!formik.errors.lastName} value={formik.values.lastName} onChange={formik.handleChange} id="lastName" name="lastName"
-                            type="text" placeholder="ex : MAZILU" />
+            <InputComponent
+              isInvalid={!!formik.errors.lastName}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="ex : MAZILU"
+            />
           </FormControl>
         </div>
-        {formik.errors.lastName ? <div className="mb-7">
-          <FormControl>
-            <FormLabel />
-            <FormComment>
-              <div className="text-lena-pink">{formik.errors.lastName}</div>
-            </FormComment>
-          </FormControl>
-        </div> : null}
+        {formik.errors.lastName ? (
+          <div className="mb-7">
+            <FormControl>
+              <FormLabel />
+              <FormComment>
+                <div className="text-lena-pink">{formik.errors.lastName}</div>
+              </FormComment>
+            </FormControl>
+          </div>
+        ) : null}
         <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="email">Email *</FormLabel>
-            <InputComponent value={formik.values.email} onChange={formik.handleChange} id="email" name="email"
-                            checked={true} type="email" isInvalid={!!formik.errors.email} placeholder="test@test.dev" />
+            <InputComponent
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              id="email"
+              name="email"
+              checked={true}
+              type="email"
+              isInvalid={!!formik.errors.email}
+              placeholder="test@test.dev"
+            />
           </FormControl>
         </div>
-        {formik.errors.lastName ? <div className="mb-3">
-          <FormControl>
-            <FormLabel />
-            <FormComment>
-              <div className="text-lena-pink">{formik.errors.lastName}</div>
-            </FormComment>
-          </FormControl>
-        </div> : null}
+        {formik.errors.lastName ? (
+          <div className="mb-3">
+            <FormControl>
+              <FormLabel />
+              <FormComment>
+                <div className="text-lena-pink">{formik.errors.lastName}</div>
+              </FormComment>
+            </FormControl>
+          </div>
+        ) : null}
         <div className="mb-3">
           <FormControl>
             <FormLabel htmlFor="password">Mot de passe *</FormLabel>
-            <InputComponent value={formik.values.password} onChange={formik.handleChange} id="password" name="password"
-                            checked={true} type="password" isInvalid={!!formik.errors.password} />
+            <InputComponent
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              id="password"
+              name="password"
+              checked={true}
+              type="password"
+              isInvalid={!!formik.errors.password}
+            />
           </FormControl>
         </div>
         <div className="mb-3">
@@ -107,22 +138,34 @@ const RegisterForm: FunctionComponent = () => {
         <div className="mb-3">
           <FormControl>
             <FormLabel htmlFor="city">Ville de résidence</FormLabel>
-            <InputComponent isInvalid={!!formik.errors.city} value={formik.values.city} onChange={formik.handleChange} id="city" name="city" />
+            <InputComponent
+              isInvalid={!!formik.errors.city}
+              value={formik.values.city}
+              onChange={formik.handleChange}
+              id="city"
+              name="city"
+            />
           </FormControl>
         </div>
-        {formik.errors.city ? <div className="mb-3">
-          <FormControl>
-            <FormLabel />
-            <FormComment>
-              <div className="text-lena-pink">{formik.errors.city}</div>
-            </FormComment>
-          </FormControl>
-        </div> : null}
+        {formik.errors.city ? (
+          <div className="mb-3">
+            <FormControl>
+              <FormLabel />
+              <FormComment>
+                <div className="text-lena-pink">{formik.errors.city}</div>
+              </FormComment>
+            </FormControl>
+          </div>
+        ) : null}
         <div className="mb-3">
           <FormControl>
             <FormLabel htmlFor="codeGroup">Code groupe</FormLabel>
-            <InputComponent value={formik.values.codeGroup} onChange={formik.handleChange} id="codeGroup"
-                            name="codeGroup" />
+            <InputComponent
+              value={formik.values.codeGroup}
+              onChange={formik.handleChange}
+              id="codeGroup"
+              name="codeGroup"
+            />
           </FormControl>
         </div>
         <div className="mt-4 flex justify-center">
@@ -130,18 +173,15 @@ const RegisterForm: FunctionComponent = () => {
             required={true}
             label={
               <>
-                J'accepte les{" "}
-                <span className="text-lena-blue-dark font-bold">
-                conditions d'utilisation
-              </span>{" "}
-                de Diagoriente
+                J'accepte les <span className="text-lena-blue-dark font-bold">conditions d'utilisation</span> de
+                Diagoriente
               </>
             }
           />
         </div>
         <div className="text-center mt-7 pb-10">
-          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">Finaliser mon
-            inscription
+          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">
+            Finaliser mon inscription
           </button>
         </div>
       </form>

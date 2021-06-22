@@ -4,6 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { client } from 'common/requests/client';
 
 import './index.css';
+import './utils/yupLocale';
 
 import RootContainer from 'containers/RootContainer';
 

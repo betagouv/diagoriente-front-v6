@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from '../ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 import SelectorTest from '../../../components/design-system/SelectorTest';
+import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -52,8 +53,9 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
 
 const WipChoixActivites: FunctionComponent = () => {
   const history = useHistory();
+  const { activities, setActivities, setStep } = useContext(NewExperienceContext);
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>([]);
-  const [activities, setActivity] = useState<{ id: number; name: string; extra?: boolean }[]>([
+  const [todoRenameActivities, setTodoRenameActivities] = useState<{ id: number; name: string; extra?: boolean }[]>([
     { id: 1, name: 'Activité A' },
     { id: 2, name: 'Activité B' },
     { id: 3, name: 'Activité C' },
@@ -87,10 +89,8 @@ const WipChoixActivites: FunctionComponent = () => {
     if (checked) {
       setActivitiesChecked([...activitiesChecked, value]);
     } else {
-      const filteredAry = activitiesChecked.filter(function (e) {
-        return e !== value;
-      });
-      setActivitiesChecked(filteredAry);
+      const updatedArray = activitiesChecked.filter((e) => e !== value);
+      setActivitiesChecked(updatedArray);
     }
   };
 
@@ -106,13 +106,13 @@ const WipChoixActivites: FunctionComponent = () => {
     const min = Math.ceil(10000000);
     const max = Math.floor(999999999999);
     const newId = Math.floor(Math.random() * (max - min)) + min;
-    setActivity([...activities, { id: newId, name: value, extra: true }]);
+    setTodoRenameActivities([...todoRenameActivities, { id: newId, name: value, extra: true }]);
     setActivitiesChecked([...activitiesChecked, newId]);
   };
 
   const handleValidateActivites = () => {
     // TODO: Implement form logic
-    history.push('/experience/activites/done');
+    setStep(EParcoursStep.ACTIVITIES_DONE);
   };
 
   return (
@@ -127,7 +127,7 @@ const WipChoixActivites: FunctionComponent = () => {
           </div>
           <div className="w-full mt-8 relative mb-24">
             <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
-              {activities.map((activity) => (
+              {todoRenameActivities.map((activity) => (
                 <SelectorTest
                   key={activity.id}
                   onClick={(e) => handleCheck(activity.id, e)}

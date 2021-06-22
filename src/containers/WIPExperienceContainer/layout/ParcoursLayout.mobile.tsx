@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
 
-const ParcoursLayout: FunctionComponent = ({ children }) => {
+const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
       <div className="sticky top-0 shadow-md z-50">
@@ -17,4 +17,4 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
   );
 };
 
-export default ParcoursLayout;
+export default ParcoursLayoutForMobile;

@@ -5,7 +5,7 @@ import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
 import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
-import ParcoursLayout from '../ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 
 type JobTag = {

@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import ParcoursLayout from '../ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 import { ReactComponent as PictoSorganiserSvg } from '../../../assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from '../../../components/design-system/SelectorTest';
 import CardLevel from '../../../components/design-system/CardLevel';
 import ModalComponent from '../../../components/design-system/Modal';
+import Button from '../../../components/design-system/Button';
 
 type Choice = {
   open?: boolean;
@@ -78,7 +79,7 @@ type Skill = {
 };
 
 const WipSelectionCompetence: FunctionComponent = () => {
-  const [skills] = useState<Array<Skills>>([
+  const skills: Skills[] = [
     {
       id: 1,
       name: 'Agir face aux imprévus',
@@ -109,16 +110,16 @@ const WipSelectionCompetence: FunctionComponent = () => {
         },
       ],
     },
-  ]);
-  const [skillsChecked, setSkillsChecked] = useState<Array<Skill>>([]);
+  ];
 
-  const [skillSelected, setSkillSelected] = useState<Skills>();
-  const [showModal, setShowModal] = useState(false);
+  const [skillsChecked, setSkillsChecked] = useState<Array<Skill>>([]);
+  const [selectedSkill, setSelectedSkill] = useState<Skills>();
+  const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
 
   const handleCheck = (value: Skills, checked: boolean) => {
     if (checked) {
-      setSkillSelected(value);
-      setShowModal(true);
+      setSelectedSkill(value);
+      setShowLevelSelectionModal(true);
     } else {
       const filteredAry = skillsChecked.filter(function (e) {
         return e.id !== value.id;
@@ -135,10 +136,10 @@ const WipSelectionCompetence: FunctionComponent = () => {
   };
 
   const handleAddLevel = (value: Levels) => {
-    if (skillSelected) {
+    if (selectedSkill) {
       const skill = {
-        id: skillSelected.id,
-        name: skillSelected.name,
+        id: selectedSkill.id,
+        name: selectedSkill.name,
         levels: value,
       };
       setSkillsChecked([...skillsChecked, skill]);
@@ -166,12 +167,17 @@ const WipSelectionCompetence: FunctionComponent = () => {
               </SelectorTest>
             ))}
         </div>
+        <div>
+          <Button variant="secondary" disabled={skillsChecked.length <= 0}>
+            Valider
+          </Button>
+        </div>
       </div>
-      {skillSelected && (
+      {selectedSkill && (
         <ModalChoice
-          open={showModal}
-          data={skillSelected.levels}
-          onClose={() => setShowModal(false)}
+          open={showLevelSelectionModal}
+          data={selectedSkill.levels}
+          onClose={() => setShowLevelSelectionModal(false)}
           onSend={(e) => handleAddLevel(e)}
         />
       )}

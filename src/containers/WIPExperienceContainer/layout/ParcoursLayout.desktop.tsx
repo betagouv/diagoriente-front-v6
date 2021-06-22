@@ -1,10 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
-import AppHeader from '../../layouts/AppHeader';
-import { ReactComponent as PictoExpPro } from '../../assets/svg/exp_professional.svg';
+import AppHeader from '../../../layouts/AppHeader';
+import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professional.svg';
+import { NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
-const ParcoursLayout: FunctionComponent = ({ children }) => {
+const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
+  const { activities } = useContext(NewExperienceContext);
+
   return (
     <div className="min-h-screen h-full flex flex-col relative">
       <AppHeader />
@@ -25,14 +28,16 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
                 <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
                   [!!WIP!!]
                 </div>
-                <div>
-                  <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
-                  <ul className="list-disc list-inside">
-                    <li>Activité A</li>
-                    <li>Activité B</li>
-                    <li>Activité C</li>
-                  </ul>
-                </div>
+                {activities.length > 0 && (
+                  <div>
+                    <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
+                    <ul className="list-disc list-inside">
+                      {activities.map((v) => (
+                        <li key={v.id}>{v.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
             <div className="p-4 text-sm italic rounded bg-lena-turquoise-light text-justify">
@@ -47,4 +52,4 @@ const ParcoursLayout: FunctionComponent = ({ children }) => {
   );
 };
 
-export default ParcoursLayout;
+export default ParcoursLayoutForDesktop;
