@@ -42,9 +42,9 @@ const ModalChoice: FunctionComponent<Choice> = ({ open, onClose, onSend, data })
                 selected={false}
                 starReverse
                 text={
-                  <>
+                  <span>
                     Niveau <strong>{level.name.toLowerCase()}</strong>
-                  </>
+                  </span>
                 }
                 opacity={false}
                 star={level.star}

@@ -16,23 +16,20 @@ type JobTag = {
 const SearchJobTag: FunctionComponent<JobTag> = ({ id, tags, children }) => {
   return (
     <div>
-      <button className={clsx('focus-:ring-0 focus:outline-none w-full px-7 py-1 text-left flex justify-between')}>
+      <div className="focus:ring-0 focus:outline-none w-full py-1 text-left flex justify-between border-b border-lena-lightgray2">
         {children}
-      </button>
-      <ul className="px-7 py-1 list-inside">
+      </div>
+      <div className="px-4 py-1 divide-y divide-lena-lightgray2">
         {tags &&
-          tags.map((tag, index) => (
-            <li
+          tags.map((tag) => (
+            <div
               key={tag}
-              className={clsx(
-                'px-5 py-1 whitespace-nowrap overflow-ellipsis overflow-hidden border-t bg-opacity-50 border-lena-lightgray2',
-                tags.length - 1 === index && 'border-b',
-              )}
+              className="cursor-pointer px-4 py-1 whitespace-nowrap overflow-ellipsis overflow-hidden bg-opacity-50"
             >
               {tag}
-            </li>
+            </div>
           ))}
-      </ul>
+      </div>
     </div>
   );
 };
@@ -49,7 +46,7 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ id, jobs, idActive, onA
     <div>
       <button
         className={clsx(
-          'focus-:ring-0 focus:outline-none w-full px-7 py-1 text-left border-t flex justify-between',
+          'focus-:ring-0 focus:outline-none w-full py-1 text-left flex justify-between',
           id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
           id !== idActive && 'border-white',
         )}
@@ -59,14 +56,14 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ id, jobs, idActive, onA
           className="focus:ring-0 focus:outline-none"
           onClick={() => onActive.call(null, id === idActive ? undefined : id)}
         >
-          <img src={id === idActive ? HelpLightSvg : HelpSvg} alt="Help Svg" />
+          <img src={id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
         </button>
       </button>
       {id === idActive && (
-        <ul className="list-disc px-12 py-1 list-inside">
+        <ul className="list-disc px-4 py-1 list-inside">
           {jobs &&
             jobs.map((job) => (
-              <li key={id} className="whitespace-nowrap overflow-ellipsis overflow-hidden">
+              <li key={job} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
                 {job}
               </li>
             ))}
@@ -85,7 +82,7 @@ type Domains = {
   domains: {
     id: number;
     name: string;
-    jobs: string[];
+    activites: string[];
   }[];
   tags: {
     id: number;
@@ -111,12 +108,12 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
         {
           id: 1,
           name: 'Cordonnier',
-          jobs: ['test', 'lol', 'hello word'],
+          activites: ['test', 'lol', 'hello word'],
         },
         {
           id: 2,
           name: 'Soins esthétiques et corporels',
-          jobs: [
+          activites: [
             'J’accueille une clientèle',
             'Je propose un service et/ou un produit adapté',
             'Je nettoie et je prépare le corps, le visage',
@@ -154,31 +151,39 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
           <input ref={inputRef} className="w-full bg-transparent focus:ring-0 focus:outline-none py-2" />
         </div>
       </div>
-      <div style={{ boxShadow: '0 -5px 5px -5px rgba(0,0,0,.2)' }}>
-        <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
-          <strong>Métiers</strong>
+      <div className="divide-y divide-lena-lightgray2" style={{ boxShadow: '0 -5px 5px -5px rgba(0,0,0,.2)' }}>
+        <div>
+          <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+            <strong>Métiers</strong>
+          </div>
+          <div className="divide-y divide-lena-lightgray2 px-8">
+            {domains &&
+              domains.domains.map((domain) => (
+                <SearchJobDomain
+                  onActive={(e: number | undefined) => setDomainHelp(e)}
+                  idActive={domainHelp}
+                  key={domain.id}
+                  id={domain.id}
+                  jobs={domain.activites}
+                >
+                  {domain.name}
+                </SearchJobDomain>
+              ))}
+          </div>
         </div>
-        {typeof domains !== 'undefined' &&
-          domains.domains.map((domain) => (
-            <SearchJobDomain
-              onActive={(e: number | undefined) => setDomainHelp(e)}
-              idActive={domainHelp}
-              key={domain.id}
-              id={domain.id}
-              jobs={domain.jobs}
-            >
-              {domain.name}
-            </SearchJobDomain>
-          ))}
-        <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
-          <strong>Tags</strong>
+        <div>
+          <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
+            <strong>Tags</strong>
+          </div>
+          <div className="divide-y divide-lena-lightgray2 px-8">
+            {domains &&
+              domains.tags.map((domain) => (
+                <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
+                  {domain.name}
+                </SearchJobTag>
+              ))}
+          </div>
         </div>
-        {typeof domains !== 'undefined' &&
-          domains.tags.map((domain) => (
-            <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
-              {domain.name}
-            </SearchJobTag>
-          ))}
       </div>
     </div>
   );
@@ -194,12 +199,12 @@ const DomainList: FunctionComponent = () => {
         {
           id: 1,
           name: 'Cordonnier',
-          jobs: ['test', 'lol', 'hello word'],
+          activites: ['test', 'lol', 'hello word'],
         },
         {
           id: 2,
           name: 'Soins esthétiques et corporels',
-          jobs: [
+          activites: [
             'J’accueille une clientèle',
             'Je propose un service et/ou un produit adapté',
             'Je nettoie et je prépare le corps, le visage',
@@ -209,68 +214,55 @@ const DomainList: FunctionComponent = () => {
       tags: [
         {
           id: 1,
-          name: '#lol',
-          tags: ['lol', 'mdr'],
+          name: '#coronavirus',
+          tags: ['Infirmièr-e', 'Médecin'],
         },
         {
           id: 2,
-          name: '#coucou',
-          tags: [
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-            'dia',
-            'go',
-          ],
+          name: '#CORA',
+          tags: ['Animation commerciale', 'Vente en alimentation commerce'],
         },
       ],
     });
-  }, [domains]);
+  }, []);
 
   return (
     <div
       style={{ boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)', maxHeight: 'calc(100vh - 42vh)' }}
-      className="border border-lena-lightgray rounded-md overflow-y-auto"
+      className="border border-lena-lightgray rounded-md overflow-y-auto divide-y divide-lena-lightgray2"
     >
-      <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
-        <strong>Métiers</strong>
+      <div>
+        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+          <strong>Métiers</strong>
+        </div>
+        <div className="divide-y divide-lena-lightgray2 px-8">
+          {domains &&
+            domains.domains.map((domain) => (
+              <SearchJobDomain
+                onActive={(e: number | undefined) => setDomainHelp(e)}
+                idActive={domainHelp}
+                key={domain.id}
+                id={domain.id}
+                jobs={domain.activites}
+              >
+                {domain.name}
+              </SearchJobDomain>
+            ))}
+        </div>
       </div>
-      {typeof domains !== 'undefined' &&
-        domains.domains.map((domain) => (
-          <SearchJobDomain
-            onActive={(e: number | undefined) => setDomainHelp(e)}
-            idActive={domainHelp}
-            key={domain.id}
-            id={domain.id}
-            jobs={domain.jobs}
-          >
-            {domain.name}
-          </SearchJobDomain>
-        ))}
-      <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
-        <strong>Tags</strong>
+      <div>
+        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+          <strong>Tags</strong>
+        </div>
+        <div className="divide-y divide-lena-lightgray2 px-8">
+          {domains &&
+            domains.tags.map((domain) => (
+              <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
+                {domain.name}
+              </SearchJobTag>
+            ))}
+        </div>
       </div>
-      {typeof domains !== 'undefined' &&
-        domains.tags.map((domain) => (
-          <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
-            {domain.name}
-          </SearchJobTag>
-        ))}
     </div>
   );
 };
