@@ -11,6 +11,7 @@ import OnBoardingContainer from './OnBoardingContainer';
 import WipExperienceContainer from './WIPExperienceContainer/WIPExperienceContainer';
 import ProfileContainer from './ProfileContainer';
 import PageNotFoundContainer from './PageNotFoundContainer';
+import SkillCardContainer from "./SkillCard";
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -28,6 +29,7 @@ const RootContainer = () => {
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
           <Route exact path="/profil" component={ProfileContainer} />
           <Route exact path="/experience" component={WipExperienceContainer} />
+          <Route exact path="/skill_card" component={SkillCardContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />
         </Switch>
