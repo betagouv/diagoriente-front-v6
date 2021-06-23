@@ -1,42 +1,48 @@
-import React, { FunctionComponent } from "react";
-import InputComponent from "components/Register/Input";
-import Checkbox from "components/Register/Checkbox";
-import { FormControl, FormLabel } from "components/Register/FormController";
-import FormComment from "components/Register/FormComment";
-import { useFormik } from "formik";
-import clsx from "clsx";
-import * as Yup from "yup";
-import { regexPassword } from "../../utils/validation";
-import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from "../../common/utils/validation";
+import React, { FunctionComponent } from 'react';
+import InputComponent from 'components/Register/Input';
+import Checkbox from 'components/Register/Checkbox';
+import { FormControl, FormLabel } from 'components/Register/FormController';
+import FormComment from 'components/Register/FormComment';
+import { useFormik } from 'formik';
+import clsx from 'clsx';
+import * as Yup from 'yup';
+import { regexPassword } from '../../utils/validation';
+import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from '../../common/utils/validation';
 
 const RegisterForm: FunctionComponent = () => {
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      city: "",
-      codeGroup: ""
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      city: '',
+      codeGroup: '',
     },
     validationSchema: Yup.object({
-      firstName: Yup.string()
-        .required(),
-      lastName: Yup.string()
-        .required(),
-      email: Yup.string()
-        .email()
-        .required(),
+      firstName: Yup.string().required(),
+      lastName: Yup.string().required(),
+      email: Yup.string().email().required(),
       password: Yup.string()
-        .matches(regexPassword, "Votre mot de passe est invalide")
-        .required("Ce champ est obligatoire"),
-      city: Yup.string()
-        .required()
+        .matches(regexPassword, 'Votre mot de passe est invalide')
+        .required('Ce champ est obligatoire'),
+      city: Yup.string().required(),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-    }
+    },
   });
+
+  const fakeCities = [
+    {
+      city: 'Lille',
+      postal: '59000',
+    },
+    {
+      city: 'Paris',
+      postal: '75000',
+    },
+  ];
 
   return (
     <div className="flex flex-col w-full">
@@ -48,7 +54,6 @@ const RegisterForm: FunctionComponent = () => {
               isInvalid={!!formik.errors.firstName}
               value={formik.values.firstName}
               onChange={formik.handleChange}
-
               id="firstName"
               name="firstName"
               type="text"
@@ -66,7 +71,7 @@ const RegisterForm: FunctionComponent = () => {
             </FormControl>
           </div>
         ) : null}
-        <div className={clsx(formik.errors.lastName && formik.touched.lastName ? "mb-" : "mb-7")}>
+        <div className={clsx(formik.errors.lastName && formik.touched.lastName ? 'mb-' : 'mb-7')}>
           <FormControl>
             <FormLabel htmlFor="lastName">Nom de famille *</FormLabel>
             <InputComponent
@@ -134,23 +139,45 @@ const RegisterForm: FunctionComponent = () => {
             <FormLabel />
             <FormComment>
               <div>
-                Votre mot de passe doit comporter{" "}
-                <span className={clsx(formik.values.password.length >= 6 ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
+                Votre mot de passe doit comporter{' '}
+                <span
+                  className={clsx(
+                    formik.values.password.length >= 6 ? 'text-lena-blue' : 'text-lena-pink',
+                    'font-bold',
+                  )}
+                >
                   6 caractères minimum
                 </span>
                 , dont :
               </div>
               <ul className="list-disc ml-4 mt-1">
-                <li className={clsx(hasUppercase(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
+                <li
+                  className={clsx(
+                    hasUppercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    'font-bold',
+                  )}
+                >
                   1 majuscule
                 </li>
-                <li className={clsx(hasLowercase(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
+                <li
+                  className={clsx(
+                    hasLowercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    'font-bold',
+                  )}
+                >
                   1 minuscule
                 </li>
-                <li className={clsx(hasNumber(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>1
-                  chiffre
+                <li
+                  className={clsx(hasNumber(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink', 'font-bold')}
+                >
+                  1 chiffre
                 </li>
-                <li className={clsx(hasSpecial(formik.values.password) ? "text-lena-blue" : "text-lena-pink", "font-bold")}>
+                <li
+                  className={clsx(
+                    hasSpecial(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    'font-bold',
+                  )}
+                >
                   1 caractère spécial
                 </li>
               </ul>
@@ -161,11 +188,18 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel htmlFor="city">Ville de résidence</FormLabel>
             <InputComponent
-              isInvalid={!!formik.errors.city}
               value={formik.values.city}
               onChange={formik.handleChange}
-              id="city"
-              name="city"
+              id="password"
+              name="password"
+              checked={true}
+              isInvalid={!!formik.errors.city}
+              selectShow={true}
+              withSelect={
+                fakeCities.map((city) => (
+                  <li className="p-1">{city.city}</li>
+                ))
+              }
             />
           </FormControl>
         </div>
