@@ -3,46 +3,13 @@ import InputComponent from 'components/Register/Input';
 import Checkbox from 'components/Register/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
-import { useFormik } from 'formik';
+
 import clsx from 'clsx';
-import * as Yup from 'yup';
-import { regexPassword } from '../../utils/validation';
-import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from '../../common/utils/validation';
+import useRegister from 'common/container/auth/useRegister';
+import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from 'common/utils/validation';
 
 const RegisterForm: FunctionComponent = () => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      city: '',
-      codeGroup: '',
-    },
-    validationSchema: Yup.object({
-      firstName: Yup.string().required(),
-      lastName: Yup.string().required(),
-      email: Yup.string().email().required(),
-      password: Yup.string()
-        .matches(regexPassword, 'Votre mot de passe est invalide')
-        .required('Ce champ est obligatoire'),
-      city: Yup.string().required(),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
-
-  const fakeCities = [
-    {
-      city: 'Lille',
-      postal: '59000',
-    },
-    {
-      city: 'Paris',
-      postal: '75000',
-    },
-  ];
+  const { formik, data, openLocation, onSelect, handelChangeLocation } = useRegister();
 
   return (
     <div className="flex flex-col w-full">
@@ -188,27 +155,28 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel htmlFor="city">Ville de résidence</FormLabel>
             <InputComponent
-              value={formik.values.city}
-              onChange={formik.handleChange}
-              id="password"
-              name="password"
+              value={formik.values.location}
+              onChange={(e) => handelChangeLocation(e)}
+              id="location"
+              name="location"
               checked={true}
-              isInvalid={!!formik.errors.city}
-              selectShow={true}
-              withSelect={
-                fakeCities.map((city) => (
-                  <li className="p-1">{city.city}</li>
-                ))
-              }
+              isInvalid={!!formik.errors.location}
+              selectShow={openLocation}
+              withSelect={data?.location.map((location) => (
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                <li className="p-1" onClick={() => onSelect(location)}>
+                  {location.label}
+                </li>
+              ))}
             />
           </FormControl>
         </div>
-        {formik.touched.city && formik.errors.city ? (
+        {formik.touched.location && formik.errors.location ? (
           <div className="mb-2">
             <FormControl>
               <FormLabel />
               <FormComment>
-                <div className="text-lena-pink">{formik.errors.city}</div>
+                <div className="text-lena-pink">{formik.errors.location}</div>
               </FormComment>
             </FormControl>
           </div>
@@ -221,6 +189,17 @@ const RegisterForm: FunctionComponent = () => {
               onChange={formik.handleChange}
               id="codeGroup"
               name="codeGroup"
+            />
+          </FormControl>
+        </div>
+        <div className="mb-2">
+          <FormControl>
+            <FormLabel htmlFor="codeGroup">Structure</FormLabel>
+            <InputComponent
+              value={formik.values.structure}
+              onChange={formik.handleChange}
+              id="structure"
+              name="structure"
             />
           </FormControl>
         </div>
