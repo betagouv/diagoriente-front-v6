@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import MenuSkillSvg from 'assets/svg/menu_skill.svg';
 import ExportSvg from 'assets/svg/export.svg';
 import IlluSkillSvg from 'assets/illu/skill.svg';
@@ -9,10 +9,11 @@ import BagSvg from 'assets/svg/bag.svg';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import ExpPersoSvg from 'assets/svg/exp_perso.svg';
 import EditSvg from 'assets/svg/edit.svg';
-import ExportModalSvg from "assets/svg/modal_export.svg";
+import ExportModalSvg from 'assets/svg/modal_export.svg';
 import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
 import ModalComponent from '../../components/design-system/Modal';
+import SkillCardExport from "./SkillCardExport";
 
 type SkillProps = {
   star: number;
@@ -82,42 +83,50 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, exp, recommended }
 type ModalExportProps = {
   open: boolean;
   onClose: () => void;
+  onSelect: () => void;
 };
 
-const ModalExport = ({ open, onClose }: ModalExportProps) => {
+const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
   return (
     <ModalComponent onClose={() => onClose.call(null)} open={open}>
       <div className="flex flex-col justify-center items-center py-10">
         <img className="mb-6" src={ExportModalSvg} alt="Export Icon" />
         <h2 className="text-lena-pink-dark font-bold uppercase text-xl">Exporter ma carte de compétences</h2>
         <div className="md:w-1/2 text-center mt-5 text-sm">
-          Vous allez exporter votre carte de compétences.<br />
-          Vous pouvez sélectionner les expériences et compétences
-          que vous voulez voir apparaître, ou bien l’exporter dans sa totalité.
+          Vous allez exporter votre carte de compétences.
+          <br />
+          Vous pouvez sélectionner les expériences et compétences que vous voulez voir apparaître, ou bien l’exporter
+          dans sa totalité.
         </div>
         <div className="mt-10">
-          <Button variant="primary">
-            Exporter la carte complète
-          </Button>
+          <Button variant="primary">Exporter la carte complète</Button>
         </div>
-        <div className="py-4">
-          ou
-        </div>
-        <span className="text-lena-pink-dark text-sm underline cursor-pointer">Exporter une sélection</span>
+        <div className="py-4">ou</div>
+        <button
+          onClick={() => {
+            onSelect.call(null);
+            onClose.call(null);
+          }}
+          className="text-lena-pink-dark text-sm underline cursor-pointer"
+        >
+          Exporter une sélection
+        </button>
       </div>
     </ModalComponent>
   );
 };
 
 const SkillCardContainer: FunctionComponent = () => {
-
   const [showModalExport, setShowModalExport] = useState(false);
+  const [showSelector, setShowSelector] = useState(true);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#E5E5E5';
   }, [document]);
 
-  return (
+  return showSelector ? (
+    <SkillCardExport />
+  ) : (
     <div className="pb-10">
       <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
         <div>
@@ -146,6 +155,7 @@ const SkillCardContainer: FunctionComponent = () => {
           </div>
         </div>
       </div>
+
       <div className="container mt-10">
         <div className="grid grid-cols-2 gap-4">
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md">
@@ -281,7 +291,11 @@ const SkillCardContainer: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <ModalExport open={showModalExport} onClose={() => setShowModalExport(false)} />
+      <ModalExport
+        open={showModalExport}
+        onSelect={() => setShowSelector(true)}
+        onClose={() => setShowModalExport(false)}
+      />
     </div>
   );
 };
