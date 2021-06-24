@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import InputComponent from 'components/Register/Input';
 import Checkbox from 'components/Register/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
@@ -7,6 +7,7 @@ import FormComment from 'components/Register/FormComment';
 import clsx from 'clsx';
 import useRegister from 'common/container/auth/useRegister';
 import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from 'common/utils/validation';
+import Button from '../../components/design-system/Button';
 
 const RegisterForm: FunctionComponent = () => {
   const { formik, data, openLocation, onSelect, handelChangeLocation } = useRegister();
@@ -18,9 +19,10 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel htmlFor="firstName">Prénom *</FormLabel>
             <InputComponent
-              isInvalid={!!formik.errors.firstName}
+              isInvalid={formik.touched.firstName && !!formik.errors.firstName}
               value={formik.values.firstName}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="firstName"
               name="firstName"
               type="text"
@@ -38,13 +40,14 @@ const RegisterForm: FunctionComponent = () => {
             </FormControl>
           </div>
         ) : null}
-        <div className={clsx(formik.errors.lastName && formik.touched.lastName ? 'mb-' : 'mb-7')}>
+        <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="lastName">Nom de famille *</FormLabel>
             <InputComponent
-              isInvalid={!!formik.errors.lastName}
+              isInvalid={formik.touched.lastName && !!formik.errors.lastName}
               value={formik.values.lastName}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="lastName"
               name="lastName"
               type="text"
@@ -53,7 +56,7 @@ const RegisterForm: FunctionComponent = () => {
           </FormControl>
         </div>
         {formik.touched.lastName && formik.errors.lastName ? (
-          <div className="mb-7">
+          <div className="mb-2">
             <FormControl>
               <FormLabel />
               <FormComment>
@@ -68,11 +71,12 @@ const RegisterForm: FunctionComponent = () => {
             <InputComponent
               value={formik.values.email}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="email"
               name="email"
               checked={true}
               type="email"
-              isInvalid={!!formik.errors.email}
+              isInvalid={!!formik.touched.email && !!formik.errors.email}
               placeholder="test@test.dev"
             />
           </FormControl>
@@ -93,11 +97,12 @@ const RegisterForm: FunctionComponent = () => {
             <InputComponent
               value={formik.values.password}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="password"
               name="password"
               checked={true}
               type="password"
-              isInvalid={!!formik.errors.password}
+              isInvalid={formik.touched.password && !!formik.errors.password}
             />
           </FormControl>
         </div>
@@ -157,10 +162,11 @@ const RegisterForm: FunctionComponent = () => {
             <InputComponent
               value={formik.values.location}
               onChange={(e) => handelChangeLocation(e)}
+              onBlur={formik.handleBlur}
               id="location"
               name="location"
               checked={true}
-              isInvalid={!!formik.errors.location}
+              isInvalid={formik.touched.location && !!formik.errors.location}
               selectShow={openLocation}
               withSelect={data?.location.map((location) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -187,6 +193,7 @@ const RegisterForm: FunctionComponent = () => {
             <InputComponent
               value={formik.values.codeGroup}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="codeGroup"
               name="codeGroup"
             />
@@ -198,6 +205,7 @@ const RegisterForm: FunctionComponent = () => {
             <InputComponent
               value={formik.values.structure}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               id="structure"
               name="structure"
             />
@@ -215,9 +223,9 @@ const RegisterForm: FunctionComponent = () => {
           />
         </div>
         <div className="text-center mt-7 pb-10">
-          <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">
+          <Button variant="primary" size="md">
             Finaliser mon inscription
-          </button>
+          </Button>
         </div>
       </form>
     </div>
