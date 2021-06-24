@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
+import { useThemes } from 'common/requests/themes';
 import WipSelectionTheme from './containers/WIPSelectionTheme';
 import {
   EParcoursStep,
@@ -18,6 +19,7 @@ const WipExperienceContainer: FunctionComponent = () => {
   const [experienceType, setExperienceType] = useState<LocalExperienceType>('personal');
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
+  const secteursData = useThemes();
 
   const renderStep = () => {
     switch (step) {
