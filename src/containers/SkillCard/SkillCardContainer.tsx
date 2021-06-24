@@ -122,6 +122,7 @@ const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
+  const [showHelpComp, setShowHelpComp] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
 
   useEffect(() => {
@@ -178,7 +179,7 @@ const SkillCardContainer: FunctionComponent = () => {
               <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
                 Mes compétences
               </h3>
-              <button>
+              <button onClick={() => setShowHelpComp(true)}>
                 <img src={HelpSvg} alt="Help Icon" />
               </button>
             </div>
@@ -244,9 +245,6 @@ const SkillCardContainer: FunctionComponent = () => {
                 <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
                   Mes expériences
                 </h3>
-                <button>
-                  <img src={HelpSvg} alt="Help Icon" />
-                </button>
               </div>
               <div className="py-7 bg-white rounded-b-md">
                 <div className="flex items-center mb-7 px-10">
@@ -317,6 +315,22 @@ const SkillCardContainer: FunctionComponent = () => {
         onSelect={() => setShowSelector(true)}
         onClose={() => setShowModalExport(false)}
       />
+      <ModalComponent open={showHelpComp}>
+        <div className="flex flex-col items-center justify-center py-5">
+          <div className="w-1/2 flex justify-center flex-col items-center">
+            <img alt="Help Svg" src={HelpSvg} className="mb-5" />
+            <div>
+              Pour <strong>supprimer ou éditer une compétence,</strong> vous devez modifier l'<strong>expérience</strong> dans laquelle vous avez renseigné cette compétence.
+            </div>
+            <div className="mt-4">
+              NB : Si une compétence est associée à plusieurs expériences, par défaut, c’est le niveau de compétence le plus élevé qui apparaît dans la carte de compétences.
+            </div>
+            <div className="mt-7">
+              <Button onClick={() => setShowHelpComp(false)} size="md" variant="primary">OK</Button>
+            </div>
+          </div>
+        </div>
+      </ModalComponent>
     </div>
   );
 };
