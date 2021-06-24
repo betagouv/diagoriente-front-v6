@@ -5,6 +5,7 @@ import Star from 'components/design-system/Star';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import CloseSvg from 'assets/svg/cross2.svg';
 import ModalExportSvg from 'assets/svg/export_red.svg';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 type SkillProps = {
   star: number;
@@ -95,25 +96,46 @@ type SkillCardExportProps = {
 };
 
 const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
+  const mediaQueryMD = useMediaQuery('md');
+
   useEffect(() => {
-    document.body.style.backgroundColor = '#E5E5E5';
+    document.body.style.backgroundColor = mediaQueryMD ? '#E5E5E5' : 'rgba(34, 58, 122)';
     document.body.style.overflow = 'auto';
-  }, [document]);
+  }, [document, mediaQueryMD]);
+
   return (
     <div className="mb-32 overflow-auto">
-      <nav className="mb-6" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
-        <div className="flex justify-between container py-6">
-          <span className="font-bold">Sélectionnez ce qui sera visible sur votre carte de compétences :</span>
-          <button
-            onClick={() => onClose.call(null)}
-            className="text-lena-pink-dark flex items-center focus:ring-0 focus:outline-none"
-          >
-            Fermer <img className="ml-3" src={CloseSvg} alt="Cross Icon" />
-          </button>
-        </div>
-      </nav>
+      {mediaQueryMD ? (
+        <nav className="mb-6 bg-white" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
+          <div className="flex justify-between container py-6">
+            <span className="font-bold">Sélectionnez ce qui sera visible sur votre carte de compétences :</span>
+            <button
+              onClick={() => onClose.call(null)}
+              className="text-lena-pink-dark flex items-center focus:ring-0 focus:outline-none"
+            >
+              Fermer <img className="ml-3" src={CloseSvg} alt="Cross Icon" />
+            </button>
+          </div>
+        </nav>
+      ) : (
+        <nav className="mb-6 bg-white" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}>
+          <div className="container py-2">
+            <div className="flex justify-end">
+              <button
+                onClick={() => onClose.call(null)}
+                className="text-lena-pink-dark flex items-center focus:ring-0 focus:outline-none"
+              >
+                Fermer <img className="ml-3" src={CloseSvg} alt="Cross Icon" />
+              </button>
+            </div>
+            <span className="font-bold inline-block mb-3 mt-2">
+              Sélectionnez ce qui sera visible sur votre carte de compétences :
+            </span>
+          </div>
+        </nav>
+      )}
       <div className="container">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <div>
             <h2
               style={{ fontSize: 22 }}
