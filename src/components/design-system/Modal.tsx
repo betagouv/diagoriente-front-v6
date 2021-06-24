@@ -11,7 +11,7 @@ export type ModalProps = {
   variant?: 'primary' | 'secondary';
 };
 
-const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primary', onClose, isMobile, children }) => {
+const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primary', onClose, children }) => {
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
   }, [open]);
@@ -29,7 +29,7 @@ const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primar
         style={{ height: 'auto', maxHeight: '95%' }}
         className={clsx(
           'rounded-lg z-50 relative',
-          !isMobile ? 'w-1/2 mx-auto' : 'm-5',
+          mediaQueryMD ? 'w-1/2 mx-auto' : 'm-5',
           mediaQueryMD ? 'w-1/2' : 'w-full',
           variant === 'primary' && 'bg-white',
           variant === 'secondary' && 'bg-lena-turquoise-light',

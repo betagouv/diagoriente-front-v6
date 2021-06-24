@@ -13,7 +13,8 @@ import ExportModalSvg from 'assets/svg/modal_export.svg';
 import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
 import ModalComponent from '../../components/design-system/Modal';
-import SkillCardExport from "./SkillCardExport";
+import SkillCardExport from './SkillCardExport';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 type SkillProps = {
   star: number;
@@ -91,14 +92,16 @@ const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
     <ModalComponent onClose={() => onClose.call(null)} open={open}>
       <div className="flex flex-col justify-center items-center py-10">
         <img className="mb-6" src={ExportModalSvg} alt="Export Icon" />
-        <h2 className="text-lena-pink-dark font-bold uppercase text-xl">Exporter ma carte de compétences</h2>
+        <h2 className="text-lena-pink-dark font-bold uppercase text-xl text-center">
+          Exporter ma carte de compétences
+        </h2>
         <div className="md:w-1/2 text-center mt-5 text-sm">
           Vous allez exporter votre carte de compétences.
           <br />
           Vous pouvez sélectionner les expériences et compétences que vous voulez voir apparaître, ou bien l’exporter
           dans sa totalité.
         </div>
-        <div className="mt-10">
+        <div className="mt-10 fle">
           <Button variant="primary">Exporter la carte complète</Button>
         </div>
         <div className="py-4">ou</div>
@@ -119,46 +122,57 @@ const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
+  const mediaQueryMD = useMediaQuery('md');
 
   useEffect(() => {
-    document.body.style.backgroundColor = '#E5E5E5';
+    document.body.style.backgroundColor = mediaQueryMD ? '#E5E5E5' : 'rgba(34, 58, 122)';
     document.body.style.overflow = 'auto';
-  }, [document]);
+  }, [document, mediaQueryMD]);
 
   return showSelector ? (
     <SkillCardExport onClose={() => setShowSelector(false)} />
   ) : (
-    <div className="pb-10">
-      <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
-        <div>
-          <button
-            className="bg-white p-2 rounded-full flex items-center justify-center cursor-pointer focus:ring-0 focus:outline-none"
-            style={{ height: 45, width: 45 }}
-          >
-            <img src={MenuSkillSvg} alt="Menu Icon" style={{ height: 25, width: 25 }} />
-          </button>
-        </div>
-        <div className="flex justify-around flex-grow">
-          <div className="md:w-96 pt-10">
-            <h2 className="text-white uppercase font-bold text-2xl mb-3">Ma carte de compétences</h2>
-            <span className="text-white inline-block mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem consectetur ipsum dolor sit amet, con.
-            </span>
-            <Button onClick={() => setShowModalExport(true)} variant="primary">
-              <div className="flex items-center px-10">
-                <img className="mr-3" src={ExportSvg} alt="Export Icon" />
-                Exporter
-              </div>
-            </Button>
-          </div>
+    <div className="pb-10 mb-10">
+      {mediaQueryMD ? (
+        <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
           <div>
-            <img src={IlluSkillSvg} alt="Illustration" />
+            <button
+              className="bg-white p-2 rounded-full flex items-center justify-center cursor-pointer focus:ring-0 focus:outline-none"
+              style={{ height: 45, width: 45 }}
+            >
+              <img src={MenuSkillSvg} alt="Menu Icon" style={{ height: 25, width: 25 }} />
+            </button>
+          </div>
+          <div className="flex justify-around flex-grow">
+            <div className="md:w-96 pt-10">
+              <h2 className="text-white uppercase font-bold text-2xl mb-3">Ma carte de compétences</h2>
+              <span className="text-white inline-block mb-8">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem consectetur ipsum dolor sit amet, con.
+              </span>
+              <Button onClick={() => setShowModalExport(true)} variant="primary">
+                <div className="flex items-center px-10">
+                  <img className="mr-3" src={ExportSvg} alt="Export Icon" />
+                  Exporter
+                </div>
+              </Button>
+            </div>
+            <div>
+              <img src={IlluSkillSvg} alt="Illustration" />
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex justify-center flex-col items-center mt-10">
+          <img className="mb-5" style={{ width: '60%' }} src={IlluSkillSvg} alt="Illustration" />
+          <h2 style={{ fontSize: 22 }} className="font-bold uppercase text-white text-center">
+            Ma carte <br />
+            de compétences
+          </h2>
+        </div>
+      )}
 
       <div className="container mt-10">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md">
             <div className="bg-lena-turquoise-light rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
               <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
@@ -291,6 +305,12 @@ const SkillCardContainer: FunctionComponent = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="bg-lena-pink-dark fixed bottom-0 left-0 right-0 flex justify-center py-4 md:hidden">
+        <button onClick={() => setShowModalExport(true)} className="flex items-center text-white font-bold text-lg">
+          <img className="mr-2" src={ExportSvg} alt="Export Svg" />
+          Exporter
+        </button>
       </div>
       <ModalExport
         open={showModalExport}
