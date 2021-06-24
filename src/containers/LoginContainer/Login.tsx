@@ -4,9 +4,11 @@ import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
 import useLogin from 'common/container/auth/useLogin';
 import AppLayout from '../../layouts/AppLayout';
+import Button from '../../components/design-system/Button';
 
 const LoginContainer = () => {
   const { user, formik, errorForm, loginState } = useLogin();
+
   return (
     <AppLayout>
       <span>Login</span>
@@ -18,16 +20,17 @@ const LoginContainer = () => {
               <InputComponent
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 id="email"
                 name="email"
                 checked={true}
                 type="email"
-                isInvalid={!!formik.errors.email}
+                isInvalid={formik.touched.email && !!formik.errors.email}
                 placeholder="test@test.dev"
               />
             </FormControl>
           </div>
-          {formik.touched.email && formik.errors.email ? (
+          {formik.touched.email && formik.errors.email && (
             <div className="mb-2">
               <FormControl>
                 <FormLabel />
@@ -36,23 +39,26 @@ const LoginContainer = () => {
                 </FormComment>
               </FormControl>
             </div>
-          ) : null}
+          )}
           <div className="mb-2">
             <FormControl>
               <FormLabel htmlFor="password">Mot de passe *</FormLabel>
               <InputComponent
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 id="password"
                 name="password"
                 checked={true}
                 type="password"
-                isInvalid={!!formik.errors.password}
+                isInvalid={formik.touched.password && !!formik.errors.password}
               />
             </FormControl>
           </div>
           <div className="text-center mt-7 pb-10">
-            <button className="bg-lena-pink w-full text-white font-bold md:w-72 py-3 rounded-md">connexion</button>
+            <Button variant="primary" size="md">
+              Connexion
+            </Button>
           </div>
         </form>
       </div>
