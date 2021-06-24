@@ -118,14 +118,15 @@ const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
 
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
-  const [showSelector, setShowSelector] = useState(true);
+  const [showSelector, setShowSelector] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#E5E5E5';
+    document.body.style.overflow = 'auto';
   }, [document]);
 
   return showSelector ? (
-    <SkillCardExport />
+    <SkillCardExport onClose={() => setShowSelector(false)} />
   ) : (
     <div className="pb-10">
       <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
