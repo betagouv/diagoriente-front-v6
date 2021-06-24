@@ -24,8 +24,8 @@ type SkillProps = {
 
 const Skill = ({ star = 1, title, description }: SkillProps) => {
   return (
-    <div className="flex items-start mb-4">
-      <div style={{ width: 80 }} className="flex-shrink-0">
+    <div className="md:flex items-start mb-4">
+      <div className="flex-shrink-0 mb-3 md:mb-0 w-auto md:w-20">
         <Star star={star} />
       </div>
       <div className="-mt-1">
