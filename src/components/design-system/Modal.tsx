@@ -13,7 +13,7 @@ export type ModalProps = {
 
 const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primary', onClose, children }) => {
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : 'auto';
   }, [open]);
 
   const mediaQueryMD = useMediaQuery('md');

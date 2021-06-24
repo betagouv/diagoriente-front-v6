@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import SearchSvg from 'assets/images/svg/picto/search.svg';
 import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
@@ -7,26 +7,72 @@ import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
 import ParcoursLayout from '../layout/ParcoursLayout';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
-type JobTag = {
-  id: number | undefined;
-  tags: string[];
+const jobData = {
+  domains: [
+    {
+      id: '1',
+      name: 'Cordonnier',
+      activites: ['test', 'lol', 'hello word'],
+    },
+    {
+      id: '2',
+      name: 'Soins esthétiques et corporels',
+      activites: [
+        'J’accueille une clientèle',
+        'Je propose un service et/ou un produit adapté',
+        'Je nettoie et je prépare le corps, le visage',
+      ],
+    },
+  ],
+  tags: [
+    {
+      id: '1',
+      name: '#lol',
+      jobs: [
+        { id: '1', name: 'lol' },
+        { id: '2', name: 'lul' },
+      ],
+    },
+    {
+      id: '2',
+      name: '#coucou',
+      jobs: [
+        { id: '3', name: 'hashtagcovid' },
+        { id: '4', name: 'diagoriente' },
+      ],
+    },
+  ],
 };
 
-const SearchJobTag: FunctionComponent<JobTag> = ({ id, tags, children }) => {
+// TODO: move this to requests folder
+type JobType = {
+  id: string;
+  name: string;
+};
+
+type JobTag = {
+  id: string;
+  domains: JobType[];
+  onSelect: (job: JobType) => void;
+};
+
+const SearchJobTag: FunctionComponent<JobTag> = ({ id, domains, onSelect, children }) => {
   return (
     <div>
       <div className="focus:ring-0 focus:outline-none w-full py-1 text-left flex justify-between border-b border-lena-lightgray2">
         {children}
       </div>
       <div className="px-4 py-1 divide-y divide-lena-lightgray2">
-        {tags &&
-          tags.map((tag) => (
+        {domains &&
+          domains.map((domain) => (
             <div
-              key={tag}
+              key={domain.id}
               className="cursor-pointer px-4 py-1 whitespace-nowrap overflow-ellipsis overflow-hidden bg-opacity-50"
+              onClick={() => onSelect.call(null, domain)}
             >
-              {tag}
+              {domain.name}
             </div>
           ))}
       </div>
@@ -35,36 +81,38 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ id, tags, children }) => {
 };
 
 type JobDomain = {
-  id: number | undefined;
-  jobs: string[];
-  idActive: number | undefined;
-  onActive: (e: number | undefined) => void;
+  job: JobType;
+  activities: string[];
+  idActive?: string;
+  onActive: (e: string | undefined) => void;
+  onSelect: (job: JobType) => void;
 };
 
-const SearchJobDomain: FunctionComponent<JobDomain> = ({ id, jobs, idActive, onActive, children }) => {
+const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, activities, idActive, onActive, onSelect, children }) => {
   return (
     <div>
       <button
         className={clsx(
           'focus-:ring-0 focus:outline-none w-full py-1 text-left flex justify-between',
-          id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
-          id !== idActive && 'border-white',
+          job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
+          job.id !== idActive && 'border-white',
         )}
+        onClick={() => onSelect.call(null, job)}
       >
         {children}
         <button
           className="focus:ring-0 focus:outline-none"
-          onClick={() => onActive.call(null, id === idActive ? undefined : id)}
+          onClick={() => onActive.call(null, job.id === idActive ? undefined : job.id)}
         >
-          <img src={id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
+          <img src={job.id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
         </button>
       </button>
-      {id === idActive && (
+      {job.id === idActive && (
         <ul className="list-disc px-4 py-1 list-inside">
-          {jobs &&
-            jobs.map((job) => (
-              <li key={job} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
-                {job}
+          {activities &&
+            activities.map((activity) => (
+              <li key={activity} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
+                {activity}
               </li>
             ))}
         </ul>
@@ -80,21 +128,22 @@ type SearchProps = {
 
 type Domains = {
   domains: {
-    id: number;
+    id: string;
     name: string;
     activites: string[];
   }[];
   tags: {
-    id: number;
+    id: string;
     name: string;
-    tags: string[];
+    jobs: { id: string; name: string }[];
   }[];
 };
 
 const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
   const inputRef = useRef<any>(null);
-  const [domains, setDomains] = useState<Domains>();
-  const [domainHelp, setDomainHelp] = useState<number | undefined>(undefined);
+  const [domains, setDomains] = useState<Domains>(jobData);
+  const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
+  const { theme, setTheme, setStep } = useContext(NewExperienceContext);
 
   useEffect(() => {
     if (open) {
@@ -102,38 +151,11 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
     }
   }, [open]);
 
-  useEffect(() => {
-    setDomains({
-      domains: [
-        {
-          id: 1,
-          name: 'Cordonnier',
-          activites: ['test', 'lol', 'hello word'],
-        },
-        {
-          id: 2,
-          name: 'Soins esthétiques et corporels',
-          activites: [
-            'J’accueille une clientèle',
-            'Je propose un service et/ou un produit adapté',
-            'Je nettoie et je prépare le corps, le visage',
-          ],
-        },
-      ],
-      tags: [
-        {
-          id: 1,
-          name: '#lol',
-          tags: ['lol', 'mdr'],
-        },
-        {
-          id: 2,
-          name: '#coucou',
-          tags: ['dia', 'go'],
-        },
-      ],
-    });
-  }, [domains]);
+  // TODO: pass job object
+  const handleSelectJob = (job: JobType) => {
+    setTheme(job);
+    setStep(EParcoursStep.THEME_DONE);
+  };
 
   return (
     <div>
@@ -160,11 +182,12 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
             {domains &&
               domains.domains.map((domain) => (
                 <SearchJobDomain
-                  onActive={(e: number | undefined) => setDomainHelp(e)}
+                  onActive={(e: string | undefined) => setDomainHelp(e)}
                   idActive={domainHelp}
                   key={domain.id}
-                  id={domain.id}
-                  jobs={domain.activites}
+                  job={domain}
+                  activities={domain.activites}
+                  onSelect={handleSelectJob}
                 >
                   {domain.name}
                 </SearchJobDomain>
@@ -178,7 +201,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
           <div className="divide-y divide-lena-lightgray2 px-8">
             {domains &&
               domains.tags.map((domain) => (
-                <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
+                <SearchJobTag key={domain.id} id={domain.id} domains={domain.jobs} onSelect={handleSelectJob}>
                   {domain.name}
                 </SearchJobTag>
               ))}
@@ -190,41 +213,15 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
 };
 
 const DomainList: FunctionComponent = () => {
-  const [domains, setDomains] = useState<Domains>();
-  const [domainHelp, setDomainHelp] = useState<number | undefined>(undefined);
+  const [domains, setDomains] = useState<Domains>(jobData);
+  const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
+  const { setTheme, setStep } = useContext(NewExperienceContext);
 
-  useEffect(() => {
-    setDomains({
-      domains: [
-        {
-          id: 1,
-          name: 'Cordonnier',
-          activites: ['test', 'lol', 'hello word'],
-        },
-        {
-          id: 2,
-          name: 'Soins esthétiques et corporels',
-          activites: [
-            'J’accueille une clientèle',
-            'Je propose un service et/ou un produit adapté',
-            'Je nettoie et je prépare le corps, le visage',
-          ],
-        },
-      ],
-      tags: [
-        {
-          id: 1,
-          name: '#coronavirus',
-          tags: ['Infirmièr-e', 'Médecin'],
-        },
-        {
-          id: 2,
-          name: '#CORA',
-          tags: ['Animation commerciale', 'Vente en alimentation commerce'],
-        },
-      ],
-    });
-  }, []);
+  // TODO: pass job object
+  const handleSelectJob = (job: JobType) => {
+    setTheme(job);
+    setStep(EParcoursStep.THEME_DONE);
+  };
 
   return (
     <div
@@ -239,11 +236,12 @@ const DomainList: FunctionComponent = () => {
           {domains &&
             domains.domains.map((domain) => (
               <SearchJobDomain
-                onActive={(e: number | undefined) => setDomainHelp(e)}
+                onActive={(e: string | undefined) => setDomainHelp(e)}
                 idActive={domainHelp}
                 key={domain.id}
-                id={domain.id}
-                jobs={domain.activites}
+                job={domain}
+                activities={domain.activites}
+                onSelect={handleSelectJob}
               >
                 {domain.name}
               </SearchJobDomain>
@@ -257,7 +255,7 @@ const DomainList: FunctionComponent = () => {
         <div className="divide-y divide-lena-lightgray2 px-8">
           {domains &&
             domains.tags.map((domain) => (
-              <SearchJobTag key={domain.id} id={domain.id} tags={domain.tags}>
+              <SearchJobTag key={domain.id} id={domain.id} domains={domain.jobs} onSelect={handleSelectJob}>
                 {domain.name}
               </SearchJobTag>
             ))}

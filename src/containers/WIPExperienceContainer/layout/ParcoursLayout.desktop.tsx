@@ -3,17 +3,17 @@ import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
 import AppHeader from '../../../layouts/AppHeader';
 import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professional.svg';
-import { NewExperienceContext } from '../../../contexts/NewExperienceContext';
+import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
-  const { activities } = useContext(NewExperienceContext);
+  const { step, activities, theme, competences } = useContext(NewExperienceContext);
 
   return (
     <div className="min-h-screen h-full flex flex-col relative">
       <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col sticky top-0 left-0">
-          <ProgressBar value={20} />
+          <ProgressBar value={step} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center">
@@ -25,14 +25,26 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 </div>
               </div>
               <div className="flex flex-col space-y-4">
-                <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
-                  [!!WIP!!]
-                </div>
+                {theme && (
+                  <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
+                    {theme.name}
+                  </div>
+                )}
                 {activities.length > 0 && (
                   <div>
                     <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
                     <ul className="list-disc list-inside">
                       {activities.map((v) => (
+                        <li key={v.id}>{v.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {competences.length > 0 && (
+                  <div>
+                    <div className="font-bold text-lena-blue-dark">Compétences développées</div>
+                    <ul className="list-disc list-inside">
+                      {competences.map((v) => (
                         <li key={v.id}>{v.name}</li>
                       ))}
                     </ul>

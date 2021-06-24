@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useContext, useState } from 'react';
+import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
 import { ReactComponent as PictoSorganiserSvg } from '../../../assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from '../../../components/design-system/SelectorTest';
 import CardLevel from '../../../components/design-system/CardLevel';
 import ModalComponent from '../../../components/design-system/Modal';
-import Button from '../../../components/design-system/Button';
 
 type Choice = {
   open?: boolean;
@@ -43,8 +43,8 @@ const ModalChoice: FunctionComponent<Choice> = ({ open, onClose, onSend, data })
                 selected={false}
                 starReverse
                 text={
-                  <span>
-                    Niveau <strong>{level.name.toLowerCase()}</strong>
+                  <span className="lowercase">
+                    Niveau <strong>{level.name}</strong>
                   </span>
                 }
                 opacity={false}
@@ -67,13 +67,13 @@ type Levels = {
 };
 
 type Skills = {
-  id: number;
+  id: string;
   name: string;
   levels: Levels[];
 };
 
 type Skill = {
-  id: number;
+  id: string;
   name: string;
   levels: Levels;
 };
@@ -81,7 +81,7 @@ type Skill = {
 const WipSelectionCompetence: FunctionComponent = () => {
   const skills: Skills[] = [
     {
-      id: 1,
+      id: '1',
       name: 'Agir face aux imprévus',
       levels: [
         {
@@ -93,20 +93,32 @@ const WipSelectionCompetence: FunctionComponent = () => {
       ],
     },
     {
-      id: 2,
+      id: '2',
       name: 'test',
       levels: [
         {
           id: 1,
-          name: 'débutant',
+          name: 'Débutant',
           star: 1,
-          description: 'test test test test test test test',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         },
         {
           id: 2,
-          name: 'avancé',
-          star: 1,
-          description: 'test test test test test test test',
+          name: 'Intermédiaire',
+          star: 2,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        },
+        {
+          id: 3,
+          name: 'Confirmé',
+          star: 3,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        },
+        {
+          id: 4,
+          name: 'Avancé',
+          star: 4,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         },
       ],
     },
@@ -115,6 +127,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
   const [skillsChecked, setSkillsChecked] = useState<Array<Skill>>([]);
   const [selectedSkill, setSelectedSkill] = useState<Skills>();
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
+  const { setStep, setCompetences } = useContext(NewExperienceContext);
 
   const handleCheck = (value: Skills, checked: boolean) => {
     if (checked) {
@@ -146,6 +159,17 @@ const WipSelectionCompetence: FunctionComponent = () => {
     }
   };
 
+  const handleValidateCompetences = () => {
+    setCompetences(skillsChecked);
+    setStep(EParcoursStep.DONE);
+    // TODO change competence group
+  };
+
+  const handleSkipCompetences = () => {
+    setCompetences([]);
+    setStep(EParcoursStep.DONE);
+  };
+
   return (
     <ParcoursLayout>
       <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
@@ -155,7 +179,7 @@ const WipSelectionCompetence: FunctionComponent = () => {
         </div>
         <div>
           <div className="text-lena-blue-dark">
-            Quelles sont les <strong>compétences d’organisation</strong> que vous mettez en oeuvre ?
+            Quelles sont les <strong>compétences d'organisation</strong> que vous mettez en oeuvre ?
           </div>
           <div className="italic mt-2">Plusieurs choix possibles</div>
         </div>
@@ -168,9 +192,20 @@ const WipSelectionCompetence: FunctionComponent = () => {
             ))}
         </div>
         <div>
-          <Button variant="secondary" disabled={skillsChecked.length <= 0}>
-            Valider
-          </Button>
+          <div onClick={handleSkipCompetences} className="text-lena-blue-dark cursor-pointer font-bold">
+            Aucune de ces compétences
+          </div>
+        </div>
+        <div>
+          <div className="fixed bottom-0 left-0 right-0 md:relative">
+            <button
+              disabled={skillsChecked.length <= 0}
+              onClick={handleValidateCompetences}
+              className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+            >
+              Valider
+            </button>
+          </div>
         </div>
       </div>
       {selectedSkill && (

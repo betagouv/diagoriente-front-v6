@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { uniqueId } from 'lodash';
 import ParcoursLayout from '../layout/ParcoursLayout';
 import SelectorTest from '../../../components/design-system/SelectorTest';
 import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
@@ -52,67 +52,57 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
 };
 
 const WipChoixActivites: FunctionComponent = () => {
-  const history = useHistory();
   const { activities, setActivities, setStep } = useContext(NewExperienceContext);
-  const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>([]);
-  const [todoRenameActivities, setTodoRenameActivities] = useState<{ id: number; name: string; extra?: boolean }[]>([
-    { id: 1, name: 'Activité A' },
-    { id: 2, name: 'Activité B' },
-    { id: 3, name: 'Activité C' },
-    { id: 4, name: 'Activité D' },
-    { id: 5, name: 'Activité E' },
-    { id: 6, name: 'Activité F' },
-    { id: 7, name: 'Activité G' },
-    { id: 8, name: 'Activité H' },
-    { id: 9, name: 'Activité I' },
-    { id: 10, name: 'Activité J' },
-    { id: 11, name: 'Activité K' },
-    { id: 12, name: 'Activité L' },
-    { id: 13, name: 'Activité M' },
-    { id: 14, name: 'Activité N' },
-    { id: 15, name: 'Activité O' },
-    { id: 16, name: 'Activité P' },
-    { id: 17, name: 'Activité Q' },
-    { id: 18, name: 'Activité R' },
-    { id: 19, name: 'Activité S' },
-    { id: 20, name: 'Activité T' },
-    { id: 21, name: 'Activité U' },
-    { id: 22, name: 'Activité V' },
-    { id: 23, name: 'Activité W' },
-    { id: 24, name: 'Activité X' },
-    { id: 25, name: 'Activité Y' },
-    { id: 26, name: 'Activité Z' },
+  const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
+  const [todoRenameActivities, setTodoRenameActivities] = useState<{ id: string; name: string; extra?: boolean }[]>([
+    { id: '1', name: 'Activité A' },
+    { id: '2', name: 'Activité B' },
+    { id: '3', name: 'Activité C' },
+    { id: '4', name: 'Activité D' },
+    { id: '5', name: 'Activité E' },
+    { id: '6', name: 'Activité F' },
+    { id: '7', name: 'Activité G' },
+    { id: '8', name: 'Activité H' },
+    { id: '9', name: 'Activité I' },
+    { id: '10', name: 'Activité J' },
+    { id: '11', name: 'Activité K' },
+    { id: '12', name: 'Activité L' },
+    { id: '13', name: 'Activité M' },
+    { id: '14', name: 'Activité N' },
+    { id: '15', name: 'Activité O' },
+    { id: '16', name: 'Activité P' },
+    { id: '17', name: 'Activité Q' },
+    { id: '18', name: 'Activité R' },
+    { id: '19', name: 'Activité S' },
+    { id: '20', name: 'Activité T' },
+    { id: '21', name: 'Activité U' },
+    { id: '22', name: 'Activité V' },
+    { id: '23', name: 'Activité W' },
+    { id: '24', name: 'Activité X' },
+    { id: '25', name: 'Activité Y' },
+    { id: '26', name: 'Activité Z' },
   ]);
   const [showNewActivity, setShowNewActivity] = useState(false);
 
-  const handleCheck = (value: any, checked: boolean) => {
+  const handleCheck = (value: string, checked: boolean) => {
     if (checked) {
-      setActivitiesChecked([...activitiesChecked, value]);
+      setActivitiesChecked([...activitiesChecked, todoRenameActivities.find((v) => v.id === value)]);
     } else {
-      const updatedArray = activitiesChecked.filter((e) => e !== value);
+      const updatedArray = activitiesChecked.filter((e) => e.id !== value);
       setActivitiesChecked(updatedArray);
     }
   };
 
-  const verifyIfCheck = (value: any) => {
-    const filteredAry = activitiesChecked.filter(function (e) {
-      return e === value;
-    });
-    return filteredAry.length > 0;
-  };
-
   const handleAddNewActivity = (value: string) => {
-    // @ts-ignore
-    const min = Math.ceil(10000000);
-    const max = Math.floor(999999999999);
-    const newId = Math.floor(Math.random() * (max - min)) + min;
-    setTodoRenameActivities([...todoRenameActivities, { id: newId, name: value, extra: true }]);
-    setActivitiesChecked([...activitiesChecked, newId]);
+    const newId = uniqueId('local-');
+    const data = { id: newId, name: value, extra: true };
+    setTodoRenameActivities([...todoRenameActivities, data]);
+    setActivitiesChecked([...activitiesChecked, data]);
   };
 
   const handleValidateActivites = () => {
-    // TODO: Implement form logic
     setStep(EParcoursStep.ACTIVITIES_DONE);
+    setActivities(activitiesChecked);
   };
 
   return (
@@ -131,7 +121,7 @@ const WipChoixActivites: FunctionComponent = () => {
                 <SelectorTest
                   key={activity.id}
                   onClick={(e) => handleCheck(activity.id, e)}
-                  checked={verifyIfCheck(activity.id)}
+                  checked={activitiesChecked.find((v) => v.id === activity.id)}
                 >
                   {activity.name}
                 </SelectorTest>

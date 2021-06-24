@@ -6,16 +6,19 @@ import {
   LocalExperienceType,
   LocalParcoursActivity,
   LocalParcoursCompetence,
+  LocalParcoursTheme,
   NewExperienceContext,
 } from '../../contexts/NewExperienceContext';
 import WipAddActivityDone from './containers/WIPAddActivityDone';
 import WipChoixActivites from './containers/WIPChoixActivites';
 import WipSelectionCompetence from './containers/WIPSelectionCompetence';
 import WipAddExperienceDone from './containers/WIPAddExperienceDone';
+import WipDomainSelect from './containers/WIPDomainSelect';
 
 const WipExperienceContainer: FunctionComponent = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);
-  const [step, setStep] = useState<EParcoursStep>(EParcoursStep.ACTIVITIES);
+  const [step, setStep] = useState<EParcoursStep>(EParcoursStep.THEME);
+  const [theme, setTheme] = useState<LocalParcoursTheme>();
   const [experienceType, setExperienceType] = useState<LocalExperienceType>('personal');
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
@@ -25,6 +28,8 @@ const WipExperienceContainer: FunctionComponent = () => {
     switch (step) {
       case EParcoursStep.THEME:
         return <WipSelectionTheme />;
+      case EParcoursStep.THEME_DONE:
+        return <WipDomainSelect />;
       case EParcoursStep.ACTIVITIES:
         return <WipChoixActivites />;
       case EParcoursStep.ACTIVITIES_DONE:
@@ -40,7 +45,7 @@ const WipExperienceContainer: FunctionComponent = () => {
 
   return (
     <NewExperienceContext.Provider
-      value={{ step, setStep, experienceType, activities, setActivities, competences, setCompetences }}
+      value={{ theme, setTheme, step, setStep, experienceType, activities, setActivities, competences, setCompetences }}
     >
       {renderStep()}
     </NewExperienceContext.Provider>
