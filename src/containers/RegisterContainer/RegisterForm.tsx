@@ -171,7 +171,7 @@ const RegisterForm: FunctionComponent = () => {
               withSelect={data?.location.map((location) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
                 <li className="p-1" onClick={() => onSelect(location)}>
-                  {location.label}
+                  {location.postcode} {location.label}
                 </li>
               ))}
             />
