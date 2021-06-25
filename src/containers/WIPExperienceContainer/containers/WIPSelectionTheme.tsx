@@ -9,17 +9,17 @@ import ParcoursLayout from '../layout/ParcoursLayout';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
-const jobData = {
+const jobData: Domains = {
   domains: [
     {
       id: '1',
       name: 'Cordonnier',
-      activites: ['test', 'lol', 'hello word'],
+      activities: ['test', 'lol', 'hello word'],
     },
     {
       id: '2',
       name: 'Soins esthétiques et corporels',
-      activites: [
+      activities: [
         'J’accueille une clientèle',
         'Je propose un service et/ou un produit adapté',
         'Je nettoie et je prépare le corps, le visage',
@@ -31,16 +31,16 @@ const jobData = {
       id: '1',
       name: '#lol',
       jobs: [
-        { id: '1', name: 'lol' },
-        { id: '2', name: 'lul' },
+        { id: '1', name: 'lol', activities: [] },
+        { id: '2', name: 'lul', activities: [] },
       ],
     },
     {
       id: '2',
       name: '#coucou',
       jobs: [
-        { id: '3', name: 'hashtagcovid' },
-        { id: '4', name: 'diagoriente' },
+        { id: '3', name: 'hashtagcovid', activities: [] },
+        { id: '4', name: 'diagoriente', activities: [] },
       ],
     },
   ],
@@ -50,6 +50,7 @@ const jobData = {
 type JobType = {
   id: string;
   name: string;
+  activities: string[];
 };
 
 type JobTag = {
@@ -127,15 +128,11 @@ type SearchProps = {
 };
 
 type Domains = {
-  domains: {
-    id: string;
-    name: string;
-    activites: string[];
-  }[];
+  domains: JobType[];
   tags: {
     id: string;
     name: string;
-    jobs: { id: string; name: string }[];
+    jobs: JobType[];
   }[];
 };
 
@@ -186,7 +183,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
                   idActive={domainHelp}
                   key={domain.id}
                   job={domain}
-                  activities={domain.activites}
+                  activities={domain.activities}
                   onSelect={handleSelectJob}
                 >
                   {domain.name}
@@ -240,7 +237,7 @@ const DomainList: FunctionComponent = () => {
                 idActive={domainHelp}
                 key={domain.id}
                 job={domain}
-                activities={domain.activites}
+                activities={domain.activities}
                 onSelect={handleSelectJob}
               >
                 {domain.name}

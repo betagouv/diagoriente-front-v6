@@ -13,14 +13,22 @@ const WipDomainSelect: FunctionComponent = () => {
   return (
     <ParcoursLayout>
       <div className="container py-8 md:p-14">
-        <div className="flex flex-col items-center justify-start w-full">
+        <div className="flex flex-col space-y-4 items-center justify-start w-full">
           <div className="flex flex-col justify-center items-center h-56 w-56 space-y-2">
             <PictoExpPro />
           </div>
-          <div className="mb-5 text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
+          <div className="text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
           <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
             {theme?.name}
           </div>
+          {theme && theme.activities.length > 0 && (
+            <ul className="list-disc list-inside">
+              {theme.activities.map((v, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <li key={index}>{v}</li>
+              ))}
+            </ul>
+          )}
         </div>
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-14 md:text-center">
           <button

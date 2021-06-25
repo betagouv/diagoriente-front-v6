@@ -12,7 +12,7 @@ export enum EParcoursStep {
 // TODO: Maybe migrate this to Redux or use Apollo cache,
 //  so we don't store database data in states
 export type LocalExperienceType = 'personal' | 'professional' | 'engagement';
-export type LocalParcoursTheme = { id: string; name: string };
+export type LocalParcoursTheme = { id: string; name: string; activities: string[] };
 export type LocalParcoursActivity = { id: string; name: string; extra: boolean };
 export type LocalParcoursCompetence = { id: string; name: string };
 
