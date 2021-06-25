@@ -138,7 +138,8 @@ const SkillCardContainer: FunctionComponent = () => {
         <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
           <div>
             <button
-              className="bg-white p-2 rounded-full flex items-center justify-center cursor-pointer focus:ring-0 focus:outline-none"
+              className="
+              bg-white p-2 rounded-full flex items-center justify-center cursor-pointer focus:ring-0 focus:outline-none"
               style={{ height: 45, width: 45 }}
             >
               <img src={MenuSkillSvg} alt="Menu Icon" style={{ height: 25, width: 25 }} />
@@ -173,8 +174,8 @@ const SkillCardContainer: FunctionComponent = () => {
       )}
 
       <div className="container mt-10">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md">
+        <div className="grid md:grid-cols-2 auto-cols-max gap-4">
+          <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-turquoise-light rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
               <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
                 Mes compétences
@@ -239,64 +240,76 @@ const SkillCardContainer: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <div>
-            <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md">
-              <div className="bg-lena-blue-lightest rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
-                <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
-                  Mes expériences
-                </h3>
+          <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
+            <div className="bg-lena-blue-lightest rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
+              <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
+                Mes expériences
+              </h3>
+            </div>
+            <div className="py-7 bg-white rounded-b-md">
+              <div className="flex items-center mb-7 px-10">
+                <img className="mr-5" src={BagSvg} alt="Brain Icon" />
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PRO</span>
               </div>
-              <div className="py-7 bg-white rounded-b-md">
-                <div className="flex items-center mb-7 px-10">
-                  <img className="mr-5" src={BagSvg} alt="Brain Icon" />
-                  <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PRO</span>
-                </div>
-                <div className="px-10">
-                  <Experience
-                    title="Graphisme multimédia"
-                    date="Depuis Avril 2020"
-                    exp={[
-                      "J'analyse les besoins du client",
-                      'Je traite des images numériques (colorimétrie, recadrage...)',
-                      'Je modélise des éléments graphique',
-                    ]}
-                  />
-                  <Experience
-                    title="Programmation"
-                    date="Avril 2020 - Mai 2021"
-                    exp={[
-                      "J'écris les notices techniques d'installation",
-                      'Je code des logiciels (ou parties de logiciels)',
-                    ]}
-                    recommended={{
-                      description:
-                        '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
-                      signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
-                    }}
-                  />
-                </div>
-                <div className="px-4">
-                  <div className="bg-lena-lightgray px-4 py-2 rounded-md relative">
-                    <div className="flex items-center justify-between mb-7 px-4">
-                      <div className="flex items-center">
-                        <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
-                        <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PERSOS</span>
-                      </div>
-                      <div className="absolute right-6 top-6 flex flex-col justify-center items-center">
-                        <img src={EditSvg} alt="Edit Icon" />
-                        <span className="text-lena-blue-dark text-sm">Editer</span>
-                      </div>
+              <div className="px-10">
+                <Experience
+                  title="Graphisme multimédia"
+                  date="Depuis Avril 2020"
+                  exp={[
+                    "J'analyse les besoins du client",
+                    'Je traite des images numériques (colorimétrie, recadrage...)',
+                    'Je modélise des éléments graphique',
+                  ]}
+                />
+                <Experience
+                  title="Programmation"
+                  date="Avril 2020 - Mai 2021"
+                  exp={[
+                    "J'écris les notices techniques d'installation",
+                    'Je code des logiciels (ou parties de logiciels)',
+                  ]}
+                  recommended={{
+                    description:
+                      '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
+                    signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
+                  }}
+                />
+                <Experience
+                  title="Programmation"
+                  date="Avril 2020 - Mai 2021"
+                  exp={[
+                    "J'écris les notices techniques d'installation",
+                    'Je code des logiciels (ou parties de logiciels)',
+                  ]}
+                  recommended={{
+                    description:
+                      '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
+                    signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
+                  }}
+                />
+              </div>
+              <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
+              <div className="px-10">
+                <div className="rounded-md relative">
+                  <div className="flex items-center justify-between mb-7">
+                    <div className="flex items-center">
+                      <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
+                      <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PERSOS</span>
                     </div>
-                    <div className="px-4">
-                      <Experience
-                        title="Programmation"
-                        date="Avril 2020 - Mai 2021"
-                        exp={[
-                          "J'écris les notices techniques d'installation",
-                          'Je code des logiciels (ou parties de logiciels)',
-                        ]}
-                      />
+                    <div className="absolute right-6 top-6 flex flex-col justify-center items-center">
+                      <img src={EditSvg} alt="Edit Icon" />
+                      <span className="text-lena-blue-dark text-sm">Editer</span>
                     </div>
+                  </div>
+                  <div>
+                    <Experience
+                      title="Programmation"
+                      date="Avril 2020 - Mai 2021"
+                      exp={[
+                        "J'écris les notices techniques d'installation",
+                        'Je code des logiciels (ou parties de logiciels)',
+                      ]}
+                    />
                   </div>
                 </div>
               </div>
@@ -320,13 +333,17 @@ const SkillCardContainer: FunctionComponent = () => {
           <div className="w-1/2 flex justify-center flex-col items-center">
             <img alt="Help Svg" src={HelpSvg} className="mb-5" />
             <div>
-              Pour <strong>supprimer ou éditer une compétence,</strong> vous devez modifier l'<strong>expérience</strong> dans laquelle vous avez renseigné cette compétence.
+              Pour <strong>supprimer ou éditer une compétence,</strong> vous devez modifier l'
+              <strong>expérience</strong> dans laquelle vous avez renseigné cette compétence.
             </div>
             <div className="mt-4">
-              NB : Si une compétence est associée à plusieurs expériences, par défaut, c’est le niveau de compétence le plus élevé qui apparaît dans la carte de compétences.
+              NB : Si une compétence est associée à plusieurs expériences, par défaut, c’est le niveau de compétence le
+              plus élevé qui apparaît dans la carte de compétences.
             </div>
             <div className="mt-7">
-              <Button onClick={() => setShowHelpComp(false)} size="md" variant="primary">OK</Button>
+              <Button onClick={() => setShowHelpComp(false)} size="md" variant="primary">
+                OK
+              </Button>
             </div>
           </div>
         </div>
