@@ -9,7 +9,7 @@ const WipAddExperienceDone: FunctionComponent = () => {
   return (
     <ParcoursLayout>
       <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center">
-        <div className="container flex flex-col items-center justify-center text-center space-y-8">
+        <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
           <div className="text-2xl font-bold">Merci !</div>
           <div className="text-lg">
             Vous avez ajouté avec succès l'expérience <strong className="uppercase">{theme?.name}</strong> à votre

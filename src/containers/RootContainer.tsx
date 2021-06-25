@@ -11,7 +11,7 @@ import OnBoardingContainer from './OnBoardingContainer';
 import WipExperienceContainer from './WIPExperienceContainer/WIPExperienceContainer';
 import ProfileContainer from './ProfileContainer';
 import PageNotFoundContainer from './PageNotFoundContainer';
-import SkillCardContainer from "./SkillCard";
+import SkillCardContainer from './SkillCard';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
