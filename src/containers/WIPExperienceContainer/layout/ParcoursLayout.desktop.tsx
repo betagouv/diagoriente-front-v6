@@ -1,12 +1,34 @@
 import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
+import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import AppHeader from '../../../layouts/AppHeader';
 import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professional.svg';
 import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
-  const { step, activities, theme, competences } = useContext(NewExperienceContext);
+  const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
+
+  const backStep = () => {
+    switch (step) {
+      case 1:
+        setStep(EParcoursStep.THEME);
+        break;
+      case 2:
+        setStep(EParcoursStep.THEME_DONE);
+        break;
+      case 3:
+        setStep(EParcoursStep.ACTIVITIES);
+        break;
+      case 4:
+        setStep(EParcoursStep.ACTIVITIES_DONE);
+        break;
+      case 5:
+        setStep(EParcoursStep.COMPETENCES);
+        break;
+      default:
+    }
+  };
 
   return (
     <div className="min-h-screen h-full flex flex-col relative">
@@ -58,7 +80,14 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex flex-col md:relative">{children}</div>
+        <div className="w-full flex flex-col md:relative">
+          {step !== 0 && step !== 3 && (
+            <button onClick={backStep} className="pl-10 pt-5 flex items-center cursor-pointer select-none">
+              <ArrowLeftSvg /> <span className="ml-2 text-lena-blue-dark">Retour</span>
+            </button>
+          )}
+          {children}
+        </div>
       </div>
     </div>
   );

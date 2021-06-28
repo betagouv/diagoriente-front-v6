@@ -26,6 +26,12 @@ const WipAddActivityDone: FunctionComponent = () => {
               >
                 Sélectionner les compétences
               </button>
+              <button
+                onClick={() => setStep(EParcoursStep.ACTIVITIES)}
+                className="mt-2 md:px-14 md:rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg"
+              >
+                Retour
+              </button>
             </div>
           </div>
         </div>
