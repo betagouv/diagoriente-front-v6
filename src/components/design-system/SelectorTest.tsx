@@ -4,15 +4,22 @@ import clsx from 'clsx';
 export type SelectorTestProps = {
   checked: boolean;
   onClick?: (value: boolean) => void;
+  color?: string;
 };
 
-const SelectorTest: FunctionComponent<SelectorTestProps> = ({ checked = false, onClick, children, ...rest }) => {
+const SelectorTest: FunctionComponent<SelectorTestProps> = ({ color, checked = false, onClick, children, ...rest }) => {
   return (
     <div
       onClick={() => onClick?.call(null, !checked)}
       className={clsx(
         'group py-4 px-6 rounded-md flex items-center border-2 cursor-pointer',
-        checked ? 'bg-lena-turquoise border-lena-turquoise-dark' : 'bg-lena-turquoise-light border-transparent',
+        checked
+          ? color !== 'yellow'
+            ? 'bg-lena-turquoise border-lena-turquoise-dark'
+            : 'bg-lena-yellow border-lena-yellow-dark'
+          : color !== 'yellow'
+          ? 'bg-lena-turquoise-light border-transparent'
+          : 'bg-lena-yellow-light border-transparent',
       )}
     >
       <div className="flex flex-row items-start space-x-4">

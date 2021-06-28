@@ -12,6 +12,7 @@ import WipExperienceContainer from './WIPExperienceContainer/WIPExperienceContai
 import ProfileContainer from './ProfileContainer';
 import PageNotFoundContainer from './PageNotFoundContainer';
 import SkillCardContainer from './SkillCard';
+import CenterInterestContainer from './CenterInterest/CenterInterestContainer';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -29,6 +30,7 @@ const RootContainer = () => {
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
           <Route exact path="/profil" component={ProfileContainer} />
           <Route exact path="/experience" component={WipExperienceContainer} />
+          <Route exact path="/centres_interets" component={CenterInterestContainer} />
           <Route exact path="/skill_card" component={SkillCardContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />
