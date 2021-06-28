@@ -69,7 +69,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "build:staging": "env-cmd -f .env.staging craco build"
   },
   "eslintConfig": {
     "extends": [
