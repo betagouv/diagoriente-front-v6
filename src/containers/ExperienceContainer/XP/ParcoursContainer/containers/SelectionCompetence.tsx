@@ -212,7 +212,10 @@ const SelectionCompetence: FunctionComponent = () => {
         <ModalChoice
           open={showLevelSelectionModal}
           data={selectedSkill.levels}
-          onClose={() => setShowLevelSelectionModal(false)}
+          onClose={() => {
+            setShowLevelSelectionModal(false);
+            document.body.style.overflow = 'auto';
+          }}
           onSend={(e) => handleAddLevel(e)}
         />
       )}
