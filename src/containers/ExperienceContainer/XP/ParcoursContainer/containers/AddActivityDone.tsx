@@ -3,7 +3,7 @@ import Illustration from 'assets/svg/illu_01.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-const WipAddActivityDone: FunctionComponent = () => {
+const AddActivityDone: FunctionComponent = () => {
   const { setStep } = useContext(NewExperienceContext);
 
   return (
@@ -40,4 +40,4 @@ const WipAddActivityDone: FunctionComponent = () => {
   );
 };
 
-export default WipAddActivityDone;
+export default AddActivityDone;

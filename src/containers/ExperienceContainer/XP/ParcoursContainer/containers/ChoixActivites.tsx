@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { uniqueId } from 'lodash';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import SelectorTest from '../../../components/design-system/SelectorTest';
-import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
+import SelectorTest from '../../../../../components/design-system/SelectorTest';
+import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -51,7 +51,7 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   );
 };
 
-const WipChoixActivites: FunctionComponent = () => {
+const ChoixActivites: FunctionComponent = () => {
   const { activities, setActivities, setStep } = useContext(NewExperienceContext);
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<{ id: string; name: string; extra?: boolean }[]>([
@@ -151,4 +151,4 @@ const WipChoixActivites: FunctionComponent = () => {
   );
 };
 
-export default WipChoixActivites;
+export default ChoixActivites;

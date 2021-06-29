@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { useThemes } from 'common/requests/themes';
-import WipSelectionTheme from './containers/WIPSelectionTheme';
+import SelectionTheme from './containers/SelectionTheme';
 import {
   EParcoursStep,
   LocalExperienceType,
@@ -8,14 +8,14 @@ import {
   LocalParcoursCompetence,
   LocalParcoursTheme,
   NewExperienceContext,
-} from '../../contexts/NewExperienceContext';
-import WipAddActivityDone from './containers/WIPAddActivityDone';
-import WipChoixActivites from './containers/WIPChoixActivites';
-import WipSelectionCompetence from './containers/WIPSelectionCompetence';
-import WipAddExperienceDone from './containers/WIPAddExperienceDone';
-import WipDomainSelect from './containers/WIPDomainSelect';
+} from '../../../../contexts/NewExperienceContext';
+import AddActivityDone from './containers/AddActivityDone';
+import ChoixActivites from './containers/ChoixActivites';
+import SelectionCompetence from './containers/SelectionCompetence';
+import AddExperienceDone from './containers/AddExperienceDone';
+import DomainSelect from './containers/DomainSelect';
 
-const WipExperienceContainer: FunctionComponent = () => {
+const ExperienceXPContainer: FunctionComponent = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);
   const [step, setStep] = useState<EParcoursStep>(EParcoursStep.THEME);
   const [theme, setTheme] = useState<LocalParcoursTheme>();
@@ -27,17 +27,17 @@ const WipExperienceContainer: FunctionComponent = () => {
   const renderStep = () => {
     switch (step) {
       case EParcoursStep.THEME:
-        return <WipSelectionTheme />;
+        return <SelectionTheme />;
       case EParcoursStep.THEME_DONE:
-        return <WipDomainSelect />;
+        return <DomainSelect />;
       case EParcoursStep.ACTIVITIES:
-        return <WipChoixActivites />;
+        return <ChoixActivites />;
       case EParcoursStep.ACTIVITIES_DONE:
-        return <WipAddActivityDone />;
+        return <AddActivityDone />;
       case EParcoursStep.COMPETENCES:
-        return <WipSelectionCompetence />;
+        return <SelectionCompetence />;
       case EParcoursStep.DONE:
-        return <WipAddExperienceDone />;
+        return <AddExperienceDone />;
       default:
         return <div>Une erreur est survenue.</div>;
     }
@@ -52,4 +52,4 @@ const WipExperienceContainer: FunctionComponent = () => {
   );
 };
 
-export default WipExperienceContainer;
+export default ExperienceXPContainer;

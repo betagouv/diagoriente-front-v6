@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useContext } from 'react';
 import Illustration from 'assets/images/illu_01.png';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import { NewExperienceContext } from '../../../contexts/NewExperienceContext';
+import { NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
-const WipAddExperienceDone: FunctionComponent = () => {
+const AddExperienceDone: FunctionComponent = () => {
   const { theme } = useContext(NewExperienceContext);
 
   return (
@@ -36,4 +36,4 @@ const WipAddExperienceDone: FunctionComponent = () => {
   );
 };
 
-export default WipAddExperienceDone;
+export default AddExperienceDone;

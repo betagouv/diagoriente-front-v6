@@ -6,8 +6,8 @@ import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import useMediaQuery from '../../../hooks/useMediaQuery';
-import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
+import useMediaQuery from '../../../../../hooks/useMediaQuery';
+import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
 const jobData: Domains = {
   domains: [
@@ -262,7 +262,7 @@ const DomainList: FunctionComponent = () => {
   );
 };
 
-const WipSelectionTheme: FunctionComponent = () => {
+const SelectionTheme: FunctionComponent = () => {
   const [showSearch, setShowSearch] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
   return !showSearch ? (
@@ -291,4 +291,4 @@ const WipSelectionTheme: FunctionComponent = () => {
   );
 };
 
-export default WipSelectionTheme;
+export default SelectionTheme;

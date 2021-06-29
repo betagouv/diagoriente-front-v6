@@ -3,7 +3,7 @@ import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-const WipDomainSelect: FunctionComponent = () => {
+const DomainSelect: FunctionComponent = () => {
   const { theme, setStep } = useContext(NewExperienceContext);
 
   const handleNextStep = () => {
@@ -43,4 +43,4 @@ const WipDomainSelect: FunctionComponent = () => {
   );
 };
 
-export default WipDomainSelect;
+export default DomainSelect;

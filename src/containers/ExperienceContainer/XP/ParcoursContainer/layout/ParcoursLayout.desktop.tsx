@@ -2,9 +2,9 @@ import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import AppHeader from '../../../layouts/AppHeader';
-import { ReactComponent as PictoExpPro } from '../../../assets/svg/exp_professional.svg';
-import { EParcoursStep, NewExperienceContext } from '../../../contexts/NewExperienceContext';
+import AppHeader from '../../../../../layouts/AppHeader';
+import { ReactComponent as PictoExpPro } from '../../../../../assets/svg/exp_professional.svg';
+import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
