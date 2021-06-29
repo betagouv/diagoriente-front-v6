@@ -8,8 +8,8 @@ type Props = {
 const AxeSituation = ({ onStep }: Props) => {
   return (
     <ParcoursLayout withRange={false} backgroundColor="yellow">
-      <div className="flex flex-col justify-center flex-grow w-full">
-        <h2 className="text-center mb-16">Sur cet axe, comment vous situez-vous ?</h2>
+      <div className="flex flex-col  mt-48 flex-grow w-full">
+        <h2 className="text-center mb-16 text-lena-blue-darkest">Sur cet axe, comment vous situez-vous ?</h2>
         <div className="w-full px-10">
           <div className="flex justify-between">
             <span className="text-center text-lena-blue-dark font-bold">
