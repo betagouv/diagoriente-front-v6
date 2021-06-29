@@ -21,7 +21,7 @@ const ExperienceContainer = () => {
             <button
               onClick={() => history.push('/experience/xp')}
               style={{ background: '#ECE8F0' }}
-              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none"
+              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"
             >
               <ExpProSvg height={45} />
               <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">
@@ -30,20 +30,20 @@ const ExperienceContainer = () => {
             </button>
             <div
               style={{ background: '#ECE8F0' }}
-              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none"
+              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"
             >
               <ExpPersoSvg height={45} />
               <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">
-                Mes expériences personnelles
+                Mes expériences personnelles (no route)
               </span>
             </div>
             <div
               style={{ background: '#ECE8F0' }}
-              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none"
+              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"
             >
               <ExpProSvg height={45} />
               <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">
-                Mes expériences de bénévolat
+                Mes expériences de bénévolat (no route)
               </span>
             </div>
           </div>

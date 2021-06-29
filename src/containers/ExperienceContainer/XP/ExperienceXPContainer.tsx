@@ -112,7 +112,7 @@ const ExperienceXPContainer = () => {
             <ExpProSvg />
             <span className="uppercase font-bold text-white ml-3">Mes expériences pro</span>
           </div>
-          <button onClick={() => history.push('/experience')}>
+          <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
             <CrossSvg fill="#fff" />
           </button>
         </div>
@@ -134,7 +134,10 @@ const ExperienceXPContainer = () => {
             ))}
           </div>
           <div className="flex justify-center mt-10">
-            <button onClick={() => history.push('/experience/xp/create')} className="flex items-center">
+            <button
+              onClick={() => history.push('/experience/xp/create')}
+              className="flex items-center focus:ring-0 focus:outline-none"
+            >
               <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience professionnelle</span>
             </button>
           </div>
