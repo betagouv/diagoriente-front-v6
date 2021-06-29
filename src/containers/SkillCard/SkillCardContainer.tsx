@@ -174,7 +174,7 @@ const SkillCardContainer: FunctionComponent = () => {
       )}
 
       <div className="container mt-10">
-        <div className="grid md:grid-cols-2 auto-cols-max gap-4">
+        <div className="grid md:grid-cols-2 md:auto-cols-max gap-4">
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-turquoise-light rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
               <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
