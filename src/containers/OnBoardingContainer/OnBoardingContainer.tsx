@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import OnBoardingBg from 'assets/images/bg/onboarding.jpg';
 import OnBoardingWebBg from 'assets/images/bg/onboarding-web.jpg';
 import OnBoardingChoiceHeader from 'assets/images/header/onboarding_choice_header.jpg';
@@ -15,9 +16,11 @@ import useMediaQuery from '../../hooks/useMediaQuery';
 
 type ButtonWithPopoverProps = {
   popover?: string;
+  path?: string;
 };
 
-const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover, children }) => {
+const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover, path, children }) => {
+  const history = useHistory();
   const [popoverShow, setPopoverShow] = useState(false);
   const btnRef = React.createRef<any>();
   const popoverRef = React.createRef<any>();
@@ -44,7 +47,12 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
         {popoverShow && <div className="fixed bg-lena-blue-dark bg-opacity-50 z-10 w-full h-full top-0 left-0" />}
         <div className="w-full text-center">
           <div ref={btnRef} className={clsx('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
-            <button className="bg-lena-blue w-full text-white font-bold md:w-72 py-3 rounded-md">{children}</button>
+            <button
+              onClick={() => path && history.push(path)}
+              className="bg-lena-blue w-full text-white font-bold md:w-72 py-3 rounded-md focus:ring-0 focus:outline-none"
+            >
+              {children}
+            </button>
             <div className="md:w-72 hidden md:block w-full mx-auto text-lena-blue-dark italic text-sm mt-2">
               {popover}
             </div>
@@ -158,7 +166,10 @@ const ChoiceComponent = () => {
             <div>
               <h2 className="text-lena-blue-dark font-bold text-lg">Je commence par renseigner mes expériences...</h2>
               <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
-                <ButtonWithPopover popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence.">
+                <ButtonWithPopover
+                  path="/experience/xp/create"
+                  popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence."
+                >
                   Professionnelles
                 </ButtonWithPopover>
                 <ButtonWithPopover popover="Garder des enfants, des animaux, aider un voisin, organiser un événement...">
