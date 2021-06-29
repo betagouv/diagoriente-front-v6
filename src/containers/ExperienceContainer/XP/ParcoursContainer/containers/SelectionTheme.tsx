@@ -92,32 +92,38 @@ type JobDomain = {
 const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, activities, idActive, onActive, onSelect, children }) => {
   return (
     <div>
-      <button
-        className={clsx(
-          'focus-:ring-0 focus:outline-none w-full py-1 text-left flex justify-between',
-          job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
-          job.id !== idActive && 'border-white',
-        )}
-        onClick={() => onSelect.call(null, job)}
+      <div
+        className={clsx('flex px-8', job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2')}
       >
-        {children}
+        <button
+          className={clsx(
+            'focus-:ring-0 focus:outline-none w-full py-1 text-left flex justify-between',
+            job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
+            job.id !== idActive && 'border-white',
+          )}
+          onClick={() => onSelect.call(null, job)}
+        >
+          {children}
+        </button>
         <button
           className="focus:ring-0 focus:outline-none"
           onClick={() => onActive.call(null, job.id === idActive ? undefined : job.id)}
         >
           <img src={job.id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
         </button>
-      </button>
-      {job.id === idActive && (
-        <ul className="list-disc px-4 py-1 list-inside">
-          {activities &&
-            activities.map((activity) => (
-              <li key={activity} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
-                {activity}
-              </li>
-            ))}
-        </ul>
-      )}
+      </div>
+      <div className="px-9">
+        {job.id === idActive && (
+          <ul className="list-disc px-4 py-1 list-inside">
+            {activities &&
+              activities.map((activity) => (
+                <li key={activity} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
+                  {activity}
+                </li>
+              ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
@@ -175,7 +181,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
           <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
             <strong>Métiers</strong>
           </div>
-          <div className="divide-y divide-lena-lightgray2 px-8">
+          <div className="divide-y divide-lena-lightgray2">
             {domains &&
               domains.domains.map((domain) => (
                 <SearchJobDomain
@@ -229,7 +235,7 @@ const DomainList: FunctionComponent = () => {
         <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
           <strong>Métiers</strong>
         </div>
-        <div className="divide-y divide-lena-lightgray2 px-8">
+        <div className="divide-y divide-lena-lightgray2">
           {domains &&
             domains.domains.map((domain) => (
               <SearchJobDomain
