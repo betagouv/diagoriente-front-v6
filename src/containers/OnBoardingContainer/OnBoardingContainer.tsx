@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 import OnBoardingBg from 'assets/images/bg/onboarding.jpg';
+import OnBoardingWebBg from 'assets/images/bg/onboarding-web.jpg';
 import OnBoardingChoiceHeader from 'assets/images/header/onboarding_choice_header.jpg';
 import LogoSvg from 'assets/images/logo/diagoriente-white.svg';
 import OnBoardingPictoInfoSvg from 'assets/images/svg/picto/onboarding_info.svg';
@@ -10,6 +11,7 @@ import ArrowLeftSvg from 'assets/images/svg/picto/arrow-left.svg';
 import clsx from 'clsx';
 
 import { createPopper } from '@popperjs/core';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 type ButtonWithPopoverProps = {
   popover?: string;
@@ -78,42 +80,48 @@ type WelcomeProps = {
   onClick: () => void;
 };
 
-const WelcomeComponent = ({ onClick }: WelcomeProps) => (
-  <div
-    className="fixed w-full h-full"
-    style={{
-      background: `url(${OnBoardingBg}) no-repeat center fixed`,
-      backgroundSize: 'cover',
-    }}
-  >
-    <div className="md:container md:mx-auto flex flex-col justify-center h-full items-center text-center mx-5 space-y-20">
-      <div>
-        <h6 className="text-white text-xl font-normal mb-1">Bienvenue sur</h6>
-        <img
-          className="inline-block mb-3"
-          src={LogoSvg}
-          alt="Logo Diagoriente"
-          style={{ height: 'auto', width: '60%' }}
-        />
-        <span className="italic block text-white text-xl">Trouvez le métier fait pour vous !</span>
-      </div>
-      <div className="w-full md:w-auto md:flex md:flex-col">
-        <button
-          onClick={() => onClick.call(null)}
-          className="bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14 block text-lena-blue-dark font-bold text-sm mb-4"
-        >
-          Je ne sais pas vers quel métier m'orienter
-          <br />
-          Je veux me réorienter
-        </button>
-        <button className="bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm">
-          J'ai une idée précise du métier que je recherche
-        </button>
-        <span className="text-white inline-block mt-10">Comment ça marche ?</span>
+const WelcomeComponent = ({ onClick }: WelcomeProps) => {
+  const mediaQueryMD = useMediaQuery('md');
+  return (
+    <div
+      className="fixed w-full h-full"
+      style={{
+        background: `url(${mediaQueryMD ? OnBoardingWebBg : OnBoardingBg}) center center / cover no-repeat fixed`,
+        backgroundSize: 'cover',
+      }}
+    >
+      <div className="md:container md:mx-auto flex flex-col justify-center h-full items-center text-center mx-5 space-y-20">
+        <div>
+          <h6 className="text-white text-xl font-normal mb-1">Bienvenue sur</h6>
+          <img
+            className="inline-block mb-3"
+            src={LogoSvg}
+            alt="Logo Diagoriente"
+            style={{
+              height: 'auto',
+              width: '60%',
+            }}
+          />
+          <span className="italic block text-white text-xl">Trouvez le métier fait pour vous !</span>
+        </div>
+        <div className="w-full md:w-auto md:flex md:flex-col">
+          <button
+            onClick={() => onClick.call(null)}
+            className="bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14 block text-lena-blue-dark font-bold text-sm mb-4"
+          >
+            Je ne sais pas vers quel métier m'orienter
+            <br />
+            Je veux me réorienter
+          </button>
+          <button className="bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm">
+            J'ai une idée précise du métier que je recherche
+          </button>
+          <span className="text-white inline-block mt-10">Comment ça marche ?</span>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ChoiceComponent = () => {
   const [showHelp, setShowHelp] = useState(false);
