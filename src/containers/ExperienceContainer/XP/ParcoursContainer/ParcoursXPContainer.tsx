@@ -15,7 +15,7 @@ import SelectionCompetence from './containers/SelectionCompetence';
 import AddExperienceDone from './containers/AddExperienceDone';
 import DomainSelect from './containers/DomainSelect';
 
-const ExperienceXPContainer: FunctionComponent = () => {
+const ParcoursXPContainer: FunctionComponent = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);
   const [step, setStep] = useState<EParcoursStep>(EParcoursStep.THEME);
   const [theme, setTheme] = useState<LocalParcoursTheme>();
@@ -52,4 +52,4 @@ const ExperienceXPContainer: FunctionComponent = () => {
   );
 };
 
-export default ExperienceXPContainer;
+export default ParcoursXPContainer;

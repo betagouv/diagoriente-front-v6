@@ -159,13 +159,13 @@ const ChoiceComponent = () => {
               <h2 className="text-lena-blue-dark font-bold text-lg">Je commence par renseigner mes expériences...</h2>
               <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
                 <ButtonWithPopover popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence.">
-                  professionnelles
+                  Professionnelles
                 </ButtonWithPopover>
                 <ButtonWithPopover popover="Garder des enfants, des animaux, aider un voisin, organiser un événement...">
-                  personnelles
+                  Personnelles
                 </ButtonWithPopover>
                 <ButtonWithPopover popover="Service civique, bénévolat, vie associative...">
-                  d'engagement
+                  De bénévolat
                 </ButtonWithPopover>
               </div>
             </div>
