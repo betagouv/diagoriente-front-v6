@@ -100,21 +100,20 @@ type SearchProps = {
   onClose: () => void;
 };
 
-type Domains = {
-  domains: JobType[];
-  tags: {
-    id: string;
-    name: string;
-    jobs: JobType[];
-  }[];
-};
-
-/**
- const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
+const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
   const inputRef = useRef<any>(null);
-  const [domains, setDomains] = useState<Domains>(jobData);
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
   const { theme, setTheme, setStep } = useContext(NewExperienceContext);
+
+  const [text, setText] = useState(String);
+
+  const [getThemes, { loading, data }] = useLazyThemes();
+  const [getTags, { loading: loadingTags, data: dataTags }] = useListTags();
+
+  const handleThemes = (title: string) => {
+    setText(title);
+    getThemes({ variables: { domain: 'professional', title } });
+  };
 
   useEffect(() => {
     if (open) {
@@ -123,8 +122,12 @@ type Domains = {
   }, [open]);
 
   // TODO: pass job object
-  const handleSelectJob = (job: JobType) => {
-    setTheme(job);
+  const handleSelectJob = (job: Theme) => {
+    setTheme({
+      id: job.id,
+      name: job.title,
+      activities: ['no connected'],
+    });
     setStep(EParcoursStep.THEME_DONE);
   };
 
@@ -141,7 +144,12 @@ type Domains = {
         </div>
         <div className="w-full border border-lena-gray-light px-2 flex bg-white rounded-md">
           <img src={SearchSvg} alt="Search Icon" className="mr-2" />
-          <input ref={inputRef} className="w-full bg-transparent focus:ring-0 focus:outline-none py-2" />
+          <input
+            value={text}
+            onChange={(e) => handleThemes(e.currentTarget.value)}
+            ref={inputRef}
+            className="w-full bg-transparent focus:ring-0 focus:outline-none py-2"
+          />
         </div>
       </div>
       <div className="divide-y divide-lena-lightgray2" style={{ boxShadow: '0 -5px 5px -5px rgba(0,0,0,.2)' }}>
@@ -150,8 +158,8 @@ type Domains = {
             <strong>Métiers</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2">
-            {domains &&
-              domains.domains.map((domain) => (
+            {data &&
+              data.themes.data.map((domain) => (
                 <SearchJobDomain
                   onActive={(e: string | undefined) => setDomainHelp(e)}
                   idActive={domainHelp}
@@ -160,7 +168,7 @@ type Domains = {
                   activities={domain.activities}
                   onSelect={handleSelectJob}
                 >
-                  {domain.name}
+                  {domain.title}
                 </SearchJobDomain>
               ))}
           </div>
@@ -169,20 +177,12 @@ type Domains = {
           <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
             <strong>Tags</strong>
           </div>
-          <div className="divide-y divide-lena-lightgray2 px-8">
-            {domains &&
-              domains.tags.map((domain) => (
-                <SearchJobTag key={domain.id} id={domain.id} domains={domain.jobs} onSelect={handleSelectJob}>
-                  {domain.name}
-                </SearchJobTag>
-              ))}
-          </div>
+          <div className="divide-y divide-lena-lightgray2 px-8" />
         </div>
       </div>
     </div>
   );
 };
- */
 
 type DomainListProps = {
   data: Theme[] | undefined;
@@ -293,7 +293,7 @@ const SelectionTheme: FunctionComponent = () => {
       </div>
     </ParcoursLayout>
   ) : (
-    <div>lol {/**  <WIPSearchTheme open={showSearch} onClose={() => setShowSearch(false)} /> */}</div>
+    <WIPSearchTheme open={showSearch} onClose={() => setShowSearch(false)} />
   );
 };
 
