@@ -50,7 +50,7 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ id, domains, onSelect, childr
 
 type JobDomain = {
   job: Theme;
-  activities: Activity;
+  activities: Activity[];
   idActive?: string;
   onActive: (e: string | undefined) => void;
   onSelect: (job: Theme) => void;
@@ -264,6 +264,7 @@ const SelectionTheme: FunctionComponent = () => {
   const handleThemes = (title: string) => {
     setText(title);
     getThemes({ variables: { domain: 'professional', title } });
+    getTags({ variables: { title } });
   };
 
   return !showSearch ? (
