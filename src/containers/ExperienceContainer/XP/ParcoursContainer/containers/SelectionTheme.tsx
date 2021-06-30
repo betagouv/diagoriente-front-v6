@@ -5,45 +5,26 @@ import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
 import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
-import * as queryString from 'querystring';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import { useLazyThemes, useThemes } from 'common/requests/themes';
-import { Activity, Theme } from 'common/requests/types';
+import { useLazyThemes } from 'common/requests/themes';
+import { Activity, Sector, Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-// TODO: move this to requests folder
-type JobType = {
-  id: string;
-  name: string;
-  activities: string[];
-};
-
 type JobTag = {
   id: string;
-  domains: JobType[];
-  onSelect: (job: JobType) => void;
+  domains: Sector | undefined;
+  onSelect: (job: Sector) => void;
 };
 
-const SearchJobTag: FunctionComponent<JobTag> = ({ id, domains, onSelect, children }) => {
+const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }) => {
   return (
     <div>
       <div className="focus:ring-0 focus:outline-none w-full py-1 text-left flex justify-between border-b border-lena-lightgray2">
         {children}
       </div>
-      <div className="px-4 py-1 divide-y divide-lena-lightgray2">
-        {domains &&
-          domains.map((domain) => (
-            <div
-              key={domain.id}
-              className="cursor-pointer px-4 py-1 whitespace-nowrap overflow-ellipsis overflow-hidden bg-opacity-50"
-              onClick={() => onSelect.call(null, domain)}
-            >
-              {domain.name}
-            </div>
-          ))}
-      </div>
+      <div className="px-4 py-1 divide-y divide-lena-lightgray2">{domains?.title}</div>
     </div>
   );
 };
@@ -113,6 +94,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
   const handleThemes = (title: string) => {
     setText(title);
     getThemes({ variables: { domain: 'professional', title } });
+    getTags({ variables: { title } });
   };
 
   useEffect(() => {
@@ -177,7 +159,14 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
           <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
             <strong>Tags</strong>
           </div>
-          <div className="divide-y divide-lena-lightgray2 px-8" />
+          <div className="divide-y divide-lena-lightgray2 px-8">
+            {dataTags &&
+              dataTags?.tags.data.map((domain) => (
+                <SearchJobTag key={domain.id} id={domain.id} domains={domain.sector} onSelect={() => console.log('ok')}>
+                  {domain.title}
+                </SearchJobTag>
+              ))}
+          </div>
         </div>
       </div>
     </div>
@@ -186,9 +175,10 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
 
 type DomainListProps = {
   data: Theme[] | undefined;
+  tags: Tag[] | undefined;
 };
 
-const DomainList: FunctionComponent<DomainListProps> = ({ data }) => {
+const DomainList: FunctionComponent<DomainListProps> = ({ data, tags }) => {
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
   const { setTheme, setStep } = useContext(NewExperienceContext);
 
@@ -230,22 +220,20 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data }) => {
             ))}
         </div>
       </div>
-      {/**
-       <div>
-       <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
-       <strong>Tags</strong>
-       </div>
-       <div className="divide-y divide-lena-lightgray2 px-8">
-       {domains &&
-            domains.tags.map((domain) => (
-              <SearchJobTag key={domain.id} id={domain.id} domains={domain.jobs} onSelect={handleSelectJob}>
-                {domain.name}
+
+      <div>
+        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+          <strong>Tags</strong>
+        </div>
+        <div className="divide-y divide-lena-lightgray2 px-8">
+          {tags &&
+            tags.map((domain) => (
+              <SearchJobTag key={domain.id} id={domain.id} domains={domain.sector} onSelect={() => console.log('ok')}>
+                {domain.title}
               </SearchJobTag>
             ))}
-       </div>
-       </div>
-
-       */}
+        </div>
+      </div>
     </div>
   );
 };
@@ -289,7 +277,9 @@ const SelectionTheme: FunctionComponent = () => {
               placeholder="Vente de fleurs"
             />
           </div>
-          <div className="w-full">{mediaQueryMD && text.length > 0 && <DomainList data={data?.themes.data} />}</div>
+          <div className="w-full">
+            {mediaQueryMD && text.length > 2 && <DomainList tags={dataTags?.tags.data} data={data?.themes.data} />}
+          </div>
         </div>
       </div>
     </ParcoursLayout>
