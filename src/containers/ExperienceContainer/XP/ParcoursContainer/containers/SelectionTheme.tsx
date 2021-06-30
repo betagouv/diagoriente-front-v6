@@ -5,46 +5,13 @@ import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
 import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
+import * as queryString from 'querystring';
 import ParcoursLayout from '../layout/ParcoursLayout';
 import useMediaQuery from '../../../../../hooks/useMediaQuery';
 import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
-
-const jobData: Domains = {
-  domains: [
-    {
-      id: '1',
-      name: 'Cordonnier',
-      activities: ['test', 'lol', 'hello word'],
-    },
-    {
-      id: '2',
-      name: 'Soins esthétiques et corporels',
-      activities: [
-        'J’accueille une clientèle',
-        'Je propose un service et/ou un produit adapté',
-        'Je nettoie et je prépare le corps, le visage',
-      ],
-    },
-  ],
-  tags: [
-    {
-      id: '1',
-      name: '#lol',
-      jobs: [
-        { id: '1', name: 'lol', activities: [] },
-        { id: '2', name: 'lul', activities: [] },
-      ],
-    },
-    {
-      id: '2',
-      name: '#coucou',
-      jobs: [
-        { id: '3', name: 'hashtagcovid', activities: [] },
-        { id: '4', name: 'diagoriente', activities: [] },
-      ],
-    },
-  ],
-};
+import { useLazyThemes, useThemes } from '../../../../../common/requests/themes';
+import { Activity, Theme } from '../../../../../common/requests/types';
+import { useListTags } from '../../../../../common/requests/tags';
 
 // TODO: move this to requests folder
 type JobType = {
@@ -82,11 +49,11 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ id, domains, onSelect, childr
 };
 
 type JobDomain = {
-  job: JobType;
-  activities: string[];
+  job: Theme;
+  activities: Activity;
   idActive?: string;
   onActive: (e: string | undefined) => void;
-  onSelect: (job: JobType) => void;
+  onSelect: (job: Theme) => void;
 };
 
 const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, activities, idActive, onActive, onSelect, children }) => {
@@ -106,21 +73,21 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, activities, idActi
           {children}
         </button>
         <button
-          className="focus:ring-0 focus:outline-none"
+          className="focus:ring-0 focus:outline-none pl-5"
           onClick={() => onActive.call(null, job.id === idActive ? undefined : job.id)}
         >
-          <img src={job.id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
+          <img className="ml-3" src={job.id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
         </button>
       </div>
       <div className="px-9">
         {job.id === idActive && (
           <ul className="list-disc px-4 py-1 list-inside">
-            {activities &&
+            {/** {activities &&
               activities.map((activity) => (
-                <li key={activity} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
-                  {activity}
+                <li key={activity.id} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
+                  {activity.title}
                 </li>
-              ))}
+              ))} */}
           </ul>
         )}
       </div>
@@ -142,7 +109,8 @@ type Domains = {
   }[];
 };
 
-const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
+/**
+ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
   const inputRef = useRef<any>(null);
   const [domains, setDomains] = useState<Domains>(jobData);
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
@@ -214,21 +182,32 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
     </div>
   );
 };
+ */
 
-const DomainList: FunctionComponent = () => {
-  const [domains, setDomains] = useState<Domains>(jobData);
+type DomainListProps = {
+  data: Theme[] | undefined;
+};
+
+const DomainList: FunctionComponent<DomainListProps> = ({ data }) => {
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
   const { setTheme, setStep } = useContext(NewExperienceContext);
 
   // TODO: pass job object
-  const handleSelectJob = (job: JobType) => {
-    setTheme(job);
+  const handleSelectJob = (job: Theme) => {
+    setTheme({
+      id: job.id,
+      name: job.title,
+      activities: ['no connected'],
+    });
     setStep(EParcoursStep.THEME_DONE);
   };
 
   return (
     <div
-      style={{ boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)', maxHeight: 'calc(100vh - 42vh)' }}
+      style={{
+        boxShadow: '5px 5px 10px 0px rgba(0,0,0,.1)',
+        maxHeight: 'calc(100vh - 42vh)',
+      }}
       className="border border-lena-lightgray rounded-md overflow-y-auto divide-y divide-lena-lightgray2"
     >
       <div>
@@ -236,8 +215,8 @@ const DomainList: FunctionComponent = () => {
           <strong>Métiers</strong>
         </div>
         <div className="divide-y divide-lena-lightgray2">
-          {domains &&
-            domains.domains.map((domain) => (
+          {data &&
+            data.map((domain) => (
               <SearchJobDomain
                 onActive={(e: string | undefined) => setDomainHelp(e)}
                 idActive={domainHelp}
@@ -246,24 +225,27 @@ const DomainList: FunctionComponent = () => {
                 activities={domain.activities}
                 onSelect={handleSelectJob}
               >
-                {domain.name}
+                {domain.title}
               </SearchJobDomain>
             ))}
         </div>
       </div>
-      <div>
-        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
-          <strong>Tags</strong>
-        </div>
-        <div className="divide-y divide-lena-lightgray2 px-8">
-          {domains &&
+      {/**
+       <div>
+       <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+       <strong>Tags</strong>
+       </div>
+       <div className="divide-y divide-lena-lightgray2 px-8">
+       {domains &&
             domains.tags.map((domain) => (
               <SearchJobTag key={domain.id} id={domain.id} domains={domain.jobs} onSelect={handleSelectJob}>
                 {domain.name}
               </SearchJobTag>
             ))}
-        </div>
-      </div>
+       </div>
+       </div>
+
+       */}
     </div>
   );
 };
@@ -271,10 +253,26 @@ const DomainList: FunctionComponent = () => {
 const SelectionTheme: FunctionComponent = () => {
   const [showSearch, setShowSearch] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
+  const mediaQueryLG = useMediaQuery('lg');
+  const mediaQueryXL = useMediaQuery('xl');
+  const mediaQuery2XL = useMediaQuery('2xl');
+  const [text, setText] = useState(String);
+
+  const [getThemes, { loading, data }] = useLazyThemes();
+  const [getTags, { loading: loadingTags, data: dataTags }] = useListTags();
+
+  const handleThemes = (title: string) => {
+    setText(title);
+    getThemes({ variables: { domain: 'professional', title } });
+  };
+
   return !showSearch ? (
     <ParcoursLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
-        <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5">
+        <div
+          style={{ width: mediaQuery2XL ? '50%' : mediaQueryXL ? '70%' : mediaQueryLG ? '85%' : '100%' }}
+          className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5"
+        >
           <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
             <PictoExpPro />
             <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
@@ -284,16 +282,18 @@ const SelectionTheme: FunctionComponent = () => {
             <input
               onClick={() => !mediaQueryMD && setShowSearch(true)}
               type="text"
+              value={text}
+              onChange={(e) => handleThemes(e.currentTarget.value)}
               className="border-red-400 rounded-md w-full"
               placeholder="Vente de fleurs"
             />
           </div>
-          <div className="w-full">{mediaQueryMD && <DomainList />}</div>
+          <div className="w-full">{mediaQueryMD && text.length > 0 && <DomainList data={data?.themes.data} />}</div>
         </div>
       </div>
     </ParcoursLayout>
   ) : (
-    <WIPSearchTheme open={showSearch} onClose={() => setShowSearch(false)} />
+    <div>lol {/**  <WIPSearchTheme open={showSearch} onClose={() => setShowSearch(false)} /> */}</div>
   );
 };
 
