@@ -191,7 +191,7 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel htmlFor="codeGroup">Code groupe</FormLabel>
             <InputComponent
-              value={formik.values.codeGroup}
+              value={formik.values.code}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               id="codeGroup"
