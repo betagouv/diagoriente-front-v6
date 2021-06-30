@@ -81,7 +81,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
           </div>
         </div>
         <div className="w-full flex flex-col md:relative">
-          {step !== 0 && step !== 3 && (
+          {step !== 0 && step !== 3 && step !== 5 && (
             <button onClick={backStep} className="pl-10 pt-5 flex items-center cursor-pointer select-none">
               <ArrowLeftSvg /> <span className="ml-2 text-lena-blue-dark">Retour</span>
             </button>
