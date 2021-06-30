@@ -6,12 +6,12 @@ import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import clsx from 'clsx';
 import * as queryString from 'querystring';
+import useMediaQuery from 'hooks/useMediaQuery';
+import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { useLazyThemes, useThemes } from 'common/requests/themes';
+import { Activity, Theme } from 'common/requests/types';
+import { useListTags } from 'common/requests/tags';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
-import { useLazyThemes, useThemes } from '../../../../../common/requests/themes';
-import { Activity, Theme } from '../../../../../common/requests/types';
-import { useListTags } from '../../../../../common/requests/tags';
 
 // TODO: move this to requests folder
 type JobType = {
