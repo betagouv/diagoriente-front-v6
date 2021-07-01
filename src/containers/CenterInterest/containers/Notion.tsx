@@ -1,6 +1,6 @@
 import React from 'react';
+import SelectorTest from 'components/design-system/SelectorTest';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import SelectorTest from '../../../components/design-system/SelectorTest';
 
 const Notion = () => {
   return (

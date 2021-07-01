@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
+import SelectorTest from 'components/design-system/SelectorTest';
+import CardLevel from 'components/design-system/CardLevel';
+import ModalComponent from 'components/design-system/Modal';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import { ReactComponent as PictoSorganiserSvg } from '../../../../../assets/images/svg/picto/sorganiser.svg';
-import SelectorTest from '../../../../../components/design-system/SelectorTest';
-import CardLevel from '../../../../../components/design-system/CardLevel';
-import ModalComponent from '../../../../../components/design-system/Modal';
 
 type Choice = {
   open?: boolean;

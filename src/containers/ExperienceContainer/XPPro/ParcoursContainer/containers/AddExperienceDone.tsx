@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 import Illustration from 'assets/images/illu_01.png';
+import { NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import { NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
 const AddExperienceDone: FunctionComponent = () => {
   const { theme } = useContext(NewExperienceContext);

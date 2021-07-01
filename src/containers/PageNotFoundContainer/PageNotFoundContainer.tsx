@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import AppLayout from '../../layouts/AppLayout';
+import AppLayout from 'layouts/AppLayout';
 
 const PageNotFoundContainer: FunctionComponent = () => {
   return <AppLayout>Page non trouvée</AppLayout>;

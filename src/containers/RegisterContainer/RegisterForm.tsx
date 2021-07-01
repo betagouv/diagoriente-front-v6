@@ -7,7 +7,7 @@ import FormComment from 'components/Register/FormComment';
 import clsx from 'clsx';
 import useRegister from 'common/container/auth/useRegister';
 import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from 'common/utils/validation';
-import Button from '../../components/design-system/Button';
+import Button from 'components/design-system/Button';
 
 const RegisterForm: FunctionComponent = () => {
   const { formik, data, openLocation, onSelect, handelChangeLocation } = useRegister();

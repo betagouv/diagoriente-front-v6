@@ -5,7 +5,7 @@ import Star from 'components/design-system/Star';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import CloseSvg from 'assets/svg/cross2.svg';
 import ModalExportSvg from 'assets/svg/export_red.svg';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 type SkillProps = {
   star: number;

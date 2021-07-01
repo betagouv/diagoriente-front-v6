@@ -62,7 +62,7 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, description, certi
   </div>
 );
 
-const ExperienceXPContainer = () => {
+const ExperienceXPPersoContainer = () => {
   const history = useHistory();
   const experiences: ExperienceProps[] = [
     {
@@ -110,7 +110,7 @@ const ExperienceXPContainer = () => {
         <div className="container flex justify-between w-full">
           <div className="flex items-center">
             <ExpProSvg />
-            <span className="uppercase font-bold text-white ml-3">Mes expériences pro</span>
+            <span className="uppercase font-bold text-white ml-3">Mes expériences perso</span>
           </div>
           <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
             <CrossSvg fill="#fff" />
@@ -135,10 +135,10 @@ const ExperienceXPContainer = () => {
           </div>
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => history.push('/experience/xp/create')}
+              onClick={() => history.push('/experience/perso/create')}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
-              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience professionnelle</span>
+              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience personnelle</span>
             </button>
           </div>
         </div>
@@ -147,4 +147,4 @@ const ExperienceXPContainer = () => {
   );
 };
 
-export default ExperienceXPContainer;
+export default ExperienceXPPersoContainer;

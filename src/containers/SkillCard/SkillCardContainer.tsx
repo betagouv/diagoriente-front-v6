@@ -12,9 +12,9 @@ import EditSvg from 'assets/svg/edit.svg';
 import ExportModalSvg from 'assets/svg/modal_export.svg';
 import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
-import ModalComponent from '../../components/design-system/Modal';
+import ModalComponent from 'components/design-system/Modal';
+import useMediaQuery from 'hooks/useMediaQuery';
 import SkillCardExport from './SkillCardExport';
-import useMediaQuery from '../../hooks/useMediaQuery';
 
 type SkillProps = {
   star: number;

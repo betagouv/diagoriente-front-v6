@@ -12,7 +12,7 @@ import ArrowLeftSvg from 'assets/images/svg/picto/arrow-left.svg';
 import clsx from 'clsx';
 
 import { createPopper } from '@popperjs/core';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 type ButtonWithPopoverProps = {
   popover?: string;
@@ -167,12 +167,15 @@ const ChoiceComponent = () => {
               <h2 className="text-lena-blue-dark font-bold text-lg">Je commence par renseigner mes expériences...</h2>
               <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
                 <ButtonWithPopover
-                  path="/experience/xp/create"
+                  path="/experience/pro/create"
                   popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence."
                 >
                   Professionnelles
                 </ButtonWithPopover>
-                <ButtonWithPopover popover="Garder des enfants, des animaux, aider un voisin, organiser un événement...">
+                <ButtonWithPopover
+                  path="/experience/perso/create"
+                  popover="Garder des enfants, des animaux, aider un voisin, organiser un événement..."
+                >
                   Personnelles
                 </ButtonWithPopover>
                 <ButtonWithPopover popover="Service civique, bénévolat, vie associative...">

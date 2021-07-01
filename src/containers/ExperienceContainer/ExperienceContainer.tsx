@@ -19,7 +19,7 @@ const ExperienceContainer = () => {
           </h2>
           <div className="grid grid-cols-2 gap-4">
             <button
-              onClick={() => history.push('/experience/xp')}
+              onClick={() => history.push('/experience/pro')}
               style={{ background: '#ECE8F0' }}
               className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"
             >
@@ -28,15 +28,16 @@ const ExperienceContainer = () => {
                 Mes expériences professionnelles
               </span>
             </button>
-            <div
+            <button
+              onClick={() => history.push('/experience/perso')}
               style={{ background: '#ECE8F0' }}
               className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"
             >
               <ExpPersoSvg height={45} />
               <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">
-                Mes expériences personnelles (no route)
+                Mes expériences personnelles
               </span>
-            </div>
+            </button>
             <div
               style={{ background: '#ECE8F0' }}
               className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none"

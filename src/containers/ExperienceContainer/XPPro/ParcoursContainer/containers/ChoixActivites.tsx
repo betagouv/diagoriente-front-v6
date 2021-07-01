@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { uniqueId } from 'lodash';
+import SelectorTest from 'components/design-system/SelectorTest';
+import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import SelectorTest from '../../../../../components/design-system/SelectorTest';
-import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
 
 type NewActivity = {
   onSend: (e: string) => void;
