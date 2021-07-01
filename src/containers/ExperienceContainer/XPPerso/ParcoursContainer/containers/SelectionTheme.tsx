@@ -4,6 +4,8 @@ import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveSvg } from 'assets/svg/love.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import clsx from 'clsx';
+import useMediaQuery from 'hooks/useMediaQuery';
+import ReactTooltip from 'react-tooltip';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type FakeDataType = {
@@ -398,28 +400,74 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
   );
 };
 
+const WebDomainDisplay = () => {
+  return (
+    <div className="bg-lena-yellow-light p-5 cursor-pointer" data-tip="React-tooltip" data-event="click focus">
+      <div className="flex flex-col items-center">
+        <LoveSvg />
+        <span className="block mt-5">test</span>
+      </div>
+      <div style={{ transform: 'whatever' }}>
+        <ReactTooltip globalEventOff="click" place="right" type="light" effect="solid">
+          <ul className="list-disc">
+            <li>Choisir sa formation</li>
+            <li>Suivre un cours en ligne</li>
+            <li>Faire des recherches sur un ...</li>
+            <li>Passer un examen</li>
+            <li>Réviser ses cours</li>
+          </ul>
+        </ReactTooltip>
+      </div>
+    </div>
+  );
+};
+
 const SelectionTheme = () => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
+  const mediaQueryMD = useMediaQuery('md');
+
+  const renderDomain = () => {
+    const domains: any[] = [];
+
+    for (let i = 0; i < 1; i++) {
+      domains.push(<WebDomainDisplay />);
+    }
+
+    return domains;
+  };
 
   return !showMobileChoice ? (
     <ParcoursLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5 w-full">
-          <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
-            <PictoExpPerso style={{ height: 60 }} />
-            <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences personnelles</div>
-          </div>
-          <div className="flex flex-col justify-start w-full px-5">
-            <div className="text-lena-blue-dark mb-5">Selectionnez un domaine :</div>
-            <button
-              onClick={() => setShowMobileChoice(true)}
-              className="border-2 w-full py-4 rounded-md focus:ring-0 focus:outline-none flex items-center justify-between px-8"
-              style={{ borderColor: '#e1e7f7' }}
-            >
-              <span className="text-lena-blue-dark">Aucun domaine choisi</span>
-              <ArrowDownSvg />
-            </button>
-          </div>
+          {mediaQueryMD ? (
+            <div className="flex flex-col w-full items-center">
+              <h2 className="text-lena-blue-dark">
+                Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
+              </h2>
+              <div className="mx-auto w-3/5">
+                <div className="grid grid-cols-4 gap-5 mt-10">{renderDomain().map((r) => r)}</div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
+                <PictoExpPerso style={{ height: 60 }} />
+                <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences personnelles</div>
+              </div>
+              <div className="flex flex-col justify-start w-full px-5">
+                <div className="text-lena-blue-dark mb-5">Selectionnez un domaine :</div>
+                <button
+                  onClick={() => setShowMobileChoice(true)}
+                  className="border-2 w-full py-4 rounded-md focus:ring-0 focus:outline-none flex items-center justify-between px-8"
+                  style={{ borderColor: '#e1e7f7' }}
+                >
+                  <span className="text-lena-blue-dark">Aucun domaine choisi</span>
+                  <ArrowDownSvg />
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </ParcoursLayout>
