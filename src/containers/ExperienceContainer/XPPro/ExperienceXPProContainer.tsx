@@ -135,7 +135,7 @@ const ExperienceXPProContainer = () => {
           </div>
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => history.push('/experience/xp/create')}
+              onClick={() => history.push('/experience/pro/create')}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
               <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience professionnelle</span>
