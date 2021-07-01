@@ -2,9 +2,9 @@ import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import IconeProfil from 'assets/svg/user_profile.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import AppHeader from '../../../../../layouts/AppHeader';
-import { ReactComponent as PictoExpPro } from '../../../../../assets/svg/exp_professional.svg';
-import { EParcoursStep, NewExperienceContext } from '../../../../../contexts/NewExperienceContext';
+import AppHeader from 'layouts/AppHeader';
+import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
+import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
@@ -40,9 +40,9 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center">
                 <div className="flex flex-col justify-center items-center bg-white rounded-full h-44 w-44 xl:h-56 xl:w-56 space-y-2">
-                  <PictoExpPro className="w-12 h-12 xl:w-16 xl:h-16" />
+                  <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
-                    Mes expériences professionnelles
+                    Mes expériences personnelles
                   </div>
                 </div>
               </div>

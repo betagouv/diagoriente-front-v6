@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { useThemes } from 'common/requests/themes';
-import SelectionTheme from './containers/SelectionTheme';
 import {
   EParcoursStep,
   LocalExperienceType,
@@ -8,18 +7,19 @@ import {
   LocalParcoursCompetence,
   LocalParcoursTheme,
   NewExperienceContext,
-} from '../../../../contexts/NewExperienceContext';
+} from 'contexts/NewExperienceContext';
+import SelectionTheme from './containers/SelectionTheme';
 import AddActivityDone from './containers/AddActivityDone';
 import ChoixActivites from './containers/ChoixActivites';
 import SelectionCompetence from './containers/SelectionCompetence';
 import AddExperienceDone from './containers/AddExperienceDone';
 import DomainSelect from './containers/DomainSelect';
 
-const ParcoursXPContainer: FunctionComponent = () => {
+const ParcoursXPProContainer: FunctionComponent = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);
   const [step, setStep] = useState<EParcoursStep>(EParcoursStep.THEME);
   const [theme, setTheme] = useState<LocalParcoursTheme>();
-  const [experienceType, setExperienceType] = useState<LocalExperienceType>('personal');
+  const [experienceType, setExperienceType] = useState<LocalExperienceType>('professional');
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
   const secteursData = useThemes();
@@ -52,4 +52,4 @@ const ParcoursXPContainer: FunctionComponent = () => {
   );
 };
 
-export default ParcoursXPContainer;
+export default ParcoursXPProContainer;

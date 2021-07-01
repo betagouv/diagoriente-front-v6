@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import userContext from 'common/contexts/UserContext';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import AppLayout from 'layouts/AppLayout';
 
 const HomeContainer = () => {
@@ -10,7 +10,17 @@ const HomeContainer = () => {
     return <Redirect to="/connexion" />;
   }
 
-  return <AppLayout>Page d'accueil ...</AppLayout>;
+  return (
+    <AppLayout>
+      <div className="mt-5 container">
+        <Link to="/experience">
+          <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md focus:ring-0 focus:outline-none">
+            Expérience
+          </button>
+        </Link>
+      </div>
+    </AppLayout>
+  );
 };
 
 export default HomeContainer;
