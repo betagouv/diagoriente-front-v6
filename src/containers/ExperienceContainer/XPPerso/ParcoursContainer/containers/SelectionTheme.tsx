@@ -401,27 +401,23 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
 };
 
 const WebDomainDisplay = () => {
+  const id = randomToken();
+
   return (
-    <div
-      className="bg-lena-turquoise-light rounded-xl p-5 cursor-pointer"
-      data-event="click focus"
-      data-tip="React-tooltip"
-    >
+    <div className="bg-lena-turquoise-light rounded-xl p-5 cursor-pointer" data-tip="Info" data-for={id}>
       <div className="flex flex-col items-center">
         <LoveSvg />
         <span className="block mt-5">test</span>
       </div>
-      <div style={{ transform: 'whatever' }}>
-        <ReactTooltip globalEventOff="click" place="right" type="light" effect="solid">
-          <ul className="list-disc">
-            <li>Choisir sa formation</li>
-            <li>Suivre un cours en ligne</li>
-            <li>Faire des recherches sur un ...</li>
-            <li>Passer un examen</li>
-            <li>Réviser ses cours</li>
-          </ul>
-        </ReactTooltip>
-      </div>
+      <ReactTooltip id={id} place="right" type="light" effect="solid">
+        <ul className="list-disc">
+          <li>Choisir sa formation</li>
+          <li>Suivre un cours en ligne</li>
+          <li>Faire des recherches sur un ...</li>
+          <li>Passer un examen</li>
+          <li>Réviser ses cours</li>
+        </ul>
+      </ReactTooltip>
     </div>
   );
 };
