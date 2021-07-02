@@ -341,6 +341,7 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
 
   const [selectedDomain, setSelectedDomain] = useState<FakeDataType>();
   const [activeDomain, setActiveDomain] = useState(String);
+  const { setTheme, setStep } = useContext(NewExperienceContext);
 
   const controlSelected = (data: any) => {
     if (activeDomain === data.id && selectedDomain?.id === data.id) {
@@ -352,6 +353,17 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
     } else {
       setActiveDomain('');
       setSelectedDomain(undefined);
+    }
+  };
+
+  const handleValidate = () => {
+    if (selectedDomain) {
+      setTheme({
+        id: selectedDomain.id,
+        name: selectedDomain.title,
+        activities: ['no connected'],
+      });
+      setStep(EParcoursStep.ACTIVITIES);
     }
   };
 
@@ -395,7 +407,9 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
       </div>
       {selectedDomain && (
         <div className="fixed bottom-0 left-0 right-0">
-          <button className="bg-lena-blue py-3 font-bold w-full text-white">Valider</button>
+          <button onClick={handleValidate} className="bg-lena-blue py-3 font-bold w-full text-white">
+            Valider
+          </button>
         </div>
       )}
     </div>
