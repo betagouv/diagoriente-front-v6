@@ -5,6 +5,8 @@ import SelectorTest from 'components/design-system/SelectorTest';
 import CardLevel from 'components/design-system/CardLevel';
 import ModalComponent from 'components/design-system/Modal';
 import ParcoursLayout from '../layout/ParcoursLayout';
+import SaveButtonComponent from '../../../../../components/design-system/SaveButton';
+import useMediaQuery from '../../../../../hooks/useMediaQuery';
 
 type Choice = {
   open?: boolean;
@@ -128,6 +130,7 @@ const SelectionCompetence: FunctionComponent = () => {
   const [selectedSkill, setSelectedSkill] = useState<Skills>();
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
   const { setStep, setCompetences } = useContext(NewExperienceContext);
+  const mediaQueryMD = useMediaQuery('md');
 
   const handleCheck = (value: Skills, checked: boolean) => {
     if (checked) {
@@ -218,6 +221,9 @@ const SelectionCompetence: FunctionComponent = () => {
           }}
           onSend={(e) => handleAddLevel(e)}
         />
+      )}
+      {!mediaQueryMD && skillsChecked.length === 0 && !showLevelSelectionModal && (
+        <SaveButtonComponent position="right" />
       )}
     </ParcoursLayout>
   );

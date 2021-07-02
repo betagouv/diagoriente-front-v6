@@ -29,7 +29,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen h-full flex flex-col relative">
+    <div className="min-h-screen h-full flex flex-col">
       <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col sticky top-0 left-0">
@@ -72,7 +72,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 )}
               </div>
             </div>
-            <div className="px-5">
+            <div className="px-5 bottom-0">
               <button className="flex items-center bg-lena-blue-lightest px-5 py-2 rounded-lg focus:outline-none focus:ring-0">
                 <img src={SaveSvg} alt="Save Icon" />
                 <span className="text-left ml-5 font-bold text-lena-blue-dark text-sm mt-1">

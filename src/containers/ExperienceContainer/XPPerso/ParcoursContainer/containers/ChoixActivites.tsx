@@ -2,7 +2,10 @@ import React, { FunctionComponent, useContext, useState } from 'react';
 import { uniqueId } from 'lodash';
 import SelectorTest from 'components/design-system/SelectorTest';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { ReactComponent as SaveMobileSvg } from 'assets/svg/save_mobile.svg';
 import ParcoursLayout from '../layout/ParcoursLayout';
+import useMediaQuery from '../../../../../hooks/useMediaQuery';
+import SaveButtonComponent from '../../../../../components/design-system/SaveButton';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -83,6 +86,7 @@ const ChoixActivites: FunctionComponent = () => {
     { id: '26', name: 'Activité Z' },
   ]);
   const [showNewActivity, setShowNewActivity] = useState(false);
+  const mediaQueryMD = useMediaQuery('md');
 
   const handleCheck = (value: string, checked: boolean) => {
     if (checked) {
@@ -143,6 +147,7 @@ const ChoixActivites: FunctionComponent = () => {
               </button>
             </div>
           </div>
+          {!mediaQueryMD && activitiesChecked.length === 0 && <SaveButtonComponent position="left" />}
         </div>
       ) : (
         <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />
