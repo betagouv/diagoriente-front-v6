@@ -403,38 +403,53 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
 const WebDomainDisplay = () => {
   const id = randomToken();
 
+  const fakeData: Array<FakeDataType> = fake;
+
+  const [selectedDomain, setSelectedDomain] = useState<FakeDataType>();
+
+  const controlSelected = (data: any) => {
+    if (selectedDomain?.id === data.id) {
+      setSelectedDomain(undefined);
+    } else {
+      setSelectedDomain(data);
+    }
+  };
+
   return (
-    <div className="bg-lena-turquoise-light rounded-xl p-5 cursor-pointer" data-tip="Info" data-for={id}>
-      <div className="flex flex-col items-center">
-        <LoveSvg />
-        <span className="block mt-5">test</span>
-      </div>
-      <ReactTooltip id={id} place="right" type="light" effect="solid">
-        <ul className="list-disc">
-          <li>Choisir sa formation</li>
-          <li>Suivre un cours en ligne</li>
-          <li>Faire des recherches sur un ...</li>
-          <li>Passer un examen</li>
-          <li>Réviser ses cours</li>
-        </ul>
-      </ReactTooltip>
-    </div>
+    <>
+      {fakeData &&
+        fakeData.map((f) => (
+          <button
+            onClick={() => controlSelected(f)}
+            className={clsx(
+              'rounded-xl p-5 cursor-pointer focus:ring-0 focus:outline-none',
+              selectedDomain?.id === f.id ? 'bg-lena-turquoise' : 'hover:bg-lena-turquoise-light',
+            )}
+            data-tip="Info"
+            data-for={f.id}
+          >
+            <div className="flex flex-col items-center">
+              <LoveSvg />
+              <span className="block mt-5">{f.title}</span>
+            </div>
+            <ReactTooltip id={f.id} place="right" type="light" effect="solid">
+              <ul className="list-disc">
+                <li>Choisir sa formation</li>
+                <li>Suivre un cours en ligne</li>
+                <li>Faire des recherches sur un ...</li>
+                <li>Passer un examen</li>
+                <li>Réviser ses cours</li>
+              </ul>
+            </ReactTooltip>
+          </button>
+        ))}
+    </>
   );
 };
 
 const SelectionTheme = () => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
-
-  const renderDomain = () => {
-    const domains: any[] = [];
-
-    for (let i = 0; i < 16; i++) {
-      domains.push(<WebDomainDisplay />);
-    }
-
-    return domains;
-  };
 
   return !showMobileChoice ? (
     <ParcoursLayout>
@@ -446,7 +461,9 @@ const SelectionTheme = () => {
                 Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
               </h2>
               <div className="mx-auto w-3/5">
-                <div className="grid grid-cols-4 gap-5 mt-10">{renderDomain().map((r) => r)}</div>
+                <div className="grid grid-cols-4 gap-5 mt-10">
+                  <WebDomainDisplay />
+                </div>
               </div>
             </div>
           ) : (

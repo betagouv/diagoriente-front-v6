@@ -54,6 +54,7 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
   padding: 15px 30px;
+  opacity: 1!important;
 }
 
 .__react_component_tooltip.place-right::before {
