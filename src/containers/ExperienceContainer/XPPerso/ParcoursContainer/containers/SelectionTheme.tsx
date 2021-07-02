@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveSvg } from 'assets/svg/comp_eng.svg';
@@ -6,6 +6,8 @@ import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import clsx from 'clsx';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
+import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { Theme } from 'common/requests/types';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type FakeDataType = {
@@ -405,14 +407,15 @@ const WebDomainDisplay = () => {
 
   const fakeData: Array<FakeDataType> = fake;
 
-  const [selectedDomain, setSelectedDomain] = useState<FakeDataType>();
+  const { setTheme, setStep } = useContext(NewExperienceContext);
 
   const controlSelected = (data: any) => {
-    if (selectedDomain?.id === data.id) {
-      setSelectedDomain(undefined);
-    } else {
-      setSelectedDomain(data);
-    }
+    setTheme({
+      id: data.id,
+      name: data.title,
+      activities: ['no connected'],
+    });
+    setStep(EParcoursStep.ACTIVITIES);
   };
 
   return (
@@ -421,10 +424,7 @@ const WebDomainDisplay = () => {
         fakeData.map((f) => (
           <button
             onClick={() => controlSelected(f)}
-            className={clsx(
-              'rounded-xl p-5 cursor-pointer focus:ring-0 focus:outline-none',
-              selectedDomain?.id === f.id ? 'bg-lena-turquoise' : 'hover:bg-lena-turquoise-light',
-            )}
+            className="rounded-xl p-5 cursor-pointer focus:ring-0 focus:outline-none hover:bg-lena-turquoise-light"
             data-tip="Info"
             data-for={f.id}
           >

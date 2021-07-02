@@ -8,6 +8,10 @@ import {
   NewExperienceContext,
 } from 'contexts/NewExperienceContext';
 import SelectionTheme from './containers/SelectionTheme';
+import ChoixActivites from './containers/ChoixActivites';
+import AddActivityDone from './containers/AddActivityDone';
+import SelectionCompetence from './containers/SelectionCompetence';
+import AddExperienceDone from './containers/AddExperienceDone';
 
 const ParcoursXPPersoContainer = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);
@@ -21,6 +25,14 @@ const ParcoursXPPersoContainer = () => {
     switch (step) {
       case EParcoursStep.THEME:
         return <SelectionTheme />;
+      case EParcoursStep.ACTIVITIES:
+        return <ChoixActivites />;
+      case EParcoursStep.ACTIVITIES_DONE:
+        return <AddActivityDone />;
+      case EParcoursStep.COMPETENCES:
+        return <SelectionCompetence />;
+      case EParcoursStep.DONE:
+        return <AddExperienceDone />;
       default:
         return <div>Une erreur est survenue.</div>;
     }

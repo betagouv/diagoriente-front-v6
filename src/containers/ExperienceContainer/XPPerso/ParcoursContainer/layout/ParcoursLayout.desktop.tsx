@@ -11,11 +11,8 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
 
   const backStep = () => {
     switch (step) {
-      case 1:
-        setStep(EParcoursStep.THEME);
-        break;
       case 2:
-        setStep(EParcoursStep.THEME_DONE);
+        setStep(EParcoursStep.THEME);
         break;
       case 3:
         setStep(EParcoursStep.ACTIVITIES);
