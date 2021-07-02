@@ -2,11 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { ReactComponent as SaveMobileSvg } from 'assets/svg/save_mobile.svg';
 import clsx from 'clsx';
 
-type SaveButton = {
-  position: 'left' | 'right';
-};
-
-const SaveButtonComponent: FunctionComponent<SaveButton> = ({ position }) => {
+const SaveButtonComponent: FunctionComponent = () => {
   const [visible, setVisible] = useState(false);
 
   const handleScroll = () => {
@@ -24,19 +20,18 @@ const SaveButtonComponent: FunctionComponent<SaveButton> = ({ position }) => {
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
+  if (visible) return null;
+
   return (
-    <div className={clsx('fixed bottom-16 z-30', position === 'left' && 'left-5', position === 'right' && 'right-5')}>
+    <div className="fixed bottom-0 z-30 right-0 left-0">
       <button
-        className={clsx(
-          'flex justify-center items-center rounded-full p-3 transition duration-500',
-          !visible ? 'bg-white' : 'bg-lena-blue-lightest',
-        )}
+        className="flex justify-center items-center p-3 w-full bg-lena-blue-lightest"
         style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)' }}
       >
-        {!visible && (
-          <span className="text-lena-blue-dark font-bold mr-3 text-right mt-1 text-sm">Enregistrer mes réponses</span>
-        )}
         <SaveMobileSvg />
+        <span className="text-lena-blue-dark ml-3 text-right mt-1 text-sm">
+          Enregistrer mes réponses et reprendre plus tard
+        </span>
       </button>
     </div>
   );

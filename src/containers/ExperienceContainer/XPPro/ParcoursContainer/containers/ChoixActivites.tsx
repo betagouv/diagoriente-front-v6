@@ -136,17 +136,20 @@ const ChoixActivites: FunctionComponent = () => {
               </button>
             </div>
           </div>
-          <div className="flex justify-center">
-            <div className="fixed bottom-0 left-0 right-0 md:relative">
-              <button
-                onClick={handleValidateActivites}
-                className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
-              >
-                Valider
-              </button>
+          {!mediaQueryMD && activitiesChecked.length === 0 ? (
+            <SaveButtonComponent />
+          ) : (
+            <div className="flex justify-center">
+              <div className="fixed bottom-0 left-0 right-0 md:relative">
+                <button
+                  onClick={handleValidateActivites}
+                  className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+                >
+                  Valider
+                </button>
+              </div>
             </div>
-          </div>
-          {!mediaQueryMD && activitiesChecked.length === 0 && <SaveButtonComponent position="right" />}
+          )}
         </div>
       ) : (
         <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />

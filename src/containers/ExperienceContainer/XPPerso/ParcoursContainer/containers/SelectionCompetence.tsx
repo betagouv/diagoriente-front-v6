@@ -201,15 +201,19 @@ const SelectionCompetence: FunctionComponent = () => {
           </div>
         </div>
         <div>
-          <div className="fixed bottom-0 left-0 right-0 md:relative">
-            <button
-              disabled={skillsChecked.length <= 0}
-              onClick={handleValidateCompetences}
-              className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
-            >
-              Valider
-            </button>
-          </div>
+          {!mediaQueryMD && skillsChecked.length === 0 && !showLevelSelectionModal ? (
+            <SaveButtonComponent />
+          ) : !showLevelSelectionModal ? (
+            <div className="fixed bottom-0 left-0 right-0 md:relative">
+              <button
+                disabled={skillsChecked.length <= 0}
+                onClick={handleValidateCompetences}
+                className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+              >
+                Valider
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
       {selectedSkill && (
@@ -222,9 +226,6 @@ const SelectionCompetence: FunctionComponent = () => {
           }}
           onSend={(e) => handleAddLevel(e)}
         />
-      )}
-      {!mediaQueryMD && skillsChecked.length === 0 && !showLevelSelectionModal && (
-        <SaveButtonComponent position="left" />
       )}
     </ParcoursLayout>
   );
