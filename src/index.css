@@ -58,7 +58,7 @@
 
 .__react_component_tooltip.place-right::before {
   z-index: 9;
-  content: url(http://localhost:3000/images/arrow_tooltip.png);
+  content: url(https://app-dev-standard.projetttv.org/images/arrow_tooltip.png);
   border: none!important;
   left: -20px!important;
   margin-top: -16px!important;
