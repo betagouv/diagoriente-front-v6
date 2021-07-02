@@ -5,6 +5,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import AppHeader from 'layouts/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import SaveSvg from 'assets/svg/save.svg';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
@@ -71,9 +72,16 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 )}
               </div>
             </div>
-            <div className="p-4 text-sm italic rounded bg-lena-turquoise-light text-justify">
-              Cette expérience est modifiable à tout moment dans votre profil, accessible en cliquant sur l’icône :
-              <img className="inline mx-2" src={IconeProfil} height={24} width={24} alt="Profil utilisateur" />
+            <div className="px-5">
+              <button className="flex items-center bg-lena-blue-lightest px-5 py-2 rounded-lg focus:outline-none focus:ring-0">
+                <img src={SaveSvg} alt="Save Icon" />
+                <span className="text-left ml-5 font-bold text-lena-blue-dark text-sm mt-1">
+                  Enregistrer mes réponses et reprendre plus tard
+                </span>
+              </button>
+              <div className="p-4 text-sm italic text-justify">
+                Cette expérience est modifiable à tout moment dans votre profil (en haut à droite)
+              </div>
             </div>
           </div>
         </div>
