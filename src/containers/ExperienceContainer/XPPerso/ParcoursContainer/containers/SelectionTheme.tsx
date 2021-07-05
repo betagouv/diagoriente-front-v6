@@ -132,11 +132,9 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
               </div>
               <ReactTooltip id={f.id} place="right" type="light" effect="solid">
                 <ul className="list-disc text-left">
-                  <li>Choisir sa formation</li>
-                  <li>Suivre un cours en ligne</li>
-                  <li>Faire des recherches sur un ...</li>
-                  <li>Passer un examen</li>
-                  <li>Réviser ses cours</li>
+                  {f.activities.map((a) => (
+                    <li>{a.title}</li>
+                  ))}
                 </ul>
               </ReactTooltip>
             </button>
