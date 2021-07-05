@@ -47,6 +47,8 @@ module.exports = {
           "alt-dark": "#3C59A7", // used for button
           dark: '#223A7A',
           darkest: '#011A5E',
+          inter: '#A3AFD3',
+          light: '#E1E7F7'
         },
         'lena-turquoise': {
           light: '#F1FCFF',

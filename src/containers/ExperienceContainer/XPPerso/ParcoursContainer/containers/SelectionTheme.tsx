@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveSvg } from 'assets/svg/comp_eng.svg';
+import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import clsx from 'clsx';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import { Theme } from 'common/requests/types';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type FakeDataType = {
@@ -417,46 +417,68 @@ const MobileChoiceDomain = ({ onClose }: MobileChoiceDomainProps) => {
 };
 
 const WebDomainDisplay = () => {
-  const id = randomToken();
-
   const fakeData: Array<FakeDataType> = fake;
 
   const { setTheme, setStep } = useContext(NewExperienceContext);
+  const [selected, setSelected] = useState<FakeDataType>();
 
   const controlSelected = (data: any) => {
-    setTheme({
-      id: data.id,
-      name: data.title,
-      activities: ['no connected'],
-    });
-    setStep(EParcoursStep.ACTIVITIES);
+    setSelected(data);
+  };
+
+  const handleNext = () => {
+    if (selected) {
+      setTheme({
+        id: selected.id,
+        name: selected.title,
+        activities: ['no connected'],
+      });
+      setStep(EParcoursStep.ACTIVITIES);
+    }
   };
 
   return (
     <>
-      {fakeData &&
-        fakeData.map((f) => (
-          <button
-            onClick={() => controlSelected(f)}
-            className="rounded-xl p-5 cursor-pointer focus:ring-0 focus:outline-none hover:bg-lena-turquoise-light"
-            data-tip="Info"
-            data-for={f.id}
-          >
-            <div className="flex flex-col items-center">
-              <LoveSvg />
-              <span className="block mt-5">{f.title}</span>
-            </div>
-            <ReactTooltip id={f.id} place="right" type="light" effect="solid">
-              <ul className="list-disc">
-                <li>Choisir sa formation</li>
-                <li>Suivre un cours en ligne</li>
-                <li>Faire des recherches sur un ...</li>
-                <li>Passer un examen</li>
-                <li>Réviser ses cours</li>
-              </ul>
-            </ReactTooltip>
-          </button>
-        ))}
+      <div className="mx-auto w-3/5">
+        <div className="grid grid-cols-4 gap-5 mt-10">
+          {fakeData &&
+            fakeData.map((f) => (
+              <button
+                onClick={() => controlSelected(f)}
+                className={clsx(
+                  'rounded-xl p-5 cursor-pointer border-4  focus:ring-0 focus:outline-none',
+                  selected && selected?.id === f.id
+                    ? 'bg-lena-blue-light border-lena-blue-inter'
+                    : 'hover:bg-lena-turquoise-light border-transparent',
+                )}
+                data-tip="Info"
+                data-for={f.id}
+              >
+                <div className="flex flex-col items-center">
+                  {selected && selected.id === f.id ? <LoveWhiteSvg /> : <LoveSvg />}
+                  <span className="block mt-5">{f.title}</span>
+                </div>
+                <ReactTooltip id={f.id} place="right" type="light" effect="solid">
+                  <ul className="list-disc text-left">
+                    <li>Choisir sa formation</li>
+                    <li>Suivre un cours en ligne</li>
+                    <li>Faire des recherches sur un ...</li>
+                    <li>Passer un examen</li>
+                    <li>Réviser ses cours</li>
+                  </ul>
+                </ReactTooltip>
+              </button>
+            ))}
+        </div>
+      </div>
+      {selected && (
+        <button
+          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10"
+          onClick={handleNext}
+        >
+          Valider
+        </button>
+      )}
     </>
   );
 };
@@ -474,11 +496,7 @@ const SelectionTheme = () => {
               <h2 className="text-lena-blue-dark">
                 Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
               </h2>
-              <div className="mx-auto w-3/5">
-                <div className="grid grid-cols-4 gap-5 mt-10">
-                  <WebDomainDisplay />
-                </div>
-              </div>
+              <WebDomainDisplay />
             </div>
           ) : (
             <>
