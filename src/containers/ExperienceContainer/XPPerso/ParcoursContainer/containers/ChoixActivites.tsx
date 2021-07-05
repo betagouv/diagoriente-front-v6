@@ -1,7 +1,8 @@
-import React, { FunctionComponent, useContext, useState } from 'react';
+import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { uniqueId } from 'lodash';
 import SelectorTest from 'components/design-system/SelectorTest';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { Activity } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import ParcoursLayout from '../layout/ParcoursLayout';
@@ -54,38 +55,16 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
 };
 
 const ChoixActivites: FunctionComponent = () => {
-  const { activities, setActivities, setStep } = useContext(NewExperienceContext);
+  const { activities, setActivities, setStep, theme } = useContext(NewExperienceContext);
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
-  const [todoRenameActivities, setTodoRenameActivities] = useState<{ id: string; name: string; extra?: boolean }[]>([
-    { id: '1', name: 'Activité A' },
-    { id: '2', name: 'Activité B' },
-    { id: '3', name: 'Activité C' },
-    { id: '4', name: 'Activité D' },
-    { id: '5', name: 'Activité E' },
-    { id: '6', name: 'Activité F' },
-    { id: '7', name: 'Activité G' },
-    { id: '8', name: 'Activité H' },
-    { id: '9', name: 'Activité I' },
-    { id: '10', name: 'Activité J' },
-    { id: '11', name: 'Activité K' },
-    { id: '12', name: 'Activité L' },
-    { id: '13', name: 'Activité M' },
-    { id: '14', name: 'Activité N' },
-    { id: '15', name: 'Activité O' },
-    { id: '16', name: 'Activité P' },
-    { id: '17', name: 'Activité Q' },
-    { id: '18', name: 'Activité R' },
-    { id: '19', name: 'Activité S' },
-    { id: '20', name: 'Activité T' },
-    { id: '21', name: 'Activité U' },
-    { id: '22', name: 'Activité V' },
-    { id: '23', name: 'Activité W' },
-    { id: '24', name: 'Activité X' },
-    { id: '25', name: 'Activité Y' },
-    { id: '26', name: 'Activité Z' },
-  ]);
+  const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
+  useEffect(() => {
+    if (theme?.activities) {
+      setTodoRenameActivities(theme?.activities);
+    }
+  }, [theme?.activities]);
 
   const handleCheck = (value: string, checked: boolean) => {
     if (checked) {
@@ -97,10 +76,8 @@ const ChoixActivites: FunctionComponent = () => {
   };
 
   const handleAddNewActivity = (value: string) => {
-    const newId = uniqueId('local-');
-    const data = { id: newId, name: value, extra: true };
-    setTodoRenameActivities([...todoRenameActivities, data]);
-    setActivitiesChecked([...activitiesChecked, data]);
+    /* setTodoRenameActivities([...todoRenameActivities, data]);
+    setActivitiesChecked([...activitiesChecked, data]); */
   };
 
   const handleValidateActivites = () => {
@@ -126,7 +103,7 @@ const ChoixActivites: FunctionComponent = () => {
                   onClick={(e) => handleCheck(activity.id, e)}
                   checked={activitiesChecked.find((v) => v.id === activity.id)}
                 >
-                  {activity.name}
+                  {activity.title}
                 </SelectorTest>
               ))}
             </div>

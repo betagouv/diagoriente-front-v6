@@ -49,7 +49,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
               <div className="flex flex-col space-y-4">
                 {theme && (
                   <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
-                    {theme.name}
+                    {theme.title}
                   </div>
                 )}
                 {activities.length > 0 && (
@@ -57,7 +57,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                     <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
                     <ul className="list-disc list-inside">
                       {activities.map((v) => (
-                        <li key={v.id}>{v.name}</li>
+                        <li key={v.id}>{v.title}</li>
                       ))}
                     </ul>
                   </div>

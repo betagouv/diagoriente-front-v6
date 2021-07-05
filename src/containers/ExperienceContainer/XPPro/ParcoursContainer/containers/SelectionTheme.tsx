@@ -105,11 +105,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
 
   // TODO: pass job object
   const handleSelectJob = (job: Theme) => {
-    setTheme({
-      id: job.id,
-      name: job.title,
-      activities: ['no connected'],
-    });
+    setTheme(job);
     setStep(EParcoursStep.THEME_DONE);
   };
 
@@ -184,11 +180,7 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags }) => {
 
   // TODO: pass job object
   const handleSelectJob = (job: Theme) => {
-    setTheme({
-      id: job.id,
-      name: job.title,
-      activities: ['no connected'],
-    });
+    setTheme(job);
     setStep(EParcoursStep.THEME_DONE);
   };
 

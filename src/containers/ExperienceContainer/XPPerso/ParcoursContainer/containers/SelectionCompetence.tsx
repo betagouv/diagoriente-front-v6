@@ -1,5 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { useListCompetences } from 'common/requests/competences';
+import { useDidMount } from 'common/hooks/useLifeCycle';
 import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
 import CardLevel from 'components/design-system/CardLevel';
@@ -81,6 +83,10 @@ type Skill = {
 };
 
 const SelectionCompetence: FunctionComponent = () => {
+  const [loadList, { data }] = useListCompetences();
+  useDidMount(() => {
+    loadList();
+  });
   const skills: Skills[] = [
     {
       id: '1',

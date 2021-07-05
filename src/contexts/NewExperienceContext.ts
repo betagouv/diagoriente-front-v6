@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { Activity, Theme } from 'common/requests/types';
 
 export enum EParcoursStep {
   THEME,
@@ -12,8 +13,8 @@ export enum EParcoursStep {
 // TODO: Maybe migrate this to Redux or use Apollo cache,
 //  so we don't store database data in states
 export type LocalExperienceType = 'personal' | 'professional' | 'engagement';
-export type LocalParcoursTheme = { id: string; name: string; activities: string[] };
-export type LocalParcoursActivity = { id: string; name: string; extra: boolean };
+export type LocalParcoursTheme = Theme;
+export type LocalParcoursActivity = Activity;
 export type LocalParcoursCompetence = { id: string; name: string };
 
 type ParcoursContextData = {

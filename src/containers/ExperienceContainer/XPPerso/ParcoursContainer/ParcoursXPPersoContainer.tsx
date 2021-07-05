@@ -7,6 +7,9 @@ import {
   LocalParcoursTheme,
   NewExperienceContext,
 } from 'contexts/NewExperienceContext';
+import { useLazyThemes } from 'common/requests/themes';
+import { useDidMount } from 'common/hooks/useLifeCycle';
+
 import SelectionTheme from './containers/SelectionTheme';
 import ChoixActivites from './containers/ChoixActivites';
 import AddActivityDone from './containers/AddActivityDone';
@@ -20,6 +23,10 @@ const ParcoursXPPersoContainer = () => {
   const [experienceType, setExperienceType] = useState<LocalExperienceType>('personal');
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
+  const [loadThemes, { data }] = useLazyThemes({ variables: { domain: 'personal' } });
+  useDidMount(() => {
+    loadThemes();
+  });
 
   useEffect(() => {
     window.scrollTo({
@@ -31,7 +38,7 @@ const ParcoursXPPersoContainer = () => {
   const renderStep = () => {
     switch (step) {
       case EParcoursStep.THEME:
-        return <SelectionTheme />;
+        return <SelectionTheme data={data?.themes.data} />;
       case EParcoursStep.ACTIVITIES:
         return <ChoixActivites />;
       case EParcoursStep.ACTIVITIES_DONE:

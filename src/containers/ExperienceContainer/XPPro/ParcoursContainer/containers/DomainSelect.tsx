@@ -19,7 +19,7 @@ const DomainSelect: FunctionComponent = () => {
           </div>
           <div className="text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
           <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
-            {theme?.name}
+            {theme?.title}
           </div>
           {theme && theme.activities.length > 0 && (
             <ul className="list-disc list-inside">

@@ -12,7 +12,7 @@ const AddExperienceDone: FunctionComponent = () => {
         <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
           <div className="text-2xl font-bold">Merci !</div>
           <div className="text-lg">
-            Vous avez ajouté avec succès l'expérience <strong className="uppercase">{theme?.name}</strong> à votre
+            Vous avez ajouté avec succès l'expérience <strong className="uppercase">{theme?.title}</strong> à votre
             parcours et identifié de nouvelles compétences.
           </div>
           <div>
