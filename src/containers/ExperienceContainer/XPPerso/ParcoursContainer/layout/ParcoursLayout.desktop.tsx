@@ -1,11 +1,10 @@
 import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
-import IconeProfil from 'assets/svg/user_profile.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import AppHeader from 'layouts/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import SaveSvg from 'assets/svg/save.svg';
+import SaveButtonComponent from 'components/design-system/SaveButton';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
@@ -32,7 +31,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
     <div className="min-h-screen h-full flex flex-col">
       <AppHeader />
       <div className="flex flex-row flex-1">
-        <div className="w-96 bg-lena-lightgray flex flex-col sticky top-0 left-0">
+        <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative">
           <ProgressBar value={step} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
@@ -73,12 +72,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
               </div>
             </div>
             <div className="px-5 bottom-0">
-              <button className="flex items-center bg-lena-blue-lightest px-5 py-2 rounded-lg focus:outline-none focus:ring-0">
-                <img src={SaveSvg} alt="Save Icon" />
-                <span className="text-left ml-5 font-bold text-lena-blue-dark text-sm mt-1">
-                  Enregistrer mes réponses et reprendre plus tard
-                </span>
-              </button>
+              <SaveButtonComponent />
               <div className="p-4 text-sm italic text-justify">
                 Cette expérience est modifiable à tout moment dans votre profil (en haut à droite)
               </div>

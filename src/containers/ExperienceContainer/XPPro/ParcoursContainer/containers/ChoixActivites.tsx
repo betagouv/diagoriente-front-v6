@@ -137,7 +137,7 @@ const ChoixActivites: FunctionComponent = () => {
             </div>
           </div>
           {!mediaQueryMD && activitiesChecked.length === 0 ? (
-            <SaveButtonComponent />
+            <SaveButtonComponent isMobile={true} />
           ) : (
             <div className="flex justify-center">
               <div className="fixed bottom-0 left-0 right-0 md:relative">

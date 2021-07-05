@@ -2,10 +2,9 @@ import React, { FunctionComponent, useContext, useState } from 'react';
 import { uniqueId } from 'lodash';
 import SelectorTest from 'components/design-system/SelectorTest';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import { ReactComponent as SaveMobileSvg } from 'assets/svg/save_mobile.svg';
+import useMediaQuery from 'hooks/useMediaQuery';
+import SaveButtonComponent from 'components/design-system/SaveButton';
 import ParcoursLayout from '../layout/ParcoursLayout';
-import useMediaQuery from '../../../../../hooks/useMediaQuery';
-import SaveButtonComponent from '../../../../../components/design-system/SaveButton';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -139,7 +138,7 @@ const ChoixActivites: FunctionComponent = () => {
           </div>
           <div className="flex justify-center">
             {!mediaQueryMD && activitiesChecked.length === 0 ? (
-              <SaveButtonComponent />
+              <SaveButtonComponent isMobile={true} />
             ) : (
               <div className="fixed bottom-0 left-0 right-0 md:relative">
                 <button

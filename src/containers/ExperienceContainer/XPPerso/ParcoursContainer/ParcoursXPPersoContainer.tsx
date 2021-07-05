@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   EParcoursStep,
   LocalExperienceType,
@@ -21,6 +21,13 @@ const ParcoursXPPersoContainer = () => {
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [step]);
+
   const renderStep = () => {
     switch (step) {
       case EParcoursStep.THEME:
@@ -37,6 +44,7 @@ const ParcoursXPPersoContainer = () => {
         return <div>Une erreur est survenue.</div>;
     }
   };
+
   return (
     <NewExperienceContext.Provider
       value={{ theme, setTheme, step, setStep, experienceType, activities, setActivities, competences, setCompetences }}

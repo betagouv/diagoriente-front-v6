@@ -201,7 +201,7 @@ const SelectionCompetence: FunctionComponent = () => {
         </div>
         <div>
           {!mediaQueryMD && skillsChecked.length === 0 && !showLevelSelectionModal ? (
-            <SaveButtonComponent />
+            <SaveButtonComponent isMobile={true} />
           ) : !showLevelSelectionModal ? (
             <div className="fixed bottom-0 left-0 right-0 md:relative">
               <button
