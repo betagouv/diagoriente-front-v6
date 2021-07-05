@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as SaveSvg } from 'assets/svg/save_white.svg';
+import userContext from 'common/contexts/UserContext';
+
 import TextField from 'components/design-system/TextField';
 import InputComponent from 'components/Register/Input';
 
 const EditInfoContainer = () => {
   const history = useHistory();
+  const { user } = useContext(userContext);
+
   return (
     <div className="min-h-screen h-full flex flex-col">
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
         <div className="container flex items-center justify-between">
-          <span className="uppercase font-bold text-white text-xl">LÉNA MAZILU</span>
+          <span className="uppercase font-bold text-white text-xl">
+            {' '}
+            {user?.lastName} {user?.firstName}
+          </span>
           <button className="">
             <SettingsSvg />
           </button>
@@ -36,11 +43,11 @@ const EditInfoContainer = () => {
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Nom</span>
-              <TextField placeholder="Mazilu" />
+              <TextField placeholder={user?.firstName} />
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Prénom</span>
-              <TextField placeholder="Léna" />
+              <TextField placeholder={user?.lastName} />
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Ville</span>
@@ -48,7 +55,7 @@ const EditInfoContainer = () => {
                 fullWidth={true}
                 id="location"
                 name="location"
-                placeholder="Paris"
+                placeholder={user?.location.address}
                 selectShow={false}
                 withSelect={
                   <div>
@@ -62,7 +69,7 @@ const EditInfoContainer = () => {
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Code groupe</span>
-              <TextField placeholder="1234567" />
+              <TextField placeholder={user?.group} />
             </div>
           </div>
         </div>

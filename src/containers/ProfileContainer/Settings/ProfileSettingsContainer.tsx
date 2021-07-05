@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import userContext from 'common/contexts/UserContext';
 import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit_white.svg';
 
 const ProfileSettingsContainer = () => {
   const history = useHistory();
+  const { user } = useContext(userContext);
   return (
     <div className="min-h-screen h-full flex flex-col">
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
         <div className="container flex items-center justify-between">
-          <span className="uppercase font-bold text-white text-xl">LÉNA MAZILU</span>
+          <span className="uppercase font-bold text-white text-xl">
+            {user?.lastName} {user?.firstName}
+          </span>
           <button className="">
             <SettingsSvg />
           </button>
@@ -40,19 +44,19 @@ const ProfileSettingsContainer = () => {
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Nom</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">Mazilu</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.firstName}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Prénom</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">Léna</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.lastName}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Ville</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">Paris</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.location.address}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Code groupe</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">1234567</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.group}</span>
             </div>
           </div>
           <div className="mx-4 mb-5">
@@ -67,7 +71,7 @@ const ProfileSettingsContainer = () => {
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Email</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">mail@mail.fr</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.email}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Mot de passe</span>
