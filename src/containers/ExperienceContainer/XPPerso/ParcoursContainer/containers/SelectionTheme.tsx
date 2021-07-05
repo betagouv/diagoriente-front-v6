@@ -67,7 +67,9 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
               {activeDomain === d.id && selectedDomain?.id === d.id && (
                 <div className="px-14 py-4">
                   <ul className="list-disc">
-                    <li>lol</li>
+                    {selectedDomain.activities.map((a) => (
+                      <li>{a.title}</li>
+                    ))}
                   </ul>
                 </div>
               )}
