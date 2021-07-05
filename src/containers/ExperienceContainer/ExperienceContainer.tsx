@@ -13,7 +13,7 @@ const ExperienceContainer = () => {
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
         <div className="container flex items-center justify-between">
           <span className="uppercase font-bold text-white text-xl">LÉNA MAZILU</span>
-          <button className="">
+          <button>
             <SettingsSvg />
           </button>
         </div>
