@@ -25,6 +25,7 @@ const InputRegister: FunctionComponent<Props> = ({
         'md:flex-grow',
         !fullWidth && 'lg:max-w-58p md:max-w69p',
         !fullWidth && 'lg:w-58p md:w-69p',
+        fullWidth && 'w-full',
       )}
     >
       <div className="md:flex relative items-center">

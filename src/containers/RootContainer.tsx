@@ -11,8 +11,9 @@ import OnBoardingContainer from './OnBoardingContainer';
 import ProfileContainer from './ProfileContainer';
 import PageNotFoundContainer from './PageNotFoundContainer';
 import SkillCardContainer from './SkillCard';
-import CenterInterestContainer from './CenterInterest/CenterInterestContainer';
 import ExperienceRoute from './ExperienceContainer/ExperienceRoute';
+import CenterInterestRoute from './CenterInterest/CenterInterestRoute';
+import ProfileRoute from './ProfileContainer/ProfileRoute';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -28,9 +29,9 @@ const RootContainer = () => {
           <Route exact path="/connexion" component={LoginContainer} />
           <Route exact path="/inscription" component={RegisterContainer} />
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
-          <Route exact path="/profil" component={ProfileContainer} />
+          <ProfileRoute path="/profil" />
           <ExperienceRoute path="/experience" />
-          <Route exact path="/centres_interets" component={CenterInterestContainer} />
+          <CenterInterestRoute path="/centres_interet" />
           <Route exact path="/skill_card" component={SkillCardContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />

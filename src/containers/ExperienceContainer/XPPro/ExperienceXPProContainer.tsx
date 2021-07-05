@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_blue.svg';
+import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit.svg';
 import MedailleSvg from 'assets/svg/medaille.svg';
@@ -106,14 +106,14 @@ const ExperienceXPProContainer = () => {
   ];
   return (
     <div className="min-h-screen h-full flex flex-col">
-      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
+      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-light py-5">
         <div className="container flex justify-between w-full">
           <div className="flex items-center">
             <ExpProSvg />
-            <span className="uppercase font-bold text-white ml-3">Mes expériences pro</span>
+            <span className="font-bold text-white ml-3 text-lena-blue-dark">Mes expériences professionnelles</span>
           </div>
           <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
-            <CrossSvg fill="#fff" />
+            <CrossSvg fill="#223A7A" />
           </button>
         </div>
       </div>
