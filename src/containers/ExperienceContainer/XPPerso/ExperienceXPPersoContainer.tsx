@@ -110,7 +110,7 @@ const ExperienceXPPersoContainer = () => {
         <div className="container flex justify-between w-full">
           <div className="flex items-center">
             <ExpProSvg />
-            <span className="font-bold text-white ml-3 text-lena-blue-dark">Mes expériences perso</span>
+            <span className="font-bold ml-3 text-lena-blue-dark">Mes expériences perso</span>
           </div>
           <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
             <CrossSvg fill="#223A7A" />

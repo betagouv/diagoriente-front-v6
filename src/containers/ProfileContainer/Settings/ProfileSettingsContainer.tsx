@@ -4,22 +4,14 @@ import userContext from 'common/contexts/UserContext';
 import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit_white.svg';
+import PrivateBarLayout from 'layouts/PrivateBar';
 
 const ProfileSettingsContainer = () => {
   const history = useHistory();
   const { user } = useContext(userContext);
   return (
     <div className="min-h-screen h-full flex flex-col">
-      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
-        <div className="container flex items-center justify-between">
-          <span className="uppercase font-bold text-white text-xl">
-            {user?.lastName} {user?.firstName}
-          </span>
-          <button className="">
-            <SettingsSvg />
-          </button>
-        </div>
-      </div>
+      <PrivateBarLayout />
       <div style={{ background: 'rgb(250,250,250)' }} className="pt-3 flex flex-col justify-start flex-1 pb-20">
         <div className="container">
           <button

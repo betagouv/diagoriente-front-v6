@@ -5,19 +5,13 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import { ReactComponent as SaveSvg } from 'assets/svg/save_white.svg';
 import TextField from 'components/design-system/TextField';
 import InputComponent from 'components/Register/Input';
+import PrivateBarLayout from 'layouts/PrivateBar';
 
 const EditLoginContainer = () => {
   const history = useHistory();
   return (
     <div className="min-h-screen h-full flex flex-col">
-      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
-        <div className="container flex items-center justify-between">
-          <span className="uppercase font-bold text-white text-xl">LÉNA MAZILU</span>
-          <button className="">
-            <SettingsSvg />
-          </button>
-        </div>
-      </div>
+      <PrivateBarLayout />
       <div style={{ background: 'rgb(250,250,250)' }} className="pt-3 flex flex-col justify-start flex-1 pb-20">
         <div className="container">
           <button
@@ -65,8 +59,8 @@ const EditLoginContainer = () => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-14 md:text-center">
-        <button className="focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-pink-dark hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg flex justify-center">
+      <div className="fixed bottom-0 left-0 right-0">
+        <button className="focus:ring-0 focus:outline-none w-full bg-lena-pink-dark hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg flex justify-center">
           <SaveSvg />
           <span className="ml-5">Enregistrer</span>
         </button>

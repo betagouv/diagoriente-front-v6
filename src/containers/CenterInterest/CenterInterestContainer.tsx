@@ -1,22 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as HeartSvg } from 'assets/svg/heart.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as DeleteSvg } from 'assets/svg/delete.svg';
+import PrivateBarLayout from 'layouts/PrivateBar';
 
 const CenterInterestContainer = () => {
   const history = useHistory();
   return (
     <div className="min-h-screen h-full flex flex-col">
-      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
-        <div className="container flex items-center justify-between">
-          <span className="uppercase font-bold text-white text-xl">LÉNA MAZILU</span>
-          <button className="">
-            <SettingsSvg />
-          </button>
-        </div>
-      </div>
+      <PrivateBarLayout />
       <div style={{ background: 'rgb(250,250,250)' }} className="pt-3 flex flex-col justify-start flex-1 pb-20">
         <div className="container">
           <button onClick={() => history.push('/')} className="flex items-center mb-5 focus:ring-0 focus:outline-none">
