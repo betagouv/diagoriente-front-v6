@@ -13,6 +13,7 @@ import clsx from 'clsx';
 
 import { createPopper } from '@popperjs/core';
 import useMediaQuery from 'hooks/useMediaQuery';
+import AppLayout from '../../layouts/AppLayout';
 
 type ButtonWithPopoverProps = {
   popover?: string;
@@ -212,7 +213,15 @@ const ChoiceComponent = () => {
 const OnBoardingContainer = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showChoice, setShowCoice] = useState(false);
-  return showChoice ? <ChoiceComponent /> : <WelcomeComponent onClick={() => setShowCoice(true)} />;
+  return showChoice ? (
+    <AppLayout>
+      <ChoiceComponent />
+    </AppLayout>
+  ) : (
+    <AppLayout>
+      <WelcomeComponent onClick={() => setShowCoice(true)} />
+    </AppLayout>
+  );
 };
 
 // @ts-ignore
