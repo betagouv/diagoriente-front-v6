@@ -3,7 +3,7 @@ import { ReactComponent as HidePasswordIcon } from 'assets/svg/hide_password.svg
 import { ReactComponent as ShowPasswordIcon } from 'assets/svg/show_password.svg';
 import { ReactComponent as InvalidIcon } from 'assets/svg/validation_error.svg';
 import { ReactComponent as ValidIcon } from 'assets/svg/validation_ok.svg';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 
 export type TextFieldProps = {
   isInvalid?: boolean;
@@ -11,7 +11,7 @@ export type TextFieldProps = {
 
 const TextField: FunctionComponent<TextFieldProps> = ({ isInvalid = null, type = 'text', ...rest }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const inputClasses = clsx([
+  const inputClasses = classNames([
     'w-full border rounded-md focus:ring-0 focus:outline-none',
     !isInvalid && 'border-lena-lightgray2 focus:border-lena-gray',
     isInvalid === true && 'border-lena-pink-dark focus:border-lena-pink-dark text-lena-pink-dark',

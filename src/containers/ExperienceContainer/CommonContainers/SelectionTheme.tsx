@@ -5,11 +5,11 @@ import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveSvg } from 'assets/svg/comp_eng.svg';
 import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import ParcoursLayout from '../XPPerso/ParcoursContainer/layout/ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -56,13 +56,13 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
               <button
                 onClick={() => controlSelected(d)}
                 key={d.id}
-                className={clsx(
+                className={classNames(
                   'w-full py-3 flex items-center px-10 focus:outline-none focus:ring-0',
                   selectedDomain?.id === d.id ? 'bg-lena-turquoise-light' : '',
                 )}
               >
                 <LoveSvg />
-                <span className={clsx('ml-8', selectedDomain?.id === d.id && 'font-bold')}>{d.title}</span>
+                <span className={classNames('ml-8', selectedDomain?.id === d.id && 'font-bold')}>{d.title}</span>
               </button>
               {activeDomain === d.id && selectedDomain?.id === d.id && (
                 <div className="px-14 py-4">
@@ -119,7 +119,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
           {data?.map((f) => (
             <button
               onClick={() => controlSelected(f)}
-              className={clsx(
+              className={classNames(
                 'rounded-xl p-5 cursor-pointer border-4  focus:ring-0 focus:outline-none',
                 selected && selected?.id === f.id
                   ? 'bg-lena-blue-light border-lena-blue-inter'

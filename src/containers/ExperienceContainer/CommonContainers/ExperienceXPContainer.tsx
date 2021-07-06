@@ -1,11 +1,13 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit.svg';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
+
+import { decodeUri } from 'common/utils/url';
 
 type ExperienceProps = {
   id?: string;
@@ -24,7 +26,7 @@ type ExperienceProps = {
 const Experience: React.FC<ExperienceProps> = ({ title, date, description, certified }) => (
   <div className="bg-white p-4 rounded-lg mb-2" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}>
     <div className="flex justify-between items-start mb-2">
-      <div className={clsx(certified && 'flex items-center')}>
+      <div className={classNames(certified && 'flex items-center')}>
         {certified && (
           <div className="mr-3">
             <img src={MedailleSvg} style={{ height: 27 }} alt="Medaille Badge" />
@@ -62,8 +64,11 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, description, certi
   </div>
 );
 
-const ExperienceXPPersoContainer = () => {
+const ExperienceXPProContainer = () => {
   const history = useHistory();
+  const location = useLocation();
+  const params = decodeUri(location.search);
+
   const experiences: ExperienceProps[] = [
     {
       id: 'a',
@@ -104,13 +109,40 @@ const ExperienceXPPersoContainer = () => {
       },
     },
   ];
+  const path = () => {
+    let text = '';
+    let url = '';
+    if (params.type) {
+      switch (params.type) {
+        case 'pro': {
+          text = 'professionnelles';
+          url = 'pro';
+          break;
+        }
+        case 'perso': {
+          text = 'personnel';
+          url = 'perso';
+          break;
+        }
+        default: {
+          text = 'personnel';
+          url = 'perso';
+          break;
+        }
+      }
+    }
+    return {
+      text,
+      url,
+    };
+  };
   return (
     <div className="min-h-screen h-full flex flex-col">
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-light py-5">
         <div className="container flex justify-between w-full">
           <div className="flex items-center">
             <ExpProSvg />
-            <span className="font-bold ml-3 text-lena-blue-dark">Mes expériences perso</span>
+            <span className="font-bold ml-3 text-lena-blue-dark">Mes expériences {path().text}</span>
           </div>
           <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
             <CrossSvg fill="#223A7A" />
@@ -135,10 +167,10 @@ const ExperienceXPPersoContainer = () => {
           </div>
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => history.push('/experience/perso/create')}
+              onClick={() => history.push(`/experience/${path().url}/create`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
-              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience personnelle</span>
+              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text}</span>
             </button>
           </div>
         </div>
@@ -147,4 +179,4 @@ const ExperienceXPPersoContainer = () => {
   );
 };
 
-export default ExperienceXPPersoContainer;
+export default ExperienceXPProContainer;

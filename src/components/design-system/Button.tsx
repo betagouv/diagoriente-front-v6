@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 
 export type ButtonProps = {
   size?: 'normal' | 'md' | 'lg';
@@ -32,7 +32,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   className,
   ...rest
 }) => {
-  const classes = clsx([
+  const classes = classNames([
     'rounded font-bold focus:outline-none focus:ring-0',
     'disabled:cursor-default disabled:opacity-50',
     variant && variants[variant],

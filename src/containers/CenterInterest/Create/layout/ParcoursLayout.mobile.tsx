@@ -2,7 +2,7 @@ import React, { FunctionComponent, useContext } from 'react';
 import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 
 type Props = {
   withRange?: boolean;
@@ -47,7 +47,7 @@ const ParcoursLayoutForMobile: FunctionComponent<Props> = ({ withRange, backgrou
         )}
       </div>
       <div
-        className={clsx(
+        className={classNames(
           'flex flex-col items-center justify-start flex-1',
           backgroundColor === 'yellow' && 'bg-lena-yellow-light',
         )}

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 
 export type SelectorTestProps = {
   checked: boolean;
@@ -11,7 +11,7 @@ const SelectorTest: FunctionComponent<SelectorTestProps> = ({ color, checked = f
   return (
     <div
       onClick={() => onClick?.call(null, !checked)}
-      className={clsx(
+      className={classNames(
         'group py-4 px-6 rounded-md flex items-center border-2 cursor-pointer',
         checked
           ? color !== 'yellow'
@@ -27,14 +27,14 @@ const SelectorTest: FunctionComponent<SelectorTestProps> = ({ color, checked = f
           type="checkbox"
           readOnly
           checked={checked}
-          className={clsx(
+          className={classNames(
             'border border-lena-lightgray2 checked:border-white checkbox-lena-blue',
             'rounded-md h-6 w-6 cursor-pointer focus:outline-none focus:ring-0 text-white',
             !checked && 'group-hover:border-lena-turquoise-dark group-hover:border-2',
           )}
           {...rest}
         />
-        <div className={clsx(checked && 'text-lena-black font-bold')}>{children}</div>
+        <div className={classNames(checked && 'text-lena-black font-bold')}>{children}</div>
       </div>
     </div>
   );

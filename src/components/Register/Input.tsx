@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import classNames from 'clsx';
+import classNames from 'common/utils/classNames';
 import TextField from '../design-system/TextField';
 
 type Props = {

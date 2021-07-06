@@ -4,13 +4,14 @@ import SearchSvg from 'assets/images/svg/picto/search.svg';
 import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
 import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
+
 import useMediaQuery from 'hooks/useMediaQuery';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { useLazyThemes } from 'common/requests/themes';
 import { Activity, Sector, Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../../../layout/ParcoursLayout';
 
 type JobTag = {
   id: string;
@@ -41,10 +42,13 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, activities, idActi
   return (
     <div>
       <div
-        className={clsx('flex px-8', job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2')}
+        className={classNames(
+          'flex px-8',
+          job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
+        )}
       >
         <button
-          className={clsx(
+          className={classNames(
             'focus-:ring-0 focus:outline-none w-full py-1 text-left flex justify-between',
             job.id === idActive && 'bg-lena-lightgray bg-opacity-50 border-lena-lightgray2',
             job.id !== idActive && 'border-white',

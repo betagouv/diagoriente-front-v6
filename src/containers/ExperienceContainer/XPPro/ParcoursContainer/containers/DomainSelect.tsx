@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../../../layout/ParcoursLayout';
 
 const DomainSelect: FunctionComponent = () => {
   const { theme, setStep } = useContext(NewExperienceContext);

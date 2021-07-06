@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 import Checkbox from 'components/Register/Checkbox';
 import Star from 'components/design-system/Star';
 import MedailleSvg from 'assets/svg/medaille.svg';
@@ -17,7 +17,7 @@ type SkillProps = {
 
 const Skill: React.FC<SkillProps> = ({ star, checked, title, description, bottom = false }) => {
   return (
-    <div className={clsx('bg-white px-10 py-3 rounded-md', bottom && 'mb-2', !checked && 'opacity-50')}>
+    <div className={classNames('bg-white px-10 py-3 rounded-md', bottom && 'mb-2', !checked && 'opacity-50')}>
       <div className="mb-4 flex items-start">
         <div className="mt-5 mr-2">
           <Checkbox label="" checked={checked} />
@@ -51,7 +51,7 @@ type ExperienceProps = {
 const Experience: React.FC<ExperienceProps> = ({ checked, title, date, exp, recommended }) => {
   return (
     <div
-      className={clsx(
+      className={classNames(
         'flex mb-7 bg-white p-5 rounded-md',
         !recommended?.checked && !checked ? 'opacity-50' : !checked && !recommended?.checked && 'opacity-50',
       )}
@@ -68,7 +68,7 @@ const Experience: React.FC<ExperienceProps> = ({ checked, title, date, exp, reco
           ))}
         </ul>
         {typeof recommended !== 'undefined' && (
-          <div className={clsx('flex mt-5', !recommended?.checked && 'opacity-50')}>
+          <div className={classNames('flex mt-5', !recommended?.checked && 'opacity-50')}>
             <Checkbox checked={recommended.checked} label="" />
             <div className="bg-lena-yellow-light p-5 rounded-md">
               <div className="flex items-center">
@@ -144,7 +144,7 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               Mes compétences
             </h2>
             <div
-              className={clsx('mt-3 bg-lena-turquoise-light p-6 rounded-lg', false && 'opacity-50')}
+              className={classNames('mt-3 bg-lena-turquoise-light p-6 rounded-lg', false && 'opacity-50')}
               style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}
             >
               <div className="flex items-center ml-10 mb-5">
@@ -164,7 +164,7 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               />
             </div>
             <div
-              className={clsx('mt-3 bg-lena-turquoise-light p-6 rounded-lg', false && 'opacity-50')}
+              className={classNames('mt-3 bg-lena-turquoise-light p-6 rounded-lg', false && 'opacity-50')}
               style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}
             >
               <div className="flex items-center ml-10 mb-5">
@@ -192,7 +192,7 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               Mes expériences
             </h2>
             <div
-              className={clsx('mt-3 bg-lena-blue-lightest p-6 rounded-lg', false && 'opacity-50')}
+              className={classNames('mt-3 bg-lena-blue-lightest p-6 rounded-lg', false && 'opacity-50')}
               style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}
             >
               <div className="flex items-center ml-10 mb-5">
@@ -225,7 +225,7 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               />
             </div>
             <div
-              className={clsx('mt-3 bg-lena-blue-lightest p-6 rounded-lg', false && 'opacity-50')}
+              className={classNames('mt-3 bg-lena-blue-lightest p-6 rounded-lg', false && 'opacity-50')}
               style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}
             >
               <div className="flex items-center ml-10 mb-5">

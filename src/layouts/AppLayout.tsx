@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 import AppFooter from './AppFooter';
 import AppHeader from './AppHeader';
 
@@ -7,7 +7,7 @@ const AppLayout: FunctionComponent<{ className?: string }> = ({ className, child
   return (
     <div className="flex flex-col min-h-screen">
       <AppHeader />
-      <main className={clsx('flex flex-col flex-1', className)}>{children}</main>
+      <main className={classNames('flex flex-col flex-1', className)}>{children}</main>
       <AppFooter />
     </div>
   );

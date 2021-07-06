@@ -3,8 +3,8 @@ import InputComponent from 'components/Register/Input';
 import Checkbox from 'components/Register/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
+import classNames from 'common/utils/classNames';
 
-import clsx from 'clsx';
 import useRegister from 'common/container/auth/useRegister';
 import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from 'common/utils/validation';
 import Button from 'components/design-system/Button';
@@ -113,7 +113,7 @@ const RegisterForm: FunctionComponent = () => {
               <div>
                 Votre mot de passe doit comporter{' '}
                 <span
-                  className={clsx(
+                  className={classNames(
                     formik.values.password.length >= 6 ? 'text-lena-blue' : 'text-lena-pink',
                     'font-bold',
                   )}
@@ -124,7 +124,7 @@ const RegisterForm: FunctionComponent = () => {
               </div>
               <ul className="list-disc ml-4 mt-1">
                 <li
-                  className={clsx(
+                  className={classNames(
                     hasUppercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
                     'font-bold',
                   )}
@@ -132,7 +132,7 @@ const RegisterForm: FunctionComponent = () => {
                   1 majuscule
                 </li>
                 <li
-                  className={clsx(
+                  className={classNames(
                     hasLowercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
                     'font-bold',
                   )}
@@ -140,12 +140,15 @@ const RegisterForm: FunctionComponent = () => {
                   1 minuscule
                 </li>
                 <li
-                  className={clsx(hasNumber(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink', 'font-bold')}
+                  className={classNames(
+                    hasNumber(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    'font-bold',
+                  )}
                 >
                   1 chiffre
                 </li>
                 <li
-                  className={clsx(
+                  className={classNames(
                     hasSpecial(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
                     'font-bold',
                   )}

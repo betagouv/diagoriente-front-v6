@@ -1,24 +1,19 @@
-import React, { FunctionComponent, useContext, useState } from 'react';
+import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import { useListCompetences } from 'common/requests/competences';
-import { useDidMount } from 'common/hooks/useLifeCycle';
+import { Competence } from 'common/requests/types';
+
 import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
 import CardLevel from 'components/design-system/CardLevel';
 import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
-import ParcoursLayout from '../XPPerso/ParcoursContainer/layout/ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type Choice = {
   open?: boolean;
-  data: {
-    id: number;
-    name: string;
-    star: number;
-    description: string;
-  }[];
-  onSend: (e: Levels) => void;
+  data: any[];
+  onSend: (e: any) => void;
   onClose: () => void;
 };
 
@@ -63,82 +58,22 @@ const ModalChoice: FunctionComponent<Choice> = ({ open, onClose, onSend, data })
   );
 };
 
-type Levels = {
-  id: number;
-  name: string;
-  star: number;
-  description: string;
-};
-
-type Skills = {
-  id: string;
-  name: string;
-  levels: Levels[];
-};
-
-type Skill = {
-  id: string;
-  name: string;
-  levels: Levels;
-};
-
 const SelectionCompetence: FunctionComponent = () => {
-  const [loadList, { data }] = useListCompetences();
-  useDidMount(() => {
-    loadList();
-  });
-  const skills: Skills[] = [
-    {
-      id: '1',
-      name: 'Agir face aux imprévus',
-      levels: [
-        {
-          id: 1,
-          name: 'débutant',
-          star: 4,
-          description: 'zeubi',
-        },
-      ],
-    },
-    {
-      id: '2',
-      name: 'test',
-      levels: [
-        {
-          id: 1,
-          name: 'Débutant',
-          star: 1,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        },
-        {
-          id: 2,
-          name: 'Intermédiaire',
-          star: 2,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        },
-        {
-          id: 3,
-          name: 'Confirmé',
-          star: 3,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        },
-        {
-          id: 4,
-          name: 'Avancé',
-          star: 4,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-        },
-      ],
-    },
-  ];
+  const { setStep, setCompetences, theme } = useContext(NewExperienceContext);
 
-  const [skillsChecked, setSkillsChecked] = useState<Array<Skill>>([]);
-  const [selectedSkill, setSelectedSkill] = useState<Skills>();
+  const [skills, setSkills] = useState<Competence[]>([]);
+  /* useEffect(() => {
+    if (theme.refe) {
+      setSkills(data?.competences.data);
+    }
+  }, [data]); */
+
+  const [skillsChecked, setSkillsChecked] = useState<Array<Competence>>([]);
+  const [selectedSkill, setSelectedSkill] = useState<Competence>();
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
-  const { setStep, setCompetences } = useContext(NewExperienceContext);
   const mediaQueryMD = useMediaQuery('md');
 
-  const handleCheck = (value: Skills, checked: boolean) => {
+  const handleCheck = (value: Competence, checked: boolean) => {
     if (checked) {
       setSelectedSkill(value);
       setShowLevelSelectionModal(true);
@@ -157,19 +92,15 @@ const SelectionCompetence: FunctionComponent = () => {
     return filteredAry.length > 0;
   };
 
-  const handleAddLevel = (value: Levels) => {
+  const handleAddLevel = (value: any) => {
     if (selectedSkill) {
-      const skill = {
-        id: selectedSkill.id,
-        name: selectedSkill.name,
-        levels: value,
-      };
-      setSkillsChecked([...skillsChecked, skill]);
+      console.log('value', value, 'selectedSkill', selectedSkill);
+      // setSkillsChecked([...skillsChecked, skill]);
     }
   };
 
   const handleValidateCompetences = () => {
-    setCompetences(skillsChecked);
+    // setCompetences(skillsChecked);
     setStep(EParcoursStep.DONE);
     // TODO change competence group
   };
@@ -196,7 +127,7 @@ const SelectionCompetence: FunctionComponent = () => {
           {skills &&
             skills.map((skill) => (
               <SelectorTest key={skill.id} onClick={(e) => handleCheck(skill, e)} checked={verifyIfCheck(skill.id)}>
-                {skill.name}
+                {skill.title}
               </SelectorTest>
             ))}
         </div>

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
 import useMediaQuery from '../../hooks/useMediaQuery';
 
@@ -19,15 +19,15 @@ const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primar
   const mediaQueryMD = useMediaQuery('md');
 
   return !open ? null : (
-    <div className={clsx('fixed w-full h-full flex items-center justify-center top-0 left-0 md:absolute')}>
+    <div className={classNames('fixed w-full h-full flex items-center justify-center top-0 left-0 md:absolute')}>
       <div
         onClick={() => onClose?.call(null)}
         style={{ backgroundColor: 'rgba(1, 26, 94, .2)' }}
-        className={clsx('modal-overlay absolute md:fixed w-full  h-full top-0 left-0 bg-gray-900 opacity-100')}
+        className={classNames('modal-overlay absolute md:fixed w-full  h-full top-0 left-0 bg-gray-900 opacity-100')}
       />
       <div
         style={{ height: 'auto', maxHeight: '95%' }}
-        className={clsx(
+        className={classNames(
           'rounded-lg z-50 relative',
           mediaQueryMD ? 'w-1/2 mx-auto' : 'm-5',
           mediaQueryMD ? 'w-1/2' : 'w-full',
@@ -38,14 +38,14 @@ const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primar
         <div className="cursor-pointer z-50 flex justify-end absolute -right-2 -top-2">
           <div
             onClick={() => onClose?.call(null)}
-            className={clsx(
+            className={classNames(
               'p-2 rounded-full shadow-lg',
               variant === 'primary' && 'bg-lena-pink-dark',
               variant === 'secondary' && 'bg-white',
             )}
           >
             <CrossIcon
-              className={clsx(
+              className={classNames(
                 'fill-current',
                 variant === 'primary' && 'text-white',
                 variant === 'secondary' && 'text-lena-turquoise',

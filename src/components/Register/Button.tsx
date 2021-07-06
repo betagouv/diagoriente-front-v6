@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
-import classNames from 'clsx';
+import classNames from 'common/utils/classNames';
 
 type Props = {
   variant?: 'primary' | 'secondary' | 'outline-secondary';

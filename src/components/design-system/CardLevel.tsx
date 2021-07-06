@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 import Star from './Star';
 
 export type CardLevelProps = {
@@ -23,7 +23,7 @@ const CardLevel: FunctionComponent<CardLevelProps> = ({
   return (
     <div
       onClick={() => onSelect?.call(null, !selected)}
-      className={clsx(
+      className={classNames(
         'bg-white mb-2 cursor-pointer rounded-md py-3 px-5',
         opacity && 'opacity-70',
         selected && !opacity && 'border-2 border-lena-turquoise-dark',
@@ -31,11 +31,13 @@ const CardLevel: FunctionComponent<CardLevelProps> = ({
     >
       <div className="flex items-start">
         <div className="mt-1">
-          <div className={clsx('w-4 h-4 mr-3 rounded-full bg-lena-turquoise-dark flex items-center justify-center')}>
+          <div
+            className={classNames('w-4 h-4 mr-3 rounded-full bg-lena-turquoise-dark flex items-center justify-center')}
+          >
             {selected ? (
-              <div className={clsx('w-3 h-3 rounded-full bg-lena-turquoise-dark border-2 border-white')} />
+              <div className={classNames('w-3 h-3 rounded-full bg-lena-turquoise-dark border-2 border-white')} />
             ) : (
-              <div className={clsx('w-3 h-3 rounded-full bg-white border-2 border-white')} />
+              <div className={classNames('w-3 h-3 rounded-full bg-white border-2 border-white')} />
             )}
           </div>
         </div>

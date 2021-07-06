@@ -9,7 +9,7 @@ import OnBoardingPictoHelpSvg from 'assets/images/svg/picto/onboarding_help.svg'
 import OnBoardingPictoPolyganeSvg from 'assets/images/svg/picto/onboarding_polygone.svg';
 import CrossTurquoiseSvg from 'assets/images/svg/picto/cross_turquoise.svg';
 import ArrowLeftSvg from 'assets/images/svg/picto/arrow-left.svg';
-import clsx from 'clsx';
+import classNames from 'common/utils/classNames';
 
 import { createPopper } from '@popperjs/core';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -47,7 +47,7 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
       <div className="flex flex-wrap">
         {popoverShow && <div className="fixed bg-lena-blue-dark bg-opacity-50 z-10 w-full h-full top-0 left-0" />}
         <div className="w-full text-center">
-          <div ref={btnRef} className={clsx('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
+          <div ref={btnRef} className={classNames('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
             <button
               onClick={() => path && history.push(path)}
               className="bg-lena-blue w-full text-white font-bold md:w-72 py-3 rounded-md focus:ring-0 focus:outline-none"
@@ -65,7 +65,7 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
               <img className="pl-4" src={OnBoardingPictoHelpSvg} alt="Picto Help" />
             </button>
           </div>
-          <div className={clsx(!popoverShow && 'hidden', 'block z-50')} style={{ width: '90%' }} ref={popoverRef}>
+          <div className={classNames(!popoverShow && 'hidden', 'block z-50')} style={{ width: '90%' }} ref={popoverRef}>
             <div className="bg-white border-0 font-normal leading-normal text-sm  text-left no-underline break-words rounded-lg">
               <button
                 onClick={closePopover}
@@ -141,7 +141,7 @@ const ChoiceComponent = () => {
           background: `url(${OnBoardingChoiceHeader}) no-repeat fixed`,
           backgroundSize: 'cover',
         }}
-        className={clsx('px-9 py-10 text-center space-y-5 relative')}
+        className={classNames('px-9 py-10 text-center space-y-5 relative')}
       >
         <span className="text-white block">
           Tout d'abord, nous allons vous <br /> demander vos expériences passées.

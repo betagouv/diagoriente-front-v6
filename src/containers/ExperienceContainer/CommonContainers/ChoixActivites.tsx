@@ -5,7 +5,7 @@ import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceConte
 import { Activity } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
-import ParcoursLayout from '../XPPerso/ParcoursContainer/layout/ParcoursLayout';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type NewActivity = {
   onSend: (e: string) => void;
