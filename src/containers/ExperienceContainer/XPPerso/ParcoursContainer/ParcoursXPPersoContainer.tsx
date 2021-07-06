@@ -10,11 +10,11 @@ import {
 import { useLazyThemes } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 
-import SelectionTheme from './containers/SelectionTheme';
-import ChoixActivites from './containers/ChoixActivites';
-import AddActivityDone from './containers/AddActivityDone';
-import SelectionCompetence from './containers/SelectionCompetence';
-import AddExperienceDone from './containers/AddExperienceDone';
+import SelectionTheme from '../../CommonContainers/SelectionTheme';
+import ChoixActivites from '../../CommonContainers/ChoixActivites';
+import AddActivityDone from '../../CommonContainers/AddActivityDone';
+import SelectionCompetence from '../../CommonContainers/SelectionCompetence';
+import AddExperienceDone from '../../CommonContainers/AddExperienceDone';
 
 const ParcoursXPPersoContainer = () => {
   const { step: parcoursStep } = useContext(NewExperienceContext);

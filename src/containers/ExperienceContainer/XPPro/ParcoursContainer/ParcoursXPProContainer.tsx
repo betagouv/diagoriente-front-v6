@@ -8,11 +8,11 @@ import {
   LocalParcoursTheme,
   NewExperienceContext,
 } from 'contexts/NewExperienceContext';
+import AddActivityDone from 'containers/ExperienceContainer/CommonContainers/AddActivityDone';
+import ChoixActivites from 'containers//ExperienceContainer/CommonContainers/ChoixActivites';
+import SelectionCompetence from 'containers/ExperienceContainer/CommonContainers/SelectionCompetence';
+import AddExperienceDone from 'containers//ExperienceContainer/CommonContainers/AddExperienceDone';
 import SelectionTheme from './containers/SelectionTheme';
-import AddActivityDone from './containers/AddActivityDone';
-import ChoixActivites from './containers/ChoixActivites';
-import SelectionCompetence from './containers/SelectionCompetence';
-import AddExperienceDone from './containers/AddExperienceDone';
 import DomainSelect from './containers/DomainSelect';
 
 const ParcoursXPProContainer: FunctionComponent = () => {

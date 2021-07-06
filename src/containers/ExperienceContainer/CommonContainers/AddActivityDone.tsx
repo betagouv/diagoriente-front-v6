@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
 import Illustration from 'assets/svg/illu_01.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../XPPerso/ParcoursContainer/layout/ParcoursLayout';
 
 const AddActivityDone: FunctionComponent = () => {
   const { setStep } = useContext(NewExperienceContext);

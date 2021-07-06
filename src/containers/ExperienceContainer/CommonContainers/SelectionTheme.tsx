@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../XPPerso/ParcoursContainer/layout/ParcoursLayout';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
