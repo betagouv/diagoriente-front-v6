@@ -213,14 +213,21 @@ const ChoiceComponent = () => {
 const OnBoardingContainer = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showChoice, setShowCoice] = useState(false);
+  const mediaQueryMD = useMediaQuery('md');
   return showChoice ? (
-    <AppLayout>
+    mediaQueryMD ? (
+      <AppLayout>
+        <ChoiceComponent />
+      </AppLayout>
+    ) : (
       <ChoiceComponent />
-    </AppLayout>
-  ) : (
+    )
+  ) : mediaQueryMD ? (
     <AppLayout>
       <WelcomeComponent onClick={() => setShowCoice(true)} />
     </AppLayout>
+  ) : (
+    <WelcomeComponent onClick={() => setShowCoice(true)} />
   );
 };
 

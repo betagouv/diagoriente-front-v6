@@ -14,6 +14,13 @@ const HomeContainer = () => {
     <AppLayout>
       <div className="mt-5 container">
         <div className="mb-2">
+          <Link to="/bienvenue">
+            <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md focus:ring-0 focus:outline-none">
+              Bienvenue
+            </button>
+          </Link>
+        </div>
+        <div className="mb-2">
           <Link to="/experience">
             <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md focus:ring-0 focus:outline-none">
               Expérience
