@@ -128,7 +128,7 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
           </span>
         </div>
         <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
-          <div className="absolute z-50 w-full" style={{ marginTop: 9 }}>
+          <div className="absolute z-50 w-full flex justify-center" style={{ marginTop: 9 }}>
             <input
               max={4}
               min={0}
@@ -136,15 +136,26 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
               value={rangeValue}
               onChange={(e) => handleChange(e.currentTarget.value)}
               type="range"
-              className="w-full thumb thumb--left px-7"
+              className="w-full thumb thumb--left"
+              style={{ width: 'calc(80% + 40px)' }}
             />
           </div>
-          <div className="flex justify-around absolute w-full" style={{ marginTop: -3.7 }}>
-            <PointSvg height={20} width={20} />
-            <PointSvg height={20} width={20} />
-            <PointSvg height={20} width={20} />
-            <PointSvg height={20} width={20} />
-            <PointSvg height={20} width={20} />
+          <div className="flex absolute w-full justify-center " style={{ marginTop: -3.7 }}>
+            <div style={{ width: '20%' }} className="flex justify-center">
+              <PointSvg height={20} width={20} />
+            </div>
+            <div style={{ width: '20%' }} className="flex justify-center">
+              <PointSvg height={20} width={20} />
+            </div>
+            <div style={{ width: '20%' }} className="flex justify-center">
+              <PointSvg height={20} width={20} />
+            </div>
+            <div style={{ width: '20%' }} className="flex justify-center">
+              <PointSvg height={20} width={20} />
+            </div>
+            <div style={{ width: '20%' }} className="flex justify-center">
+              <PointSvg height={20} width={20} />
+            </div>
           </div>
         </div>
         <div

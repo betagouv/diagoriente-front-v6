@@ -104,7 +104,6 @@ input[type=range]:focus {
   cursor: pointer;
   height: 40px;
   width: 40px;
-  margin-top: 4px;
   pointer-events: all;
   position: relative;
 }
