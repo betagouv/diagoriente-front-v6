@@ -12,7 +12,12 @@ type InterestProps = {
 };
 
 const Interest = ({ position }: InterestProps) => {
-  const getWidth = window.innerWidth;
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const getWidth = window.innerWidth;
+    setWidth(getWidth);
+  }, [window]);
 
   const renderPolygone = () => {
     const poly = [];
@@ -32,7 +37,7 @@ const Interest = ({ position }: InterestProps) => {
     <div
       className="relative"
       style={{
-        transform: `translate(${getWidth * position}px, 0px)`,
+        transform: `translate(${width * position}px, 0px)`,
       }}
     >
       <div
@@ -43,7 +48,7 @@ const Interest = ({ position }: InterestProps) => {
         <div className="z-30 relative p-3">
           <div className="mb-3">
             <SelectorTest color="yellow" size="small" checked={false}>
-              lol {getWidth * (position + 1)}
+              lol {width * (position + 1)}
             </SelectorTest>
           </div>
           <div className="mb-3">
