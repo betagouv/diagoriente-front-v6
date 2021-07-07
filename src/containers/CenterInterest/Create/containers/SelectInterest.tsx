@@ -117,15 +117,20 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
         </h2>
       </header>
       <div className="container mt-4">
-        <div className="flex justify-between text-center text-lena-blue-dark mx-4">
-          <span>
-            Travail <br />
-            collectif
-          </span>
-          <span>
-            Travail <br />
-            individuel
-          </span>
+        <div className="flex items-center flex-col w-full">
+          <div
+            style={{ width: 'calc(80% + 60px)' }}
+            className="flex justify-between text-center text-lena-blue-dark mx-4"
+          >
+            <span>
+              Travail <br />
+              collectif
+            </span>
+            <span>
+              Travail <br />
+              individuel
+            </span>
+          </div>
         </div>
         <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
           <div className="absolute z-50 w-full flex justify-center" style={{ marginTop: 9 }}>
