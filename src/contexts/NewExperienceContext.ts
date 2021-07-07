@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Activity, Theme } from 'common/requests/types';
+import { Activity, Theme, Competence } from 'common/requests/types';
 
 export enum EParcoursStep {
   THEME,
@@ -15,7 +15,8 @@ export enum EParcoursStep {
 export type LocalExperienceType = 'personal' | 'professional' | 'engagement';
 export type LocalParcoursTheme = Theme;
 export type LocalParcoursActivity = Activity;
-export type LocalParcoursCompetence = { id: string; name: string };
+export type LocalParcoursCompetence = Competence;
+export type LocalParcoursCompetenceValues = { id: string; value: number };
 
 type ParcoursContextData = {
   step: EParcoursStep;
@@ -25,6 +26,8 @@ type ParcoursContextData = {
   setActivities: (activities: LocalParcoursActivity[]) => void;
   competences: LocalParcoursCompetence[];
   setCompetences: (competences: LocalParcoursCompetence[]) => void;
+  competencesValues: LocalParcoursCompetenceValues[];
+  setCompetencesValues: (competencesValues: LocalParcoursCompetenceValues[]) => void;
   theme: LocalParcoursTheme | undefined;
   setTheme: (theme: LocalParcoursTheme) => void;
 };
@@ -37,6 +40,8 @@ export const NewExperienceContext = createContext<ParcoursContextData>({
   setActivities: () => {},
   competences: [],
   setCompetences: () => {},
+  competencesValues: [],
+  setCompetencesValues: () => {},
   theme: undefined,
   setTheme: () => {},
 });

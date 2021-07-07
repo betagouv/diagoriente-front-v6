@@ -5,6 +5,7 @@ import {
   LocalExperienceType,
   LocalParcoursActivity,
   LocalParcoursCompetence,
+  LocalParcoursCompetenceValues,
   LocalParcoursTheme,
   NewExperienceContext,
 } from 'contexts/NewExperienceContext';
@@ -22,6 +23,8 @@ const ParcoursXPProContainer: FunctionComponent = () => {
   const [experienceType, setExperienceType] = useState<LocalExperienceType>('professional');
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
+  const [competencesValues, setCompetencesValues] = useState<LocalParcoursCompetenceValues[]>([]);
+
   const secteursData = useThemes();
 
   const renderStep = () => {
@@ -45,7 +48,19 @@ const ParcoursXPProContainer: FunctionComponent = () => {
 
   return (
     <NewExperienceContext.Provider
-      value={{ theme, setTheme, step, setStep, experienceType, activities, setActivities, competences, setCompetences }}
+      value={{
+        theme,
+        setTheme,
+        step,
+        setStep,
+        experienceType,
+        activities,
+        setActivities,
+        competences,
+        setCompetences,
+        competencesValues,
+        setCompetencesValues,
+      }}
     >
       {renderStep()}
     </NewExperienceContext.Provider>
