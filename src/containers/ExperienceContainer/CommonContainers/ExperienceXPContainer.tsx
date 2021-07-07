@@ -1,4 +1,5 @@
 import React from 'react';
+import { useListSkills } from 'common/requests/skills';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
@@ -68,7 +69,7 @@ const ExperienceXPProContainer = () => {
   const history = useHistory();
   const location = useLocation();
   const params = decodeUri(location.search);
-
+  const [callSkills, skillsState] = useListSkills();
   const experiences: ExperienceProps[] = [
     {
       id: 'a',
@@ -122,6 +123,11 @@ const ExperienceXPProContainer = () => {
         case 'personnel': {
           text = 'personnel';
           url = 'personal';
+          break;
+        }
+        case 'voluntary': {
+          text = 'bénévolat';
+          url = 'voluntary';
           break;
         }
         default: {

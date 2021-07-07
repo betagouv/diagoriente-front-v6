@@ -39,7 +39,6 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
       setSelectedDomain(undefined);
     }
   };
-
   const handleValidate = () => {
     if (selectedDomain) {
       setTheme(selectedDomain);
@@ -104,6 +103,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   const controlSelected = (dataSelected: any) => {
     setSelected(dataSelected);
   };
+  console.log('selected', selected);
 
   const handleNext = () => {
     if (selected) {

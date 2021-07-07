@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { Competence } from 'common/requests/types';
+import { useAddSkill } from 'common/requests/skills';
 import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -9,7 +10,8 @@ import ModalChoice from './Modals/CompetenceValues';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 const SelectionCompetence: FunctionComponent = () => {
-  const { setStep, setCompetences, theme, setCompetencesValues, competencesValues } = useContext(NewExperienceContext);
+  const { theme, competencesValues, setCompetencesValues, setStep, setCompetences } = useContext(NewExperienceContext);
+  const [addSkillCall, addSkillState] = useAddSkill();
   const [skills, setSkills] = useState<Competence[]>([]);
   const [skillsChecked, setSkillsChecked] = useState<Competence[]>([]);
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
@@ -66,7 +68,7 @@ const SelectionCompetence: FunctionComponent = () => {
       setShowLevelSelectionModal(true);
     } else {
       setCompetences(skillsChecked);
-      setStep(EParcoursStep.DONE);
+      setStep(EParcoursStep.DATE);
     }
   };
 
