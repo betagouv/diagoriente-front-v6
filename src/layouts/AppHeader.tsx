@@ -50,16 +50,25 @@ const AppHeader: FunctionComponent = () => {
             <ul className="mx-5 mt-2">
               <Link to="/experience">
                 <li className="flex items-center mb-2">
-                  <StarSvg /> <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes expériences</span>
+                  <div style={{ width: 18 }}>
+                    <StarSvg />
+                  </div>{' '}
+                  <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes expériences</span>
                 </li>
               </Link>
               <Link to="/centres_interet">
                 <li className="flex items-center mb-2">
-                  <HeartSvg /> <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes centres d'intérêt</span>
+                  <div style={{ width: 18 }}>
+                    <HeartSvg />
+                  </div>{' '}
+                  <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes centres d'intérêt</span>
                 </li>
               </Link>
               <li className="flex items-center mb-2">
-                <CVSvg /> <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mon CV compétences</span>
+                <div style={{ width: 18 }}>
+                  <CVSvg />
+                </div>{' '}
+                <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mon CV compétences</span>
               </li>
             </ul>
           </div>
@@ -67,7 +76,10 @@ const AppHeader: FunctionComponent = () => {
             <ul className="mx-5 mt-2">
               <Link to="/profil/reglages">
                 <li className="flex items-center mb-2">
-                  <SettingsSvg /> <span className="ml-3 text-lena-blue-dark mt-1">Mes réglages</span>
+                  <div style={{ width: 18 }}>
+                    <SettingsSvg />
+                  </div>{' '}
+                  <span className="ml-3 text-lena-blue-dark mt-1">Mes réglages</span>
                 </li>
               </Link>
             </ul>
@@ -75,14 +87,20 @@ const AppHeader: FunctionComponent = () => {
           <div className="border-b border-lena-lightgray2">
             <ul className="mx-5 mt-2">
               <li className="flex items-center mb-2">
-                <SearchSvg /> <span className="ml-3 text-lena-blue-dark mt-1">Recherche (stage, emploi...)</span>
+                <div style={{ width: 18 }}>
+                  <SearchSvg />
+                </div>{' '}
+                <span className="ml-3 text-lena-blue-dark mt-1">Recherche (stage, emploi...)</span>
               </li>
             </ul>
           </div>
-          <div className="bg-lena-lightgray">
+          <div className="bg-lena-lightgray rounded-b-lg">
             <ul className="mx-5 pt-2">
               <li className="flex items-center pb-2">
-                <LogoutSvg className="-mt-1" /> <span className="ml-3 mt-1">Déconnexion</span>
+                <div style={{ width: 18 }}>
+                  <LogoutSvg className="-mt-1" />
+                </div>{' '}
+                <span className="ml-3 mt-1">Déconnexion</span>
               </li>
             </ul>
           </div>

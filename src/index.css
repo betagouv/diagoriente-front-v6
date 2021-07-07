@@ -64,3 +64,60 @@
   left: -20px!important;
   margin-top: -16px!important;
 }
+
+.thumb,
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+input[type=range] {
+  -webkit-appearance: none
+}
+
+.thumb {
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  outline: none;
+}
+
+.thumb--left {
+  z-index: 3;
+}
+
+.thumb--right {
+  z-index: 4;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  background-image: url('https://app-dev-standard.projetttv.org/images/cursor.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  pointer-events: all;
+  position: relative;
+}
+
+.thumb::-moz-range-thumb {
+  border: none;
+  background-image: url('https://app-dev-standard.projetttv.org/images/cursor.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
