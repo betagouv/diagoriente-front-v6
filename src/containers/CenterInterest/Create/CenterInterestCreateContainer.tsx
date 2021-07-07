@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import AxeSituation from './containers/AxeSituating';
-import Notion from './containers/Notion';
+import Start from './containers/Start';
+import SelectFamily from './containers/SelectFamily';
+import SelectInterest from './containers/SelectInterest';
 
 const CenterInterestCreateContainer = () => {
   const [step, setStep] = useState(0);
@@ -8,9 +9,11 @@ const CenterInterestCreateContainer = () => {
   const renderStep = () => {
     switch (step) {
       case 0:
-        return <AxeSituation onStep={() => setStep(1)} />;
+        return <Start onStep={() => setStep(1)} />;
       case 1:
-        return <Notion />;
+        return <SelectFamily onStep={() => setStep(2)} />;
+      case 2:
+        return <SelectInterest onBack={() => setStep(1)} onStep={() => setStep(3)} />;
       default:
         return false;
     }
