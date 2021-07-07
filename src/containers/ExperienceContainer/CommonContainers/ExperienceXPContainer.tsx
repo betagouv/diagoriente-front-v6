@@ -114,19 +114,19 @@ const ExperienceXPProContainer = () => {
     let url = '';
     if (params.type) {
       switch (params.type) {
-        case 'pro': {
+        case 'professional': {
           text = 'professionnelles';
-          url = 'pro';
+          url = 'professional';
           break;
         }
-        case 'perso': {
+        case 'personnel': {
           text = 'personnel';
-          url = 'perso';
+          url = 'personal';
           break;
         }
         default: {
           text = 'personnel';
-          url = 'perso';
+          url = 'personal';
           break;
         }
       }
@@ -167,7 +167,7 @@ const ExperienceXPProContainer = () => {
           </div>
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => history.push(`/experience/${path().url}/create`)}
+              onClick={() => history.push(`/experience/theme/create?type=${path().url}`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
               <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text}</span>

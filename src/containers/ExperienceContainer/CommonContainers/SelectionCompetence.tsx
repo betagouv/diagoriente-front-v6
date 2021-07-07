@@ -1,89 +1,28 @@
 import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { Competence } from 'common/requests/types';
-
 import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
-import CardLevel from 'components/design-system/CardLevel';
-import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
+import ModalChoice from './Modals/CompetenceValues';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-type Choice = {
-  open?: boolean;
-  data: any[];
-  onSend: (e: any) => void;
-  onClose: () => void;
-};
-
-const ModalChoice: FunctionComponent<Choice> = ({ open, onClose, onSend, data }) => {
-  return (
-    <div>
-      {open && (
-        <ModalComponent
-          variant="secondary"
-          open={open}
-          onClose={() => onClose.call(null)}
-          isMobile
-          bgColor="bg-lena-turquoise-light"
-        >
-          <div className="flex justify-center mb-6 mt-3">
-            <div className="text-lg font-bold">Organiser l'activité</div>
-          </div>
-          {data &&
-            data.map((level) => (
-              <CardLevel
-                key={level.id}
-                onSelect={() => {
-                  onSend.call(null, level);
-                  onClose.call(null);
-                }}
-                selected={false}
-                starReverse
-                text={
-                  <span className="lowercase">
-                    Niveau <strong>{level.name}</strong>
-                  </span>
-                }
-                opacity={false}
-                star={level.star}
-              >
-                {level.description}
-              </CardLevel>
-            ))}
-        </ModalComponent>
-      )}
-    </div>
-  );
-};
-
 const SelectionCompetence: FunctionComponent = () => {
-  const { setStep, setCompetences, theme } = useContext(NewExperienceContext);
-
+  const { setStep, setCompetences, theme, setCompetencesValues, competencesValues } = useContext(NewExperienceContext);
   const [skills, setSkills] = useState<Competence[]>([]);
-  /* useEffect(() => {
-    if (theme.refe) {
-      setSkills(data?.competences.data);
-    }
-  }, [data]); */
-
-  const [skillsChecked, setSkillsChecked] = useState<Array<Competence>>([]);
-  const [selectedSkill, setSelectedSkill] = useState<Competence>();
+  const [skillsChecked, setSkillsChecked] = useState<Competence[]>([]);
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
-  const mediaQueryMD = useMediaQuery('md');
+  const [selectedCMpValue, setSelectedCMpValue] = useState(0);
 
-  const handleCheck = (value: Competence, checked: boolean) => {
-    if (checked) {
-      setSelectedSkill(value);
-      setShowLevelSelectionModal(true);
-    } else {
-      const filteredAry = skillsChecked.filter(function (e) {
-        return e.id !== value.id;
-      });
-      setSkillsChecked(filteredAry);
+  const [step, SetStep] = useState(1);
+
+  const mediaQueryMD = useMediaQuery('md');
+  useEffect(() => {
+    if (theme?.reference.competences) {
+      setSkills(theme?.reference.competences);
     }
-  };
+  }, [theme]);
 
   const verifyIfCheck = (value: any) => {
     const filteredAry = skillsChecked.filter(function (e) {
@@ -92,17 +31,43 @@ const SelectionCompetence: FunctionComponent = () => {
     return filteredAry.length > 0;
   };
 
-  const handleAddLevel = (value: any) => {
-    if (selectedSkill) {
-      console.log('value', value, 'selectedSkill', selectedSkill);
-      // setSkillsChecked([...skillsChecked, skill]);
+  const handleCheck = (value: Competence) => {
+    const isCheked = verifyIfCheck(value.id);
+    if (!isCheked) {
+      const arrayCompetences = [...skillsChecked];
+      arrayCompetences.push(value);
+      setSkillsChecked(arrayCompetences);
+    } else {
+      const filteredAry = skillsChecked.filter(function (e) {
+        return e !== value;
+      });
+      setSkillsChecked(filteredAry);
+    }
+  };
+
+  const handleAddLevel = (value: number) => {
+    setSelectedCMpValue(value);
+    const array = [...competencesValues];
+    const dataToSave = { id: skills[step].id, value };
+    array[step - 1] = dataToSave;
+    setCompetencesValues(array);
+  };
+  const onConfirmLevel = () => {
+    if (step < skillsChecked.length) {
+      setSelectedCMpValue(0);
+      SetStep(step + 1);
+    } else {
+      setShowLevelSelectionModal(false);
     }
   };
 
   const handleValidateCompetences = () => {
-    // setCompetences(skillsChecked);
-    setStep(EParcoursStep.DONE);
-    // TODO change competence group
+    if (step < skillsChecked.length) {
+      setShowLevelSelectionModal(true);
+    } else {
+      setCompetences(skillsChecked);
+      setStep(EParcoursStep.DONE);
+    }
   };
 
   const handleSkipCompetences = () => {
@@ -126,7 +91,7 @@ const SelectionCompetence: FunctionComponent = () => {
         <div className="flex flex-col space-y-2 w-full md:w-auto">
           {skills &&
             skills.map((skill) => (
-              <SelectorTest key={skill.id} onClick={(e) => handleCheck(skill, e)} checked={verifyIfCheck(skill.id)}>
+              <SelectorTest key={skill.id} onClick={() => handleCheck(skill)} checked={verifyIfCheck(skill.id)}>
                 {skill.title}
               </SelectorTest>
             ))}
@@ -152,15 +117,18 @@ const SelectionCompetence: FunctionComponent = () => {
           ) : null}
         </div>
       </div>
-      {selectedSkill && (
+      {showLevelSelectionModal && (
         <ModalChoice
           open={showLevelSelectionModal}
-          data={selectedSkill.levels}
+          data={skillsChecked}
           onClose={() => {
             setShowLevelSelectionModal(false);
             document.body.style.overflow = 'auto';
           }}
-          onSend={(e) => handleAddLevel(e)}
+          step={step}
+          onSend={handleAddLevel}
+          selectedCMpValue={selectedCMpValue}
+          onConfirmLevel={onConfirmLevel}
         />
       )}
     </ParcoursLayout>

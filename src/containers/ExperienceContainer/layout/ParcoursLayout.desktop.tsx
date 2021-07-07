@@ -64,7 +64,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                     <div className="font-bold text-lena-blue-dark">Compétences développées</div>
                     <ul className="list-disc list-inside">
                       {competences.map((v) => (
-                        <li key={v.id}>{v.name}</li>
+                        <li key={v.id}>{v.title}</li>
                       ))}
                     </ul>
                   </div>
