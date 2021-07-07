@@ -6,6 +6,7 @@ import { ReactComponent as PointSvg } from 'assets/svg/point.svg';
 import { ReactComponent as PolygoneSvg } from 'assets/svg/polygon.svg';
 import { ReactComponent as PointBlueSvg } from 'assets/svg/point_blue.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
+import useWindowSize from 'hooks/useWindowSize';
 
 type InterestProps = {
   position: number;
@@ -13,11 +14,12 @@ type InterestProps = {
 
 const Interest = ({ position }: InterestProps) => {
   const [width, setWidth] = useState(0);
+  const sizeWindow = useWindowSize();
 
   useEffect(() => {
-    const getWidth = window.innerWidth;
+    const getWidth = sizeWindow.width;
     setWidth(getWidth);
-  }, [window]);
+  }, [sizeWindow]);
 
   const renderPolygone = () => {
     const poly = [];
@@ -92,12 +94,19 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
   const axisRef = useRef<any>(null);
   const [translate, setTranslate] = useState(0);
   const [rangeValue, setRangeValue] = useState(0);
+  const [width, setWidth] = useState(0);
+  const sizeWindow = useWindowSize();
 
   const handleChange = (e: any) => {
     setRangeValue(e);
-    const width = window.innerWidth;
     setTranslate(width * e);
   };
+
+  useEffect(() => {
+    const widthWindow = sizeWindow.width;
+    setWidth(widthWindow);
+    setTranslate(widthWindow * rangeValue);
+  }, [sizeWindow]);
 
   return (
     <div
