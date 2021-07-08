@@ -33,7 +33,8 @@ const DomainSelect: FunctionComponent = () => {
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-14 md:text-center">
           <button
             onClick={handleNextStep}
-            className="focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue  text-white py-3 text-center font-bold text-lg"
+            className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
+            text-white py-3 text-center font-bold text-lg`}
           >
             Valider
           </button>

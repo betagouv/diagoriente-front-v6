@@ -60,7 +60,10 @@ const EditLoginContainer = () => {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0">
-        <button className="focus:ring-0 focus:outline-none w-full bg-lena-pink-dark hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg flex justify-center">
+        <button
+          className={`focus:ring-0 focus:outline-none w-full bg-lena-pink-dark hover:bg-lena-pink-darkest text-white
+        py-3 text-center font-bold text-lg flex justify-center`}
+        >
           <SaveSvg />
           <span className="ml-5">Enregistrer</span>
         </button>

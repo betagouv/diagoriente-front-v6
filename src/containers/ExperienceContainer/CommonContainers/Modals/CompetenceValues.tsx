@@ -16,26 +16,26 @@ type Choice = {
 const Levels = [
   {
     text: 'Niveau débutant',
-    subText:
-      'Faire des comparatifs, se munir d’une application de planification et de prise de note, constituer une note récapitulative',
+    subText: `Faire des comparatifs, se munir d’une application de planification et de prise de note,
+      constituer une note récapitulative`,
     value: 1,
   },
   {
     text: 'Niveau intermédiaire',
-    subText:
-      'Faire des comparatifs, se munir d’une application de planification et de prise de note, constituer une note récapitulative',
+    subText: `Faire des comparatifs, se munir d’une application de planification et de prise de note,
+      constituer une note récapitulative`,
     value: 2,
   },
   {
     text: 'Niveau confirmé',
-    subText:
-      'Faire des comparatifs, se munir d’une application de planification et de prise de note, constituer une note récapitulative',
+    subText: `Faire des comparatifs, se munir d’une application de planification et de prise de note,
+      constituer une note récapitulative`,
     value: 3,
   },
   {
     text: 'Niveau avancé',
-    subText:
-      'Faire des comparatifs, se munir d’une application de planification et de prise de note, constituer une note récapitulative',
+    subText: `Faire des comparatifs, se munir d’une application de planification et de prise de note,
+      constituer une note récapitulative`,
     value: 4,
   },
 ];
@@ -90,7 +90,8 @@ const ModalChoice: FunctionComponent<Choice> = ({
             <button
               onClick={onConfirmLevel}
               className={className(
-                'focus:ring-0 focus:outline-none w-full  text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg',
+                `focus:ring-0 focus:outline-none w-full  text-white py-3
+                text-center font-bold text-lg md:w-72 md:rounded-lg`,
                 step > competencesValues.length ? 'bg-gray-300' : 'bg-lena-blue',
               )}
             >

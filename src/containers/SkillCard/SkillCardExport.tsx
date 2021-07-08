@@ -154,7 +154,8 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               <Skill
                 star={4}
                 title="Agir collectivement"
-                description="Je fais des propositions au groupe, j'écoute et prends en compte l'avis de chacun, exprime des avis contraires."
+                description={`Je fais des propositions au groupe,
+                j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
                 bottom={true}
               />
               <Skill
@@ -174,7 +175,8 @@ const SkillCardExport = ({ onClose }: SkillCardExportProps) => {
               <Skill
                 star={4}
                 title="Prendre en compte les codes sociaux dans l’activité"
-                description="Je fais des propositions au groupe, j'écoute et prends en compte l'avis de chacun, exprime des avis contraires."
+                description={`Je fais des propositions au groupe, j'écoute et prends en compte l'avis de chacun,
+                exprime des avis contraires.`}
                 bottom={true}
               />
               <Skill

@@ -22,7 +22,10 @@ type JobTag = {
 const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }) => {
   return (
     <div>
-      <div className="focus:ring-0 focus:outline-none w-full py-1 text-left flex justify-between border-b border-lena-lightgray2">
+      <div
+        className={`focus:ring-0 focus:outline-none w-full py-1 text-left
+      flex justify-between border-b border-lena-lightgray2`}
+      >
         {children}
       </div>
       <div className="px-4 py-1 divide-y divide-lena-lightgray2">{domains?.title}</div>
@@ -92,13 +95,13 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
 
   const [text, setText] = useState(String);
 
-  const [getThemes, { loading, data }] = useLazyThemes();
-  const [getTags, { loading: loadingTags, data: dataTags }] = useListTags();
+  const [getThemesCall, getThemesState] = useLazyThemes();
+  const [getTagsCall, getTagsState] = useListTags();
 
   const handleThemes = (title: string) => {
     setText(title);
-    getThemes({ variables: { domain: 'professional', title } });
-    getTags({ variables: { title } });
+    getThemesCall({ variables: { domain: 'professional', title } });
+    getTagsCall({ variables: { title } });
   };
 
   useEffect(() => {
@@ -140,8 +143,8 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
             <strong>Métiers</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2">
-            {data &&
-              data.themes.data.map((domain) => (
+            {getThemesState &&
+              getThemesState.data?.themes.data.map((domain) => (
                 <SearchJobDomain
                   onActive={(e: string | undefined) => setDomainHelp(e)}
                   idActive={domainHelp}
@@ -160,8 +163,8 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose }) => {
             <strong>Tags</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2 px-8">
-            {dataTags &&
-              dataTags?.tags.data.map((domain) => (
+            {getTagsState &&
+              getTagsState.data?.tags.data.map((domain) => (
                 <SearchJobTag key={domain.id} id={domain.id} domains={domain.sector} onSelect={() => console.log('ok')}>
                   {domain.title}
                 </SearchJobTag>
@@ -258,7 +261,10 @@ const SelectionTheme: FunctionComponent = () => {
           style={{ width: mediaQuery2XL ? '50%' : mediaQueryXL ? '70%' : mediaQueryLG ? '85%' : '100%' }}
           className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5"
         >
-          <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
+          <div
+            className={`flex flex-col justify-center items-center bg-lena-lightgray
+          rounded-full h-56 w-56 space-y-2 p-4 md:hidden`}
+          >
             <PictoExpPro />
             <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
           </div>

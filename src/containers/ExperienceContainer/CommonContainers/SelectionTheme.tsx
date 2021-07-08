@@ -144,7 +144,8 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
       </div>
       {selected && (
         <button
-          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10"
+          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
+          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`}
           onClick={handleNext}
         >
           Valider
@@ -171,7 +172,10 @@ const SelectionTheme = ({ data }: SelectionProps) => {
             </div>
           ) : (
             <>
-              <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
+              <div
+                className={`flex flex-col justify-center items-center
+              bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden`}
+              >
                 <PictoExpPerso style={{ height: 60 }} />
                 <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences personnelles</div>
               </div>
@@ -179,7 +183,8 @@ const SelectionTheme = ({ data }: SelectionProps) => {
                 <div className="text-lena-blue-dark mb-5">Selectionnez un domaine :</div>
                 <button
                   onClick={() => setShowMobileChoice(true)}
-                  className="border-2 w-full py-4 rounded-md focus:ring-0 focus:outline-none flex items-center justify-between px-8"
+                  className={`border-2 w-full py-4 rounded-md focus:ring-0
+                  focus:outline-none flex items-center justify-between px-8`}
                   style={{ borderColor: '#e1e7f7' }}
                 >
                   <span className="text-lena-blue-dark">Aucun domaine choisi</span>

@@ -23,7 +23,11 @@ const AddExperienceDone: FunctionComponent = () => {
             confiance à vos futurs recruteurs.
           </div>
           <div className="flex flex-col space-y-4 w-full">
-            <button className="mt-2 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg">
+            <button
+              className={`mt-2 rounded-md focus:ring-0
+            focus:outline-none w-full bg-lena-pink-dark
+            text-white py-3 text-center font-bold text-lg`}
+            >
               Être recommandé.e
             </button>
             <div className="text-center">

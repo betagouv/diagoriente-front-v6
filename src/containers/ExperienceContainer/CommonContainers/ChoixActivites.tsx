@@ -41,13 +41,15 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
       </span>
       <button
         onClick={handleSend}
-        className="mt-6 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg"
+        className={`mt-6 rounded-md focus:ring-0 focus:outline-none w-full
+        bg-lena-blue text-white py-3 text-center font-bold text-lg`}
       >
         Valider
       </button>
       <button
         onClick={() => onClose.call(null)}
-        className="mt-2 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg"
+        className={`mt-2 rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark
+        text-white py-3 text-center font-bold text-lg`}
       >
         Annuler
       </button>
@@ -125,7 +127,9 @@ const ChoixActivites: FunctionComponent = () => {
                   disabled={activitiesChecked.length === 0}
                   onClick={handleValidateActivites}
                   className={classNames(
-                    'focus:ring-0 focus:outline-none w-full text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg',
+                    `focus:ring-0 focus:outline-none w-full
+                    text-white py-3 text-center font-bold
+                    text-lg md:w-72 md:rounded-lg`,
                     activitiesChecked.length > 0 ? 'bg-lena-blue' : 'bg-gray-300',
                   )}
                 >

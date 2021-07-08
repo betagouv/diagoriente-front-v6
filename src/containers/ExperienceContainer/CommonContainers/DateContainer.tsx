@@ -8,7 +8,6 @@ import DatePicker from 'components/design-system/DatePicker';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 const DateContainer = () => {
-  const history = useHistory();
   const { theme, competencesValues, activities, setCompetencesValues, setStep, setCompetences } =
     useContext(NewExperienceContext);
   const [addSkillCall, addSkillState] = useAddSkill();
@@ -20,8 +19,6 @@ const DateContainer = () => {
 
   const onAddSkill = () => {
     if (theme?.id && activities.length && competencesValues.length) {
-      const sD = moment(`${monthStart}-${yearStart}`).format('MMMM-AAAA');
-      console.log('sd', sD);
       const dataToSend: {
         theme: string;
         activities: string[];
@@ -29,16 +26,19 @@ const DateContainer = () => {
           competence: string;
           value: number;
         }[];
-        startDate: string;
+        startDate?: string;
         endDate?: string;
       } = {
         theme: theme?.id,
         activities: activities.map((act) => act.id),
         competences: competencesValues.map((cmp) => ({ competence: cmp.id, value: cmp.value })),
-        startDate: sD,
       };
+      if (monthStart && yearStart) {
+        const sD = moment(`01-${monthStart}-${yearStart}`).toISOString();
+        dataToSend.startDate = sD;
+      }
       if (monthEnd && yearEnd) {
-        const sE = moment(`${monthEnd}-${yearEnd}`).format('MMMM-AAAA');
+        const sE = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
         dataToSend.endDate = sE;
       }
       addSkillCall({ variables: dataToSend });
@@ -46,9 +46,9 @@ const DateContainer = () => {
   };
   useEffect(() => {
     if (addSkillState.data) {
-      setStep(EParcoursStep.DATE);
+      setStep(EParcoursStep.DONE);
     }
-  }, []);
+  }, [addSkillState.data]);
   return (
     <ParcoursLayout>
       <button
@@ -61,7 +61,8 @@ const DateContainer = () => {
       <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
         <div>
           <div className="text-lena-blue-dark">
-            Pour finir, à quelles dates s’est déroulée cette expérience de <strong> boulangerie </strong> ? (facultatif){' '}
+            Pour finir, à quelles dates s’est déroulée cette expérience de
+            <strong> boulangerie </strong> ? (facultatif){' '}
           </div>
         </div>
         <DatePicker
@@ -84,7 +85,9 @@ const DateContainer = () => {
       <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
         <button
           onClick={onAddSkill}
-          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+          className={`focus:ring-0 focus:outline-none w-full
+          bg-lena-blue text-white py-3 text-center
+          font-bold text-lg md:w-72 md:rounded-lg`}
         >
           Valider
         </button>

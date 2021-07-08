@@ -50,7 +50,8 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
           <div ref={btnRef} className={classNames('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
             <button
               onClick={() => path && history.push(path)}
-              className="bg-lena-blue w-full text-white font-bold md:w-72 py-3 rounded-md focus:ring-0 focus:outline-none"
+              className={`bg-lena-blue w-full text-white font-bold
+              md:w-72 py-3 rounded-md focus:ring-0 focus:outline-none`}
             >
               {children}
             </button>
@@ -66,7 +67,10 @@ const ButtonWithPopover: FunctionComponent<ButtonWithPopoverProps> = ({ popover,
             </button>
           </div>
           <div className={classNames(!popoverShow && 'hidden', 'block z-50')} style={{ width: '90%' }} ref={popoverRef}>
-            <div className="bg-white border-0 font-normal leading-normal text-sm  text-left no-underline break-words rounded-lg">
+            <div
+              className={`bg-white border-0 font-normal leading-normal text-sm
+            text-left no-underline break-words rounded-lg`}
+            >
               <button
                 onClick={closePopover}
                 className="bg-white shadow-lg -top-3 absolute p-2 -right-2 rounded-full focus:ring-0 focus:outline-none"
@@ -99,7 +103,10 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => {
         backgroundSize: 'cover',
       }}
     >
-      <div className="md:container md:mx-auto flex flex-col justify-center h-full items-center text-center mx-5 space-y-20">
+      <div
+        className={`md:container md:mx-auto flex flex-col justify-center
+      h-full items-center text-center mx-5 space-y-20`}
+      >
         <div>
           <h6 className="text-white text-xl font-normal mb-1">Bienvenue sur</h6>
           <img
@@ -116,13 +123,17 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => {
         <div className="w-full md:w-auto md:flex md:flex-col">
           <button
             onClick={() => onClick.call(null)}
-            className="bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14 block text-lena-blue-dark font-bold text-sm mb-4"
+            className={`bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14
+            block text-lena-blue-dark font-bold text-sm mb-4`}
           >
             Je ne sais pas vers quel métier m'orienter
             <br />
             Je veux me réorienter
           </button>
-          <button className="bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full block text-lena-blue-dark font-bold text-sm">
+          <button
+            className={`bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full
+          block text-lena-blue-dark font-bold text-sm`}
+          >
             J'ai une idée précise du métier que je recherche
           </button>
           <span className="text-white inline-block mt-10">Comment ça marche ?</span>
@@ -169,7 +180,8 @@ const ChoiceComponent = () => {
               <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
                 <ButtonWithPopover
                   path="/experience/professional/create"
-                  popover="Même si vous voulez changer de voie, vos expériences professionnelles vous ont fait gagner en compétence."
+                  popover={`Même si vous voulez changer de voie,
+                  vos expériences professionnelles vous ont fait gagner en compétence.`}
                 >
                   Professionnelles
                 </ButtonWithPopover>

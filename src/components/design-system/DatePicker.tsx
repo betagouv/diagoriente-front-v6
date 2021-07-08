@@ -33,7 +33,8 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
             <strong className="text-lena-blue-dark">Mois</strong>{' '}
             <div
               style={{ borderColor: '#e1e7f7' }}
-              className="flex w-40 items-center justify-between border rounded-md focus:ring-0 focus:outline-none pt-2 pb-2 ml-5 px-6 shadow text-lena-blue-dark"
+              className={`flex w-40 items-center justify-between border rounded-md focus:ring-0 focus:outline-none
+              pt-2 pb-2 ml-5 px-6 shadow text-lena-blue-dark`}
               onClick={() => setOpen(!open)}
             >
               {mois[Number(month) - 1]?.title || 'janvier'}

@@ -22,13 +22,17 @@ const AddActivityDone: FunctionComponent = () => {
             <div className="fixed bottom-0 left-0 right-0 md:relative">
               <button
                 onClick={() => setStep(EParcoursStep.COMPETENCES)}
-                className="md:px-14 md:rounded-md focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg"
+                className={`md:px-14 md:rounded-md
+                focus:ring-0 focus:outline-none w-full
+                bg-lena-blue text-white py-3 text-center font-bold text-lg`}
               >
                 Sélectionner les compétences
               </button>
               <button
                 onClick={() => setStep(EParcoursStep.ACTIVITIES)}
-                className="mt-2 md:px-14 md:rounded-md focus:ring-0 focus:outline-none w-full bg-lena-pink-dark text-white py-3 text-center font-bold text-lg"
+                className={`mt-2 md:px-14 md:rounded-md focus:ring-0
+                focus:outline-none w-full bg-lena-pink-dark
+                text-white py-3 text-center font-bold text-lg`}
               >
                 Retour
               </button>

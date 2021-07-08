@@ -193,7 +193,8 @@ const SkillCardContainer: FunctionComponent = () => {
                 <Skill
                   star={1}
                   title="Agir collectivement"
-                  description="Je fais des propositions au groupe, j'écoute et prends en compte l'avis de chacun, exprime des avis contraires."
+                  description={`Je fais des propositions au groupe,
+                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
                 />
                 <Skill
                   star={2}
@@ -203,12 +204,14 @@ const SkillCardContainer: FunctionComponent = () => {
                 <Skill
                   star={3}
                   title="Utiliser les mathématiques"
-                  description="J'applique toutes les consignes et procédures en autonomie au travail, dans les activités manuelles... et j'identifie les risques de non respect"
+                  description={`J'applique toutes les consignes et procédures en autonomie au travail,
+                  dans les activités manuelles... et j'identifie les risques de non respect`}
                 />
                 <Skill
                   star={4}
                   title="Organiser son activité"
-                  description="Je fais des opérations et des mesures pour des petits travaux, des dosages pour des produits..."
+                  description={`Je fais des opérations et des mesures pour des petits travaux,
+                  des dosages pour des produits..."`}
                 />
               </div>
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
@@ -220,7 +223,8 @@ const SkillCardContainer: FunctionComponent = () => {
                 <Skill
                   star={1}
                   title="Prendre en compte les codes sociaux dans l’activité"
-                  description="Je fais des propositions au groupe, j'écoute et prends en compte l'avis de chacun, exprime des avis contraires."
+                  description={`Je fais des propositions au groupe,
+                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
                 />
                 <Skill
                   star={2}
@@ -235,7 +239,8 @@ const SkillCardContainer: FunctionComponent = () => {
                 <Skill
                   star={4}
                   title="Lorem ipsum"
-                  description="Je fais des opérations et des mesures pour des petits travaux, des dosages pour des produits..."
+                  description={`Je fais des opérations et des mesures pour des petits travaux,
+                  des dosages pour des produits...`}
                 />
               </div>
             </div>
