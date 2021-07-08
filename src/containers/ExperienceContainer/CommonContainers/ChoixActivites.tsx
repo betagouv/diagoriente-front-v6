@@ -5,6 +5,7 @@ import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceConte
 import { Activity } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
+import classNames from 'common/utils/classNames';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type NewActivity = {
@@ -81,8 +82,10 @@ const ChoixActivites: FunctionComponent = () => {
   };
 
   const handleValidateActivites = () => {
-    setStep(EParcoursStep.ACTIVITIES_DONE);
-    setActivities(activitiesChecked);
+    if (activitiesChecked.length !== 0) {
+      setStep(EParcoursStep.ACTIVITIES_DONE);
+      setActivities(activitiesChecked);
+    }
   };
 
   return (
@@ -119,8 +122,12 @@ const ChoixActivites: FunctionComponent = () => {
             ) : (
               <div className="fixed bottom-0 left-0 right-0 md:relative">
                 <button
+                  disabled={activitiesChecked.length === 0}
                   onClick={handleValidateActivites}
-                  className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+                  className={classNames(
+                    'focus:ring-0 focus:outline-none w-full text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg',
+                    activitiesChecked.length > 0 ? 'bg-lena-blue' : 'bg-gray-300',
+                  )}
                 >
                   Valider
                 </button>

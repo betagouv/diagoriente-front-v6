@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { Competence } from 'common/requests/types';
-import { useAddSkill } from 'common/requests/skills';
+import classNames from 'common/utils/classNames';
 import { ReactComponent as PictoSorganiserSvg } from 'assets/images/svg/picto/sorganiser.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -11,7 +11,6 @@ import ParcoursLayout from '../layout/ParcoursLayout';
 
 const SelectionCompetence: FunctionComponent = () => {
   const { theme, competencesValues, setCompetencesValues, setStep, setCompetences } = useContext(NewExperienceContext);
-  const [addSkillCall, addSkillState] = useAddSkill();
   const [skills, setSkills] = useState<Competence[]>([]);
   const [skillsChecked, setSkillsChecked] = useState<Competence[]>([]);
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
@@ -111,7 +110,10 @@ const SelectionCompetence: FunctionComponent = () => {
               <button
                 disabled={skillsChecked.length <= 0}
                 onClick={handleValidateCompetences}
-                className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+                className={classNames(
+                  'focus:ring-0 focus:outline-none w-full  text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg',
+                  skillsChecked.length > 0 ? 'bg-lena-blue' : 'bg-gray-300',
+                )}
               >
                 Valider
               </button>
@@ -130,6 +132,7 @@ const SelectionCompetence: FunctionComponent = () => {
           step={step}
           onSend={handleAddLevel}
           selectedCMpValue={selectedCMpValue}
+          competencesValues={competencesValues}
           onConfirmLevel={onConfirmLevel}
         />
       )}

@@ -103,7 +103,6 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   const controlSelected = (dataSelected: any) => {
     setSelected(dataSelected);
   };
-  console.log('selected', selected);
 
   const handleNext = () => {
     if (selected) {

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import ModalComponent from 'components/design-system/Modal';
 import CardLevel from 'components/design-system/CardLevel';
+import className from 'common/utils/classNames';
 
 type Choice = {
   open?: boolean;
@@ -8,6 +9,7 @@ type Choice = {
   onSend: (e: any) => void;
   onClose: () => void;
   step: number;
+  competencesValues: any[];
   selectedCMpValue: number;
   onConfirmLevel: () => void;
 };
@@ -45,6 +47,7 @@ const ModalChoice: FunctionComponent<Choice> = ({
   data,
   step,
   selectedCMpValue,
+  competencesValues,
   onConfirmLevel,
 }) => {
   return (
@@ -83,10 +86,13 @@ const ModalChoice: FunctionComponent<Choice> = ({
                 {level.subText}
               </CardLevel>
             ))}
-          <div className="bottom-0 left-0 right-0 md:relative">
+          <div className="flex justify-center pt-2">
             <button
               onClick={onConfirmLevel}
-              className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg"
+              className={className(
+                'focus:ring-0 focus:outline-none w-full  text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg',
+                step > competencesValues.length ? 'bg-gray-300' : 'bg-lena-blue',
+              )}
             >
               Valider
             </button>
