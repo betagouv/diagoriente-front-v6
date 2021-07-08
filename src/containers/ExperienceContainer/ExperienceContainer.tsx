@@ -40,12 +40,15 @@ const ExperienceContainer = () => {
                 Mes expériences personnelles
               </span>
             </button>
-            <div className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none bg-lena-blue-light2 hover:bg-lena-blue-alt-light">
+            <button
+              onClick={() => history.push('/experience/theme?type=voluntary')}
+              className="flex flex-col justify-center items-center py-8 rounded-md cursor-pointer select-none focus:ring-0 focus:outline-none bg-lena-blue-light2 hover:bg-lena-blue-alt-light"
+            >
               <ExpProSvg height={45} />
               <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">
-                Mes expériences de bénévolat (no route)
+                Mes expériences de bénévolat
               </span>
-            </div>
+            </button>
           </div>
         </div>
       </div>

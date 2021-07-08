@@ -19,6 +19,8 @@ import SelectionThemePro from '../XPPro/ParcoursContainer/containers/SelectionTh
 import ChoixActivites from './ChoixActivites';
 import AddActivityDone from './AddActivityDone';
 import SelectionCompetence from './SelectionCompetence';
+import DateContainer from './DateContainer';
+
 import AddExperienceDone from './AddExperienceDone';
 
 const ParcoursXPPersoContainer = () => {
@@ -32,7 +34,7 @@ const ParcoursXPPersoContainer = () => {
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
   const [competencesValues, setCompetencesValues] = useState<LocalParcoursCompetenceValues[]>([]);
 
-  const [loadThemes, { data }] = useLazyThemes();
+  const [loadThemes, { data }] = useLazyThemes({ fetchPolicy: 'network-only' });
   const renderType = () => {
     let type = '';
     if (params.type) {
@@ -43,6 +45,10 @@ const ParcoursXPPersoContainer = () => {
         }
         case 'personal': {
           type = 'personal';
+          break;
+        }
+        case 'voluntary': {
+          type = 'voluntary';
           break;
         }
         default: {
@@ -76,6 +82,8 @@ const ParcoursXPPersoContainer = () => {
         return <AddActivityDone />;
       case EParcoursStep.COMPETENCES:
         return <SelectionCompetence />;
+      case EParcoursStep.DATE:
+        return <DateContainer />;
       case EParcoursStep.DONE:
         return <AddExperienceDone />;
       default:

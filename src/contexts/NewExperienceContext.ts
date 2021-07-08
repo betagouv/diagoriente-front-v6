@@ -7,6 +7,7 @@ export enum EParcoursStep {
   ACTIVITIES,
   ACTIVITIES_DONE,
   COMPETENCES,
+  DATE,
   DONE,
 }
 
