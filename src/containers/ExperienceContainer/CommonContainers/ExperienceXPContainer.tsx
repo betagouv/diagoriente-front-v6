@@ -1,6 +1,7 @@
 import React from 'react';
 import { useListSkills } from 'common/requests/skills';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useDidMount } from 'common/hooks/useLifeCycle';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit.svg';
@@ -13,10 +14,11 @@ import { decodeUri } from 'common/utils/url';
 type ExperienceProps = {
   id?: string;
   title: string;
-  date: string;
+  startDate?: string;
+  endDate?: string;
   description: {
     id: string;
-    content: string;
+    title: string;
   }[];
   certified?: {
     message: string;
@@ -24,7 +26,7 @@ type ExperienceProps = {
   };
 };
 
-const Experience: React.FC<ExperienceProps> = ({ title, date, description, certified }) => (
+const Experience: React.FC<ExperienceProps> = ({ title, startDate, endDate, description, certified }) => (
   <div className="bg-white p-4 rounded-lg mb-2" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}>
     <div className="flex justify-between items-start mb-2">
       <div className={classNames(certified && 'flex items-center')}>
@@ -35,7 +37,8 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, description, certi
         )}
         <div>
           <h3 className="text-sm font-bold ">{title}</h3>
-          <span className="block font-bold text-xs text-lena-blue-dark">{date}</span>
+          {startDate && <span className="block font-bold text-xs text-lena-blue-dark">{startDate}</span>}
+          {endDate && <span className="block font-bold text-xs text-lena-blue-dark">{` - ${endDate}`}</span>}
         </div>
       </div>
       <button>
@@ -46,7 +49,7 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, description, certi
       <ul>
         {description.map((d) => (
           <li className="text-sm" key={d.id}>
-            {d.content}
+            {d.title}
           </li>
         ))}
       </ul>
@@ -70,46 +73,11 @@ const ExperienceXPProContainer = () => {
   const location = useLocation();
   const params = decodeUri(location.search);
   const [callSkills, skillsState] = useListSkills();
-  const experiences: ExperienceProps[] = [
-    {
-      id: 'a',
-      title: 'Graphisme multimédia',
-      date: 'Avril 20 - Mai 21',
-      description: [
-        {
-          id: 'aa',
-          content: "J'analyse les besoins du client",
-        },
-        {
-          id: 'bb',
-          content: 'Je traite les images numériques (colorimétrie, recadrage...)',
-        },
-        {
-          id: 'cc',
-          content: 'Je modélise des éléments graphique',
-        },
-      ],
-    },
-    {
-      id: 'a',
-      title: 'Programmation',
-      date: 'Dec 19 - Mai 20',
-      description: [
-        {
-          id: 'aa',
-          content: "J'écris les notices techniques d'installation",
-        },
-        {
-          id: 'bb',
-          content: 'Je code des logiciels (ou parties de logiciels)',
-        },
-      ],
-      certified: {
-        message: '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
-        signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
-      },
-    },
-  ];
+  useDidMount(() => {
+    if (params.type) {
+      callSkills({ variables: { domain: params.type } });
+    }
+  });
   const path = () => {
     let text = '';
     let url = '';
@@ -161,15 +129,18 @@ const ExperienceXPProContainer = () => {
             Vous pouvez ici modifier les expériences que vous avez renseigné, ou bien ajouter de nouvelles expériences.
           </h2>
           <div className="mt-4">
-            {experiences.map((exp) => (
-              <Experience
-                key={exp.id}
-                title={exp.title}
-                date={exp.date}
-                description={exp.description}
-                certified={exp.certified}
-              />
-            ))}
+            {skillsState.data?.skills.data.map((exp) => {
+              console.log('exp', exp);
+              return (
+                <Experience
+                  key={exp.id}
+                  title={exp.theme.title}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  description={exp.activities}
+                />
+              );
+            })}
           </div>
           <div className="flex justify-center mt-10">
             <button

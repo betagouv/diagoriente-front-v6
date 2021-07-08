@@ -18,6 +18,7 @@ import ProfileRoute from './ProfileContainer/ProfileRoute';
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
   const [state, dispatch] = useReducer(snackbarReducer, snackbarState);
+  console.log('user', user);
 
   if (!startupEnd) return <div />;
 

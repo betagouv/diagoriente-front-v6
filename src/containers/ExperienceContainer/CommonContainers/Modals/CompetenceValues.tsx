@@ -61,10 +61,10 @@ const ModalChoice: FunctionComponent<Choice> = ({
           bgColor="bg-lena-turquoise-light"
         >
           <div className="flex justify-center mb-6 mt-3">
-            <div className="text-lg font-bold">{`${step}/${data.length}`}</div>
+            <div className="text-lg font-bold">{`${step + 1}/${data.length}`}</div>
           </div>
           <div className="flex justify-center mb-6 mt-3">
-            <div className="text-lg font-bold">{data[step - 1]?.title}</div>
+            <div className="text-lg font-bold">{data[step]?.title}</div>
           </div>
           {Levels &&
             Levels.map((level, index) => (

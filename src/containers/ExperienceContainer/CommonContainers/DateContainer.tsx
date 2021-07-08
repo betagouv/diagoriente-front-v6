@@ -42,6 +42,8 @@ const DateContainer = () => {
         dataToSend.endDate = sE;
       }
       addSkillCall({ variables: dataToSend });
+    } else {
+      console.log('error');
     }
   };
   useEffect(() => {

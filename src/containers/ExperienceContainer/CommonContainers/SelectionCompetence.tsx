@@ -16,7 +16,7 @@ const SelectionCompetence: FunctionComponent = () => {
   const [showLevelSelectionModal, setShowLevelSelectionModal] = useState(false);
   const [selectedCMpValue, setSelectedCMpValue] = useState(0);
 
-  const [step, SetStep] = useState(1);
+  const [step, SetStep] = useState(0);
 
   const mediaQueryMD = useMediaQuery('md');
   useEffect(() => {
@@ -50,20 +50,20 @@ const SelectionCompetence: FunctionComponent = () => {
     setSelectedCMpValue(value);
     const array = [...competencesValues];
     const dataToSave = { id: skills[step].id, value };
-    array[step - 1] = dataToSave;
+    array[step] = dataToSave;
     setCompetencesValues(array);
   };
+
   const onConfirmLevel = () => {
-    if (step < skillsChecked.length) {
+    if (step < skillsChecked.length - 1) {
       setSelectedCMpValue(0);
       SetStep(step + 1);
     } else {
       setShowLevelSelectionModal(false);
     }
   };
-
   const handleValidateCompetences = () => {
-    if (step < skillsChecked.length) {
+    if (skillsChecked.length && competencesValues.length === 0 && step <= competencesValues.length) {
       setShowLevelSelectionModal(true);
     } else {
       setCompetences(skillsChecked);
