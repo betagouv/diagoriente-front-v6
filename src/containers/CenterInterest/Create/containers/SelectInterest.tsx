@@ -99,7 +99,6 @@ const Tutorial1 = () => {
         <div style={{ height: 204, top: -120 }} className="relative z-20">
           <div
             style={{
-              backgroundColor: 'rgb(229,229,229)',
               height: 190,
               top: -56,
               borderRadius: '55%',
@@ -122,14 +121,13 @@ const Tutorial2 = () => {
         <h2>Tutoriel</h2>
         <span>2/3</span>
       </header>
-      <div className="px-1">
+      <div className="px-1 relative">
         <div
           style={{ height: 100, width: 100, top: -55, transform: `translate(${sizeWindow.width / 2 - 55}px, 0)` }}
           className="relative z-20"
         >
           <div
             style={{
-              backgroundColor: 'rgb(229,229,229)',
               height: 100,
               borderRadius: '100%',
             }}
@@ -191,7 +189,7 @@ const RenderTutorial = () => {
           {step === 2 ? 'OK, compris !' : 'Suivant'}
         </button>
       </div>
-      <div className="bg-lena-blue-darkest bg-opacity-80 fixed z-10 top-0 bottom-0 left-0 right-0" />
+      {step === 0 ? <div className="overlay-1" /> : <div className="overlay-2" />}
     </div>
   );
 };
@@ -243,7 +241,7 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
         </h2>
       </header>
       <div className="container mt-4">
-        <div className="z-40 relative">
+        <div className="relative">
           <div className="flex items-center flex-col w-full">
             <div
               style={{ width: 'calc(80% + 60px)' }}
@@ -309,7 +307,6 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
           Valider
         </button>
       </div>
-      <RenderTutorial />
     </div>
   );
 };

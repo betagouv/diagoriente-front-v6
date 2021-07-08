@@ -120,3 +120,36 @@ input[type=range]:focus {
   pointer-events: all;
   position: relative;
 }
+
+.overlay-1 {
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  --circle-radius: 50px;
+  height: 100%;
+  width: 100%;
+  --mask: radial-gradient(farthest-side at 50% 50%, transparent var(--circle-radius), #fff calc(var(--circle-radius) + 2px) 10%) 100% 100%/100% 100% no-repeat;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  background: rgba(0, 0, 0, .8);
+}
+
+.overlay-2 {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  --circle-radius: 50px;
+  height: 100%;
+  width: 100%;
+  --mask: radial-gradient(circle farthest-side at 50% 170px, transparent var(--circle-radius), #000 calc(var(--circle-radius) + 2px) 10%) 90% 90%/100% 100% no-repeat;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  mask-position: 50% 50%;
+  background: rgba(0, 0, 0, .8);
+}
