@@ -24,7 +24,7 @@ const Start = ({ onStep }: Props) => {
           Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.
         </p>
       </div>
-      <div onClick={() => onStep.call(null)} className="fixed bottom-0 left-0 right-0 md:relative">
+      <div onClick={() => onStep.call(null)} className="fixed bottom-0 left-0 right-0 md:relative md:flex md:justify-center">
         <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg">
           Commencer
         </button>

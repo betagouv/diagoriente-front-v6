@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import InputComponent from 'components/Register/Input';
 import Checkbox from 'components/Register/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
@@ -199,18 +199,6 @@ const RegisterForm: FunctionComponent = () => {
               onBlur={formik.handleBlur}
               id="codeGroup"
               name="codeGroup"
-            />
-          </FormControl>
-        </div>
-        <div className="mb-2">
-          <FormControl>
-            <FormLabel htmlFor="codeGroup">Structure</FormLabel>
-            <InputComponent
-              value={formik.values.structure}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="structure"
-              name="structure"
             />
           </FormControl>
         </div>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import useMediaQuery from "hooks/useMediaQuery";
 import Start from './containers/Start';
 import SelectFamily from './containers/SelectFamily';
 import SelectInterest from './containers/SelectInterest';
 
 const CenterInterestCreateContainer = () => {
-  const [step, setStep] = useState(0);
+  const mediaQueryMD = useMediaQuery('md');
+  const [step, setStep] = useState(mediaQueryMD ? 1 : 0);
 
   const renderStep = () => {
     switch (step) {

@@ -80,16 +80,19 @@ const ExperienceXPProContainer = () => {
   });
   const path = () => {
     let text = '';
+    let text2 = '';
     let url = '';
     if (params.type) {
       switch (params.type) {
         case 'professional': {
           text = 'professionnelles';
+          text2 = 'professionnelle';
           url = 'professional';
           break;
         }
         case 'personnel': {
-          text = 'personnel';
+          text = 'personnelles';
+          text = 'personnelle';
           url = 'personal';
           break;
         }
@@ -99,7 +102,8 @@ const ExperienceXPProContainer = () => {
           break;
         }
         default: {
-          text = 'personnel';
+          text = 'personnelles';
+          text2 = 'personnelle';
           url = 'personal';
           break;
         }
@@ -107,6 +111,7 @@ const ExperienceXPProContainer = () => {
     }
     return {
       text,
+      text2,
       url,
     };
   };
@@ -147,7 +152,7 @@ const ExperienceXPProContainer = () => {
               onClick={() => history.push(`/experience/theme/create?type=${path().url}`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
-              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text}</span>
+              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text2 ? path().text2 : path().text}</span>
             </button>
           </div>
         </div>
