@@ -18,7 +18,7 @@ const ParcoursLayout: FunctionComponent<Props> = ({ withRange, withMobile = true
     <ParcoursLayoutForMobile backgroundColor={backgroundColor} withRange={withRange}>{children}</ParcoursLayoutForMobile>
   ) : (
     <div>{children}</div>
-  )
+  );
 };
 
 export default ParcoursLayout;
