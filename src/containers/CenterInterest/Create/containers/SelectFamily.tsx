@@ -7,7 +7,7 @@ import CollectifSvg from 'assets/svg/collectif.svg';
 import IndividuelSvg from 'assets/svg/individuel.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from "hooks/useMediaQuery";
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from "../layout/ParcoursLayout";
 
 type Props = {
   onStep: () => void;
@@ -20,42 +20,24 @@ const SelectFamily = ({ onStep }: Props) => {
   const family = (left: string, right: string, imgLeft: any, imgRight: any, active?: boolean,) => {
     return (
       <button onClick={() => onStep.call(null)} className="focus:ring-0 focus:outline-none w-full">
-        {mediaQueryMD ? (
-          <li className={
-            classNames(
-              "flex justify-between items-center px-10 py-5 rounded-lg border-2 border-transparent relative",
-              "hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30",
-              active ? "bg-lena-yellow-light border-lena-yellow" : "bg-lena-gray-light-2"
-            )
-          }>
-            <img src={imgLeft} alt="Svg" />
-            <span className="text-lena-blue-dark">
-              {left} - {right}
+        <li className={
+          classNames(
+            "flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 border-transparent relative",
+            "hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30",
+            active ? "bg-lena-yellow-light border-lena-yellow" : "bg-lena-gray-light-2"
+          )
+        }>
+          <img src={imgLeft} alt="Svg" />
+          <span className="text-lena-blue-dark">
+              {left} / {right}
             </span>
-            <img src={imgRight} alt="Svg" />
-            {active && (
-              <div className="absolute -right-2 -top-2">
-                <CheckSvg />
-              </div>
-            )}
-          </li>
-        ) : (
-          <li
-            className={classNames(
-              'flex items-center space-x-3 hover:bg-lena-yellow justify-center py-3 rounded-full mb-4 relative',
-              active ? 'border-2 border-lena-yellow-dark bg-lena-yellow' : 'bg-lena-yellow-light',
-            )}
-          >
-            <span className="text-lena-blue-dark font-bold">{left}</span>
-            <LineSvg />
-            <span className="text-lena-blue-dark font-bold">{right}</span>
-            {active && (
-              <div className="absolute -right-2">
-                <CheckSvg />
-              </div>
-            )}
-          </li>
-        )}
+          <img src={imgRight} alt="Svg" />
+          {active && (
+            <div className="absolute -right-2 -top-2">
+              <CheckSvg />
+            </div>
+          )}
+        </li>
       </button>
     );
   };
@@ -96,7 +78,8 @@ const SelectFamily = ({ onStep }: Props) => {
         <div className="w-full px-5">
           <ul className={
             classNames(
-              mediaQueryMD && "xl:w-1/2 w-full mx-auto space-y-2"
+              "space-y-2",
+              mediaQueryMD && "xl:w-1/2 w-full mx-auto"
             )
           }>
             {family('Collectif', 'Individuel', CollectifSvg, IndividuelSvg, true)}

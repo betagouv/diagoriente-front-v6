@@ -33,11 +33,11 @@ const EditInfoContainer = () => {
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Nom</span>
-              <TextField placeholder={user?.firstName} />
+              <TextField value={user?.firstName} />
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Prénom</span>
-              <TextField placeholder={user?.lastName} />
+              <TextField value={user?.lastName} />
             </div>
             <div className="flex mb-3 items-center">
               <span className="font-bold w-2/5 block flex-shrink-0">Ville</span>
@@ -45,7 +45,7 @@ const EditInfoContainer = () => {
                 fullWidth={true}
                 id="location"
                 name="location"
-                placeholder={user?.location.address}
+                value={user?.location.address}
                 selectShow={false}
                 withSelect={
                   <div>

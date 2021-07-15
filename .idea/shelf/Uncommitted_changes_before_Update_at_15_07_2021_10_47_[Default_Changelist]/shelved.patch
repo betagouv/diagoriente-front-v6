@@ -1,0 +1,200 @@
+Index: src/containers/CenterInterest/Create/containers/SelectFamily.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\nimport { useHistory } from 'react-router-dom';\nimport { ReactComponent as LineSvg } from 'assets/svg/line.svg';\nimport { ReactComponent as InfoSvg } from 'assets/svg/info_yellow.svg';\nimport { ReactComponent as CheckSvg } from 'assets/svg/check_blue.svg';\nimport CollectifSvg from 'assets/svg/collectif.svg';\nimport IndividuelSvg from 'assets/svg/individuel.svg';\nimport classNames from 'common/utils/classNames';\nimport useMediaQuery from \"hooks/useMediaQuery\";\nimport ParcoursLayout from '../layout/ParcoursLayout';\n\ntype Props = {\n  onStep: () => void;\n};\n\nconst SelectFamily = ({ onStep }: Props) => {\n  const history = useHistory();\n  const mediaQueryMD = useMediaQuery('md');\n\n  const family = (left: string, right: string, imgLeft: any, imgRight: any, active?: boolean,) => {\n    return (\n      <button onClick={() => onStep.call(null)} className=\"focus:ring-0 focus:outline-none w-full\">\n        {mediaQueryMD ? (\n          <li className={\n            classNames(\n              \"flex justify-between items-center px-10 py-5 rounded-lg border-2 border-transparent relative\",\n              \"hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30\",\n              active ? \"bg-lena-yellow-light border-lena-yellow\" : \"bg-lena-gray-light-2\"\n            )\n          }>\n            <img src={imgLeft} alt=\"Svg\" />\n            <span className=\"text-lena-blue-dark\">\n              {left} - {right}\n            </span>\n            <img src={imgRight} alt=\"Svg\" />\n            {active && (\n              <div className=\"absolute -right-2 -top-2\">\n                <CheckSvg />\n              </div>\n            )}\n          </li>\n        ) : (\n          <li\n            className={classNames(\n              'flex items-center space-x-3 hover:bg-lena-yellow justify-center py-3 rounded-full mb-4 relative',\n              active ? 'border-2 border-lena-yellow-dark bg-lena-yellow' : 'bg-lena-yellow-light',\n            )}\n          >\n            <span className=\"text-lena-blue-dark font-bold\">{left}</span>\n            <LineSvg />\n            <span className=\"text-lena-blue-dark font-bold\">{right}</span>\n            {active && (\n              <div className=\"absolute -right-2\">\n                <CheckSvg />\n              </div>\n            )}\n          </li>\n        )}\n      </button>\n    );\n  };\n\n  return (\n    <ParcoursLayout>\n      <div className=\"container pt-14 flex flex-col items-center justify-start space-y-8 md:p-14\">\n        <div className={\n          classNames(\n\n          )\n        }>\n          <div className={\n            classNames(\n              !mediaQueryMD ? \"hidden\" : \"xl:w-3/4 w-full mx-auto\"\n            )\n          }>\n            <p className=\"text-lena-blue-dark mb-5\">\n              Pour votre futur métier, vous êtes peut-être intéressé.e par des choses que vous avez déjà faites ou des\n              choses nouvelles, des choses très précises ou très générales...\n            </p>\n            <p className=\"text-lena-blue-dark\">\n              Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.\n            </p>\n            <p className=\"text-lena-blue-dark mt-5 font-bold\">\n              Pour commencer, cliquez sur une famille pour sélectionner les centres d’intérêts associés :\n            </p>\n          </div>\n          <p className={\n            classNames(\n              \"text-lena-blue-dark mt-5\",\n              mediaQueryMD && \"hidden\"\n            )\n          }>\n            Cliquez sur une famille pour sélectionner les centres d’intérêts associés :\n          </p>\n        </div>\n        <div className=\"w-full px-5\">\n          <ul className={\n            classNames(\n              mediaQueryMD && \"xl:w-1/2 w-full mx-auto space-y-2\"\n            )\n          }>\n            {family('Collectif', 'Individuel', CollectifSvg, IndividuelSvg, true)}\n            {family('Liberté', 'Cadre', CollectifSvg, IndividuelSvg)}\n          </ul>\n          <div className=\"flex justify-center\">\n            <button className=\"focus:outline-none focus:ring-0 flex flex justify-center items-center mt-7 space-x-2\">\n              <InfoSvg />\n              <span className=\"text-lena-blue-dark\">Comment ça marche ?</span>\n            </button>\n          </div>\n        </div>\n      </div>\n    </ParcoursLayout>\n  );\n};\n\nexport default SelectFamily;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/containers/CenterInterest/Create/containers/SelectFamily.tsx b/src/containers/CenterInterest/Create/containers/SelectFamily.tsx
+--- a/src/containers/CenterInterest/Create/containers/SelectFamily.tsx	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ b/src/containers/CenterInterest/Create/containers/SelectFamily.tsx	(date 1626183373050)
+@@ -7,7 +7,7 @@
+ import IndividuelSvg from 'assets/svg/individuel.svg';
+ import classNames from 'common/utils/classNames';
+ import useMediaQuery from "hooks/useMediaQuery";
+-import ParcoursLayout from '../layout/ParcoursLayout';
++import ParcoursLayout from "../layout/ParcoursLayout";
+ 
+ type Props = {
+   onStep: () => void;
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ /dev/null	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
+@@ -1,5 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+-# Editor-based HTTP Client requests
+-/httpRequests/
+Index: .idea/runConfigurations/start.xml
+===================================================================
+diff --git a/.idea/runConfigurations/start.xml b/.idea/runConfigurations/start.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations/start.xml	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ /dev/null	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
+@@ -1,12 +0,0 @@
+-<component name="ProjectRunConfigurationManager">
+-  <configuration default="false" name="start" type="js.build_tools.npm" nameIsGenerated="true">
+-    <package-json value="$PROJECT_DIR$/package.json" />
+-    <command value="run" />
+-    <scripts>
+-      <script value="start" />
+-    </scripts>
+-    <node-interpreter value="project" />
+-    <envs />
+-    <method v="2" />
+-  </configuration>
+-</component>
+\ No newline at end of file
+Index: .idea/jsLinters/eslint.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jsLinters/eslint.xml b/.idea/jsLinters/eslint.xml
+deleted file mode 100644
+--- a/.idea/jsLinters/eslint.xml	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ /dev/null	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="EslintConfiguration">
+-    <option name="fix-on-save" value="true" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"InspectionProjectProfileManager\">\n  <profile version=\"1.0\">\n    <option name=\"myName\" value=\"Project Default\" />\n    <inspection_tool class=\"Eslint\" enabled=\"true\" level=\"WARNING\" enabled_by_default=\"true\" />\n    <inspection_tool class=\"SpellCheckingInspection\" enabled=\"false\" level=\"TYPO\" enabled_by_default=\"false\">\n      <option name=\"processCode\" value=\"true\" />\n      <option name=\"processLiterals\" value=\"true\" />\n      <option name=\"processComments\" value=\"true\" />\n    </inspection_tool>\n  </profile>\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+--- a/.idea/inspectionProfiles/Project_Default.xml	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1626183036944)
+@@ -2,10 +2,5 @@
+   <profile version="1.0">
+     <option name="myName" value="Project Default" />
+     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+-    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+-      <option name="processCode" value="true" />
+-      <option name="processLiterals" value="true" />
+-      <option name="processComments" value="true" />
+-    </inspection_tool>
+   </profile>
+ </component>
+\ No newline at end of file
+Index: tsconfig.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\n  \"compilerOptions\": {\n    \"target\": \"es5\",\n    \"lib\": [\n      \"dom\",\n      \"dom.iterable\",\n      \"esnext\"\n    ],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"esModuleInterop\": true,\n    \"noImplicitAny\": true,\n    \"allowSyntheticDefaultImports\": true,\n    \"strict\": true,\n    \"forceConsistentCasingInFileNames\": true,\n    \"downlevelIteration\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"node\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"noEmit\": true,\n    \"jsx\": \"react-jsx\",\n    \"baseUrl\": \"./src\",\n    \"noFallthroughCasesInSwitch\": true\n  },\n  \"include\": [\n    \"src\"\n  ]\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tsconfig.json b/tsconfig.json
+--- a/tsconfig.json	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ b/tsconfig.json	(date 1626182397984)
+@@ -26,4 +26,4 @@
+   "include": [
+     "src"
+   ]
+-}
++}
+\ No newline at end of file
+Index: .idea/codeStyles/Project.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"ProjectCodeStyleConfiguration\">\r\n  <code_scheme name=\"Project\" version=\"173\">\r\n    <HTMLCodeStyleSettings>\r\n      <option name=\"HTML_SPACE_INSIDE_EMPTY_TAG\" value=\"true\" />\r\n      <option name=\"HTML_ENFORCE_QUOTES\" value=\"true\" />\r\n    </HTMLCodeStyleSettings>\r\n    <JSCodeStyleSettings version=\"0\">\r\n      <option name=\"FORCE_SEMICOLON_STYLE\" value=\"true\" />\r\n      <option name=\"SPACE_BEFORE_FUNCTION_LEFT_PARENTH\" value=\"false\" />\r\n      <option name=\"FORCE_QUOTE_STYlE\" value=\"true\" />\r\n      <option name=\"ENFORCE_TRAILING_COMMA\" value=\"Remove\" />\r\n      <option name=\"VAR_DECLARATION_WRAP\" value=\"2\" />\r\n      <option name=\"OBJECT_LITERAL_WRAP\" value=\"2\" />\r\n      <option name=\"SPACES_WITHIN_OBJECT_LITERAL_BRACES\" value=\"true\" />\r\n      <option name=\"SPACES_WITHIN_IMPORTS\" value=\"true\" />\r\n    </JSCodeStyleSettings>\r\n    <TypeScriptCodeStyleSettings version=\"0\">\r\n      <option name=\"FORCE_SEMICOLON_STYLE\" value=\"true\" />\r\n      <option name=\"SPACE_BEFORE_FUNCTION_LEFT_PARENTH\" value=\"false\" />\r\n      <option name=\"FORCE_QUOTE_STYlE\" value=\"true\" />\r\n      <option name=\"ENFORCE_TRAILING_COMMA\" value=\"Remove\" />\r\n      <option name=\"VAR_DECLARATION_WRAP\" value=\"2\" />\r\n      <option name=\"OBJECT_LITERAL_WRAP\" value=\"2\" />\r\n      <option name=\"SPACES_WITHIN_OBJECT_LITERAL_BRACES\" value=\"true\" />\r\n      <option name=\"SPACES_WITHIN_IMPORTS\" value=\"true\" />\r\n    </TypeScriptCodeStyleSettings>\r\n    <VueCodeStyleSettings>\r\n      <option name=\"INTERPOLATION_NEW_LINE_AFTER_START_DELIMITER\" value=\"false\" />\r\n      <option name=\"INTERPOLATION_NEW_LINE_BEFORE_END_DELIMITER\" value=\"false\" />\r\n    </VueCodeStyleSettings>\r\n    <codeStyleSettings language=\"HTML\">\r\n      <option name=\"SOFT_MARGINS\" value=\"80\" />\r\n      <indentOptions>\r\n        <option name=\"INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"CONTINUATION_INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"TAB_SIZE\" value=\"2\" />\r\n      </indentOptions>\r\n    </codeStyleSettings>\r\n    <codeStyleSettings language=\"JavaScript\">\r\n      <option name=\"RIGHT_MARGIN\" value=\"120\" />\r\n      <option name=\"KEEP_BLANK_LINES_IN_CODE\" value=\"1\" />\r\n      <option name=\"METHOD_CALL_CHAIN_WRAP\" value=\"2\" />\r\n      <option name=\"IF_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"DOWHILE_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"WHILE_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"FOR_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"SOFT_MARGINS\" value=\"80\" />\r\n      <indentOptions>\r\n        <option name=\"INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"CONTINUATION_INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"TAB_SIZE\" value=\"2\" />\r\n      </indentOptions>\r\n    </codeStyleSettings>\r\n    <codeStyleSettings language=\"TypeScript\">\r\n      <option name=\"RIGHT_MARGIN\" value=\"120\" />\r\n      <option name=\"KEEP_BLANK_LINES_IN_CODE\" value=\"1\" />\r\n      <option name=\"METHOD_CALL_CHAIN_WRAP\" value=\"2\" />\r\n      <option name=\"IF_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"DOWHILE_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"WHILE_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"FOR_BRACE_FORCE\" value=\"1\" />\r\n      <option name=\"SOFT_MARGINS\" value=\"80\" />\r\n      <indentOptions>\r\n        <option name=\"INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"CONTINUATION_INDENT_SIZE\" value=\"2\" />\r\n        <option name=\"TAB_SIZE\" value=\"2\" />\r\n      </indentOptions>\r\n    </codeStyleSettings>\r\n    <codeStyleSettings language=\"Vue\">\r\n      <option name=\"SOFT_MARGINS\" value=\"80\" />\r\n      <indentOptions>\r\n        <option name=\"CONTINUATION_INDENT_SIZE\" value=\"2\" />\r\n      </indentOptions>\r\n    </codeStyleSettings>\r\n  </code_scheme>\r\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/codeStyles/Project.xml b/.idea/codeStyles/Project.xml
+--- a/.idea/codeStyles/Project.xml	(revision 5023fb233a702ec0dc0ae42d5483187879a06be4)
++++ b/.idea/codeStyles/Project.xml	(date 1626183036975)
+@@ -1,26 +1,26 @@
+ <component name="ProjectCodeStyleConfiguration">
+   <code_scheme name="Project" version="173">
++    <option name="LINE_SEPARATOR" value="&#10;" />
+     <HTMLCodeStyleSettings>
+       <option name="HTML_SPACE_INSIDE_EMPTY_TAG" value="true" />
++      <option name="HTML_QUOTE_STYLE" value="Single" />
+       <option name="HTML_ENFORCE_QUOTES" value="true" />
+     </HTMLCodeStyleSettings>
+     <JSCodeStyleSettings version="0">
+       <option name="FORCE_SEMICOLON_STYLE" value="true" />
+       <option name="SPACE_BEFORE_FUNCTION_LEFT_PARENTH" value="false" />
++      <option name="USE_DOUBLE_QUOTES" value="false" />
+       <option name="FORCE_QUOTE_STYlE" value="true" />
+-      <option name="ENFORCE_TRAILING_COMMA" value="Remove" />
+-      <option name="VAR_DECLARATION_WRAP" value="2" />
+-      <option name="OBJECT_LITERAL_WRAP" value="2" />
++      <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline" />
+       <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+       <option name="SPACES_WITHIN_IMPORTS" value="true" />
+     </JSCodeStyleSettings>
+     <TypeScriptCodeStyleSettings version="0">
+       <option name="FORCE_SEMICOLON_STYLE" value="true" />
+       <option name="SPACE_BEFORE_FUNCTION_LEFT_PARENTH" value="false" />
++      <option name="USE_DOUBLE_QUOTES" value="false" />
+       <option name="FORCE_QUOTE_STYlE" value="true" />
+-      <option name="ENFORCE_TRAILING_COMMA" value="Remove" />
+-      <option name="VAR_DECLARATION_WRAP" value="2" />
+-      <option name="OBJECT_LITERAL_WRAP" value="2" />
++      <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline" />
+       <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+       <option name="SPACES_WITHIN_IMPORTS" value="true" />
+     </TypeScriptCodeStyleSettings>
+@@ -29,7 +29,7 @@
+       <option name="INTERPOLATION_NEW_LINE_BEFORE_END_DELIMITER" value="false" />
+     </VueCodeStyleSettings>
+     <codeStyleSettings language="HTML">
+-      <option name="SOFT_MARGINS" value="80" />
++      <option name="SOFT_MARGINS" value="120" />
+       <indentOptions>
+         <option name="INDENT_SIZE" value="2" />
+         <option name="CONTINUATION_INDENT_SIZE" value="2" />
+@@ -37,14 +37,7 @@
+       </indentOptions>
+     </codeStyleSettings>
+     <codeStyleSettings language="JavaScript">
+-      <option name="RIGHT_MARGIN" value="120" />
+-      <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+-      <option name="METHOD_CALL_CHAIN_WRAP" value="2" />
+-      <option name="IF_BRACE_FORCE" value="1" />
+-      <option name="DOWHILE_BRACE_FORCE" value="1" />
+-      <option name="WHILE_BRACE_FORCE" value="1" />
+-      <option name="FOR_BRACE_FORCE" value="1" />
+-      <option name="SOFT_MARGINS" value="80" />
++      <option name="SOFT_MARGINS" value="120" />
+       <indentOptions>
+         <option name="INDENT_SIZE" value="2" />
+         <option name="CONTINUATION_INDENT_SIZE" value="2" />
+@@ -52,14 +45,7 @@
+       </indentOptions>
+     </codeStyleSettings>
+     <codeStyleSettings language="TypeScript">
+-      <option name="RIGHT_MARGIN" value="120" />
+-      <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+-      <option name="METHOD_CALL_CHAIN_WRAP" value="2" />
+-      <option name="IF_BRACE_FORCE" value="1" />
+-      <option name="DOWHILE_BRACE_FORCE" value="1" />
+-      <option name="WHILE_BRACE_FORCE" value="1" />
+-      <option name="FOR_BRACE_FORCE" value="1" />
+-      <option name="SOFT_MARGINS" value="80" />
++      <option name="SOFT_MARGINS" value="120" />
+       <indentOptions>
+         <option name="INDENT_SIZE" value="2" />
+         <option name="CONTINUATION_INDENT_SIZE" value="2" />
+@@ -67,7 +53,7 @@
+       </indentOptions>
+     </codeStyleSettings>
+     <codeStyleSettings language="Vue">
+-      <option name="SOFT_MARGINS" value="80" />
++      <option name="SOFT_MARGINS" value="120" />
+       <indentOptions>
+         <option name="CONTINUATION_INDENT_SIZE" value="2" />
+       </indentOptions>
