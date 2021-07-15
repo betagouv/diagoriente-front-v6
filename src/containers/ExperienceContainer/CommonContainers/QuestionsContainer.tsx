@@ -11,21 +11,61 @@ const types = [
     title: 'Autonomie& responsabilité',
     logo: Autonomie,
     questions: [
-      { id: 1, title: 'Vous avez réalisé en toute autonomie l’activité confiée' },
+      { id: '1', title: 'Vous avez réalisé en toute autonomie l’activité confiée' },
       {
-        id: 2,
+        id: '2',
         title:
           'Vous avez réalisé en toute autonomie l’activité confiée en vous adaptant à la diversité des situations rencontrées',
       },
       {
-        id: 3,
+        id: '3',
         title:
           'Vous avez coordonné et évalué au sein d’une équipe pour mettre en oeuvre la vision stratégique de l’institution ou l’entreprise',
       },
     ],
   },
-  { title: 'Complexité', logo: complexité },
-  { title: 'Environnement de travail', logo: Environnement },
+  {
+    title: 'Complexité',
+    logo: complexité,
+    questions: [
+      {
+        id: '1',
+        title:
+          'Vous avez traité des informations et interactions sur la réalisation et l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle',
+      },
+      {
+        id: '2',
+        title:
+          'Vous avez traité des informations d’origine multiple concernant le projet et l’équipe. Interactions variées avec transformation et adaptation de messages',
+      },
+      {
+        id: '3',
+        title:
+          'Multiplicité d’informationsà hiérarchiser et gérer auprès d’interlocuteurs très variés : financeurs, décideurs partenaires etopérationnels. Analyse des interactions etdes actions entre les personnes et',
+      },
+    ],
+  },
+  {
+    title: 'Environnement de travail',
+    logo: Environnement,
+    questions: [
+      {
+        id: '1',
+        title:
+          'Vous avez traité des informations et interactions sur la réalisation et l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle',
+      },
+      {
+        id: '2',
+        title:
+          'Vous avez traité des informations d’origine multiple concernant le projet et l’équipe. Interactions variées avec transformation et adaptation de messages',
+      },
+      {
+        id: '3',
+        title:
+          'Multiplicité d’informationsà hiérarchiser et gérer auprès d’interlocuteurs très variés : financeurs, décideurs partenaires etopérationnels. Analyse des interactions etdes actions entre les personnes et',
+      },
+    ],
+  },
 ];
 
 interface BoxType {
