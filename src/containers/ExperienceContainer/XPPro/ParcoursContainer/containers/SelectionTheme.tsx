@@ -183,7 +183,7 @@ type DomainListProps = {
 
 const DomainList: FunctionComponent<DomainListProps> = ({ data, tags }) => {
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
-  const { setTheme, setStep } = useContext(NewExperienceContext);
+  const { setTheme, setStep, theme } = useContext(NewExperienceContext);
 
   // TODO: pass job object
   const handleSelectJob = (job: Theme) => {

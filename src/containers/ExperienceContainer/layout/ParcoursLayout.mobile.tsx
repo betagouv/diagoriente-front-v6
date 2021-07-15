@@ -8,7 +8,6 @@ import { decodeUri } from 'common/utils/url';
 
 const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
   const { step } = useContext(NewExperienceContext);
-  console.log(step);
   const location = useLocation();
   const params = decodeUri(location.search);
   const renderStep = () => {

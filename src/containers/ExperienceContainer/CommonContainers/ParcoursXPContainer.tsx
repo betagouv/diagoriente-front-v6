@@ -15,6 +15,7 @@ import { decodeUri } from 'common/utils/url';
 
 import SelectionTheme from './SelectionTheme';
 import SelectionThemePro from '../XPPro/ParcoursContainer/containers/SelectionTheme';
+import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
 
 import ChoixActivites from './ChoixActivites';
 import AddActivityDone from './AddActivityDone';
@@ -60,7 +61,7 @@ const ParcoursXPPersoContainer = () => {
     return type;
   };
   useEffect(() => {
-    if (params.type) {
+    if (params.type && params.type !== 'professional') {
       loadThemes({ variables: { domain: renderType() as ThemeDomain } });
     }
   }, [params.type]);
@@ -76,6 +77,8 @@ const ParcoursXPPersoContainer = () => {
     switch (step) {
       case EParcoursStep.THEME:
         return params.type === 'professional' ? <SelectionThemePro /> : <SelectionTheme data={data?.themes.data} />;
+      case EParcoursStep.THEME_DONE:
+        return <DomainSelect />;
       case EParcoursStep.ACTIVITIES:
         return <ChoixActivites />;
       case EParcoursStep.ACTIVITIES_DONE:

@@ -1,4 +1,7 @@
 import React, { FunctionComponent, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { decodeUri } from 'common/utils/url';
+
 import ProgressBar from 'components/design-system/ProgressBar';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import AppHeader from 'layouts/AppHeader';
@@ -8,6 +11,8 @@ import SaveButtonComponent from 'components/design-system/SaveButton';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
+  const location = useLocation();
+  const params = decodeUri(location.search);
 
   const backStep = () => {
     switch (step) {
@@ -26,6 +31,30 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
       default:
     }
   };
+  const path = () => {
+    let text = '';
+    if (params.type) {
+      switch (params.type) {
+        case 'professional': {
+          text = 'professionnelles';
+          break;
+        }
+        case 'personnel': {
+          text = 'personnelles';
+          break;
+        }
+        case 'voluntary': {
+          text = 'bénévolat';
+          break;
+        }
+        default: {
+          text = 'personnelles';
+          break;
+        }
+      }
+    }
+    return text;
+  };
 
   return (
     <div className="min-h-screen h-full flex flex-col">
@@ -42,7 +71,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 >
                   <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
-                    Mes expériences personnelles
+                    Mes expériences {path()}
                   </div>
                 </div>
               </div>
