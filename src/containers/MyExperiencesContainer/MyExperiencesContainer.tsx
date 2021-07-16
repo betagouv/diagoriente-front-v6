@@ -6,8 +6,9 @@ import { ReactComponent as StarSvg } from 'assets/svg/star.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import PrivateBarLayout from 'layouts/PrivateBar';
 
-const ExperienceContainer = () => {
+const MyExperiencesContainer = () => {
   const history = useHistory();
+
   return (
     <div className="min-h-screen h-full flex flex-col">
       <PrivateBarLayout />
@@ -23,7 +24,7 @@ const ExperienceContainer = () => {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <button
-              onClick={() => history.push('/experience/theme?type=professional')}
+              onClick={() => history.push('/mes-experiences/professional')}
               className={`flex flex-col justify-center
               items-center py-8 bg-lena-blue-light2 rounded-md
               cursor-pointer select-none focus:ring-0
@@ -35,7 +36,7 @@ const ExperienceContainer = () => {
               </span>
             </button>
             <button
-              onClick={() => history.push('/experience/theme?type=personal')}
+              onClick={() => history.push('/mes-experiences/personal')}
               className={`flex flex-col justify-center items-center
               py-8 rounded-md cursor-pointer select-none focus:ring-0
               focus:outline-none bg-lena-blue-light2 hover:bg-lena-blue-alt-light`}
@@ -46,7 +47,7 @@ const ExperienceContainer = () => {
               </span>
             </button>
             <button
-              onClick={() => history.push('/experience/theme?type=voluntary')}
+              onClick={() => history.push('/mes-experiences/voluntary')}
               className={`flex flex-col justify-center items-center
               py-8 rounded-md cursor-pointer select-none 
               focus:ring-0 focus:outline-none bg-lena-blue-light2 hover:bg-lena-blue-alt-light`}
@@ -63,4 +64,4 @@ const ExperienceContainer = () => {
   );
 };
 
-export default ExperienceContainer;
+export default MyExperiencesContainer;

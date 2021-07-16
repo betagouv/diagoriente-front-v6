@@ -15,6 +15,7 @@ import ExperienceRoute from './ExperienceContainer/ExperienceRoute';
 import CenterInterestRoute from './CenterInterestContainer/CenterInterestRoute';
 import ProfileRoute from './ProfileContainer/ProfileRoute';
 import TopJobRoute from './TopJobContainer/TopJobRoute';
+import MyExperiencesRoute from './MyExperiencesContainer/MyExperiencesRoute';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -32,6 +33,7 @@ const RootContainer = () => {
           <Route exact path="/inscription" component={RegisterContainer} />
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
           <ProfileRoute path="/profil" />
+          <MyExperiencesRoute path="/mes-experiences" />
           <ExperienceRoute path="/experience" />
           <CenterInterestRoute path="/centres_interet" />
           <Route exact path="/skill_card" component={SkillCardContainer} />
