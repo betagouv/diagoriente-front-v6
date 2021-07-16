@@ -8,13 +8,20 @@ import AppHeader from 'layouts/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import SaveButtonComponent from 'components/design-system/SaveButton';
+import { Activity } from 'common/requests/types';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
-  const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
   const location = useLocation();
   const params = decodeUri(location.search);
+  const theme = localStorage.getItem('theme');
+  const themeData = theme && JSON.parse(theme);
+  const activities = localStorage.getItem('activities');
+  const activityData = activities && JSON.parse(activities);
 
-  const backStep = () => {
+  console.log('theme', themeData);
+  console.log('acts', activityData);
+
+  /*   const backStep = () => {
     switch (step) {
       case 2:
         setStep(EParcoursStep.THEME);
@@ -30,7 +37,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
         break;
       default:
     }
-  };
+  }; */
   const path = () => {
     let text = '';
     if (params.type) {
@@ -61,7 +68,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
       <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative">
-          <ProgressBar value={step} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
+          <ProgressBar value={3} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center">
@@ -76,22 +83,22 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 </div>
               </div>
               <div className="flex flex-col space-y-4">
-                {theme && (
+                {themeData && (
                   <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
-                    {theme.title}
+                    {themeData.title}
                   </div>
                 )}
-                {activities.length > 0 && (
+                {activityData && activityData.activities?.length > 0 && (
                   <div>
                     <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
                     <ul className="list-disc list-inside">
-                      {activities.map((v) => (
+                      {activityData.activities.map((v: Activity) => (
                         <li key={v.id}>{v.title}</li>
                       ))}
                     </ul>
                   </div>
                 )}
-                {competences.length > 0 && (
+                {/* {competences.length > 0 && (
                   <div>
                     <div className="font-bold text-lena-blue-dark">Compétences développées</div>
                     <ul className="list-disc list-inside">
@@ -100,7 +107,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                       ))}
                     </ul>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
             <div className="px-5 bottom-0">
@@ -112,11 +119,11 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
           </div>
         </div>
         <div className="w-full flex flex-col md:relative">
-          {step !== 0 && step !== 3 && step !== 5 && (
+          {/* {step !== 0 && step !== 3 && step !== 5 && (
             <button onClick={backStep} className="pl-10 pt-5 flex items-center cursor-pointer select-none">
               <ArrowLeftSvg /> <span className="ml-2 text-lena-blue-dark">Retour</span>
             </button>
-          )}
+          )} */}
           {children}
         </div>
       </div>

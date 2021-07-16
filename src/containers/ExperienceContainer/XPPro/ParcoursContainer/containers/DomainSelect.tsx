@@ -1,13 +1,29 @@
 import React, { FunctionComponent, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
-import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import { Activity, Theme } from 'common/requests/types';
+import { useLazyTheme } from 'common/requests/themes';
+import { useDidMount } from 'common/hooks/useLifeCycle';
 import ParcoursLayout from '../../../layout/ParcoursLayout';
 
-const DomainSelect: FunctionComponent = () => {
-  const { theme, setStep } = useContext(NewExperienceContext);
+interface Props {
+  theme: Theme;
+}
+
+const DomainSelect = ({ theme }: Props) => {
+  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
+  const history = useHistory();
+
+  useDidMount(() => {
+    if (theme) {
+      themeCall({ variables: { id: theme.id } });
+    }
+  });
 
   const handleNextStep = () => {
-    setStep(EParcoursStep.ACTIVITIES);
+    if (theme) {
+      history.push(`/experience/theme/${theme?.id}/activite`);
+    }
   };
 
   return (
@@ -19,13 +35,13 @@ const DomainSelect: FunctionComponent = () => {
           </div>
           <div className="text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
           <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
-            {theme?.title}
+            {theme.title}
           </div>
-          {theme && theme.activities.length > 0 && (
+          {themeState.data && themeState.data?.theme.activities.length > 0 && (
             <ul className="list-disc list-inside">
-              {theme.activities.map((v, index) => (
+              {themeState.data?.theme.activities.map((v, index) => (
                 // eslint-disable-next-line react/no-array-index-key
-                <li key={index}>{v}</li>
+                <li key={index}>{v.title}</li>
               ))}
             </ul>
           )}

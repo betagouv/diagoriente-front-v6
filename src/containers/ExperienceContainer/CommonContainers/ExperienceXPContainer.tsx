@@ -135,7 +135,6 @@ const ExperienceXPProContainer = () => {
           </h2>
           <div className="mt-4">
             {skillsState.data?.skills.data.map((exp) => {
-              console.log('exp', exp);
               return (
                 <Experience
                   key={exp.id}
@@ -152,7 +151,10 @@ const ExperienceXPProContainer = () => {
               onClick={() => history.push(`/experience/theme/create?type=${path().url}`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
-              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text2 ? path().text2 : path().text}</span>
+              <PlusSvg />{' '}
+              <span className="ml-3 text-lena-blue-dark">
+                Ajouter une expérience {path().text2 ? path().text2 : path().text}
+              </span>
             </button>
           </div>
         </div>
