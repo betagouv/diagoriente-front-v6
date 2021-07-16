@@ -4,8 +4,8 @@ import { ReactComponent as UserSvg } from 'assets/svg/user_profile.svg';
 import ListSvg from 'assets/svg/list.svg';
 import { ReactComponent as ChevronRightSvg } from 'assets/svg/chevron_right.svg';
 import { useHistory } from 'react-router-dom';
+import classNames from 'common/utils/classNames';
 import DomainActivity, { DomainActivityType } from './DomainActivity';
-import classNames from '../../../common/utils/classNames';
 
 const SearchModal = () => {
   return <div>lol</div>;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
-import classNames from '../../../common/utils/classNames';
+import classNames from 'common/utils/classNames';
 
 export type DomainActivityType = {
   id: string;
