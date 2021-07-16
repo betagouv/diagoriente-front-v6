@@ -7,8 +7,13 @@ import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
 
 export const Job = () => {
+  const history = useHistory();
+
   return (
-    <div className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3">
+    <button
+      onClick={() => history.push('/top_metiers/detail/djs54sdf41dsf213')}
+      className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none text-left"
+    >
       <h3 style={{ color: '#424242' }} className="font-bold mb-1">
         Technicien/ne démonstrateur/trice en matériel agricole
       </h3>
@@ -16,7 +21,7 @@ export const Job = () => {
         Qu'il représente une ou plusieurs marques, le technicien démonstrateur en matériel agricole...
       </p>
       <span className="bg-lena-blue-alt-light rounded-full font-bold text-sm py-2 px-3">DEUG, BTS, DUT</span>
-    </div>
+    </button>
   );
 };
 
