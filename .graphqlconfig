@@ -9,6 +9,13 @@
           "user-agent": "JS GraphQL"
         },
         "introspect": true
+      },
+      "projetttv Endpoint": {
+        "url": "https://api-dev-standard.projetttv.org/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
       }
     }
   }

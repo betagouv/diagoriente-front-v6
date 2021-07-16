@@ -8,7 +8,6 @@ type Props = {
 };
 
 const Start = ({ onStep }: Props) => {
-  const history = useHistory();
   return (
     <ParcoursLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14 text-center">

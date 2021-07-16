@@ -10,7 +10,7 @@ const PrivateBarLayout = () => {
     <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-dark py-5">
       <div className="container flex items-center justify-between">
         <span className="uppercase font-bold text-white text-xl">
-          {user?.lastName} {user?.firstName}
+          {user?.firstName} {user?.lastName}
         </span>
         <button className="focus:outline-none focus:ring-0" onClick={() => history.push('/profil/reglages')}>
           <SettingsSvg fill="#fff" height={25} />

@@ -96,7 +96,7 @@ const Tutorial1 = () => {
             }}
           />
           <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d’intérêt est rangée selon un axe regroupant des pôles opposés.
+            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ const Tutorial2 = () => {
             }}
           />
           <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d’intérêt est rangée selon un axe regroupant des pôles opposés.
+            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
           </div>
         </div>
       </div>
@@ -394,11 +394,11 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
           >
             {mediaQueryMD ? (
               <>
-                Faites glisser le curseur le long de l’axe et <br />
-                sélectionnez autant de centres d’intérêts que vous le souhaitez :
+                Faites glisser le curseur le long de l'axe et <br />
+                sélectionnez autant de centres d'intérêts que vous le souhaitez :
               </>
             ) : (
-              <>Faites glisser le curseur et sélectionnez autant de centres d’intérêts que vous le souhaitez :</>
+              <>Faites glisser le curseur et sélectionnez autant de centres d'intérêts que vous le souhaitez :</>
             )}
           </h2>
         </header>

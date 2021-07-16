@@ -36,11 +36,11 @@ const ProfileSettingsContainer = () => {
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Nom</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.firstName}</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.lastName}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Prénom</span>
-              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.lastName}</span>
+              <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.firstName}</span>
             </div>
             <div className="flex border-b border-lena-blue-light pb-3 mb-3">
               <span className="font-bold w-1/2 block flex-shrink-0">Ville</span>

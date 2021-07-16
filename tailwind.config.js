@@ -9,19 +9,18 @@ module.exports = {
     },
     extend: {
       width: {
-        "58p": "58.33333%",
-        "41p": "41.66667%",
+        '58p': '58.33333%',
+        '41p': '41.66667%',
 
-        "69p": "69.33333%",
-        "30p": "30.66667%",
-
+        '69p': '69.33333%',
+        '30p': '30.66667%',
       },
       maxWidth: {
-        "58p": "58.33333%",
-        "41p": "41.66667%",
+        '58p': '58.33333%',
+        '41p': '41.66667%',
 
-        "69p": "69.33333%",
-        "30p": "30.66667%"
+        '69p': '69.33333%',
+        '30p': '30.66667%',
       },
       colors: {
         'lena-lightgray': '#F3F2F4',
@@ -44,18 +43,21 @@ module.exports = {
         'lena-blue': {
           lightest: '#E1E7F6',
           'alt-light': '#C4D2F8',
-          'light2': '#ECE8F0',
+          light2: '#ECE8F0',
           DEFAULT: '#4D6EC5',
-          "alt-dark": "#3C59A7", // used for button
+          'alt-dark': '#3C59A7', // used for button
           dark: '#223A7A',
           darkest: '#011A5E',
           inter: '#A3AFD3',
-          light: '#E1E7F7'
+          light: '#E1E7F7',
         },
         'lena-turquoise': {
           light: '#F1FCFF',
           DEFAULT: '#72D9F1',
           dark: '#00B2DB',
+        },
+        'lena-purple': {
+          light: '#ECE8F0',
         },
       },
     },

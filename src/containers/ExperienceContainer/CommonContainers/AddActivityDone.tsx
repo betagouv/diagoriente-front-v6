@@ -15,7 +15,7 @@ const AddActivityDone: FunctionComponent = () => {
     <ParcoursLayout>
       <div className="bg-lena-blue-darkest flex flex-col flex-1">
         <div className="text-white flex flex-col flex-1 items-center justify-center">
-          <div className="container flex flex-col items-center justify-center space-y-8">
+          <div className="container flex flex-col items-center justify-center space-y-8 my-4">
             {theme?.domain !== 'professional' && <div className="text-2xl font-bold">Merci !</div>}
             <div className="w-full flex justify-center">
               <img src={Illustration} alt="Illustration" />
@@ -44,7 +44,7 @@ const AddActivityDone: FunctionComponent = () => {
               </div>
             )}
             {theme?.domain !== 'professional' ? (
-              <div className="fixed bottom-0 left-0 right-0 md:relative">
+              <div>
                 <button
                   onClick={() => setStep(EParcoursStep.COMPETENCES)}
                   className={`md:px-14 md:rounded-md

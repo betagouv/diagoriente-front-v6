@@ -79,8 +79,11 @@ const ChoixActivites: FunctionComponent = () => {
   };
 
   const handleAddNewActivity = (value: string) => {
-    /* setTodoRenameActivities([...todoRenameActivities, data]);
-    setActivitiesChecked([...activitiesChecked, data]); */
+    // TODO find a new logic for this ...
+    const newId = uniqueId('local-');
+    const data = { id: newId, title: value, description: '', extra: true };
+    setTodoRenameActivities([...todoRenameActivities, data]);
+    setActivitiesChecked([...activitiesChecked, data]);
   };
 
   const handleValidateActivites = () => {
