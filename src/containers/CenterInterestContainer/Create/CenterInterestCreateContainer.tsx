@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useMediaQuery from "hooks/useMediaQuery";
+import useMediaQuery from 'hooks/useMediaQuery';
 import Start from './containers/Start';
 import SelectFamily from './containers/SelectFamily';
 import SelectInterest from './containers/SelectInterest';

@@ -6,8 +6,8 @@ import { ReactComponent as CheckSvg } from 'assets/svg/check_blue.svg';
 import CollectifSvg from 'assets/svg/collectif.svg';
 import IndividuelSvg from 'assets/svg/individuel.svg';
 import classNames from 'common/utils/classNames';
-import useMediaQuery from "hooks/useMediaQuery";
-import ParcoursLayout from "../layout/ParcoursLayout";
+import useMediaQuery from 'hooks/useMediaQuery';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type Props = {
   onStep: () => void;
@@ -17,20 +17,20 @@ const SelectFamily = ({ onStep }: Props) => {
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
 
-  const family = (left: string, right: string, imgLeft: any, imgRight: any, active?: boolean,) => {
+  const family = (left: string, right: string, imgLeft: any, imgRight: any, active?: boolean) => {
     return (
       <button onClick={() => onStep.call(null)} className="focus:ring-0 focus:outline-none w-full">
-        <li className={
-          classNames(
-            "flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 border-transparent relative",
-            "hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30",
-            active ? "bg-lena-yellow-light border-lena-yellow" : "bg-lena-gray-light-2"
-          )
-        }>
+        <li
+          className={classNames(
+            'flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 border-transparent relative',
+            'hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30',
+            active ? 'bg-lena-yellow-light border-lena-yellow' : 'bg-lena-gray-light-2',
+          )}
+        >
           <img src={imgLeft} alt="Svg" />
           <span className="text-lena-blue-dark">
-              {left} / {right}
-            </span>
+            {left} / {right}
+          </span>
           <img src={imgRight} alt="Svg" />
           {active && (
             <div className="absolute -right-2 -top-2">
@@ -45,16 +45,8 @@ const SelectFamily = ({ onStep }: Props) => {
   return (
     <ParcoursLayout>
       <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-14">
-        <div className={
-          classNames(
-
-          )
-        }>
-          <div className={
-            classNames(
-              !mediaQueryMD ? "hidden" : "xl:w-3/4 w-full mx-auto"
-            )
-          }>
+        <div className={classNames()}>
+          <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
             <p className="text-lena-blue-dark mb-5">
               Pour votre futur métier, vous êtes peut-être intéressé.e par des choses que vous avez déjà faites ou des
               choses nouvelles, des choses très précises ou très générales...
@@ -66,22 +58,12 @@ const SelectFamily = ({ onStep }: Props) => {
               Pour commencer, cliquez sur une famille pour sélectionner les centres d’intérêts associés :
             </p>
           </div>
-          <p className={
-            classNames(
-              "text-lena-blue-dark mt-5",
-              mediaQueryMD && "hidden"
-            )
-          }>
+          <p className={classNames('text-lena-blue-dark mt-5', mediaQueryMD && 'hidden')}>
             Cliquez sur une famille pour sélectionner les centres d’intérêts associés :
           </p>
         </div>
         <div className="w-full px-5">
-          <ul className={
-            classNames(
-              "space-y-2",
-              mediaQueryMD && "xl:w-1/2 w-full mx-auto"
-            )
-          }>
+          <ul className={classNames('space-y-2', mediaQueryMD && 'xl:w-1/2 w-full mx-auto')}>
             {family('Collectif', 'Individuel', CollectifSvg, IndividuelSvg, true)}
             {family('Liberté', 'Cadre', CollectifSvg, IndividuelSvg)}
           </ul>

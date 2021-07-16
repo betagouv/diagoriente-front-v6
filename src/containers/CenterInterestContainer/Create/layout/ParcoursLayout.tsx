@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import useMediaQuery from "hooks/useMediaQuery";
+import useMediaQuery from 'hooks/useMediaQuery';
 import ParcoursLayoutForMobile from './ParcoursLayout.mobile';
-import ParcoursLayoutForDesktop from "./ParcoursLayout.desktop";
+import ParcoursLayoutForDesktop from './ParcoursLayout.desktop';
 
 type Props = {
   withRange?: boolean;
@@ -15,7 +15,9 @@ const ParcoursLayout: FunctionComponent<Props> = ({ withRange, withMobile = true
   return isDesktop ? (
     <ParcoursLayoutForDesktop>{children}</ParcoursLayoutForDesktop>
   ) : withMobile ? (
-    <ParcoursLayoutForMobile backgroundColor={backgroundColor} withRange={withRange}>{children}</ParcoursLayoutForMobile>
+    <ParcoursLayoutForMobile backgroundColor={backgroundColor} withRange={withRange}>
+      {children}
+    </ParcoursLayoutForMobile>
   ) : (
     <div>{children}</div>
   );

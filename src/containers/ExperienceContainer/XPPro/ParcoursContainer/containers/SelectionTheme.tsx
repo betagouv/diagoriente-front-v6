@@ -258,9 +258,12 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
 
   const handleThemes = (title: string) => {
     setText(title);
-    getThemes({ variables: { domain: 'professional', title } });
-    getTags({ variables: { title } });
   };
+
+  useEffect(() => {
+    getThemes({ variables: { domain: 'professional', title: text } });
+    getTags({ variables: { title: text } });
+  }, [text]);
 
   return !showSearch ? (
     <ParcoursLayout>

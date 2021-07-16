@@ -1,16 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3fafa74-4980-4a68-9bb3-9c112d469ece" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterest/Create/containers/SelectFamily.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterest/Create/containers/SelectFamily.tsx" afterDir="false" />
+    <list default="true" id="2485ddac-971f-43ae-b3ab-dc8a0b842e13" name="Default Changelist" comment="wip : centers interest">
+      <change afterPath="$PROJECT_DIR$/src/containers/TopJobContainer/containers/DomainActivity.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/TopJobContainer/containers/ListJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_07_2021_10_47__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_15_07_2021_10_47__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common" beforeDir="false" afterPath="$PROJECT_DIR$/src/common" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/container/auth/useLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/container/auth/useLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/container/auth/useRegister.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/container/auth/useRegister.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/contexts/DrawerContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/contexts/DrawerContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/contexts/SnackbarContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/contexts/SnackbarContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/contexts/UserContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/contexts/UserContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/apollo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useCaptureRef.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useCaptureRef.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useEvent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useEvent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useInputs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useInputs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useLifeCycle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useLifeCycle.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useListener.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useListener.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useOnclickOutside.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useOnclickOutside.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/usePosthog.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/usePosthog.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useRoot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useRoot.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/hooks/useSnackBar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/hooks/useSnackBar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/activities.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/activities.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/competences.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/competences.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/location.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/location.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/reference.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/reference.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/references.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/references.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/scopeLogin.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/scopeLogin.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/sector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/sector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/skills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/skills.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/tags.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/tags.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/themes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/themes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/requests/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/requests/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/NameFormator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/NameFormator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/classNames.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/classNames.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/copyText.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/copyText.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/csv.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/csv.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/fileReader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/fileReader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/generic.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/generic.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/graphql.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/graphql.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/startup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/startup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/url.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/url.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/utils/validation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/utils/validation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Register/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Register/Input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/design-system/DatePicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/design-system/DatePicker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/CenterInterestContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/CenterInterestContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/CenterInterestRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/CenterInterestRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/CenterInterestCreateContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/CenterInterestCreateContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/SelectFamily.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/SelectFamily.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/SelectInterest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/SelectInterest.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/Start.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/containers/Start.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.desktop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.desktop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.mobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.mobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/CenterInterestContainer/Create/layout/ParcoursLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/AddActivityDone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/AddActivityDone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/AddExperienceDone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/AddExperienceDone.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ChoixActivites.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ChoixActivites.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/DateContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/DateContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ExperienceXPContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ExperienceXPContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/Modals/CompetenceValues.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/Modals/CompetenceValues.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/Modals/InfoQuestionnaire.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/Modals/InfoQuestionnaire.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ParcoursXPContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/ParcoursXPContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/QuestionsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/QuestionsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/SelectionCompetence.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/SelectionCompetence.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/SelectionTheme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/CommonContainers/SelectionTheme.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/ExperienceContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/ExperienceContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/ExperienceRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/ExperienceRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/XPPro/ParcoursContainer/containers/DomainSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/XPPro/ParcoursContainer/containers/DomainSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/XPPro/ParcoursContainer/containers/SelectionTheme.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/XPPro/ParcoursContainer/containers/SelectionTheme.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/layout/ParcoursLayout.desktop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/layout/ParcoursLayout.desktop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ExperienceContainer/layout/ParcoursLayout.mobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ExperienceContainer/layout/ParcoursLayout.mobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/HomeContainer/HomeContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/HomeContainer/HomeContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/OnBoardingContainer/OnBoardingContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/OnBoardingContainer/OnBoardingContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ProfileContainer/ProfileContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ProfileContainer/ProfileContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/ProfileContainer/Settings/containers/EditInfoContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ProfileContainer/Settings/containers/EditInfoContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ProfileContainer/Settings/containers/EditLogin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ProfileContainer/Settings/containers/EditLogin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/RegisterContainer/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RegisterContainer/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/RootContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RootContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/SkillCard/SkillCardContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/SkillCard/SkillCardContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/SkillCard/SkillCardExport.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/SkillCard/SkillCardExport.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/TopJobContainer/TopJobContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/TopJobContainer/TopJobContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/TopJobContainer/TopJobRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/TopJobContainer/TopJobRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/TopJobContainer/containers/SearchJob.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/TopJobContainer/containers/SearchJob.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/contexts/NewExperienceContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/NewExperienceContext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/staticMonths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/staticMonths.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,10 +97,42 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/src/common" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/src/common" source="develop" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$/src/common" value="398c8c30b2b5b3d8c9ed39da14a2d8313f0397da" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="ProjectId" id="1vGKVGR5BstQdrmDaX2tQ6NHuIi" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1uZmfgVJCJzL3yNuptOCi2OcEhz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -30,29 +141,357 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="js.linters.configure.manually.selectedeslint" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../rectec/rectec" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
+    <property name="ts.external.directory.path" value="D:\Id6\Diago\diagoriente-front-standard\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Id6\Diago\diagoriente-front-standard\src\containers\CenterInterest\Create" />
+      <recent name="D:\Id6\Diago\diagoriente-front-standard\src\containers\ExperienceContainer\XP\ParcoursContainer" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d3fafa74-4980-4a68-9bb3-9c112d469ece" name="Default Changelist" comment="" />
-      <created>1626183007733</created>
+      <changelist id="2485ddac-971f-43ae-b3ab-dc8a0b842e13" name="Default Changelist" comment="" />
+      <created>1624881589993</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1626183007733</updated>
-      <workItem from="1626183011752" duration="62000" />
-      <workItem from="1626183076912" duration="117000" />
-      <workItem from="1626183205935" duration="648000" />
-      <workItem from="1626333575848" duration="3924000" />
-      <workItem from="1626343380937" duration="576000" />
+      <updated>1624881589993</updated>
+      <workItem from="1624881591874" duration="1097000" />
+      <workItem from="1624884748745" duration="5691000" />
+      <workItem from="1624949983422" duration="1220000" />
+      <workItem from="1624953924864" duration="14544000" />
+      <workItem from="1625036445943" duration="1265000" />
+      <workItem from="1625045295694" duration="10000" />
+      <workItem from="1625046649271" duration="13807000" />
+      <workItem from="1625125156215" duration="45000" />
+      <workItem from="1625137711086" duration="12374000" />
+      <workItem from="1625209980717" duration="14823000" />
+      <workItem from="1625468709474" duration="20639000" />
+      <workItem from="1625554781528" duration="16063000" />
+      <workItem from="1625641250567" duration="15134000" />
+      <workItem from="1625727418309" duration="14307000" />
+      <workItem from="1625816094472" duration="4059000" />
+      <workItem from="1625829784734" duration="1962000" />
     </task>
+    <task id="LOCAL-00001" summary="fix axe situating">
+      <created>1624950341565</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624950341565</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix skill card">
+      <created>1624955477942</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1624955477942</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix onboarding">
+      <created>1624966927741</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624966927741</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refactor &amp; change republique logo">
+      <created>1624968020365</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624968020365</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add experience containers">
+      <created>1624973755198</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1624973755198</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix experience container">
+      <created>1624974044181</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1624974044181</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix selection theme">
+      <created>1624974833203</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1624974833203</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix button &amp; path">
+      <created>1624975150698</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1624975150698</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix overflow">
+      <created>1624976049061</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1624976049061</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix parcours layout desktop">
+      <created>1625036561298</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625036561298</updated>
+    </task>
+    <task id="LOCAL-00011" summary="wip : add hook themes and fix selection theme">
+      <created>1625058518237</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1625058518237</updated>
+    </task>
+    <task id="LOCAL-00012" summary="wip : add hook themes">
+      <created>1625059381404</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1625059381404</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix">
+      <created>1625060066798</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1625060066798</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix">
+      <created>1625061767941</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1625061767941</updated>
+    </task>
+    <task id="LOCAL-00015" summary="wip : add experience perso">
+      <created>1625147896515</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1625147896515</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix link">
+      <created>1625147954299</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1625147954299</updated>
+    </task>
+    <task id="LOCAL-00017" summary="wip : experience perso">
+      <created>1625152052254</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1625152052254</updated>
+    </task>
+    <task id="LOCAL-00018" summary="wip : test tooltip">
+      <created>1625211812405</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1625211812405</updated>
+    </task>
+    <task id="LOCAL-00019" summary="wip : test tooltip">
+      <created>1625211826957</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1625211826957</updated>
+    </task>
+    <task id="LOCAL-00020" summary="wip : fix tooltip">
+      <created>1625212949820</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1625212949820</updated>
+    </task>
+    <task id="LOCAL-00021" summary="wip : fix tooltip">
+      <created>1625213011666</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1625213011666</updated>
+    </task>
+    <task id="LOCAL-00022" summary="wip : fix tooltip">
+      <created>1625213852580</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1625213852580</updated>
+    </task>
+    <task id="LOCAL-00023" summary="parcours perso">
+      <created>1625215653837</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1625215653837</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix parcours perso mobile">
+      <created>1625215812251</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1625215812251</updated>
+    </task>
+    <task id="LOCAL-00025" summary="edit parcours layout">
+      <created>1625216389235</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1625216389235</updated>
+    </task>
+    <task id="LOCAL-00026" summary="add svg">
+      <created>1625216594765</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1625216594765</updated>
+    </task>
+    <task id="LOCAL-00027" summary="some change">
+      <created>1625220002030</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1625220002030</updated>
+    </task>
+    <task id="LOCAL-00028" summary="some change">
+      <created>1625225320393</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1625225320393</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fix selection theme">
+      <created>1625472643113</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1625472643113</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fix selection theme">
+      <created>1625472656891</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1625472656891</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix save button">
+      <created>1625475170371</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1625475170371</updated>
+    </task>
+    <task id="LOCAL-00032" summary="some change">
+      <created>1625495984041</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1625495984041</updated>
+    </task>
+    <task id="LOCAL-00033" summary="some change">
+      <created>1625496176028</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1625496176028</updated>
+    </task>
+    <task id="LOCAL-00034" summary="edit margin">
+      <created>1625496218581</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1625496218581</updated>
+    </task>
+    <task id="LOCAL-00035" summary="some edit">
+      <created>1625556540980</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1625556540980</updated>
+    </task>
+    <task id="LOCAL-00036" summary="some edit">
+      <created>1625559302049</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1625559302049</updated>
+    </task>
+    <task id="LOCAL-00037" summary="some edit">
+      <created>1625559934294</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1625559934294</updated>
+    </task>
+    <task id="LOCAL-00038" summary="WIP : centers interest">
+      <created>1625660934268</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1625660934268</updated>
+    </task>
+    <task id="LOCAL-00039" summary="fix slider">
+      <created>1625667869621</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1625667869621</updated>
+    </task>
+    <task id="LOCAL-00040" summary="fix slider">
+      <created>1625668187780</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1625668187780</updated>
+    </task>
+    <task id="LOCAL-00041" summary="fix responsive slider">
+      <created>1625668619868</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1625668619868</updated>
+    </task>
+    <task id="LOCAL-00042" summary="fix responsive slider">
+      <created>1625669454549</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1625669454549</updated>
+    </task>
+    <task id="LOCAL-00043" summary="wip : centers interest">
+      <created>1625749405204</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1625749405204</updated>
+    </task>
+    <task id="LOCAL-00044" summary="wip : centers interest">
+      <created>1625752517332</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1625752517332</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -69,5 +508,37 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix overflow" />
+    <MESSAGE value="fix parcours layout desktop" />
+    <MESSAGE value="wip : add hook themes and fix selection theme" />
+    <MESSAGE value="wip : add hook themes" />
+    <MESSAGE value="wip : test tags" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="Fix ESLint" />
+    <MESSAGE value="wip : add experience perso" />
+    <MESSAGE value="fix link" />
+    <MESSAGE value="wip : experience perso" />
+    <MESSAGE value="wip : test tooltip" />
+    <MESSAGE value="wip : fix tooltip" />
+    <MESSAGE value="parcours perso" />
+    <MESSAGE value="fix parcours perso mobile" />
+    <MESSAGE value="edit parcours layout" />
+    <MESSAGE value="add svg" />
+    <MESSAGE value="fix selection theme" />
+    <MESSAGE value="fix save button" />
+    <MESSAGE value="some change" />
+    <MESSAGE value="edit margin" />
+    <MESSAGE value="some edit" />
+    <MESSAGE value="WIP : centers interest" />
+    <MESSAGE value="fix slider" />
+    <MESSAGE value="fix responsive slider" />
+    <MESSAGE value="wip : centers interest" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip : centers interest" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
