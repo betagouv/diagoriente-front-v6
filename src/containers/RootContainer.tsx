@@ -14,7 +14,7 @@ import SkillCardContainer from './SkillCard';
 import ExperienceRoute from './ExperienceContainer/ExperienceRoute';
 import CenterInterestRoute from './CenterInterestContainer/CenterInterestRoute';
 import ProfileRoute from './ProfileContainer/ProfileRoute';
-import TopJobRoute from "./TopJobContainer/TopJobRoute";
+import TopJobRoute from './TopJobContainer/TopJobRoute';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
