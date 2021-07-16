@@ -110,7 +110,7 @@ const AboutJob = () => {
         <div className="mt-8">
           <ul className="text-lena-dark">
             <li>
-              - Contrat le plus empluté : <strong>CDI</strong>
+              - Contrat le plus employé : <strong>CDI</strong>
             </li>
             <li>- Répartition par type de contrat :</li>
           </ul>
