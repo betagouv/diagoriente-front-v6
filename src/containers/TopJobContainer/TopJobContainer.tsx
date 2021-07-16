@@ -12,7 +12,7 @@ export const Job = () => {
   return (
     <button
       onClick={() => history.push('/top_metiers/detail/djs54sdf41dsf213')}
-      className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none"
+      className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none text-left"
     >
       <h3 style={{ color: '#424242' }} className="font-bold mb-1">
         Technicien/ne démonstrateur/trice en matériel agricole
