@@ -110,11 +110,11 @@ const RegisterForm: FunctionComponent = () => {
           <FormControl>
             <FormLabel />
             <FormComment>
-              <div>
+              <div className="text-sm">
                 Votre mot de passe doit comporter{' '}
                 <span
                   className={classNames(
-                    formik.values.password.length >= 6 ? 'text-lena-blue' : 'text-lena-pink',
+                    formik.touched.password && formik.values.password.length >= 6 && 'text-lena-turquoise-dark',
                     'font-bold',
                   )}
                 >
@@ -122,10 +122,10 @@ const RegisterForm: FunctionComponent = () => {
                 </span>
                 , dont :
               </div>
-              <ul className="list-disc ml-4 mt-1">
+              <ul className="list-disc ml-4 mt-1 text-sm">
                 <li
                   className={classNames(
-                    hasUppercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    formik.touched.password && hasUppercase(formik.values.password) && 'text-lena-turquoise-dark',
                     'font-bold',
                   )}
                 >
@@ -133,7 +133,7 @@ const RegisterForm: FunctionComponent = () => {
                 </li>
                 <li
                   className={classNames(
-                    hasLowercase(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    formik.touched.password && hasLowercase(formik.values.password) && 'text-lena-turquoise-dark',
                     'font-bold',
                   )}
                 >
@@ -141,7 +141,7 @@ const RegisterForm: FunctionComponent = () => {
                 </li>
                 <li
                   className={classNames(
-                    hasNumber(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    formik.touched.password && hasNumber(formik.values.password) && 'text-lena-turquoise-dark',
                     'font-bold',
                   )}
                 >
@@ -149,7 +149,7 @@ const RegisterForm: FunctionComponent = () => {
                 </li>
                 <li
                   className={classNames(
-                    hasSpecial(formik.values.password) ? 'text-lena-blue' : 'text-lena-pink',
+                    formik.touched.password && hasSpecial(formik.values.password) && 'text-lena-turquoise-dark',
                     'font-bold',
                   )}
                 >

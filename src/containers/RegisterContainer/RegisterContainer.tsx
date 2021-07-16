@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroRegister from 'assets/illu/hero-register.png';
-import BgRegister from 'assets/images/bg/bg-register.png';
+import BgRegister from 'assets/images/bg/bg-register.jpg';
 import AppHeader from 'layouts/AppHeader';
 import RegisterForm from './RegisterForm';
 

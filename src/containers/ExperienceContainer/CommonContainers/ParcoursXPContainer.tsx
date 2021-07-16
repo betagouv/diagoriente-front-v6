@@ -24,7 +24,7 @@ import DateContainer from './DateContainer';
 
 import AddExperienceDone from './AddExperienceDone';
 
-const ParcoursXPPersoContainer = () => {
+const ParcoursXPContainer = () => {
   const location = useLocation();
   const params = decodeUri(location.search);
   const { step: parcoursStep } = useContext(NewExperienceContext);
@@ -34,32 +34,29 @@ const ParcoursXPPersoContainer = () => {
   const [activities, setActivities] = useState<LocalParcoursActivity[]>([]);
   const [competences, setCompetences] = useState<LocalParcoursCompetence[]>([]);
   const [competencesValues, setCompetencesValues] = useState<LocalParcoursCompetenceValues[]>([]);
-
   const [loadThemes, { data }] = useLazyThemes({ fetchPolicy: 'network-only' });
+
   const renderType = () => {
     let type = '';
     if (params.type) {
       switch (params.type) {
-        case 'professional': {
+        case 'professional':
           type = 'professional';
           break;
-        }
-        case 'personal': {
+        case 'personal':
           type = 'personal';
           break;
-        }
-        case 'voluntary': {
+        case 'voluntary':
           type = 'voluntary';
           break;
-        }
-        default: {
+        default:
           type = 'personal';
           break;
-        }
       }
     }
     return type;
   };
+
   useEffect(() => {
     if (params.type && params.type !== 'professional') {
       loadThemes({ variables: { domain: renderType() as ThemeDomain } });
@@ -115,4 +112,4 @@ const ParcoursXPPersoContainer = () => {
   );
 };
 
-export default ParcoursXPPersoContainer;
+export default ParcoursXPContainer;

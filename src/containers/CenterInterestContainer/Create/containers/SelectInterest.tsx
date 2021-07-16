@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as HelpSvg } from 'assets/svg/help_yellow.svg';
 import { ReactComponent as ArrowSvg } from 'assets/images/svg/picto/arrow-left.svg';
@@ -9,13 +9,13 @@ import { ReactComponent as StepActiveSvg } from 'assets/svg/step_active.svg';
 import CollectifSvg from 'assets/svg/collectif.svg';
 import IndividuelSvg from 'assets/svg/individuel.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
-import useWindowSize from "hooks/useWindowSize";
-import classNames from "common/utils/classNames";
-import useMediaQuery from "hooks/useMediaQuery";
-import Flicking, { ERROR_CODE, FlickingError } from "@egjs/react-flicking";
-import { Fade } from "@egjs/flicking-plugins";
-import "@egjs/flicking-plugins/dist/arrow.css";
-import ParcoursLayout from "../layout/ParcoursLayout";
+import useWindowSize from 'hooks/useWindowSize';
+import classNames from 'common/utils/classNames';
+import useMediaQuery from 'hooks/useMediaQuery';
+import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
+import { Fade } from '@egjs/flicking-plugins';
+import '@egjs/flicking-plugins/dist/arrow.css';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type InterestContent = {
   id: string;
@@ -72,8 +72,7 @@ const Interest = ({ position, content }: InterestProps) => {
                   {v.description}
                 </SelectorTest>
               </div>
-            ))
-          }
+            ))}
         </div>
       </div>
     </div>
@@ -97,7 +96,7 @@ const Tutorial1 = () => {
             }}
           />
           <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d’intérêt est rangée selon un axe regroupant des pôles opposés.
+            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
           </div>
         </div>
       </div>
@@ -125,7 +124,7 @@ const Tutorial2 = () => {
             }}
           />
           <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d’intérêt est rangée selon un axe regroupant des pôles opposés.
+            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
           </div>
         </div>
       </div>
@@ -210,11 +209,7 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
   };
 
   return (
-
-    <div
-      className="mt-10 bg-white rounded-lg"
-      style={{ filter: 'drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.15))' }}
-    >
+    <div className="mt-10 bg-white rounded-lg" style={{ filter: 'drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.15))' }}>
       <div style={{ zIndex: 100 }} className="absolute -top-7 flex justify-between w-full">
         {renderPolygone()}
       </div>
@@ -224,8 +219,7 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
             <div key={v.id} className="bg-lena-yellow-light text-center py-5 px-5 rounded-md cursor-pointer">
               {v.description}
             </div>
-          ))
-        }
+          ))}
 
         <div className="bg-lena-yellow text-center py-5 px-5 rounded-md cursor-pointer border-2 border-lena-yellow-dark">
           selected
@@ -248,103 +242,103 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
   const mediaQueryMD = useMediaQuery('md');
-  const plugins: any = [new Fade("", 0.7)];
+  const plugins: any = [new Fade('', 0.7)];
   const flickingRef = useRef<any>();
   const [flickingDisabled, setFlickingDisabled] = useState(false);
 
   const fakeData1: Array<InterestContent> = [
     {
-      id: "a",
-      description: "test 1"
+      id: 'a',
+      description: 'test 1',
     },
     {
-      id: "b",
-      description: "test 2"
+      id: 'b',
+      description: 'test 2',
     },
     {
-      id: "c",
-      description: "test 3"
+      id: 'c',
+      description: 'test 3',
     },
     {
-      id: "d",
-      description: "test 4"
-    }
+      id: 'd',
+      description: 'test 4',
+    },
   ];
   const fakeData2: Array<InterestContent> = [
     {
-      id: "e",
-      description: "test 1"
+      id: 'e',
+      description: 'test 1',
     },
     {
-      id: "f",
-      description: "test 2"
+      id: 'f',
+      description: 'test 2',
     },
     {
-      id: "g",
-      description: "test 3"
+      id: 'g',
+      description: 'test 3',
     },
     {
-      id: "h",
-      description: "test 4"
-    }
+      id: 'h',
+      description: 'test 4',
+    },
   ];
   const fakeData3: Array<InterestContent> = [
     {
-      id: "i",
-      description: "test 1"
+      id: 'i',
+      description: 'test 1',
     },
     {
-      id: "j",
-      description: "test 2"
+      id: 'j',
+      description: 'test 2',
     },
     {
-      id: "k",
-      description: "test 3"
+      id: 'k',
+      description: 'test 3',
     },
     {
-      id: "l",
-      description: "test 4"
-    }
+      id: 'l',
+      description: 'test 4',
+    },
   ];
   const fakeData4: Array<InterestContent> = [
     {
-      id: "m",
-      description: "test 1"
+      id: 'm',
+      description: 'test 1',
     },
     {
-      id: "n",
-      description: "test 2"
+      id: 'n',
+      description: 'test 2',
     },
     {
-      id: "o",
-      description: "test 3"
+      id: 'o',
+      description: 'test 3',
     },
     {
-      id: "p",
-      description: "test 4"
-    }
+      id: 'p',
+      description: 'test 4',
+    },
   ];
   const fakeData5: Array<InterestContent> = [
     {
-      id: "q",
-      description: "test 1"
+      id: 'q',
+      description: 'test 1',
     },
     {
-      id: "r",
-      description: "test 2"
+      id: 'r',
+      description: 'test 2',
     },
     {
-      id: "s",
-      description: "test 3"
+      id: 's',
+      description: 'test 3',
     },
     {
-      id: "t",
-      description: "test 4"
-    }
+      id: 't',
+      description: 'test 4',
+    },
   ];
 
   const handleChange = async (e: any) => {
-    if(!flickingDisabled) {
+    if (!flickingDisabled) {
       setRangeValue(e);
     }
     if (mediaQueryMD) {
@@ -354,9 +348,9 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
       } catch (err) {
         if (err instanceof FlickingError) {
           if (err.code === ERROR_CODE.ANIMATION_ALREADY_PLAYING) {
-            console.error("Animation is already playing!");
+            console.error('Animation is already playing!');
           } else if (err.code === ERROR_CODE.ANIMATION_INTERRUPTED) {
-            console.error("Animation is interrupted by user.");
+            console.error('Animation is interrupted by user.');
           }
         }
       }
@@ -377,7 +371,6 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
         className="flex flex-col flex-1 min-h-screen h-full flex flex-col overflow-x-hidden"
         style={{ backgroundColor: mediaQueryMD ? '#fff' : '#e5e5e5' }}
       >
-
         <header style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-white pt-2">
           <div className="flex justify-between items-center container">
             <button
@@ -393,34 +386,32 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
               </button>
             )}
           </div>
-          <h2 className={
-            classNames(
-              "text-lena-blue-dark text-center text-sm px-7 mx-auto py-3",
-              !mediaQueryMD ? "font-bold" : "text-md pb-5"
-            )
-          }>
+          <h2
+            className={classNames(
+              'text-lena-blue-dark text-center text-sm px-7 mx-auto py-3',
+              !mediaQueryMD ? 'font-bold' : 'text-md pb-5',
+            )}
+          >
             {mediaQueryMD ? (
-              <>Faites glisser le curseur le long de l’axe et <br/>sélectionnez autant de centres d’intérêts que vous le souhaitez :</>
+              <>
+                Faites glisser le curseur le long de l'axe et <br />
+                sélectionnez autant de centres d'intérêts que vous le souhaitez :
+              </>
             ) : (
-              <>Faites glisser le curseur et sélectionnez autant de centres d’intérêts que vous le souhaitez :</>
+              <>Faites glisser le curseur et sélectionnez autant de centres d'intérêts que vous le souhaitez :</>
             )}
           </h2>
         </header>
 
-        <div className={classNames(
-          "container",
-          mediaQueryMD ? "bg-lena-gray-light-2 py-14" : "mt-4"
-        )}>
+        <div className={classNames('container', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'mt-4')}>
           <div className="relative">
             <div className="flex items-center flex-col w-full">
               <div
                 style={{ width: mediaQueryMD ? 'calc(80% + 110px)' : 'calc(80% + 60px)' }}
-                className={
-                  classNames(
-                    "flex justify-between text-center text-lena-blue-dark mx-4 relative",
-                    mediaQueryMD && "mb-3"
-                  )
-                }
+                className={classNames(
+                  'flex justify-between text-center text-lena-blue-dark mx-4 relative',
+                  mediaQueryMD && 'mb-3',
+                )}
               >
                 <span className="flex flex-col items-center">
                   <img className="mb-1" src={CollectifSvg} alt="Svg" />
@@ -467,12 +458,7 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
             </div>
           </div>
           <div
-            className={
-              classNames(
-                mediaQueryMD && 'hidden',
-                'relative'
-              )
-            }
+            className={classNames(mediaQueryMD && 'hidden', 'relative')}
             style={{
               transform: `translate(-${translate}px, 0px)`,
             }}
@@ -483,12 +469,14 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
             <Interest content={fakeData4} position={3} />
             <Interest content={fakeData5} position={4} />
           </div>
-          <div className={
-            classNames(
-              !mediaQueryMD && 'hidden'
-            )
-          }>
-            <Flicking circularEnabled={false} onMoveEnd={() => setFlickingDisabled(false)} ref={flickingRef} horizontal={true} plugins={plugins}>
+          <div className={classNames(!mediaQueryMD && 'hidden')}>
+            <Flicking
+              circularEnabled={false}
+              onMoveEnd={() => setFlickingDisabled(false)}
+              ref={flickingRef}
+              horizontal={true}
+              plugins={plugins}
+            >
               <div className="relative flickingDiv">
                 <InterestDesktop content={fakeData1} position={0} />
               </div>

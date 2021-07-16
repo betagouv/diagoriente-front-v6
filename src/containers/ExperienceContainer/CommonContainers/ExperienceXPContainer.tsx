@@ -152,7 +152,10 @@ const ExperienceXPProContainer = () => {
               onClick={() => history.push(`/experience/theme/create?type=${path().url}`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
-              <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().text2 ? path().text2 : path().text}</span>
+              <PlusSvg />{' '}
+              <span className="ml-3 text-lena-blue-dark">
+                Ajouter une expérience {path().text2 ? path().text2 : path().text}
+              </span>
             </button>
           </div>
         </div>
