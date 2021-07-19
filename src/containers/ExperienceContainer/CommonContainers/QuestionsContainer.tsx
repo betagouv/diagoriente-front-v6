@@ -26,13 +26,13 @@ const types = [
       { id: '1', title: 'Vous avez réalisé en toute autonomie l’activité confiée' },
       {
         id: '2',
-        title:
-          'Vous avez réalisé en toute autonomie l’activité confiée en vous adaptant à la diversité des situations rencontrées',
+        title: `Vous avez réalisé en toute autonomie l’activité
+          confiée en vous adaptant à la diversité des situations rencontrées`,
       },
       {
         id: '3',
-        title:
-          'Vous avez coordonné et évalué au sein d’une équipe pour mettre en oeuvre la vision stratégique de l’institution ou l’entreprise',
+        title: `Vous avez coordonné et évalué au sein d’une équipe
+          pour mettre en oeuvre la vision stratégique de l’institution ou l’entreprise`,
       },
     ],
   },
@@ -42,18 +42,19 @@ const types = [
     questions: [
       {
         id: '1',
-        title:
-          'Vous avez traité des informations et interactions sur la réalisation et l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle',
+        title: `Vous avez traité des informations et interactions
+          sur la réalisation et l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle`,
       },
       {
         id: '2',
-        title:
-          'Vous avez traité des informations d’origine multiple concernant le projet et l’équipe. Interactions variées avec transformation et adaptation de messages',
+        title: `Vous avez traité des informations d’origine multiple
+          concernant le projet et l’équipe. Interactions variées avec transformation et adaptation de messages`,
       },
       {
         id: '3',
-        title:
-          'Multiplicité d’informationsà hiérarchiser et gérer auprès d’interlocuteurs très variés : financeurs, décideurs partenaires etopérationnels. Analyse des interactions etdes actions entre les personnes et',
+        title: `Multiplicité d’informationsà hiérarchiser et gérer auprès d’interlocuteurs très variés : financeurs,
+        décideurs partenaires et opérationnels.
+          Analyse des interactions etdes actions entre les personnes et`,
       },
     ],
   },
@@ -63,18 +64,19 @@ const types = [
     questions: [
       {
         id: '1',
-        title:
-          'Vous avez traité des informations et interactions sur la réalisation et l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle',
+        title: `Vous avez traité des informations et interactions sur la réalisation et
+          l’évaluation de l’activité, incluant clients / fournis-eurs / instances de contrôle`,
       },
       {
         id: '2',
-        title:
-          'Vous avez traité des informations d’origine multiple concernant le projet et l’équipe. Interactions variées avec transformation et adaptation de messages',
+        title: `Vous avez traité des informations d’origine multiple concernant le projet et l’équipe.
+          Interactions variées avec transformation et adaptation de messages`,
       },
       {
         id: '3',
-        title:
-          'Multiplicité d’informationsà hiérarchiser et gérer auprès d’interlocuteurs très variés : financeurs, décideurs partenaires etopérationnels. Analyse des interactions etdes actions entre les personnes et',
+        title: `Multiplicité d’informationsà hiérarchiser et gérer auprès
+        d’interlocuteurs très variés : financeurs, décideurs partenaires etopérationnels.
+          Analyse des interactions etdes actions entre les personnes et`,
       },
     ],
   },
@@ -96,7 +98,7 @@ const RenderBox = ({ image, title, questions }: BoxType) => (
       {questions.map((q) => (
         <div
           className={`mt-3 mb-3 p-3 rounded cursor-pointer text-lena-black
-        font-thin text-center h-20 flex items-center justify-center`}
+        font-thin text-center min-h-20 h-20 flex items-center justify-center`}
           style={{ backgroundColor: '#F1FCFF' }}
         >
           {q.title}
