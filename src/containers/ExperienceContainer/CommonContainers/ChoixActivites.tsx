@@ -17,7 +17,7 @@ type NewActivity = {
   onClose: () => void;
 };
 
-interface Props extends RouteComponentProps<{ id: string }> {
+interface Props {
   activities: Activity[];
   setActivities: (activities: Activity[]) => void;
 }
