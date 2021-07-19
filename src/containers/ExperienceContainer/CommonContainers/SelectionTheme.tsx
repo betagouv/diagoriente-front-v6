@@ -1,5 +1,8 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
+import { useLazyTheme } from 'common/requests/themes';
+
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveSvg } from 'assets/svg/comp_eng.svg';
@@ -8,24 +11,30 @@ import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
-import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
   data: Theme[] | undefined;
+  setTheme: (theme: Theme) => void;
+  theme: Theme;
 };
 type WebChoiceDomainProps = {
   data: Theme[] | undefined;
+  setTheme: (theme: Theme) => void;
+  theme: Theme;
 };
 type SelectionProps = {
   data: Theme[] | undefined;
+  setTheme: (theme: Theme) => void;
+  theme: Theme;
 };
 
-const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
+const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDomainProps) => {
+  const history = useHistory();
   const [selectedDomain, setSelectedDomain] = useState<Theme>();
   const [activeDomain, setActiveDomain] = useState(String);
-  const { setTheme, setStep } = useContext(NewExperienceContext);
+  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const controlSelected = (dataSelected: any) => {
     if (activeDomain === dataSelected.id && selectedDomain?.id === dataSelected.id) {
@@ -34,6 +43,7 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
     } else if (selectedDomain?.id !== dataSelected.id && activeDomain !== dataSelected.id) {
       setActiveDomain(dataSelected.id);
       setSelectedDomain(dataSelected);
+      themeCall({ variables: { id: dataSelected.id } });
     } else {
       setActiveDomain('');
       setSelectedDomain(undefined);
@@ -42,7 +52,9 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   const handleValidate = () => {
     if (selectedDomain) {
       setTheme(selectedDomain);
-      setStep(EParcoursStep.ACTIVITIES);
+      if (theme) {
+        history.push(`${activeDomain}/activite?type=${selectedDomain.domain}`);
+      }
     }
   };
 
@@ -63,10 +75,10 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
                 <LoveSvg />
                 <span className={classNames('ml-8', selectedDomain?.id === d.id && 'font-bold')}>{d.title}</span>
               </button>
-              {activeDomain === d.id && selectedDomain?.id === d.id && (
+              {activeDomain === d.id && selectedDomain?.id === d.id && themeState.data?.theme.activities.length !== 0 && (
                 <div className="px-14 py-4">
                   <ul className="list-disc">
-                    {selectedDomain.activities.map((a) => (
+                    {themeState.data?.theme.activities.map((a) => (
                       <li>{a.title}</li>
                     ))}
                   </ul>
@@ -96,18 +108,17 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   );
 };
 
-const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
-  const { setTheme, setStep } = useContext(NewExperienceContext);
-  const [selected, setSelected] = useState<Theme>();
+const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
+  const history = useHistory();
+  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const controlSelected = (dataSelected: any) => {
-    setSelected(dataSelected);
+    setTheme(dataSelected);
   };
-
   const handleNext = () => {
-    if (selected) {
-      setTheme(selected);
-      setStep(EParcoursStep.ACTIVITIES);
+    setTheme(theme);
+    if (theme) {
+      history.push(`${theme?.id}/activite?type=${theme.domain}`);
     }
   };
 
@@ -120,29 +131,30 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
               onClick={() => controlSelected(f)}
               className={classNames(
                 'rounded-xl p-5 cursor-pointer border-4  focus:ring-0 focus:outline-none',
-                selected && selected?.id === f.id
+                theme && theme?.id === f.id
                   ? 'bg-lena-blue-light border-lena-blue-inter'
                   : 'hover:bg-lena-turquoise-light border-transparent',
               )}
               data-tip="Info"
               data-for={f.id}
+              /* onMouseEnter={() => themeCall({ variables: { id: f.id } })} */
             >
               <div className="flex flex-col items-center">
-                {selected && selected.id === f.id ? <LoveWhiteSvg /> : <LoveSvg />}
+                {theme && theme.id === f.id ? <LoveWhiteSvg /> : <LoveSvg />}
                 <span className="block mt-5">{f.title}</span>
               </div>
-              <ReactTooltip id={f.id} place="right" type="light" effect="solid">
+              {/* <ReactTooltip id={f.id} place="right" type="light" effect="solid">
                 <ul className="list-disc text-left">
-                  {f.activities.map((a) => (
+                  {themeState.data?.theme.activities.map((a) => (
                     <li>{a.title}</li>
                   ))}
                 </ul>
-              </ReactTooltip>
+              </ReactTooltip> */}
             </button>
           ))}
         </div>
       </div>
-      {selected && (
+      {theme && (
         <button
           className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
           text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`}
@@ -155,7 +167,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   );
 };
 
-const SelectionTheme = ({ data }: SelectionProps) => {
+const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
 
@@ -168,7 +180,7 @@ const SelectionTheme = ({ data }: SelectionProps) => {
               <h2 className="text-lena-blue-dark">
                 Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
               </h2>
-              <WebDomainDisplay data={data} />
+              <WebDomainDisplay data={data} theme={theme} setTheme={setTheme} />
             </div>
           ) : (
             <>
@@ -197,7 +209,7 @@ const SelectionTheme = ({ data }: SelectionProps) => {
       </div>
     </ParcoursLayout>
   ) : (
-    <MobileChoiceDomain onClose={() => setShowMobileChoice(false)} data={data} />
+    <MobileChoiceDomain onClose={() => setShowMobileChoice(false)} data={data} theme={theme} setTheme={setTheme} />
   );
 };
 

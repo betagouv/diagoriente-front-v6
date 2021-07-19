@@ -15,12 +15,10 @@ import ExperienceRoute from './ExperienceContainer/ExperienceRoute';
 import CenterInterestRoute from './CenterInterestContainer/CenterInterestRoute';
 import ProfileRoute from './ProfileContainer/ProfileRoute';
 import TopJobRoute from './TopJobContainer/TopJobRoute';
-import MyExperiencesRoute from './MyExperiencesContainer/MyExperiencesRoute';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
   const [state, dispatch] = useReducer(snackbarReducer, snackbarState);
-  console.log('user', user);
 
   if (!startupEnd) return <div />;
 
@@ -33,8 +31,7 @@ const RootContainer = () => {
           <Route exact path="/inscription" component={RegisterContainer} />
           <Route exact path="/bienvenue" component={OnBoardingContainer} />
           <ProfileRoute path="/profil" />
-          <MyExperiencesRoute path="/mes-experiences" />
-          <ExperienceRoute path="/experience" />
+          <Route path="/experience" component={ExperienceRoute} />
           <CenterInterestRoute path="/centres_interet" />
           <Route exact path="/skill_card" component={SkillCardContainer} />
           <TopJobRoute path="/top_metiers" />

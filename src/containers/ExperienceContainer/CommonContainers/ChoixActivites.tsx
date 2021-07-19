@@ -1,5 +1,9 @@
 import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
 import { uniqueId } from 'lodash';
+import { RouteComponentProps, useHistory, useParams, useLocation } from 'react-router-dom';
+import { useLazyTheme } from 'common/requests/themes';
+import { useDidMount } from 'common/hooks/useLifeCycle';
+import { decodeUri } from 'common/utils/url';
 import SelectorTest from 'components/design-system/SelectorTest';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { Activity } from 'common/requests/types';
@@ -12,6 +16,11 @@ type NewActivity = {
   onSend: (e: string) => void;
   onClose: () => void;
 };
+
+interface Props extends RouteComponentProps<{ themeId: string }> {
+  activities: Activity[];
+  setActivities: (activities: Activity[]) => void;
+}
 
 const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   const [text, setText] = useState(String);
@@ -57,17 +66,36 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   );
 };
 
-const ChoixActivites: FunctionComponent = () => {
-  const { activities, setActivities, setStep, theme } = useContext(NewExperienceContext);
+const ChoixActivites = ({ activities, setActivities }: Props) => {
+  const history = useHistory();
+  const location = useLocation();
+  const params: { id: string } = useParams();
+  const query = decodeUri(location.search);
+
+  const { theme } = useContext(NewExperienceContext);
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
+  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
+
   const mediaQueryMD = useMediaQuery('md');
-  useEffect(() => {
-    if (theme?.activities) {
-      setTodoRenameActivities(theme?.activities);
+  useDidMount(() => {
+    if (params.id) {
+      themeCall({ variables: { id: params.id } });
     }
-  }, [theme?.activities]);
+  });
+
+  useEffect(() => {
+    if (themeState.data?.theme) {
+      setTodoRenameActivities(themeState.data?.theme.activities);
+    }
+  }, [themeState.data]);
+
+  useEffect(() => {
+    if (activities.length) {
+      setTodoRenameActivities(activities);
+    }
+  }, [activities]);
 
   const handleCheck = (value: string, checked: boolean) => {
     if (checked) {
@@ -88,7 +116,9 @@ const ChoixActivites: FunctionComponent = () => {
 
   const handleValidateActivites = () => {
     if (activitiesChecked.length !== 0) {
-      setStep(EParcoursStep.ACTIVITIES_DONE);
+      if (params.id && query) {
+        history.push(`/experience/theme/${params?.id}/doneAct?type=${query.type}`);
+      }
       setActivities(activitiesChecked);
     }
   };
@@ -99,7 +129,7 @@ const ChoixActivites: FunctionComponent = () => {
         <div className="container py-8 md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
           <div className="relative min-h-full md:min-h-0">
             <div className="text-lena-blue-dark">
-              Dans le cadre de la boulangerie, quelles sont les <strong>activités</strong> que vous pratiquez ?
+              Dans le cadre de la {theme?.title}, quelles sont les <strong>activités</strong> que vous pratiquez ?
             </div>
             <div className="italic mt-2">Plusieurs choix possibles</div>
           </div>

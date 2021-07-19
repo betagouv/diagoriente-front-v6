@@ -1,21 +1,17 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ParcoursXPContainer from 'containers/ExperienceContainer/CommonContainers/ParcoursXPContainer';
-import QuestionXPContainer from 'containers/ExperienceContainer/CommonContainers/QuestionsContainer';
+import ExperienceXPContainer from 'containers/ExperienceContainer/CommonContainers/ExperienceXPContainer';
+import RootSkills from 'containers/ExperienceContainer/CommonContainers/RootSkills';
 
 import PageNotFoundContainer from '../PageNotFoundContainer';
-import MyExperiencesContainer from '../MyExperiencesContainer/MyExperiencesContainer';
+import ExperienceContainer from './ExperienceContainer';
 
-type Props = {
-  path: string;
-};
-
-const ExperienceRoute = ({ path }: Props) => {
+const ExperienceRoute = () => {
   return (
     <Switch>
-      <Route exact path={`${path}/theme/create`} component={ParcoursXPContainer} />
-      <Route exact path={`${path}/theme/question`} component={QuestionXPContainer} />
-
+      <Route exact path="/experience" component={ExperienceContainer} />
+      <Route exact path="/experience/theme" component={ExperienceXPContainer} />
+      <Route path="/experience/theme/:id" component={RootSkills} />
       <Route component={PageNotFoundContainer} />
     </Switch>
   );
