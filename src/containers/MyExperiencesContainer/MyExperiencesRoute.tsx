@@ -11,8 +11,8 @@ type Props = {
 const MyExperiencesRoute = ({ path }: Props) => {
   return (
     <Switch>
-      <Route exact path={`${path}`} component={MyExperiencesContainer} />
-      <Route exact path={`${path}/:type`} component={MyExperiencesByThemeContainer} />
+      <Route exact path="/mes-experiences" component={MyExperiencesContainer} />
+      <Route exact path="/mes-experiences/:type" component={MyExperiencesByThemeContainer} />
       <Route component={PageNotFoundContainer} />
     </Switch>
   );
