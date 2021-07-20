@@ -16,6 +16,7 @@ import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import { useInterest } from '../../../../common/requests/interests';
+import AppLoader from '../../../../components/ui/AppLoader';
 
 type InterestContent = {
   id: string;
@@ -237,100 +238,106 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
         </header>
 
         <div className={classNames('container', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'mt-4')}>
-          <div className="relative">
-            <div className="flex items-center flex-col w-full">
-              <div
-                style={{ width: mediaQueryMD ? 'calc(80% + 110px)' : 'calc(80% + 60px)' }}
-                className={classNames(
-                  'flex justify-between text-center text-lena-blue-dark mx-4 relative',
-                  mediaQueryMD && 'mb-3',
-                )}
-              >
-                <span className="flex flex-col items-center">
-                  <img className="mb-1" src={CollectifSvg} alt="Svg" />
-                  <span>{getInterestState.data?.interest.title.split(' - ')[0]}</span>
-                </span>
-                <span className="flex flex-col items-center">
-                  <img className="mb-1" src={IndividuelSvg} alt="Svg" />
-                  <span>{getInterestState.data?.interest.title.split(' - ')[1]}</span>
-                </span>
-              </div>
-            </div>
-            <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
-              <div className="absolute w-full flex justify-center" style={{ marginTop: 9 }}>
-                <input
-                  max={(getInterestState.data?.interest.cursors.length || 1) - 1}
-                  min={0}
-                  step={mediaQueryMD ? 1 : 1}
-                  value={rangeValue}
-                  onChange={(e) => handleChange(e.currentTarget.value)}
-                  type="range"
-                  className="w-full thumb thumb--left"
-                  style={{ width: 'calc(80% + 40px)' }}
-                />
-              </div>
-              <div className="flex absolute w-full justify-center " style={{ marginTop: -3.7 }}>
-                {getInterestState.data?.interest.cursors.map((v, index) => (
+          {getInterestState.loading && <AppLoader variant="yellow" />}
+          {getInterestState.data && (
+            <>
+              <div className="relative">
+                <div className="flex items-center flex-col w-full">
                   <div
-                    key={index}
-                    style={{ width: `${100 / (getInterestState.data?.interest?.cursors?.length || 1)}%` }}
-                    className="flex justify-center"
+                    style={{ width: mediaQueryMD ? 'calc(80% + 110px)' : 'calc(80% + 60px)' }}
+                    className={classNames(
+                      'flex justify-between text-center text-lena-blue-dark mx-4 relative',
+                      mediaQueryMD && 'mb-3',
+                    )}
                   >
-                    <PointSvg height={20} width={20} />
+                    <span className="flex flex-col items-center">
+                      <img className="mb-1" src={CollectifSvg} alt="Svg" />
+                      <span>{getInterestState.data?.interest.title.split(' - ')[0]}</span>
+                    </span>
+                    <span className="flex flex-col items-center">
+                      <img className="mb-1" src={IndividuelSvg} alt="Svg" />
+                      <span>{getInterestState.data?.interest.title.split(' - ')[1]}</span>
+                    </span>
                   </div>
-                ))}
+                </div>
+                <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
+                  <div className="absolute w-full flex justify-center" style={{ marginTop: 9 }}>
+                    <input
+                      max={(getInterestState.data?.interest.cursors.length || 1) - 1}
+                      min={0}
+                      step={mediaQueryMD ? 1 : 1}
+                      value={rangeValue}
+                      onChange={(e) => handleChange(e.currentTarget.value)}
+                      type="range"
+                      className="w-full thumb thumb--left"
+                      style={{ width: 'calc(80% + 40px)' }}
+                    />
+                  </div>
+                  <div className="flex absolute w-full justify-center " style={{ marginTop: -3.7 }}>
+                    {getInterestState.data?.interest.cursors.map((v, index) => (
+                      <div
+                        key={index}
+                        style={{ width: `${100 / (getInterestState.data?.interest?.cursors?.length || 1)}%` }}
+                        className="flex justify-center"
+                      >
+                        <PointSvg height={20} width={20} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div
-            className={classNames(mediaQueryMD && 'hidden', 'relative')}
-            style={{
-              transform: `translate(-${translate}px, 0px)`,
-            }}
-          >
-            {getInterestState.data?.interest.cursors.map((v, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <InterestCardForMobile
-                key={index}
-                content={v}
-                position={index}
-                onToggleInterest={handleToggleInterest}
-                selectedInterests={selectedInterests}
-              />
-            ))}
-          </div>
-          <div className={classNames(!mediaQueryMD && 'hidden')}>
-            {getInterestState.data && (
-              <Flicking
-                circularEnabled={false}
-                onMoveEnd={(e) => {
-                  setRangeValue(e.currentTarget.index + 1);
-                  setFlickingDisabled(false);
+              <div
+                className={classNames(mediaQueryMD && 'hidden', 'relative')}
+                style={{
+                  transform: `translate(-${translate}px, 0px)`,
                 }}
-                defaultIndex={0}
-                ref={flickingRef}
-                horizontal={true}
-                plugins={plugins}
               >
                 {getInterestState.data?.interest.cursors.map((v, index) => (
                   // eslint-disable-next-line react/no-array-index-key
-                  <div key={index} className="relative flickingDiv">
-                    <InterestCardForDesktop
-                      content={v}
-                      position={index}
-                      onToggleInterest={handleToggleInterest}
-                      selectedInterests={selectedInterests}
-                    />
-                  </div>
+                  <InterestCardForMobile
+                    key={index}
+                    content={v}
+                    position={index}
+                    onToggleInterest={handleToggleInterest}
+                    selectedInterests={selectedInterests}
+                  />
                 ))}
-              </Flicking>
-            )}
-          </div>
+              </div>
+              <div className={classNames(!mediaQueryMD && 'hidden')}>
+                {getInterestState.data && (
+                  <Flicking
+                    circularEnabled={false}
+                    onMoveEnd={(e) => {
+                      setRangeValue(e.currentTarget.index + 1);
+                      setFlickingDisabled(false);
+                    }}
+                    defaultIndex={0}
+                    ref={flickingRef}
+                    horizontal={true}
+                    plugins={plugins}
+                  >
+                    {getInterestState.data?.interest.cursors.map((v, index) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div key={index} className="relative flickingDiv">
+                        <InterestCardForDesktop
+                          content={v}
+                          position={index}
+                          onToggleInterest={handleToggleInterest}
+                          selectedInterests={selectedInterests}
+                        />
+                      </div>
+                    ))}
+                  </Flicking>
+                )}
+              </div>
+            </>
+          )}
         </div>
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
           <button
-            className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md"
+            className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50"
             onClick={handleValidateInterests}
+            disabled={selectedInterests.length <= 0}
           >
             Valider
           </button>

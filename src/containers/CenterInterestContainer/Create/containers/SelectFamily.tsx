@@ -10,6 +10,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import { useInterests } from 'common/requests/interests';
 import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import { useDidMount } from '../../../../common/hooks/useLifeCycle';
+import AppLoader from '../../../../components/ui/AppLoader';
 
 type Props = {
   onStep: (familyId: string) => void;
@@ -37,9 +38,11 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
       >
         <li
           className={classNames(
-            'flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 border-transparent relative',
+            'flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 relative',
             'hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30',
-            active ? 'bg-lena-yellow-light border-lena-yellow' : 'bg-lena-gray-light-2',
+            active
+              ? 'bg-lena-yellow-light border-lena-yellow hover:border-lena-yellow-dark'
+              : 'bg-lena-gray-light-2 border-transparent',
           )}
         >
           <img src={imgLeft} alt="Svg" />
@@ -85,6 +88,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
         </div>
         <div className="w-full">
           <ul className={classNames('space-y-2', mediaQueryMD && 'xl:w-1/2 w-full mx-auto')}>
+            {getInterestsState.loading && <AppLoader variant="blue" />}
             {getInterestsState.data?.interests.data.map((v) =>
               family(v.title, v.id, CollectifSvg, IndividuelSvg, v.id in selectedFamilies),
             )}
@@ -99,8 +103,9 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
       </div>
       <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
         <button
-          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md"
+          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50"
           onClick={handleFinish}
+          disabled={Object.keys(selectedFamilies).length <= 0}
         >
           Suivant
         </button>
