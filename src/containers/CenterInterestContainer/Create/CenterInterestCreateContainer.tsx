@@ -7,15 +7,23 @@ import SelectInterest from './containers/SelectInterest';
 const CenterInterestCreateContainer = () => {
   const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(mediaQueryMD ? 1 : 0);
+  const [selectedFamilyId, setSelectedFamilyId] = useState<string>('');
 
   const renderStep = () => {
     switch (step) {
       case 0:
         return <Start onStep={() => setStep(1)} />;
       case 1:
-        return <SelectFamily onStep={() => setStep(2)} />;
+        return (
+          <SelectFamily
+            onStep={(familyId: string) => {
+              setSelectedFamilyId(familyId);
+              setStep(2);
+            }}
+          />
+        );
       case 2:
-        return <SelectInterest onBack={() => setStep(1)} onStep={() => setStep(3)} />;
+        return <SelectInterest familyId={selectedFamilyId} onBack={() => setStep(1)} onStep={() => setStep(3)} />;
       default:
         return false;
     }

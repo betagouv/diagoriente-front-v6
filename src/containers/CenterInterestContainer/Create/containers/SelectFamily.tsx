@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as LineSvg } from 'assets/svg/line.svg';
 import { ReactComponent as InfoSvg } from 'assets/svg/info_yellow.svg';
@@ -7,19 +7,30 @@ import CollectifSvg from 'assets/svg/collectif.svg';
 import IndividuelSvg from 'assets/svg/individuel.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
+import { useInterests } from 'common/requests/interests';
 import ParcoursLayout from '../layout/ParcoursLayout';
+import { useDidMount } from '../../../../common/hooks/useLifeCycle';
 
 type Props = {
-  onStep: () => void;
+  onStep: (familyId: string) => void;
 };
 
 const SelectFamily = ({ onStep }: Props) => {
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
+  const [getInterestsCall, getInterestsState] = useInterests();
 
-  const family = (left: string, right: string, imgLeft: any, imgRight: any, active?: boolean) => {
+  useDidMount(() => {
+    getInterestsCall();
+  });
+
+  const family = (title: string, familyId: string, imgLeft: any, imgRight: any, active?: boolean) => {
     return (
-      <button onClick={() => onStep.call(null)} className="focus:ring-0 focus:outline-none w-full">
+      <button
+        key={familyId}
+        onClick={() => onStep.call(null, familyId)}
+        className="focus:ring-0 focus:outline-none w-full"
+      >
         <li
           className={classNames(
             'flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 border-transparent relative',
@@ -28,9 +39,7 @@ const SelectFamily = ({ onStep }: Props) => {
           )}
         >
           <img src={imgLeft} alt="Svg" />
-          <span className="text-lena-blue-dark">
-            {left} / {right}
-          </span>
+          <span className="text-lena-blue-dark">{title}</span>
           <img src={imgRight} alt="Svg" />
           {active && (
             <div className="absolute -right-2 -top-2">
@@ -62,10 +71,11 @@ const SelectFamily = ({ onStep }: Props) => {
             Cliquez sur une famille pour sélectionner les centres d’intérêts associés :
           </p>
         </div>
-        <div className="w-full px-5">
+        <div className="w-full">
           <ul className={classNames('space-y-2', mediaQueryMD && 'xl:w-1/2 w-full mx-auto')}>
-            {family('Collectif', 'Individuel', CollectifSvg, IndividuelSvg, true)}
-            {family('Liberté', 'Cadre', CollectifSvg, IndividuelSvg)}
+            {getInterestsState.data?.interests.data.map((v) =>
+              family(v.title, v.id, CollectifSvg, IndividuelSvg, false),
+            )}
           </ul>
           <div className="flex justify-center">
             <button className="focus:outline-none focus:ring-0 flex flex justify-center items-center mt-7 space-x-2">

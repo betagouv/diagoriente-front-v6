@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as HelpSvg } from 'assets/svg/help_yellow.svg';
 import { ReactComponent as ArrowSvg } from 'assets/images/svg/picto/arrow-left.svg';
@@ -16,10 +16,11 @@ import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import ParcoursLayout from '../layout/ParcoursLayout';
+import { useInterest, useInterests } from '../../../../common/requests/interests';
 
 type InterestContent = {
   id: string;
-  description: string;
+  title: string;
 };
 
 type InterestProps = {
@@ -41,9 +42,9 @@ const Interest = ({ position, content }: InterestProps) => {
 
     for (let i = 0; i < 5; i++) {
       if (i === position) {
-        poly.push(<PolygoneSvg width={50} />);
+        poly.push(<PolygoneSvg key={i} width={50} />);
       } else {
-        poly.push(<div style={{ width: 50 }} />);
+        poly.push(<div key={i} style={{ width: 50 }} />);
       }
     }
 
@@ -67,9 +68,9 @@ const Interest = ({ position, content }: InterestProps) => {
         <div className="z-30 relative p-3">
           {content &&
             content.map((v) => (
-              <div className="mb-3">
-                <SelectorTest key={v.id} color="yellow" size="small" checked={false}>
-                  {v.description}
+              <div key={v.id} className="mb-3">
+                <SelectorTest color="yellow" size="small" checked={false}>
+                  {v.title}
                 </SelectorTest>
               </div>
             ))}
@@ -79,6 +80,7 @@ const Interest = ({ position, content }: InterestProps) => {
   );
 };
 
+/*
 const Tutorial1 = () => {
   return (
     <>
@@ -184,6 +186,7 @@ const RenderTutorial = () => {
     </div>
   );
 };
+*/
 
 const InterestDesktop = ({ position, content }: InterestProps) => {
   const [width, setWidth] = useState(0);
@@ -217,10 +220,9 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
         {content &&
           content.map((v) => (
             <div key={v.id} className="bg-lena-yellow-light text-center py-5 px-5 rounded-md cursor-pointer">
-              {v.description}
+              {v.title}
             </div>
           ))}
-
         <div className="bg-lena-yellow text-center py-5 px-5 rounded-md cursor-pointer border-2 border-lena-yellow-dark">
           selected
         </div>
@@ -232,9 +234,10 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
 type Props = {
   onBack: () => void;
   onStep: () => void;
+  familyId: string;
 };
 
-const SelectInterest = ({ onStep, onBack }: Props) => {
+const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) => {
   const history = useHistory();
   const axisRef = useRef<any>(null);
   const [translate, setTranslate] = useState(0);
@@ -245,97 +248,11 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
   const plugins: any = [new Fade('', 0.7)];
   const flickingRef = useRef<any>();
   const [flickingDisabled, setFlickingDisabled] = useState(false);
+  const [getInterestCall, getInterestState] = useInterest();
 
-  const fakeData1: Array<InterestContent> = [
-    {
-      id: 'a',
-      description: 'test 1',
-    },
-    {
-      id: 'b',
-      description: 'test 2',
-    },
-    {
-      id: 'c',
-      description: 'test 3',
-    },
-    {
-      id: 'd',
-      description: 'test 4',
-    },
-  ];
-  const fakeData2: Array<InterestContent> = [
-    {
-      id: 'e',
-      description: 'test 1',
-    },
-    {
-      id: 'f',
-      description: 'test 2',
-    },
-    {
-      id: 'g',
-      description: 'test 3',
-    },
-    {
-      id: 'h',
-      description: 'test 4',
-    },
-  ];
-  const fakeData3: Array<InterestContent> = [
-    {
-      id: 'i',
-      description: 'test 1',
-    },
-    {
-      id: 'j',
-      description: 'test 2',
-    },
-    {
-      id: 'k',
-      description: 'test 3',
-    },
-    {
-      id: 'l',
-      description: 'test 4',
-    },
-  ];
-  const fakeData4: Array<InterestContent> = [
-    {
-      id: 'm',
-      description: 'test 1',
-    },
-    {
-      id: 'n',
-      description: 'test 2',
-    },
-    {
-      id: 'o',
-      description: 'test 3',
-    },
-    {
-      id: 'p',
-      description: 'test 4',
-    },
-  ];
-  const fakeData5: Array<InterestContent> = [
-    {
-      id: 'q',
-      description: 'test 1',
-    },
-    {
-      id: 'r',
-      description: 'test 2',
-    },
-    {
-      id: 's',
-      description: 'test 3',
-    },
-    {
-      id: 't',
-      description: 'test 4',
-    },
-  ];
+  useEffect(() => {
+    if (familyId) getInterestCall({ variables: { familyId } });
+  }, [familyId]);
 
   const handleChange = async (e: any) => {
     if (!flickingDisabled) {
@@ -362,8 +279,11 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
   useEffect(() => {
     const widthWindow = sizeWindow.width;
     setWidth(widthWindow);
-    setTranslate(widthWindow * rangeValue);
   }, [sizeWindow]);
+
+  useEffect(() => {
+    setTranslate(width * rangeValue);
+  }, [width]);
 
   return (
     <ParcoursLayout withMobile={false}>
@@ -415,20 +335,18 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
               >
                 <span className="flex flex-col items-center">
                   <img className="mb-1" src={CollectifSvg} alt="Svg" />
-                  Travail {!mediaQueryMD && <br />}
-                  collectif
+                  <span>{getInterestState.data?.interest.title.split(' - ')[0]}</span>
                 </span>
                 <span className="flex flex-col items-center">
                   <img className="mb-1" src={IndividuelSvg} alt="Svg" />
-                  Travail {!mediaQueryMD && <br />}
-                  individuel
+                  <span>{getInterestState.data?.interest.title.split(' - ')[1]}</span>
                 </span>
               </div>
             </div>
             <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
               <div className="absolute w-full flex justify-center" style={{ marginTop: 9 }}>
                 <input
-                  max={4}
+                  max={getInterestState.data?.interest.cursors.length}
                   min={0}
                   step={mediaQueryMD ? 1 : 0.05}
                   value={rangeValue}
@@ -439,21 +357,15 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
                 />
               </div>
               <div className="flex absolute w-full justify-center " style={{ marginTop: -3.7 }}>
-                <div style={{ width: '20%' }} className="flex justify-center">
-                  <PointSvg height={20} width={20} />
-                </div>
-                <div style={{ width: '20%' }} className="flex justify-center">
-                  <PointSvg height={20} width={20} />
-                </div>
-                <div style={{ width: '20%' }} className="flex justify-center">
-                  <PointSvg height={20} width={20} />
-                </div>
-                <div style={{ width: '20%' }} className="flex justify-center">
-                  <PointSvg height={20} width={20} />
-                </div>
-                <div style={{ width: '20%' }} className="flex justify-center">
-                  <PointSvg height={20} width={20} />
-                </div>
+                {getInterestState.data?.interest.cursors.map((v, index) => (
+                  <div
+                    key={index}
+                    style={{ width: `${100 / (getInterestState.data?.interest?.cursors?.length || 1)}%` }}
+                    className="flex justify-center"
+                  >
+                    <PointSvg height={20} width={20} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -463,11 +375,10 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
               transform: `translate(-${translate}px, 0px)`,
             }}
           >
-            <Interest content={fakeData1} position={0} />
-            <Interest content={fakeData2} position={1} />
-            <Interest content={fakeData3} position={2} />
-            <Interest content={fakeData4} position={3} />
-            <Interest content={fakeData5} position={4} />
+            {getInterestState.data?.interest.cursors.map((v, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Interest key={index} content={v} position={index} />
+            ))}
           </div>
           <div className={classNames(!mediaQueryMD && 'hidden')}>
             <Flicking
@@ -477,21 +388,10 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
               horizontal={true}
               plugins={plugins}
             >
-              <div className="relative flickingDiv">
-                <InterestDesktop content={fakeData1} position={0} />
-              </div>
-              <div className="relative flickingDiv">
-                <InterestDesktop content={fakeData2} position={1} />
-              </div>
-              <div className="relative flickingDiv">
-                <InterestDesktop content={fakeData3} position={2} />
-              </div>
-              <div className="relative flickingDiv">
-                <InterestDesktop content={fakeData4} position={3} />
-              </div>
-              <div className="relative flickingDiv">
-                <InterestDesktop content={fakeData5} position={4} />
-              </div>
+              {getInterestState.data?.interest.cursors.map((v, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <InterestDesktop key={index} content={v} position={index} />
+              ))}
             </Flicking>
           </div>
         </div>
