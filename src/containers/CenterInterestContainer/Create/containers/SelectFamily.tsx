@@ -8,15 +8,17 @@ import IndividuelSvg from 'assets/svg/individuel.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useInterests } from 'common/requests/interests';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import { useDidMount } from '../../../../common/hooks/useLifeCycle';
 
 type Props = {
   onStep: (familyId: string) => void;
+  onRemoveFamily: (familyId: string) => void;
+  onFinish: () => void;
+  selectedFamilies: { [family: string]: string[] };
 };
 
-const SelectFamily = ({ onStep }: Props) => {
-  const history = useHistory();
+const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Props) => {
   const mediaQueryMD = useMediaQuery('md');
   const [getInterestsCall, getInterestsState] = useInterests();
 
@@ -28,7 +30,9 @@ const SelectFamily = ({ onStep }: Props) => {
     return (
       <button
         key={familyId}
-        onClick={() => onStep.call(null, familyId)}
+        onClick={() =>
+          familyId in selectedFamilies ? onRemoveFamily.call(null, familyId) : onStep.call(null, familyId)
+        }
         className="focus:ring-0 focus:outline-none w-full"
       >
         <li
@@ -39,7 +43,10 @@ const SelectFamily = ({ onStep }: Props) => {
           )}
         >
           <img src={imgLeft} alt="Svg" />
-          <span className="text-lena-blue-dark">{title}</span>
+          <div className="text-lena-blue-dark">
+            <div className={classNames(active && 'font-bold')}>{title}</div>
+            {active && <div>{selectedFamilies[familyId]?.length} centre(s) d'intérêt sélectionnés</div>}
+          </div>
           <img src={imgRight} alt="Svg" />
           {active && (
             <div className="absolute -right-2 -top-2">
@@ -51,8 +58,13 @@ const SelectFamily = ({ onStep }: Props) => {
     );
   };
 
+  const handleFinish = () => {
+    // TODO: make request to server
+    onFinish?.call(null);
+  };
+
   return (
-    <ParcoursLayout>
+    <InterestsParcoursLayout>
       <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div className={classNames()}>
           <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
@@ -74,7 +86,7 @@ const SelectFamily = ({ onStep }: Props) => {
         <div className="w-full">
           <ul className={classNames('space-y-2', mediaQueryMD && 'xl:w-1/2 w-full mx-auto')}>
             {getInterestsState.data?.interests.data.map((v) =>
-              family(v.title, v.id, CollectifSvg, IndividuelSvg, false),
+              family(v.title, v.id, CollectifSvg, IndividuelSvg, v.id in selectedFamilies),
             )}
           </ul>
           <div className="flex justify-center">
@@ -85,7 +97,15 @@ const SelectFamily = ({ onStep }: Props) => {
           </div>
         </div>
       </div>
-    </ParcoursLayout>
+      <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
+        <button
+          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md"
+          onClick={handleFinish}
+        >
+          Suivant
+        </button>
+      </div>
+    </InterestsParcoursLayout>
   );
 };
 

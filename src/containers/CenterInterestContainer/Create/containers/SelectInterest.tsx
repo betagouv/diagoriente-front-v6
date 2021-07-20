@@ -1,5 +1,4 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import { ReactComponent as HelpSvg } from 'assets/svg/help_yellow.svg';
 import { ReactComponent as ArrowSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as PointSvg } from 'assets/svg/point.svg';
@@ -15,8 +14,8 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
-import ParcoursLayout from '../layout/ParcoursLayout';
-import { useInterest, useInterests } from '../../../../common/requests/interests';
+import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
+import { useInterest } from '../../../../common/requests/interests';
 
 type InterestContent = {
   id: string;
@@ -26,9 +25,11 @@ type InterestContent = {
 type InterestProps = {
   position: number;
   content: InterestContent[];
+  onToggleInterest: (interestId: string) => void;
+  selectedInterests: string[];
 };
 
-const Interest = ({ position, content }: InterestProps) => {
+const InterestCardForMobile = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
 
@@ -68,8 +69,14 @@ const Interest = ({ position, content }: InterestProps) => {
         <div className="z-30 relative p-3">
           {content &&
             content.map((v) => (
-              <div key={v.id} className="mb-3">
-                <SelectorTest color="yellow" size="small" checked={false}>
+              <div className="mb-3">
+                <SelectorTest
+                  key={v.id}
+                  color="yellow"
+                  size="small"
+                  checked={selectedInterests.includes(v.id)}
+                  onClick={(value) => onToggleInterest?.call(null, v.id)}
+                >
                   {v.title}
                 </SelectorTest>
               </div>
@@ -80,115 +87,7 @@ const Interest = ({ position, content }: InterestProps) => {
   );
 };
 
-/*
-const Tutorial1 = () => {
-  return (
-    <>
-      <header className="absolute top-0 left-0 right-0 z-50 bg-lena-blue-darkest text-white text-center py-6 font-bold">
-        <h2>Tutoriel</h2>
-        <span>1/3</span>
-      </header>
-      <div className="px-1">
-        <div style={{ height: 204, top: -120 }} className="relative z-20">
-          <div
-            style={{
-              height: 190,
-              top: -56,
-              borderRadius: '55%',
-            }}
-          />
-          <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const Tutorial2 = () => {
-  const sizeWindow = useWindowSize();
-  return (
-    <>
-      <header className="absolute top-0 left-0 right-0 z-50 bg-lena-blue-darkest text-white text-center py-6 font-bold">
-        <h2>Tutoriel</h2>
-        <span>2/3</span>
-      </header>
-      <div className="px-1 relative">
-        <div
-          style={{ height: 100, width: 100, top: -55, transform: `translate(${sizeWindow.width / 2 - 55}px, 0)` }}
-          className="relative z-20"
-        >
-          <div
-            style={{
-              height: 100,
-              borderRadius: '100%',
-            }}
-          />
-          <div className="container text-white font-bold mt-5 px-10 text-xl">
-            Chaque famille de centres d'intérêt est rangée selon un axe regroupant des pôles opposés.
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const RenderTutorial = () => {
-  const [step, setStep] = useState(0);
-
-  const generateStep = () => {
-    const icons = [];
-
-    for (let i = 0; i < 3; i++) {
-      if (i === step) {
-        icons.push(<StepActiveSvg />);
-      } else {
-        icons.push(<StepInactiveSvg />);
-      }
-    }
-
-    return icons;
-  };
-
-  const renderStep = () => {
-    switch (step) {
-      case 0:
-        return <Tutorial1 />;
-      case 1:
-        return <Tutorial2 />;
-      default:
-        return <Tutorial1 />;
-    }
-  };
-
-  const handleStep = () => {
-    if (step === 2) {
-      alert('fini');
-    } else {
-      setStep(step + 1);
-    }
-  };
-
-  return (
-    <div>
-      {renderStep()}
-      <div className="absolute bottom-0 left-0 right-0 z-40">
-        <div className="flex justify-center space-x-4 mb-8">{generateStep()}</div>
-        <button
-          onClick={handleStep}
-          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg"
-        >
-          {step === 2 ? 'OK, compris !' : 'Suivant'}
-        </button>
-      </div>
-      {step === 0 ? <div className="overlay-1" /> : <div className="overlay-2" />}
-    </div>
-  );
-};
-*/
-
-const InterestDesktop = ({ position, content }: InterestProps) => {
+const InterestCardForDesktop = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
 
@@ -219,13 +118,19 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
       <div className="z-30 relative p-6 grid grid-cols-3 gap-2">
         {content &&
           content.map((v) => (
-            <div key={v.id} className="bg-lena-yellow-light text-center py-5 px-5 rounded-md cursor-pointer">
+            <div
+              key={v.id}
+              className={classNames(
+                'text-center py-5 px-5 border-2 rounded-md cursor-pointer',
+                selectedInterests.includes(v.id)
+                  ? 'bg-lena-yellow border-lena-yellow-dark'
+                  : 'bg-lena-yellow-light border-transparent',
+              )}
+              onClick={(value) => onToggleInterest?.call(null, v.id)}
+            >
               {v.title}
             </div>
           ))}
-        <div className="bg-lena-yellow text-center py-5 px-5 rounded-md cursor-pointer border-2 border-lena-yellow-dark">
-          selected
-        </div>
       </div>
     </div>
   );
@@ -233,12 +138,11 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
 
 type Props = {
   onBack: () => void;
-  onStep: () => void;
+  onStep: (familyId: string, selected: string[]) => void;
   familyId: string;
 };
 
-const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) => {
-  const history = useHistory();
+const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   const axisRef = useRef<any>(null);
   const [translate, setTranslate] = useState(0);
   const [rangeValue, setRangeValue] = useState(0);
@@ -249,6 +153,7 @@ const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) 
   const flickingRef = useRef<any>();
   const [flickingDisabled, setFlickingDisabled] = useState(false);
   const [getInterestCall, getInterestState] = useInterest();
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   useEffect(() => {
     if (familyId) getInterestCall({ variables: { familyId } });
@@ -263,13 +168,13 @@ const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) 
         setFlickingDisabled(true);
         await flickingRef.current.moveTo(e);
       } catch (err) {
-        if (err instanceof FlickingError) {
+        /* if (err instanceof FlickingError) {
           if (err.code === ERROR_CODE.ANIMATION_ALREADY_PLAYING) {
             console.error('Animation is already playing!');
           } else if (err.code === ERROR_CODE.ANIMATION_INTERRUPTED) {
             console.error('Animation is interrupted by user.');
           }
-        }
+        } */
       }
     } else {
       setTranslate(width * e);
@@ -279,14 +184,22 @@ const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) 
   useEffect(() => {
     const widthWindow = sizeWindow.width;
     setWidth(widthWindow);
+    setTranslate(widthWindow * rangeValue);
   }, [sizeWindow]);
 
-  useEffect(() => {
-    setTranslate(width * rangeValue);
-  }, [width]);
+  const handleToggleInterest = (interestId: string) => {
+    const updatedArray = selectedInterests.includes(interestId)
+      ? selectedInterests.filter((v) => v !== interestId)
+      : [...selectedInterests, interestId];
+    setSelectedInterests(updatedArray);
+  };
+
+  const handleValidateInterests = () => {
+    onStep?.call(null, familyId, selectedInterests);
+  };
 
   return (
-    <ParcoursLayout withMobile={false}>
+    <InterestsParcoursLayout withMobile={false}>
       <div
         className="flex flex-col flex-1 min-h-screen h-full flex flex-col overflow-x-hidden"
         style={{ backgroundColor: mediaQueryMD ? '#fff' : '#e5e5e5' }}
@@ -346,9 +259,9 @@ const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) 
             <div ref={axisRef} className="w-full bg-lena-yellow-light h-3 mt-2 rounded-full relative">
               <div className="absolute w-full flex justify-center" style={{ marginTop: 9 }}>
                 <input
-                  max={getInterestState.data?.interest.cursors.length}
+                  max={(getInterestState.data?.interest.cursors.length || 1) - 1}
                   min={0}
-                  step={mediaQueryMD ? 1 : 0.05}
+                  step={mediaQueryMD ? 1 : 1}
                   value={rangeValue}
                   onChange={(e) => handleChange(e.currentTarget.value)}
                   type="range"
@@ -377,31 +290,53 @@ const SelectInterest: FunctionComponent<Props> = ({ familyId, onStep, onBack }) 
           >
             {getInterestState.data?.interest.cursors.map((v, index) => (
               // eslint-disable-next-line react/no-array-index-key
-              <Interest key={index} content={v} position={index} />
+              <InterestCardForMobile
+                key={index}
+                content={v}
+                position={index}
+                onToggleInterest={handleToggleInterest}
+                selectedInterests={selectedInterests}
+              />
             ))}
           </div>
           <div className={classNames(!mediaQueryMD && 'hidden')}>
-            <Flicking
-              circularEnabled={false}
-              onMoveEnd={() => setFlickingDisabled(false)}
-              ref={flickingRef}
-              horizontal={true}
-              plugins={plugins}
-            >
-              {getInterestState.data?.interest.cursors.map((v, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <InterestDesktop key={index} content={v} position={index} />
-              ))}
-            </Flicking>
+            {getInterestState.data && (
+              <Flicking
+                circularEnabled={false}
+                onMoveEnd={(e) => {
+                  setRangeValue(e.currentTarget.index + 1);
+                  setFlickingDisabled(false);
+                }}
+                defaultIndex={0}
+                ref={flickingRef}
+                horizontal={true}
+                plugins={plugins}
+              >
+                {getInterestState.data?.interest.cursors.map((v, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index} className="relative flickingDiv">
+                    <InterestCardForDesktop
+                      content={v}
+                      position={index}
+                      onToggleInterest={handleToggleInterest}
+                      selectedInterests={selectedInterests}
+                    />
+                  </div>
+                ))}
+              </Flicking>
+            )}
           </div>
         </div>
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
-          <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md">
+          <button
+            className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md"
+            onClick={handleValidateInterests}
+          >
             Valider
           </button>
         </div>
       </div>
-    </ParcoursLayout>
+    </InterestsParcoursLayout>
   );
 };
 
