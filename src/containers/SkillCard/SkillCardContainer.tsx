@@ -65,7 +65,7 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, exp, recommended }
             <div className="flex items-center">
               <img src={MedailleSvg} alt="Medaille Svg" />
               <span className="bg-lena-yellow inline-block ml-4 px-3 text-sm py-1 rounded-md bg-opacity-50 font-bold">
-                EXPÉRIENCE RECOMMANDÉE
+                EXPéRIENCE RECOMMANDéE
               </span>
             </div>
             <div className="mt-3">
@@ -187,7 +187,7 @@ const SkillCardContainer: FunctionComponent = () => {
             <div className="py-7 bg-white rounded-b-md">
               <div className="flex items-center mb-7 px-8">
                 <img className="mr-5" src={BrainSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPÉTENCES TRANSVERSALES</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPéTENCES TRANSVERSALES</span>
               </div>
               <div className="px-8">
                 <Skill
@@ -217,7 +217,7 @@ const SkillCardContainer: FunctionComponent = () => {
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
               <div className="flex items-center mb-7 px-8">
                 <img className="mr-5" src={LoveSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPÉTENCES D’ENGAGEMENT</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPéTENCES D’ENGAGEMENT</span>
               </div>
               <div className="px-8">
                 <Skill
@@ -254,7 +254,7 @@ const SkillCardContainer: FunctionComponent = () => {
             <div className="py-7 bg-white rounded-b-md">
               <div className="flex items-center mb-7 px-10">
                 <img className="mr-5" src={BagSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PRO</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPéRIENCES PRO</span>
               </div>
               <div className="px-10">
                 <Experience
@@ -299,7 +299,7 @@ const SkillCardContainer: FunctionComponent = () => {
                   <div className="flex items-center justify-between mb-7">
                     <div className="flex items-center">
                       <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
-                      <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPÉRIENCES PERSOS</span>
+                      <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPéRIENCES PERSOS</span>
                     </div>
                     <div className="absolute right-6 top-6 flex flex-col justify-center items-center">
                       <img src={EditSvg} alt="Edit Icon" />

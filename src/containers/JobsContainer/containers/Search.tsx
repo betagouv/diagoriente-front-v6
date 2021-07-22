@@ -5,7 +5,7 @@ import ListSvg from 'assets/svg/list.svg';
 import { ReactComponent as ChevronRightSvg } from 'assets/svg/chevron_right.svg';
 import { useHistory } from 'react-router-dom';
 import classNames from 'common/utils/classNames';
-import DomainActivity, { DomainActivityType } from './DomainActivity';
+import DomainActivity, { DomainActivityType } from '../../TopJobContainer/containers/DomainActivity';
 
 const SearchModal = () => {
   return <div>lol</div>;
@@ -35,7 +35,7 @@ const ButtonFilter: React.FC<ButtonFilterProps> = ({ icon, title, children, ...r
   );
 };
 
-const SearchJob = () => {
+const Search = () => {
   const history = useHistory();
   const [showDomainActivity, setShowDomainActivity] = useState(false);
   const [selectedDomainActivity, setSelectedDomainActivity] = useState<Array<DomainActivityType>>();
@@ -86,7 +86,7 @@ const SearchJob = () => {
         <div className="fixed bottom-10 left-10 right-10 md:relative">
           <button
             disabled={!(selectedDomainActivity && selectedDomainActivity?.length > 0)}
-            onClick={() => history.push('/top_metiers/rechercher/resultats')}
+            onClick={() => history.push('/metiers/recherche/resultats')}
             className={classNames(
               `focus:ring-0 focus:outline-none w-full
                     text-white py-3 text-center font-bold
@@ -102,4 +102,4 @@ const SearchJob = () => {
   );
 };
 
-export default SearchJob;
+export default Search;

@@ -11,6 +11,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
 import ParcoursLayout from '../layout/ParcoursLayout';
+import AppLoader from '../../../components/ui/AppLoader';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -76,20 +77,20 @@ const ChoixActivites = ({ activities, setActivities }: Props) => {
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
-  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
+  const [fetchThemeCall, fetchThemeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const mediaQueryMD = useMediaQuery('md');
   useDidMount(() => {
     if (params.id) {
-      themeCall({ variables: { id: params.id } });
+      fetchThemeCall({ variables: { id: params.id } });
     }
   });
 
   useEffect(() => {
-    if (themeState.data?.theme) {
-      setTodoRenameActivities(themeState.data?.theme.activities);
+    if (fetchThemeState.data?.theme) {
+      setTodoRenameActivities(fetchThemeState.data?.theme.activities);
     }
-  }, [themeState.data]);
+  }, [fetchThemeState.data]);
 
   useEffect(() => {
     if (activities.length) {
@@ -135,6 +136,7 @@ const ChoixActivites = ({ activities, setActivities }: Props) => {
           </div>
           <div className="w-full mt-8 relative mb-24">
             <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
+              {fetchThemeState.loading && <AppLoader />}
               {todoRenameActivities.map((activity) => (
                 <SelectorTest
                   key={activity.id}

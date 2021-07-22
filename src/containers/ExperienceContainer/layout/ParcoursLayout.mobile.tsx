@@ -41,11 +41,11 @@ const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
           break;
         }
         case 'professional': {
-          title = 'EXPÉRIENCE PRO';
+          title = 'EXPéRIENCE PRO';
           break;
         }
         case 'voluntary': {
-          title = 'EXPÉRIENCE BENEVOLAT';
+          title = 'EXPéRIENCE BENEVOLAT';
           break;
         }
         default: {

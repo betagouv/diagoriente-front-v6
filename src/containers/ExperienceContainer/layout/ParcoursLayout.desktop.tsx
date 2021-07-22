@@ -11,6 +11,7 @@ import SaveButtonComponent from 'components/design-system/SaveButton';
 import { Activity } from 'common/requests/types';
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
+  const context = useContext(NewExperienceContext);
   const location = useLocation();
   const params = decodeUri(location.search);
   const theme = localStorage.getItem('theme');
@@ -40,8 +41,8 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   }; */
   const path = () => {
     let text = '';
-    if (params.type) {
-      switch (params.type) {
+    if (context.experienceType) {
+      switch (context.experienceType) {
         case 'professional': {
           text = 'professionnelles';
           break;
