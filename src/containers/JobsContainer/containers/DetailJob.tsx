@@ -11,7 +11,7 @@ import { ReactComponent as LoveTLSvg } from 'assets/svg/love_turquoise_light.svg
 import { ReactComponent as TimeJobSvg } from 'assets/svg/time_job.svg';
 import { ReactComponent as ChartJobSvg } from 'assets/svg/chart_job.svg';
 import classNames from 'common/utils/classNames';
-import { Doughnut, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 const AboutJob = () => {
   const data = {

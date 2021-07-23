@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import InputComponent from 'components/Register/Input';
-import Checkbox from 'components/Register/Checkbox';
+import Checkbox from 'components/design-system/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
 import classNames from 'common/utils/classNames';

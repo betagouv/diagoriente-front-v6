@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import classNames from 'common/utils/classNames';
-import Checkbox from 'components/Register/Checkbox';
+import Checkbox from 'components/design-system/Checkbox';
 import Star from 'components/design-system/Star';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import CloseSvg from 'assets/svg/cross2.svg';

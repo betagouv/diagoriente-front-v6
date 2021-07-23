@@ -4,7 +4,7 @@ import BgImmersion from 'assets/images/bg/bg-immersion.jpg';
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/design-system/Button';
 import AccordionControlled from '../../components/design-system/AccordionControlled';
-import Checkbox from '../../components/Register/Checkbox';
+import Checkbox from '../../components/design-system/Checkbox';
 import Input from '../../components/Register/Input';
 
 const searchOptions = [
@@ -26,7 +26,7 @@ const ImmersionSearch: FunctionComponent = () => {
   };
 
   const handleStartSearch = () => {
-    history.push('/immersion/recherche/resultats');
+    history.push(`/immersion/recherche/resultats?type=${searchType}`);
   };
 
   return (
@@ -70,7 +70,7 @@ const ImmersionSearch: FunctionComponent = () => {
               <div className="space-y-2">
                 <div className="font-bold text-lena-blue-dark">Mots clés de votre recherche</div>
                 <div>
-                  <Input placeholder="Ex : boulangerie, climat, assurance..." />
+                  <Input fullWidth={true} placeholder="Ex : boulangerie, climat, assurance..." />
                 </div>
                 <div className="text-xs text-lena-blue-dark">
                   Vous pouvez taper plusieurs mots clés séparés par des virgules
@@ -79,7 +79,7 @@ const ImmersionSearch: FunctionComponent = () => {
               <div className="space-y-2">
                 <div className="font-bold text-lena-blue-dark">Dans quelle ville/région ?</div>
                 <div>
-                  <Input placeholder="à Paris, Dijon, Lille..." />
+                  <Input fullWidth={true} placeholder="à Paris, Dijon, Lille..." />
                 </div>
               </div>
             </div>

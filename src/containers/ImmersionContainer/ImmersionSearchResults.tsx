@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as UserSvg } from 'assets/svg/user_profile.svg';
 import { ReactComponent as PictoFormation } from 'assets/svg/picto_formation.svg';
+import { ReactComponent as PictoFiltres } from 'assets/svg/filtres.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
+import ImmersionSearchFilters from './ImmersionSearchFilters';
 
 export const CardResult = () => {
   const address = '292 RUE CAMILLE GUERIN\n59800 LILLE\n07 XX XX XX XX';
@@ -42,12 +44,19 @@ export const CardResult = () => {
 
 const ImmersionSearchResults = () => {
   const history = useHistory();
+  const [openFilters, setOpenFilters] = useState(false);
+
+  if (openFilters) return <ImmersionSearchFilters onClose={() => setOpenFilters(false)} />;
 
   return (
     <div>
       <header style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
         <div className="container flex justify-between items-center">
-          <div />
+          <div className="flex text-sm space-x-2 text-lena-pink-dark" onClick={() => setOpenFilters(true)}>
+            <PictoFiltres />
+            <span>Filtrer</span>
+          </div>
+          <div className="text-sm text-lena-pink-dark">Voir sur une carte</div>
           <button className="focus:ring-0 focus:outline-none">
             <UserSvg />
           </button>

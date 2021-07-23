@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import InputComponent from 'components/Register/Input';
-import Checkbox from 'components/Register/Checkbox';
+import Checkbox from 'components/design-system/Checkbox';
 import { mois } from 'utils/staticMonths';
 import classNames from 'common/utils/classNames';
 
