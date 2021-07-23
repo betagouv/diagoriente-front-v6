@@ -63,7 +63,10 @@ const HomeContainer = () => {
         </div>
         <div className="mt-2">
           <Link to="/profil">
-            <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md focus:ring-0 focus:outline-none">
+            <button
+              className={`bg-lena-blue w-full text-white
+            font-bold py-3 rounded-md focus:ring-0 focus:outline-none`}
+            >
               Profil
             </button>
           </Link>

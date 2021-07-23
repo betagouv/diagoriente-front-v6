@@ -10,6 +10,10 @@ import { useSkill } from 'common/requests/skills';
 import QuestionXPContainer from 'containers/ExperienceContainer/CommonContainers/QuestionsContainer';
 import ActiviteContainer from 'containers/ExperienceContainer/CommonContainers/ChoixActivites';
 import DoneActiviteContainer from 'containers/ExperienceContainer/CommonContainers/AddActivityDone';
+import DoneQuestions from 'containers/ExperienceContainer/CommonContainers/QuestionDone';
+import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers/ContainerCompetence';
+import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
+
 import SelectionTheme from './SelectionTheme';
 import SelectionThemePro from '../XPPro/ParcoursContainer/containers/SelectionTheme';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -17,6 +21,10 @@ import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
 const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) => {
   const [theme, setTheme] = useState({} as Theme);
   const [activities, setActivities] = useState([] as Activity[]);
+  const [levels, setLevels] = useState<string[]>([]);
+  const [competencesValues, setCompetencesValues] = useState<string[]>([]);
+  const [competences, setCompetences] = useState<string[]>([]);
+
   const { skill: selectedSkillId } = decodeUri(location.search);
   const params = decodeUri(location.search);
 
@@ -93,6 +101,22 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   }, [theme, match.params.id]);
 
   useEffect(() => {
+    const d = localStorage.getItem('levels');
+    if (d && !selectedSkillId) {
+      const levelsData = JSON.parse(d);
+      setLevels(levelsData.length ? levelsData : []);
+    }
+    // eslint-disable-next-line
+  }, [match.params.id]);
+
+  useEffect(() => {
+    if (!selectedSkillId && levels.length) {
+      localStorage.setItem('levels', JSON.stringify({ levels }));
+    }
+    // eslint-disable-next-line
+  }, [levels]);
+
+  useEffect(() => {
     if (params.type && params.type !== 'professional') {
       loadThemes({ variables: { domain: renderType() as ThemeDomain } });
     }
@@ -123,7 +147,28 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         render={(props) => <ActiviteContainer {...props} activities={activities} setActivities={setActivities} />}
       />
       <Route exact path="/experience/theme/:id/doneAct" render={() => <DoneActiviteContainer theme={theme} />} />
-      <Route exact path="/experience/theme/:id/question" render={() => <QuestionXPContainer theme={theme} />} />
+      <Route
+        exact
+        path="/experience/theme/:id/question"
+        render={() => <QuestionXPContainer theme={theme} levels={levels} setLevels={setLevels} />}
+      />
+      <Route exact path="/experience/theme/:id/questions" render={() => <DoneQuestions theme={theme} />} />
+      <Route
+        exact
+        path="/experience/theme/:id/competences"
+        render={() => (
+          <CompetenceContainer
+            theme={theme}
+            competencesValues={competencesValues}
+            setCompetencesValues={setCompetencesValues}
+          />
+        )}
+      />
+      <Route
+        exact
+        path="/experience/theme/:id/sommaire"
+        render={() => <SommaireContainer theme={theme} competencesValues={competencesValues} />}
+      />
     </Switch>
   );
 };

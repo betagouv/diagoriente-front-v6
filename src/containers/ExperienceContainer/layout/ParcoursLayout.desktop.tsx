@@ -19,9 +19,6 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const activities = localStorage.getItem('activities');
   const activityData = activities && JSON.parse(activities);
 
-  console.log('theme', themeData);
-  console.log('acts', activityData);
-
   /*   const backStep = () => {
     switch (step) {
       case 2:

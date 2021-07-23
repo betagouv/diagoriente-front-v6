@@ -11,7 +11,10 @@ const Start = ({ onStep }: Props) => {
   return (
     <InterestsParcoursLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14 text-center">
-        <div className="flex flex-col justify-center items-center bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden">
+        <div
+          className={`flex flex-col justify-center items-center
+        bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden`}
+        >
           <PictoExpPerso style={{ height: 60 }} />
           <div className="text-center text-lena-blue-dark font-bold text-xl">Mes centres d'intérêt</div>
         </div>
@@ -27,7 +30,10 @@ const Start = ({ onStep }: Props) => {
         onClick={() => onStep.call(null)}
         className="fixed bottom-0 left-0 right-0 md:relative md:flex md:justify-center"
       >
-        <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg">
+        <button
+          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3
+        text-center font-bold text-lg md:w-72 md:rounded-lg`}
+        >
           Commencer
         </button>
       </div>
