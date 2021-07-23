@@ -221,7 +221,10 @@ const InterestDesktop = ({ position, content }: InterestProps) => {
             </div>
           ))}
 
-        <div className="bg-lena-yellow text-center py-5 px-5 rounded-md cursor-pointer border-2 border-lena-yellow-dark">
+        <div
+          className={`bg-lena-yellow text-center py-5 px-5
+        rounded-md cursor-pointer border-2 border-lena-yellow-dark`}
+        >
           selected
         </div>
       </div>
@@ -496,7 +499,10 @@ const SelectInterest = ({ onStep, onBack }: Props) => {
           </div>
         </div>
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
-          <button className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md">
+          <button
+            className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
+          text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md`}
+          >
             Valider
           </button>
         </div>

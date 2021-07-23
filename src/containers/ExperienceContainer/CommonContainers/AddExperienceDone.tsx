@@ -1,26 +1,25 @@
-import React, { FunctionComponent, useContext } from 'react';
-import Illustration from 'assets/images/illu_01.png';
-import { NewExperienceContext } from 'contexts/NewExperienceContext';
+import React from 'react';
+import { Theme } from 'common/requests/types';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-const AddExperienceDone: FunctionComponent = () => {
-  const { theme } = useContext(NewExperienceContext);
+interface Props {
+  competencesValues: string[];
+  theme: Theme;
+}
 
+const AddExperienceDone = ({ competencesValues, theme }: Props) => {
   return (
     <ParcoursLayout>
       <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center">
         <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
-          <div className="text-2xl font-bold">Merci !</div>
+          <div className="text-2xl font-bold">Très bien.</div>
           <div className="text-lg">
-            Vous avez ajouté avec succès l'expérience <strong className="uppercase">{theme?.title}</strong> à votre
-            parcours et identifié de nouvelles compétences.
+            Vous avez ajouté une expérience et identifié de nouvelles compétences. Les voici ci dessous récapitulées en
+            fonction du CEC. Vous pourrez les retrouver dans votre profil / carte de compétences.
           </div>
           <div>
-            <img src={Illustration} alt="Illustration" />
-          </div>
-          <div>
-            Vous pouvez maintenant demander une <strong>recommandation</strong> pour cette expérience, elle donnera
-            confiance à vos futurs recruteurs.
+            Vous pouvez maintenant demander une recommandation pour cette expérience, elle donnera confiance à vos
+            futurs recruteurs.
           </div>
           <div className="flex flex-col space-y-4 w-full">
             <button

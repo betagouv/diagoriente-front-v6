@@ -215,7 +215,8 @@ const DetailJob = () => {
                   Trouver une immersion ou une formation pour ce métier
                 </span>
                 <button
-                  className="border-2 border-lena-blue-lightest py-4 px-4 w-full rounded-md flex justify-between items-center mb-3 bg-white focus:ring-0 focus:outline-none"
+                  className={`border-2 border-lena-blue-lightest py-4 px-4
+                  w-full rounded-md flex justify-between items-center mb-3 bg-white focus:ring-0 focus:outline-none`}
                   style={{ boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)' }}
                 >
                   <div className="flex items-center space-x-3 overflow-ellipsis overflow-hidden whitespace-nowrap">
@@ -227,7 +228,10 @@ const DetailJob = () => {
                     <ArrowBottomSvg />
                   </div>
                 </button>
-                <div className="w-full border border-lena-gray-light px-2 flex bg-white rounded-md flex items-center mb-5">
+                <div
+                  className={`w-full border border-lena-gray-light
+                px-2 flex bg-white rounded-md flex items-center mb-5`}
+                >
                   <SearchInputSvg fill="#C9C9C7" />
                   <input
                     placeholder="à Paris, Dijon, Lille ..."

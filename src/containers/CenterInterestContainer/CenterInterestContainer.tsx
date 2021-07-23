@@ -49,7 +49,10 @@ const CenterInterestContainer = () => {
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 md:relative">
-        <button className="focus:ring-0 focus:outline-none w-full bg-lena-pink-dark hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg">
+        <button
+          className={`focus:ring-0 focus:outline-none w-full bg-lena-pink-dark
+        hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg`}
+        >
           Modifier mes centres d'intérêt
         </button>
       </div>
