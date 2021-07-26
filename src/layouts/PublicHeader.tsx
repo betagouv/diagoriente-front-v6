@@ -4,8 +4,8 @@ import UIButtonComponent from 'components/Register/Button';
 import LogoDiago from 'assets/images/logo/diagoriente-white.svg';
 import LogoRepublique from 'assets/images/logo/republique-white.svg';
 import { ReactComponent as LogoBeta } from 'assets/images/logo/betagouv-white.svg';
-import CrossIcon from 'assets/svg/cross.svg';
-import MenuIcon from 'assets/svg/menu.svg';
+import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
+import { ReactComponent as MenuIcon } from 'assets/svg/menu.svg';
 import LoginIcon from 'assets/svg/user.svg';
 
 const NavDivider: FunctionComponent = () => {
@@ -34,11 +34,11 @@ const PublicHeader: FunctionComponent = () => {
             <div aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'} className="xl:hidden focus:outline-none">
               {open ? (
                 <div className="cursor-pointer select-none" onClick={() => setOpen(false)}>
-                  <img src={CrossIcon} alt="Cross Icon" />
+                  <CrossIcon className="w-4 h-4 fill-current text-white" />
                 </div>
               ) : (
                 <div className="cursor-pointer select-none" onClick={() => setOpen(true)}>
-                  <img src={MenuIcon} alt="Menu Icon" />
+                  <MenuIcon className="fill-current text-white" />
                 </div>
               )}
             </div>
