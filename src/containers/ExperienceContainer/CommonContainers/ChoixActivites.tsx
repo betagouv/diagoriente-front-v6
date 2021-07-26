@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { uniqueId } from 'lodash';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
+import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { useLazyTheme } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { decodeUri } from 'common/utils/url';
@@ -9,9 +10,7 @@ import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
-import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
-import AppLoader from '../../../components/ui/AppLoader';
+import ParcoursLayout from '../layout/ParcoursLayout';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -77,20 +76,20 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
-  const [fetchThemeCall, fetchThemeState] = useLazyTheme({ fetchPolicy: 'network-only' });
+  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const mediaQueryMD = useMediaQuery('md');
   useDidMount(() => {
     if (params.id) {
-      fetchThemeCall({ variables: { id: params.id } });
+      themeCall({ variables: { id: params.id } });
     }
   });
 
   useEffect(() => {
-    if (fetchThemeState.data?.theme) {
-      setTodoRenameActivities(fetchThemeState.data?.theme.activities);
+    if (themeState.data?.theme) {
+      setTodoRenameActivities(themeState.data?.theme.activities);
     }
-  }, [fetchThemeState.data]);
+  }, [themeState.data]);
 
   useEffect(() => {
     if (activities.length) {
@@ -145,20 +144,23 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
               </div>
               <div className="italic mt-2 text-center text-sm">Plusieurs choix possibles</div>
             </div>
-            <div className="italic mt-2">Plusieurs choix possibles</div>
-          </div>
-          <div className="w-full mt-8 relative mb-24">
-            <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
-              {fetchThemeState.loading && <AppLoader />}
-              {todoRenameActivities.map((activity) => (
-                <SelectorTest
-                  key={activity.id}
-                  onClick={(e) => handleCheck(activity.id, e)}
-                  checked={activitiesChecked.find((v) => v.id === activity.id)}
-                >
-                  {activity.title}
-                </SelectorTest>
-              ))}
+            <div className="w-full mt-8 relative mb-24">
+              <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
+                {todoRenameActivities.map((activity) => (
+                  <SelectorTest
+                    key={activity.id}
+                    onClick={(e) => handleCheck(activity.id, e)}
+                    checked={activitiesChecked.find((v) => v.id === activity.id)}
+                  >
+                    {activity.title}
+                  </SelectorTest>
+                ))}
+              </div>
+              <div className="flex justify-center md:mt-10">
+                <button onClick={() => setShowNewActivity(true)} className="text-lena-blue-dark font-bold mt-2">
+                  Ajouter une activité non listée
+                </button>
+              </div>
             </div>
             <div className="flex justify-center">
               {!mediaQueryMD && activitiesChecked.length === 0 ? (

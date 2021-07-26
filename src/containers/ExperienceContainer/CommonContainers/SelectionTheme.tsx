@@ -178,7 +178,7 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
         <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5 w-full">
           {mediaQueryMD ? (
             <div className="flex flex-col w-full items-center">
-              <h2 className="text-lena-blue-dark">
+              <h2 className="text-lena-blue-dark text-center font-bold text-xl leading-10">
                 Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
               </h2>
               <WebDomainDisplay data={data} theme={theme} setTheme={setTheme} />

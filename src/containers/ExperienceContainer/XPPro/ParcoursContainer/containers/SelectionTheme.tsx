@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import SearchSvg from 'assets/images/svg/picto/search.svg';
 import CrossSvg from 'assets/images/svg/picto/cross_turquoise.svg';
+import LoupeSvg from 'assets/svg/loupe.svg';
 import HelpSvg from 'assets/images/svg/picto/help.svg';
 import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import classNames from 'common/utils/classNames';
@@ -24,14 +25,14 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
     <div>
       <div
         className={`focus:ring-0 focus:outline-none w-full py-1 text-left
-      flex justify-between border-b border-lena-lightgray2`}
+      flex justify-between border-b border-lena-lightgray2 `}
       >
-        {children}
+        #{children}
       </div>
       {domains.map((t) => (
         <div
           onClick={() => onSelect.call(null, t)}
-          className="cursor-pointer px-4 py-1 divide-y divide-lena-lightgray2"
+          className="cursor-pointer px-5 py-2 divide-y divide-lena-lightgray2 border-b border-lena-lightgray2"
         >
           {t?.title}
         </div>
@@ -149,7 +150,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
       </div>
       <div className="divide-y divide-lena-lightgray2" style={{ boxShadow: '0 -5px 5px -5px rgba(0,0,0,.2)' }}>
         <div>
-          <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+          <div className="py-1 px-8 bg-lena-turquoise-light">
             <strong>Métiers</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2">
@@ -168,7 +169,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
           </div>
         </div>
         <div>
-          <div className="py-1 px-7 bg-lena-lightgray bg-opacity-50">
+          <div className="py-1 px-7 bg-lena-turquoise-light bg-opacity-50 ">
             <strong>Tags</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2 px-8">
@@ -213,7 +214,7 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
       className="border border-lena-lightgray rounded-md overflow-y-auto divide-y divide-lena-lightgray2"
     >
       <div>
-        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+        <div className="py-1 px-8 bg-lena-turquoise-light">
           <strong>Métiers</strong>
         </div>
         <div className="divide-y divide-lena-lightgray2">
@@ -233,7 +234,7 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
       </div>
 
       <div>
-        <div className="py-1 px-8 bg-lena-lightgray bg-opacity-50">
+        <div className="py-1 px-8 bg-lena-turquoise-light">
           <strong>Tags</strong>
         </div>
         <div className="divide-y divide-lena-lightgray2 px-8">
@@ -262,16 +263,16 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   const mediaQuery2XL = useMediaQuery('2xl');
   const [text, setText] = useState(String);
 
-  const [getThemes, { loading, data }] = useLazyThemes();
-  const [getTags, { loading: loadingTags, data: dataTags }] = useListTags();
+  const [getThemesCall, getThemesState] = useLazyThemes();
+  const [getTagsCall, getTagsState] = useListTags();
 
   const handleThemes = (title: string) => {
     setText(title);
   };
 
   useEffect(() => {
-    getThemes({ variables: { domain: 'professional', title: text } });
-    getTags({ variables: { title: text } });
+    getThemesCall({ variables: { domain: 'professional', title: text } });
+    getTagsCall({ variables: { title: text } });
   }, [text]);
 
   return !showSearch ? (
@@ -288,20 +289,28 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
             <PictoExpPro />
             <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
           </div>
-          <div className="text-lena-blue-dark">Décrivez en quelques mots votre expérience professionnelle :</div>
-          <div className="w-3/4">
+          <div className="text-lena-blue-dark text-xl font-bold">
+            Décrivez en quelques mots votre expérience professionnelle :{' '}
+          </div>
+          <div className="flex items-center w-3/4 border border-gray-200 rounded px-2">
+            <img src={LoupeSvg} alt="loupe" className="w-5" />
             <input
               onClick={() => !mediaQueryMD && setShowSearch(true)}
               type="text"
               value={text}
               onChange={(e) => handleThemes(e.currentTarget.value)}
-              className="border-red-400 rounded-md w-full"
+              className="w-full border-0 focus:outline-none focus:ring-0"
               placeholder="Vente de fleurs"
             />
           </div>
           <div className="w-full">
             {mediaQueryMD && text.length > 2 && (
-              <DomainList setTheme={setTheme} theme={theme} tags={dataTags?.tags.data} data={data?.themes.data} />
+              <DomainList
+                setTheme={setTheme}
+                theme={theme}
+                tags={getTagsState.data?.tags.data}
+                data={getThemesState.data?.themes.data}
+              />
             )}
           </div>
         </div>

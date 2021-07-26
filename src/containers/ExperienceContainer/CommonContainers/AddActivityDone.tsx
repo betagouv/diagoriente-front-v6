@@ -4,7 +4,6 @@ import { Theme } from 'common/requests/types';
 import Illustration from 'assets/svg/illu_01.svg';
 import InfoPicto from 'assets/svg/picto_info.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
-import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
 import ModalInfo from './Modals/InfoQuestionnaire';
 
 interface Props {
