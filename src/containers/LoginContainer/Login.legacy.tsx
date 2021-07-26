@@ -6,7 +6,7 @@ import useLogin from 'common/container/auth/useLogin';
 import AppLayout from 'layouts/AppLayout';
 import Button from 'components/design-system/Button';
 
-const LoginContainer = () => {
+const LegacyLoginContainer = () => {
   const { user, formik, errorForm, loginState } = useLogin();
 
   return (
@@ -67,4 +67,4 @@ const LoginContainer = () => {
   );
 };
 
-export default LoginContainer;
+export default LegacyLoginContainer;

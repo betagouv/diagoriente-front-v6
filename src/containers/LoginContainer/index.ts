@@ -1,3 +1,3 @@
 import createLazyComponent from 'utils/createLazyComponent';
 
-export default createLazyComponent(() => import('./Login'));
+export default createLazyComponent(() => import('./LoginContainer'));
