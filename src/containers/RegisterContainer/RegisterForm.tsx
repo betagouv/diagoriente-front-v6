@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import InputComponent from 'components/Register/Input';
-import Checkbox from 'components/Register/Checkbox';
+import Checkbox from 'components/design-system/Checkbox';
 import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
 import classNames from 'common/utils/classNames';
@@ -173,7 +173,7 @@ const RegisterForm: FunctionComponent = () => {
               selectShow={openLocation}
               withSelect={data?.location.map((location) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                <li className="p-1" onClick={() => onSelect(location)}>
+                <li key={location.citycode} className="p-1" onClick={() => onSelect(location)}>
                   {location.postcode} {location.label}
                 </li>
               ))}

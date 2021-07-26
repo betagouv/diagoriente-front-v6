@@ -11,7 +11,7 @@ import { ReactComponent as LoveTLSvg } from 'assets/svg/love_turquoise_light.svg
 import { ReactComponent as TimeJobSvg } from 'assets/svg/time_job.svg';
 import { ReactComponent as ChartJobSvg } from 'assets/svg/chart_job.svg';
 import classNames from 'common/utils/classNames';
-import { Doughnut, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 
 const AboutJob = () => {
   const data = {
@@ -115,9 +115,9 @@ const AboutJob = () => {
             <li>- Répartition par type de contrat :</li>
           </ul>
           <div className="flex space-x-5 items-center mt-8">
-            <div className="w-1/3">
-              <Pie type="" data={data} />
-            </div>
+            <div className="w-1/3"/>
+               
+          
             <ul>
               {data.datasets.map((d, i) =>
                 d.backgroundColor.map((b, j) => (
@@ -163,7 +163,7 @@ const DetailJob = () => {
       <header style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
         <div className="container flex justify-between items-center">
           <button
-            onClick={() => (showAbout ? setShowAbout(false) : history.push('/top_metiers/rechercher/resultats'))}
+            onClick={() => (showAbout ? setShowAbout(false) : history.push('/metiers/recherche/resultats'))}
             className="flex items-center space-x-2 focus:outline-none focus:ring-0"
           >
             <ArrowLeftSvg style={{ height: 12, width: 12 }} />
@@ -210,7 +210,7 @@ const DetailJob = () => {
               <div className="-mt-5 mb-4">
                 <SearchSvg />
               </div>
-              <div className="flex flex-col items-center text-center">
+              <div className="flex flex-col items-center text-center px-4">
                 <span className="text-lena-blue-dark font-bold w-3/4 block mb-4">
                   Trouver une immersion ou une formation pour ce métier
                 </span>
@@ -264,7 +264,7 @@ const DetailJob = () => {
               <Interest />
             </ul>
             <div
-              className="mt-5 py-7 text-center rounded-md mb-6"
+              className="mt-5 p-6 text-center rounded-md mb-6"
               style={{
                 background: 'linear-gradient(180deg, #F3F2F4 0%, #F3F2F4 51.56%, rgba(243, 242, 244, 0) 100%), #F3F2F4',
               }}

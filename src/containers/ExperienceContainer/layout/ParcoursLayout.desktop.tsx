@@ -16,6 +16,7 @@ interface PropsBox {
 }
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
+  const context = useContext(NewExperienceContext);
   const location = useLocation();
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
@@ -53,8 +54,8 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   };
   const path = () => {
     let text = '';
-    if (params.type) {
-      switch (params.type) {
+    if (context.experienceType) {
+      switch (context.experienceType) {
         case 'professional': {
           text = 'professionnelles';
           break;

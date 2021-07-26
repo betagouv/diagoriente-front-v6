@@ -51,7 +51,9 @@
     "jsx-a11y/no-static-element-interactions": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "no-plusplus": "off",
-    "react/jsx-boolean-value": "off"
+    "react/jsx-boolean-value": "off",
+    // Interests cursors do not have an id field
+    "react/no-array-index-key": "warn"
   },
   "env": {
     "node": true

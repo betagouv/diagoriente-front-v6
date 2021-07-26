@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
-type AppResponsiveBreakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+type AppResponsiveBreakpoint = 'default' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 const mediaQueries: Record<AppResponsiveBreakpoint, string> = {
+  default: '(max-width: 640px)', // targets between 0-640px (most phones)
   sm: '(min-width: 640px)',
   md: '(min-width: 768px)',
   lg: '(min-width: 1024px)',

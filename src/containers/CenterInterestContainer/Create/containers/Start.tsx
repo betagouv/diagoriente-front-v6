@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/interet.svg';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 
 type Props = {
   onStep: () => void;
@@ -9,7 +9,7 @@ type Props = {
 
 const Start = ({ onStep }: Props) => {
   return (
-    <ParcoursLayout>
+    <InterestsParcoursLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14 text-center">
         <div
           className={`flex flex-col justify-center items-center
@@ -37,7 +37,7 @@ const Start = ({ onStep }: Props) => {
           Commencer
         </button>
       </div>
-    </ParcoursLayout>
+    </InterestsParcoursLayout>
   );
 };
 

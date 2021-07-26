@@ -16,7 +16,7 @@ const AddActivityDone = ({ theme }: Props) => {
   const [open, setOpen] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
 
-  const Desckcontainer = () => (
+  const DesktopContainer = () => (
     <div className="container flex flex-col items-center justify-center space-y-8">
       <div className="w-full flex justify-center">
         <img src={Illustration} alt="Illustration" />
@@ -140,6 +140,7 @@ const AddActivityDone = ({ theme }: Props) => {
       )}
     </div>
   );
+
   return (
     <>
       <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full h-screen">

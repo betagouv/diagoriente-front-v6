@@ -13,7 +13,7 @@ export enum EParcoursStep {
 
 // TODO: Maybe migrate this to Redux or use Apollo cache,
 //  so we don't store database data in states
-export type LocalExperienceType = 'personal' | 'professional' | 'engagement';
+export type LocalExperienceType = string;
 export type LocalParcoursTheme = Theme;
 export type LocalParcoursActivity = Activity;
 export type LocalParcoursCompetence = Competence;
@@ -23,6 +23,7 @@ type ParcoursContextData = {
   step: EParcoursStep;
   setStep: (step: EParcoursStep) => void;
   experienceType: LocalExperienceType;
+  setExperienceType: (type: LocalExperienceType) => void;
   activities: LocalParcoursActivity[];
   setActivities: (activities: LocalParcoursActivity[]) => void;
   competences: LocalParcoursCompetence[];
@@ -37,6 +38,7 @@ export const NewExperienceContext = createContext<ParcoursContextData>({
   step: EParcoursStep.THEME,
   setStep: () => {},
   experienceType: 'personal',
+  setExperienceType: () => {},
   activities: [],
   setActivities: () => {},
   competences: [],

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useListSkills } from 'common/requests/skills';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
@@ -26,7 +26,7 @@ type ExperienceProps = {
   };
 };
 
-const Experience: React.FC<ExperienceProps> = ({ title, startDate, endDate, description, certified }) => (
+const CardExperience: React.FC<ExperienceProps> = ({ title, startDate, endDate, description, certified }) => (
   <div className="bg-white p-4 rounded-lg mb-2" style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }}>
     <div className="flex justify-between items-start mb-2">
       <div className={classNames(certified && 'flex items-center')}>
@@ -68,16 +68,18 @@ const Experience: React.FC<ExperienceProps> = ({ title, startDate, endDate, desc
   </div>
 );
 
-const ExperienceXPProContainer = () => {
+const MyExperiencesByThemeContainer = () => {
   const history = useHistory();
   const location = useLocation();
-  const params = decodeUri(location.search);
+  const params = useParams<{ type: string }>();
   const [callSkills, skillsState] = useListSkills();
+
   useDidMount(() => {
     if (params.type) {
       callSkills({ variables: { domain: params.type } });
     }
   });
+
   const path = () => {
     let text = '';
     let text2 = '';
@@ -97,7 +99,7 @@ const ExperienceXPProContainer = () => {
           break;
         }
         case 'voluntary': {
-          text = 'bénévolat';
+          text = 'de bénévolat';
           url = 'voluntary';
           break;
         }
@@ -115,6 +117,7 @@ const ExperienceXPProContainer = () => {
       url,
     };
   };
+
   return (
     <div className="min-h-screen h-full flex flex-col">
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-light py-5">
@@ -123,7 +126,7 @@ const ExperienceXPProContainer = () => {
             <ExpProSvg />
             <span className="font-bold ml-3 text-lena-blue-dark">Mes expériences {path().text}</span>
           </div>
-          <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/experience')}>
+          <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/mes-experiences')}>
             <CrossSvg fill="#223A7A" />
           </button>
         </div>
@@ -136,7 +139,7 @@ const ExperienceXPProContainer = () => {
           <div className="mt-4">
             {skillsState.data?.skills.data.map((exp) => {
               return (
-                <Experience
+                <CardExperience
                   key={exp.id}
                   title={exp.theme.title}
                   startDate={exp.startDate}
@@ -163,4 +166,4 @@ const ExperienceXPProContainer = () => {
   );
 };
 
-export default ExperienceXPProContainer;
+export default MyExperiencesByThemeContainer;

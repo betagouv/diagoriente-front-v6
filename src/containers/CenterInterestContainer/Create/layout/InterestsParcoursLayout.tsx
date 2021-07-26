@@ -9,7 +9,12 @@ type Props = {
   backgroundColor?: string;
 };
 
-const ParcoursLayout: FunctionComponent<Props> = ({ withRange, withMobile = true, backgroundColor, children }) => {
+const InterestsParcoursLayout: FunctionComponent<Props> = ({
+  withRange,
+  withMobile = true,
+  backgroundColor,
+  children,
+}) => {
   const isDesktop = useMediaQuery('md');
 
   return isDesktop ? (
@@ -23,4 +28,4 @@ const ParcoursLayout: FunctionComponent<Props> = ({ withRange, withMobile = true
   );
 };
 
-export default ParcoursLayout;
+export default InterestsParcoursLayout;

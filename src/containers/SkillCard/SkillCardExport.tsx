@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import classNames from 'common/utils/classNames';
-import Checkbox from 'components/Register/Checkbox';
+import Checkbox from 'components/design-system/Checkbox';
 import Star from 'components/design-system/Star';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import CloseSvg from 'assets/svg/cross2.svg';
@@ -74,7 +74,7 @@ const Experience: React.FC<ExperienceProps> = ({ checked, title, date, exp, reco
               <div className="flex items-center">
                 <img src={MedailleSvg} alt="Medaille Svg" />
                 <span className="bg-lena-yellow inline-block ml-4 px-3 text-sm py-1 rounded-md bg-opacity-50 font-bold">
-                  EXPÉRIENCE RECOMMANDÉE
+                  EXPéRIENCE RECOMMANDéE
                 </span>
               </div>
               <div className="mt-3">
