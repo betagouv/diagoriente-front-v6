@@ -14,9 +14,10 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
-import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import { useInterest } from 'common/requests/interests';
+import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import AppLoader from '../../../../components/ui/AppLoader';
+
 
 type InterestContent = {
   id: string;
