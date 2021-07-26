@@ -115,9 +115,9 @@ const AboutJob = () => {
             <li>- Répartition par type de contrat :</li>
           </ul>
           <div className="flex space-x-5 items-center mt-8">
-            <div className="w-1/3">
+            <div className="w-1/3"/>
                
-            </div>
+          
             <ul>
               {data.datasets.map((d, i) =>
                 d.backgroundColor.map((b, j) => (
