@@ -116,7 +116,7 @@ const AboutJob = () => {
           </ul>
           <div className="flex space-x-5 items-center mt-8">
             <div className="w-1/3">
-              <Pie type="" data={data} />
+               
             </div>
             <ul>
               {data.datasets.map((d, i) =>
