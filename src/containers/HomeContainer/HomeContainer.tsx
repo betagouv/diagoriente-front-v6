@@ -24,7 +24,7 @@ const HomeContainer = () => {
           </Link>
         </div>
         <div className="mb-2">
-          <Link to="/mes-experiences">
+          <Link to="/profil/mes-experiences">
             <button
               className={`bg-lena-blue w-full text-white font-bold py-3
               rounded-md focus:ring-0 focus:outline-none`}

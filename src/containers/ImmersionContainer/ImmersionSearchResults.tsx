@@ -52,7 +52,10 @@ const ImmersionSearchResults = () => {
     <div>
       <header style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
         <div className="container flex justify-between items-center">
-          <div className="flex text-sm space-x-2 text-lena-pink-dark" onClick={() => setOpenFilters(true)}>
+          <div
+            className="cursor-pointer flex text-sm space-x-2 text-lena-pink-dark"
+            onClick={() => setOpenFilters(true)}
+          >
             <PictoFiltres />
             <span>Filtrer</span>
           </div>

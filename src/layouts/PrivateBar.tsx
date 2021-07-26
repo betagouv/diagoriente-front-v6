@@ -13,7 +13,7 @@ const PrivateBarLayout = () => {
           {user?.firstName} {user?.lastName}
         </span>
         <button className="focus:outline-none focus:ring-0" onClick={() => history.push('/profil/reglages')}>
-          <SettingsSvg fill="#fff" height={25} />
+          <SettingsSvg fill="#fff" height={24} />
         </button>
       </div>
     </div>

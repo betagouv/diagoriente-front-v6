@@ -30,7 +30,7 @@ type InterestProps = {
   selectedInterests: string[];
 };
 
-const InterestCardForMobile = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
+const FamilyCardForMobile = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
 
@@ -88,7 +88,7 @@ const InterestCardForMobile = ({ position, content, onToggleInterest, selectedIn
   );
 };
 
-const InterestCardForDesktop = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
+const FamilyCardForDesktop = ({ position, content, onToggleInterest, selectedInterests }: InterestProps) => {
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
 
@@ -122,7 +122,7 @@ const InterestCardForDesktop = ({ position, content, onToggleInterest, selectedI
             <div
               key={v.id}
               className={classNames(
-                'text-center py-5 px-5 border-2 rounded-md cursor-pointer',
+                'text-center py-5 px-5 border-2 rounded-md cursor-pointer w-50',
                 selectedInterests.includes(v.id)
                   ? 'bg-lena-yellow border-lena-yellow-dark'
                   : 'bg-lena-yellow-light border-transparent',
@@ -293,8 +293,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                 }}
               >
                 {getInterestState.data?.interest.cursors.map((v, index) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <InterestCardForMobile
+                  <FamilyCardForMobile
                     key={index}
                     content={v}
                     position={index}
@@ -319,7 +318,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                     {getInterestState.data?.interest.cursors.map((v, index) => (
                       // eslint-disable-next-line react/no-array-index-key
                       <div key={index} className="relative flickingDiv">
-                        <InterestCardForDesktop
+                        <FamilyCardForDesktop
                           content={v}
                           position={index}
                           onToggleInterest={handleToggleInterest}

@@ -126,15 +126,15 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => {
             className={`bg-white rounded-md py-4 px-2 w-full md:w-auto md:px-14
             block text-lena-blue-dark font-bold text-sm mb-4`}
           >
-            Je ne sais pas vers quel métier m'orienter
-            <br />
-            Je veux me réorienter
+            <div className="text-lg">Je ne sais pas</div>
+            <div>vers quel métier m'orienter</div>
           </button>
           <button
             className={`bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full
           block text-lena-blue-dark font-bold text-sm`}
           >
-            J'ai une idée précise du métier que je recherche
+            <div className="text-lg">J'ai une idée précise</div>
+            <div>du métier que je recherche</div>
           </button>
           <span className="text-white inline-block mt-10">Comment ça marche ?</span>
         </div>
@@ -149,7 +149,7 @@ const ChoiceComponent = () => {
     <div>
       <div
         style={{
-          background: `url(${OnBoardingChoiceHeader}) no-repeat fixed`,
+          background: `url(${OnBoardingChoiceHeader})`,
           backgroundSize: 'cover',
         }}
         className={classNames('px-9 py-10 text-center space-y-5 relative')}
