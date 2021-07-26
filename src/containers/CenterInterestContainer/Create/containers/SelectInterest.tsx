@@ -15,7 +15,7 @@ import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
-import { useInterest } from '../../../../common/requests/interests';
+import { useInterest } from 'common/requests/interests';
 import AppLoader from '../../../../components/ui/AppLoader';
 
 type InterestContent = {
