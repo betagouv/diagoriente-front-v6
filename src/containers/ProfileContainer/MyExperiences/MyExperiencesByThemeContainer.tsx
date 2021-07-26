@@ -1,6 +1,6 @@
 import React from 'react';
 import { useListSkills } from 'common/requests/skills';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
@@ -121,14 +121,14 @@ const MyExperiencesByThemeContainer = () => {
   return (
     <div className="min-h-screen h-full flex flex-col">
       <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-light py-5">
-        <div className="container flex justify-between w-full">
+        <div className="container flex justify-between items-center w-full">
           <div className="flex items-center">
             <ExpProSvg />
             <span className="font-bold ml-3 text-lena-blue-dark">Mes expériences {path().text}</span>
           </div>
-          <button className="focus:ring-0 focus:outline-none" onClick={() => history.push('/mes-experiences')}>
+          <Link className="focus:ring-0 focus:outline-none" to="/profil/mes-experiences">
             <CrossSvg fill="#223A7A" />
-          </button>
+          </Link>
         </div>
       </div>
       <div style={{ background: 'rgb(250,250,250)' }} className="pt-9 flex flex-col justify-start flex-1">

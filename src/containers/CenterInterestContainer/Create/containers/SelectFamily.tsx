@@ -38,7 +38,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
       >
         <li
           className={classNames(
-            'flex justify-between items-center px-10 py-2 md:py-5 rounded-lg border-2 relative',
+            'flex justify-between items-center px-4 md:px-8 py-2 md:py-4 rounded-lg border-2 relative',
             'hover:bg-opacity-60 hover:border-lena-gray-light-2 bg-opacity-30',
             active
               ? 'bg-lena-yellow-light border-lena-yellow hover:border-lena-yellow-dark'
@@ -96,7 +96,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
           <div className="flex justify-center">
             <button className="focus:outline-none focus:ring-0 flex flex justify-center items-center mt-7 space-x-2">
               <InfoSvg />
-              <span className="text-lena-blue-dark">Comment ça marche ?</span>
+              <span className="text-lena-blue-dark">En quoi cela va m’aider à trouver mon orientation ?</span>
             </button>
           </div>
         </div>

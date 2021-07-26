@@ -5,6 +5,7 @@ import ProfileSettingsContainer from './Settings/ProfileSettingsContainer';
 import EditLogin from './Settings/containers/EditLogin';
 import MyExperiencesContainer from './MyExperiences/MyExperiencesContainer';
 import MyExperiencesByThemeContainer from './MyExperiences/MyExperiencesByThemeContainer';
+import MyInterestsContainer from './Interests/MyInterestsContainer';
 
 type Props = {
   path: string;
@@ -15,6 +16,8 @@ const ProfileRoute = ({ path }: Props) => {
     <Switch>
       <Route exact path={`${path}/mes-experiences`} component={MyExperiencesContainer} />
       <Route exact path={`${path}/mes-experiences/:type`} component={MyExperiencesByThemeContainer} />
+
+      <Route exact path={`${path}/mes-centres-d-interet/`} component={MyInterestsContainer} />
 
       <Route exact path={`${path}/reglages`} component={ProfileSettingsContainer} />
       <Route exact path={`${path}/reglages/infos`} component={EditInfoContainer} />

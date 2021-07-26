@@ -16,7 +16,7 @@ const HomeContainer = () => {
     { label: 'Mon profil', url: '/profil' },
     { label: 'Ma carte de compétences', url: '/skill_card' },
     { label: 'Mes expériences', url: '/profil/mes-experiences' },
-    { label: "Mes centres d'intérêts", url: '/centres_interet' },
+    { label: "Mes centres d'intérêts", url: '/profil/mes-centres-d-interet/' },
     { label: "Ajouter mes centres d'intérêts", url: '/centres_interet/create' },
     { label: 'Mon top métiers', url: '/top_metiers' },
     { label: 'Rechercher une immersion', url: '/immersion/recherche' },
