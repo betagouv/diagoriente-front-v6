@@ -5,26 +5,20 @@ import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit_white.svg';
 import PrivateBarLayout from 'layouts/PrivateBar';
+import ProfileLayout from '../../../layouts/ProfileLayout/ProfileLayout';
 
 const ProfileSettingsContainer = () => {
   const history = useHistory();
   const { user } = useContext(userContext);
+
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <PrivateBarLayout />
-      <div style={{ background: 'rgb(250,250,250)' }} className="pt-3 flex flex-col justify-start flex-1 pb-20">
-        <div className="container">
-          <button
-            onClick={() => history.push('/profil')}
-            className="flex items-center mb-5 focus:ring-0 focus:outline-none"
-          >
-            <ArrowLeftSvg />
-            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-          </button>
-          <div className="flex flex-col items-center mb-7">
-            <h2 className="font-bold text-lena-blue-dark uppercase mt-3">Réglages</h2>
-          </div>
-          <div className="mx-4 mb-12">
+    <ProfileLayout>
+      <div className="container py-8 flex flex-col space-y-8 items-center">
+        <div className="flex flex-col items-center">
+          <h2 className="font-bold text-lena-blue-dark text-xl">Réglages</h2>
+        </div>
+        <div className="w-3/4 flex flex-col space-y-8">
+          <div>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lena-blue-dark font-bold">Mes infos</h3>
               <button
@@ -51,7 +45,7 @@ const ProfileSettingsContainer = () => {
               <span className="block flex-shrink overflow-hidden overflow-ellipsis">{user?.group}</span>
             </div>
           </div>
-          <div className="mx-4 mb-5">
+          <div>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lena-blue-dark font-bold">Mes identifiants de connexion</h3>
               <button
@@ -72,7 +66,7 @@ const ProfileSettingsContainer = () => {
           </div>
         </div>
       </div>
-    </div>
+    </ProfileLayout>
   );
 };
 

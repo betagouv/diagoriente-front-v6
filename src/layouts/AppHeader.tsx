@@ -48,59 +48,49 @@ const AppHeader: FunctionComponent = () => {
         >
           <div className="border-b border-lena-lightgray2">
             <ul>
-              <Link to="/experience">
-                <li className="flex items-center hover:bg-lena-turquoise-light px-5 py-2">
-                  <div style={{ width: 18 }}>
-                    <StarSvg />
-                  </div>{' '}
-                  <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes expériences</span>
+              <Link to="/profil/mes-experiences">
+                <li className="flex flex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
+                  <StarSvg height={18} width={18} />
+                  <div className="text-lena-blue-dark font-bold">Mes expériences</div>
                 </li>
               </Link>
               <Link to="/centres_interet">
-                <li className="flex items-center hover:bg-lena-turquoise-light px-5 py-2">
-                  <div style={{ width: 18 }}>
-                    <HeartSvg />
-                  </div>{' '}
-                  <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mes centres d'intérêt</span>
+                <li className="flex flex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
+                  <HeartSvg height={18} width={18} />
+                  <div className="text-lena-blue-dark font-bold">Mes centres d'intérêt</div>
                 </li>
               </Link>
-              <li className="flex items-center hover:bg-lena-turquoise-light px-5 py-2">
-                <div style={{ width: 18 }}>
-                  <CVSvg />
-                </div>{' '}
-                <span className="ml-3 text-lena-blue-dark font-bold mt-1">Mon CV compétences</span>
-              </li>
+              <Link to="/skill_card">
+                <li className="flex lex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
+                  <CVSvg height={18} width={18} />
+                  <div className="text-lena-blue-dark font-bold">Mon CV compétences</div>
+                </li>
+              </Link>
             </ul>
           </div>
           <div className="border-b border-lena-lightgray2">
             <ul>
               <Link to="/profil/reglages">
-                <li className="flex items-center hover:bg-lena-turquoise-light px-5 py-2">
-                  <div style={{ width: 18 }}>
-                    <SettingsSvg />
-                  </div>{' '}
-                  <span className="ml-3 text-lena-blue-dark mt-1">Mes réglages</span>
+                <li className="flex flex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
+                  <SettingsSvg height={18} width={18} />
+                  <div className="text-lena-blue-dark">Mes réglages</div>
                 </li>
               </Link>
             </ul>
           </div>
           <div className="border-b border-lena-lightgray2">
             <ul>
-              <li className="flex items-center hover:bg-lena-turquoise-light px-5 py-2">
-                <div style={{ width: 18 }}>
-                  <SearchSvg />
-                </div>{' '}
-                <span className="ml-3 text-lena-blue-dark mt-1">Recherche (stage, emploi...)</span>
+              <li className="flex  flex-row items-center space-x-4  hover:bg-lena-turquoise-light px-5 py-2">
+                <SearchSvg height={18} width={18} />
+                <div className="text-lena-blue-dark">Recherche (stage, emploi...)</div>
               </li>
             </ul>
           </div>
           <div className="bg-lena-lightgray hover:bg-lena-purple-light rounded-b-lg">
             <ul>
-              <li className="flex items-center pb-2 px-5 py-2">
-                <div style={{ width: 18 }}>
-                  <LogoutSvg className="-mt-1" />
-                </div>{' '}
-                <span className="ml-3 mt-1">Déconnexion</span>
+              <li className="flex flex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
+                <LogoutSvg height={18} width={18} />
+                <div>Déconnexion</div>
               </li>
             </ul>
           </div>

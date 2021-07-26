@@ -136,15 +136,6 @@ const SkillCardContainer: FunctionComponent = () => {
     <div className="pb-10 mb-10">
       {mediaQueryMD ? (
         <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
-          <div>
-            <button
-              className="
-              bg-white p-2 rounded-full flex items-center justify-center cursor-pointer focus:ring-0 focus:outline-none"
-              style={{ height: 45, width: 45 }}
-            >
-              <img src={MenuSkillSvg} alt="Menu Icon" style={{ height: 25, width: 25 }} />
-            </button>
-          </div>
           <div className="flex justify-around flex-grow">
             <div className="md:w-96 pt-10">
               <h2 className="text-white uppercase font-bold text-2xl mb-3">Ma carte de compétences</h2>
@@ -187,7 +178,9 @@ const SkillCardContainer: FunctionComponent = () => {
             <div className="py-7 bg-white rounded-b-md">
               <div className="flex items-center mb-7 px-8">
                 <img className="mr-5" src={BrainSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPéTENCES TRANSVERSALES</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                  MES COMPéTENCES TRANSVERSALES
+                </span>
               </div>
               <div className="px-8">
                 <Skill
@@ -217,7 +210,9 @@ const SkillCardContainer: FunctionComponent = () => {
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
               <div className="flex items-center mb-7 px-8">
                 <img className="mr-5" src={LoveSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES COMPéTENCES D’ENGAGEMENT</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                  MES COMPéTENCES D’ENGAGEMENT
+                </span>
               </div>
               <div className="px-8">
                 <Skill
@@ -254,7 +249,7 @@ const SkillCardContainer: FunctionComponent = () => {
             <div className="py-7 bg-white rounded-b-md">
               <div className="flex items-center mb-7 px-10">
                 <img className="mr-5" src={BagSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPéRIENCES PRO</span>
+                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">MES EXPéRIENCES PRO</span>
               </div>
               <div className="px-10">
                 <Experience
@@ -299,7 +294,9 @@ const SkillCardContainer: FunctionComponent = () => {
                   <div className="flex items-center justify-between mb-7">
                     <div className="flex items-center">
                       <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
-                      <span className="text-lena-blue-dark font-bold mt-2 text-lg">MES EXPéRIENCES PERSOS</span>
+                      <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                        MES EXPéRIENCES PERSOS
+                      </span>
                     </div>
                     <div className="absolute right-6 top-6 flex flex-col justify-center items-center">
                       <img src={EditSvg} alt="Edit Icon" />
