@@ -67,7 +67,6 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
       history.push(`/experience/theme/${theme.id}/questions?type=${theme.domain}`);
     }
   };
-  console.log('selected', selected);
   const RendQuestionStep = ({ title, questions }: QuestionType) => {
     return (
       <div className="flex flex-col items-center p-8">
