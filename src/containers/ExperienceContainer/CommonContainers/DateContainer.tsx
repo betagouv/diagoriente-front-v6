@@ -23,7 +23,7 @@ const DateContainer = ({ theme, activities, levels, competencesValues }: Props) 
   const [monthEnd, setMonthEnd] = useState('Janvier');
   const [yearEnd, setYearEnd] = useState('');
   const [currentTime, setCurrentTime] = useState(false);
-
+  const [error, setError] = useState('');
   const onAddSkill = () => {
     if (theme?.id && activities.length && competencesValues.length && levels.length) {
       const dataToSend: {
@@ -49,7 +49,7 @@ const DateContainer = ({ theme, activities, levels, competencesValues }: Props) 
       }
       addSkillCall({ variables: dataToSend });
     } else {
-      console.log('error');
+      setError('veuillez compléter tous les étapes');
     }
   };
   useEffect(() => {

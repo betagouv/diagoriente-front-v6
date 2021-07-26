@@ -9,14 +9,14 @@ import classNames from 'common/utils/classNames';
 
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useLazyThemes } from 'common/requests/themes';
-import { Activity, Sector, Tag, Theme } from 'common/requests/types';
+import { Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
 import ParcoursLayout from '../../../layout/ParcoursLayout';
 
 type JobTag = {
   id: string;
-  domains: Sector | undefined;
-  onSelect: (job: Sector) => void;
+  domains: Theme[];
+  onSelect: (job: Theme) => void;
 };
 
 const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }) => {
@@ -28,7 +28,14 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
       >
         {children}
       </div>
-      <div className="px-4 py-1 divide-y divide-lena-lightgray2">{domains?.title}</div>
+      {domains.map((t) => (
+        <div
+          onClick={() => onSelect.call(null, t)}
+          className="cursor-pointer px-4 py-1 divide-y divide-lena-lightgray2"
+        >
+          {t?.title}
+        </div>
+      ))}
     </div>
   );
 };
@@ -167,7 +174,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
           <div className="divide-y divide-lena-lightgray2 px-8">
             {getTagsState &&
               getTagsState.data?.tags.data.map((domain) => (
-                <SearchJobTag key={domain.id} id={domain.id} domains={domain.sector} onSelect={() => console.log('ok')}>
+                <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
                   {domain.title}
                 </SearchJobTag>
               ))}
@@ -231,11 +238,13 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
         </div>
         <div className="divide-y divide-lena-lightgray2 px-8">
           {tags &&
-            tags.map((domain) => (
-              <SearchJobTag key={domain.id} id={domain.id} domains={domain.sector} onSelect={() => console.log('ok')}>
-                {domain.title}
-              </SearchJobTag>
-            ))}
+            tags.map((domain) => {
+              return (
+                <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
+                  {domain.title}
+                </SearchJobTag>
+              );
+            })}
         </div>
       </div>
     </div>
