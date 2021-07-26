@@ -4,7 +4,7 @@ import { decodeUri } from 'common/utils/url';
 
 import ProgressBar from 'components/design-system/ProgressBar';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import AppHeader from 'layouts/AppHeader';
+import AppHeader from 'layouts/AppLayout/components/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import SaveButtonComponent from 'components/design-system/SaveButton';

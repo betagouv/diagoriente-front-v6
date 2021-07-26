@@ -6,7 +6,7 @@ import { ReactComponent as SaveSvg } from 'assets/svg/save_white.svg';
 import userContext from 'common/contexts/UserContext';
 import TextField from 'components/design-system/TextField';
 import InputComponent from 'components/Register/Input';
-import PrivateBarLayout from 'layouts/PrivateBar';
+import PrivateBarLayout from 'layouts/ProfileLayout/components/ProfileHeader';
 
 const EditInfoContainer = () => {
   const history = useHistory();

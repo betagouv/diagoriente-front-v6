@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactComponent as HeartSvg } from 'assets/svg/heart.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as DeleteSvg } from 'assets/svg/delete.svg';
-import PrivateBarLayout from 'layouts/PrivateBar';
+import PrivateBarLayout from 'layouts/ProfileLayout/components/ProfileHeader';
 
 const CenterInterestContainer = () => {
   const history = useHistory();

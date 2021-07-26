@@ -5,7 +5,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import { ReactComponent as SaveSvg } from 'assets/svg/save_white.svg';
 import TextField from 'components/design-system/TextField';
 import InputComponent from 'components/Register/Input';
-import PrivateBarLayout from 'layouts/PrivateBar';
+import PrivateBarLayout from 'layouts/ProfileLayout/components/ProfileHeader';
 
 const EditLoginContainer = () => {
   const history = useHistory();

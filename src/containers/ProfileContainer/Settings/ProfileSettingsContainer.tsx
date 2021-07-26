@@ -4,7 +4,7 @@ import userContext from 'common/contexts/UserContext';
 import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit_white.svg';
-import PrivateBarLayout from 'layouts/PrivateBar';
+import PrivateBarLayout from 'layouts/ProfileLayout/components/ProfileHeader';
 import ProfileLayout from '../../../layouts/ProfileLayout/ProfileLayout';
 
 const ProfileSettingsContainer = () => {

@@ -8,7 +8,7 @@ import IndividuelSvg from 'assets/svg/individuel.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useInterests } from 'common/requests/interests';
-import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
+import ParcoursInterestsLayout from '../../../../layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
 import { useDidMount } from '../../../../common/hooks/useLifeCycle';
 import AppLoader from '../../../../components/ui/AppLoader';
 
@@ -67,7 +67,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
   };
 
   return (
-    <InterestsParcoursLayout>
+    <ParcoursInterestsLayout>
       <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div className={classNames()}>
           <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
@@ -111,7 +111,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
           Suivant
         </button>
       </div>
-    </InterestsParcoursLayout>
+    </ParcoursInterestsLayout>
   );
 };
 

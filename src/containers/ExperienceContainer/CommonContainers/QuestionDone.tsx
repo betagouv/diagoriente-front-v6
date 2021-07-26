@@ -9,7 +9,7 @@ import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 
 import useMediaQuery from 'hooks/useMediaQuery';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
 import ModalInfo from './Modals/InfoQuestionnaire';
 
 interface Props {

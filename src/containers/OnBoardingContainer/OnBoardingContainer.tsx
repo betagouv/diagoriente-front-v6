@@ -13,7 +13,7 @@ import classNames from 'common/utils/classNames';
 
 import { createPopper } from '@popperjs/core';
 import useMediaQuery from 'hooks/useMediaQuery';
-import AppLayout from '../../layouts/AppLayout';
+import AppLayout from '../../layouts/AppLayout/AppLayout';
 
 type ButtonWithPopoverProps = {
   popover?: string;

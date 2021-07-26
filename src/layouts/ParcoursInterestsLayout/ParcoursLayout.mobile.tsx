@@ -9,7 +9,7 @@ type Props = {
   backgroundColor?: string;
 };
 
-const ParcoursLayoutForMobile: FunctionComponent<Props> = ({ withRange, backgroundColor, children }) => {
+const ParcoursInterestsLayoutForMobile: FunctionComponent<Props> = ({ withRange, backgroundColor, children }) => {
   const { step } = useContext(NewExperienceContext);
 
   return (
@@ -58,4 +58,4 @@ const ParcoursLayoutForMobile: FunctionComponent<Props> = ({ withRange, backgrou
   );
 };
 
-export default ParcoursLayoutForMobile;
+export default ParcoursInterestsLayoutForMobile;

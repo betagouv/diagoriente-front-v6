@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import MenuSkillSvg from 'assets/svg/menu_skill.svg';
+import React, { FunctionComponent, useState } from 'react';
 import ExportSvg from 'assets/svg/export.svg';
-import IlluSkillSvg from 'assets/illu/skill.svg';
+import IlluSkill from 'assets/illu/illu_skill_cropped.png';
+import IlluSkillFull from 'assets/illu/illu_skill_full.png';
 import HelpSvg from 'assets/images/svg/picto/onboarding_help.svg';
 import BrainSvg from 'assets/svg/brain.svg';
 import LoveSvg from 'assets/svg/love.svg';
@@ -9,12 +9,13 @@ import BagSvg from 'assets/svg/bag.svg';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import ExpPersoSvg from 'assets/svg/exp_perso.svg';
 import EditSvg from 'assets/svg/edit.svg';
-import ExportModalSvg from 'assets/svg/modal_export.svg';
 import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
 import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SkillCardExport from './SkillCardExport';
+import classNames from '../../common/utils/classNames';
+import ModalCardExport from './ModalCardExport';
 
 type SkillProps = {
   star: number;
@@ -48,7 +49,7 @@ type ExperienceProps = {
   recommended?: ExperienceRecommended;
 };
 
-const Experience: React.FC<ExperienceProps> = ({ title, date, exp, recommended }) => {
+const Experience: FunctionComponent<ExperienceProps> = ({ title, date, exp, recommended }) => {
   return (
     <div className="flex mb-7">
       <h3 className="text-lena-blue-dark font-bold mr-5">&bull;</h3>
@@ -81,59 +82,16 @@ const Experience: React.FC<ExperienceProps> = ({ title, date, exp, recommended }
   );
 };
 
-type ModalExportProps = {
-  open: boolean;
-  onClose: () => void;
-  onSelect: () => void;
-};
-
-const ModalExport = ({ open, onClose, onSelect }: ModalExportProps) => {
-  return (
-    <ModalComponent onClose={() => onClose.call(null)} open={open}>
-      <div className="flex flex-col justify-center items-center py-10">
-        <img className="mb-6" src={ExportModalSvg} alt="Export Icon" />
-        <h2 className="text-lena-pink-dark font-bold uppercase text-xl text-center">
-          Exporter ma carte de compétences
-        </h2>
-        <div className="md:w-1/2 text-center mt-5 text-sm">
-          Vous allez exporter votre carte de compétences.
-          <br />
-          Vous pouvez sélectionner les expériences et compétences que vous voulez voir apparaître, ou bien l’exporter
-          dans sa totalité.
-        </div>
-        <div className="mt-10 fle">
-          <Button variant="primary">Exporter la carte complète</Button>
-        </div>
-        <div className="py-4">ou</div>
-        <button
-          onClick={() => {
-            onSelect.call(null);
-            onClose.call(null);
-          }}
-          className="text-lena-pink-dark text-sm underline cursor-pointer"
-        >
-          Exporter une sélection
-        </button>
-      </div>
-    </ModalComponent>
-  );
-};
-
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
   const [showSelector, setShowSelector] = useState(false);
   const [showHelpComp, setShowHelpComp] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
 
-  useEffect(() => {
-    document.body.style.backgroundColor = mediaQueryMD ? '#E5E5E5' : 'rgba(34, 58, 122)';
-    document.body.style.overflow = 'auto';
-  }, [document, mediaQueryMD]);
-
   return showSelector ? (
     <SkillCardExport onClose={() => setShowSelector(false)} />
   ) : (
-    <div className="pb-10 mb-10">
+    <div className={classNames('pb-10', mediaQueryMD ? 'bg-lena-lightgray' : 'bg-lena-blue-dark mb-10')}>
       {mediaQueryMD ? (
         <div className="bg-lena-blue-dark pt-5 px-10 flex space-x-24 space-y-5">
           <div className="flex justify-around flex-grow">
@@ -150,27 +108,25 @@ const SkillCardContainer: FunctionComponent = () => {
               </Button>
             </div>
             <div>
-              <img src={IlluSkillSvg} alt="Illustration" />
+              <img src={IlluSkill} alt="Illustration" />
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex justify-center flex-col items-center mt-10">
-          <img className="mb-5" style={{ width: '60%' }} src={IlluSkillSvg} alt="Illustration" />
-          <h2 style={{ fontSize: 22 }} className="font-bold uppercase text-white text-center">
-            Ma carte <br />
-            de compétences
-          </h2>
+        <div className="container flex justify-center flex-col items-center py-8 space-y-4">
+          <img src={IlluSkillFull} alt="Illustration" />
+          <h2 className="text-2xl font-bold uppercase text-white text-center uppercase">Mon CV compétences</h2>
+          <p className="text-sm text-white text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem consectetur ipsum dolor sit amet, con.
+          </p>
         </div>
       )}
 
-      <div className="container mt-10">
+      <div className="container md:my-8">
         <div className="grid md:grid-cols-2 md:auto-cols-max gap-4">
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-turquoise-light rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
-              <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
-                Mes compétences
-              </h3>
+              <h3 className="text-lena-blue-dark uppercase font-bold text-lg">Mes compétences</h3>
               <button onClick={() => setShowHelpComp(true)}>
                 <img src={HelpSvg} alt="Help Icon" />
               </button>
@@ -242,9 +198,7 @@ const SkillCardContainer: FunctionComponent = () => {
           </div>
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-blue-lightest rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
-              <h3 className="text-lena-blue-dark uppercase font-bold" style={{ fontSize: 22 }}>
-                Mes expériences
-              </h3>
+              <h3 className="text-lena-blue-dark uppercase font-bold text-lg">Mes expériences</h3>
             </div>
             <div className="py-7 bg-white rounded-b-md">
               <div className="flex items-center mb-7 px-10">
@@ -325,7 +279,7 @@ const SkillCardContainer: FunctionComponent = () => {
           Exporter
         </button>
       </div>
-      <ModalExport
+      <ModalCardExport
         open={showModalExport}
         onSelect={() => setShowSelector(true)}
         onClose={() => setShowModalExport(false)}

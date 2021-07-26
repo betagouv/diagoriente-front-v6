@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import userContext from 'common/contexts/UserContext';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as SettingsSvg } from '../assets/svg/settings.svg';
+import { ReactComponent as SettingsSvg } from '../../../assets/svg/settings.svg';
 
 const PrivateBarLayout = () => {
   const { user } = useContext(userContext);

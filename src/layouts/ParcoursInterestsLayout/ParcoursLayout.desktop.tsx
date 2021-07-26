@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useContext } from 'react';
 import ProgressBar from 'components/design-system/ProgressBar';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import AppHeader from 'layouts/AppHeader';
+import AppHeader from 'layouts/AppLayout/components/AppHeader';
 import { ReactComponent as HeartSvg } from 'assets/svg/heart_yellow.svg';
 import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 
-const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
+const ParcoursInterestsLayoutForDesktop: FunctionComponent = ({ children }) => {
   const { step, activities, theme, competences, setStep } = useContext(NewExperienceContext);
 
   const backStep = () => {
@@ -95,4 +95,4 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   );
 };
 
-export default ParcoursLayoutForDesktop;
+export default ParcoursInterestsLayoutForDesktop;

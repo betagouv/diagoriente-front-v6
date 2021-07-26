@@ -12,7 +12,7 @@ const NavDivider: FunctionComponent = () => {
   return <div className="border border-white rotate-90 h-4 w-0" />;
 };
 
-const StaticHeader: FunctionComponent = () => {
+const PublicHeader: FunctionComponent = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -109,4 +109,4 @@ const StaticHeader: FunctionComponent = () => {
   );
 };
 
-export default StaticHeader;
+export default PublicHeader;

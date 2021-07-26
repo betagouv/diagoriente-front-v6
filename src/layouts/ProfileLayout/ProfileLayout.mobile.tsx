@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import PrivateBarLayout from '../PrivateBar';
+import PrivateBarLayout from './components/ProfileHeader';
 
 const ProfileLayoutForMobile: FunctionComponent = ({ children }) => {
   return (

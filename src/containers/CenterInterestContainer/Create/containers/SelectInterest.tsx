@@ -15,7 +15,7 @@ import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { useInterest } from 'common/requests/interests';
-import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
+import ParcoursInterestsLayout from '../../../../layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
 import AppLoader from '../../../../components/ui/AppLoader';
 
 type InterestContent = {
@@ -200,7 +200,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   };
 
   return (
-    <InterestsParcoursLayout withMobile={false}>
+    <ParcoursInterestsLayout withMobile={false}>
       <div
         className="flex flex-col flex-1 min-h-screen h-full flex flex-col overflow-x-hidden"
         style={{ backgroundColor: mediaQueryMD ? '#fff' : '#e5e5e5' }}
@@ -342,7 +342,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
           </button>
         </div>
       </div>
-    </InterestsParcoursLayout>
+    </ParcoursInterestsLayout>
   );
 };
 

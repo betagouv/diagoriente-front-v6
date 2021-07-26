@@ -10,7 +10,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
 import AppLoader from '../../../components/ui/AppLoader';
 
 type NewActivity = {

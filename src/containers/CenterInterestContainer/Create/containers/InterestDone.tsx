@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
-import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
+import ParcoursInterestsLayout from '../../../../layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
 import Illustration from '../../../../assets/svg/illu_01.svg';
 
 const InterestDone: FunctionComponent = () => {
   const history = useHistory();
 
   return (
-    <InterestsParcoursLayout>
+    <ParcoursInterestsLayout>
       <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           <div className="container flex flex-col items-center justify-center space-y-8">
@@ -36,7 +36,7 @@ const InterestDone: FunctionComponent = () => {
           </div>
         </div>
       </div>
-    </InterestsParcoursLayout>
+    </ParcoursInterestsLayout>
   );
 };
 

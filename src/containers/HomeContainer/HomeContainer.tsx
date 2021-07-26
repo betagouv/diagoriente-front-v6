@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import userContext from 'common/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
-import AppLayout from 'layouts/AppLayout';
+import AppLayout from 'layouts/AppLayout/AppLayout';
 import Button from '../../components/design-system/Button';
 
 const HomeContainer = () => {

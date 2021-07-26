@@ -7,14 +7,14 @@ import { FormControl, FormLabel } from '../../components/Register/FormController
 import InputComponent from '../../components/Register/Input';
 import FormComment from '../../components/Register/FormComment';
 import Button from '../../components/design-system/Button';
-import StaticHeader from '../../layouts/StaticHeader';
+import PublicHeader from '../../layouts/PublicHeader';
 
 const LoginContainer = () => {
   const { user, formik, errorForm, loginState } = useLogin();
 
   return (
     <div>
-      <StaticHeader />
+      <PublicHeader />
       <div className="md:h-screen w-full flex-1 flex flex-row">
         <div className="flex-1 px-8 pt-8 md:px-16 md:pt-16 bg-lena-lightgray z-10 flex flex-col space-y-16">
           <div className="text-center md:text-left">

@@ -9,7 +9,7 @@ import Environnement from 'assets/svg/Picto_communiquer.svg';
 import { Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 interface Props {
   theme: Theme;

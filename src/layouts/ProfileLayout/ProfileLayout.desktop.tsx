@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ReactComponent as ProfileIcon } from 'assets/svg/user_profile.svg';
 import { Link } from 'react-router-dom';
-import AppHeader from '../AppHeader';
+import AppHeader from '../AppLayout/components/AppHeader';
 
 const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
   return (

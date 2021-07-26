@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'common/utils/classNames';
-import AppFooter from './AppFooter';
-import AppHeader from './AppHeader';
+import AppFooter from './components/AppFooter';
+import AppHeader from './components/AppHeader';
 
 const AppLayout: FunctionComponent<{ className?: string }> = ({ className, children }) => {
   return (

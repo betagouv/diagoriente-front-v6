@@ -4,7 +4,7 @@ import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import { Activity, Theme } from 'common/requests/types';
 import { useLazyTheme } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
-import ParcoursLayout from '../../../layout/ParcoursLayout';
+import ParcoursLayout from '../../../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 interface Props {
   theme: Theme;

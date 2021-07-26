@@ -11,7 +11,7 @@ import { ReactComponent as SearchSvg } from 'assets/svg/search_m.svg';
 import { ReactComponent as SettingsSvg } from 'assets/svg/settings_m.svg';
 import { Link } from 'react-router-dom';
 import useOnclickOutside from 'common/hooks/useOnclickOutside';
-import UserContext from '../common/contexts/UserContext';
+import UserContext from '../../../common/contexts/UserContext';
 
 const AppHeader: FunctionComponent = () => {
   const { user } = useContext(UserContext);
