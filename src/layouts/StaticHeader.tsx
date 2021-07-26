@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UIButtonComponent from 'components/Register/Button';
 import LogoDiago from 'assets/images/logo/diagoriente-white.svg';
-import LogoRepublique from 'assets/images/logo/republique.svg';
+import LogoRepublique from 'assets/images/logo/republique-white.svg';
 import { ReactComponent as LogoBeta } from 'assets/images/logo/betagouv-white.svg';
 import CrossIcon from 'assets/svg/cross.svg';
 import MenuIcon from 'assets/svg/menu.svg';

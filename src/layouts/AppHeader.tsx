@@ -23,14 +23,14 @@ const AppHeader: FunctionComponent = () => {
   });
 
   return (
-    <div>
-      <header className="bg-white flex flex-row justify-between px-16 py-4 shadow-md sticky top-0 z-50">
-        <div className="flex flex-row items-center justify-center space-x-6">
+    <>
+      <header className="bg-white flex flex-row items-center justify-between px-4 md:px-16 py-4 space-x-4 shadow-md sticky top-0 z-50">
+        <div className="flex flex-row items-center justify-center space-x-4">
           <Link to="/">
-            <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="w-40 lg:w-52" />
+            <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="h-8" />
           </Link>
-          <img src={RepubliqueSvg} alt="Logo de la République Française" className="h-10" />
-          <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" className="h-6" />
+          <img src={RepubliqueSvg} alt="Logo de la République Française" className="h-8" />
+          <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" className="h-4 md:h-6" />
         </div>
         <div>
           {user && (
@@ -96,7 +96,7 @@ const AppHeader: FunctionComponent = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
