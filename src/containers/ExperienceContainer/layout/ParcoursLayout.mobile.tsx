@@ -1,36 +1,52 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
-import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
 import { decodeUri } from 'common/utils/url';
 
 const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
-  const { step } = useContext(NewExperienceContext);
   const location = useLocation();
+  const [index, setIndex] = useState(0);
+  const step = location.pathname.split('/').pop();
+  console.log('step', step);
   const params = decodeUri(location.search);
   const renderStep = () => {
     let title = '';
+    let ind = 0;
     switch (step) {
-      case 0: {
+      case 'domaine': {
         title = '> Choix du domaine';
+        ind = 1;
         break;
       }
-      case 1: {
+      case 'activite': {
         title = '> Choix des activités';
+        ind = 2;
         break;
       }
-      case 4: {
+      case 'question': {
+        title = '> Sélection des question';
+        ind = 3;
+        break;
+      }
+      case 'competences': {
         title = '> Sélection des compétences';
+        ind = 4;
+        break;
+      }
+      case 'date': {
+        title = '> Sélection de date';
+        ind = 5;
         break;
       }
       default: {
         title = '> Choix du domaine';
+        ind = 1;
         break;
       }
     }
-    return title;
+    return { title, ind };
   };
   const renderTitleExp = () => {
     let title = '';
@@ -60,10 +76,10 @@ const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
       <div className="sticky top-0 shadow-md z-50">
-        <ProgressBar value={step} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
+        <ProgressBar value={renderStep().ind} maxValue={5} />
         <div className="p-2 bg-lena-lightgray flex flex-row items-center justify-between">
           <div>
-            <strong className="text-lena-blue">{renderTitleExp()}</strong> {renderStep()}
+            <strong className="text-lena-blue">{renderTitleExp()}</strong> {renderStep().title}
           </div>
           <UserProfileIcon />
         </div>

@@ -1,16 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAddSkill } from 'common/requests/skills';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { NewExperienceContext, EParcoursStep } from 'contexts/NewExperienceContext';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import DatePicker from 'components/design-system/DatePicker';
+import { Theme, Activity } from 'common/requests/types';
+
 import ParcoursLayout from '../layout/ParcoursLayout';
 
-const DateContainer = () => {
-  const { theme, competencesValues, activities, setCompetencesValues, setStep, setCompetences } =
-    useContext(NewExperienceContext);
+interface Props {
+  theme: Theme;
+  activities: Activity[];
+  levels: string[];
+  competencesValues: string[];
+}
+
+const DateContainer = ({ theme, activities, levels, competencesValues }: Props) => {
   const [addSkillCall, addSkillState] = useAddSkill();
+  const history = useHistory();
   const [monthStart, setMonthStart] = useState('Janvier');
   const [yearStart, setYearStart] = useState('');
   const [monthEnd, setMonthEnd] = useState('Janvier');
@@ -18,20 +25,19 @@ const DateContainer = () => {
   const [currentTime, setCurrentTime] = useState(false);
 
   const onAddSkill = () => {
-    if (theme?.id && activities.length && competencesValues.length) {
+    if (theme?.id && activities.length && competencesValues.length && levels.length) {
       const dataToSend: {
         theme: string;
         activities: string[];
-        competences: {
-          competence: string;
-          value: number;
-        }[];
+        competences: string[];
+        levels: string[];
         startDate?: string;
         endDate?: string;
       } = {
         theme: theme?.id,
         activities: activities.map((act) => act.id),
-        competences: competencesValues.map((cmp) => ({ competence: cmp.id, value: cmp.value })),
+        competences: competencesValues,
+        levels,
       };
       if (monthStart && yearStart) {
         const sD = moment(`01-${monthStart}-${yearStart}`).toISOString();
@@ -48,15 +54,12 @@ const DateContainer = () => {
   };
   useEffect(() => {
     if (addSkillState.data) {
-      setStep(EParcoursStep.DONE);
+      history.push(`/experience/theme/${theme.id}/sommaire?type=${theme.domain}`);
     }
   }, [addSkillState.data]);
   return (
     <ParcoursLayout>
-      <button
-        onClick={() => setStep(EParcoursStep.COMPETENCES)}
-        className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
-      >
+      <button onClick={() => history.goBack()} className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none">
         <ArrowLeftSvg />
         <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
       </button>
@@ -64,7 +67,7 @@ const DateContainer = () => {
         <div>
           <div className="text-lena-blue-dark">
             Pour finir, à quelles dates s’est déroulée cette expérience de
-            <strong> boulangerie </strong> ? (facultatif){' '}
+            <strong> {theme.title} </strong> ? (facultatif){' '}
           </div>
         </div>
         <DatePicker

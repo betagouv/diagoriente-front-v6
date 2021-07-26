@@ -1,15 +1,15 @@
-import React, { FunctionComponent, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { uniqueId } from 'lodash';
-import { RouteComponentProps, useHistory, useParams, useLocation } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { useLazyTheme } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { decodeUri } from 'common/utils/url';
 import SelectorTest from 'components/design-system/SelectorTest';
-import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
-import { Activity } from 'common/requests/types';
+import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
+import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
 type NewActivity = {
@@ -18,6 +18,7 @@ type NewActivity = {
 };
 
 interface Props {
+  theme: Theme;
   activities: Activity[];
   setActivities: (activities: Activity[]) => void;
 }
@@ -66,13 +67,12 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   );
 };
 
-const ChoixActivites = ({ activities, setActivities }: Props) => {
+const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
   const history = useHistory();
   const location = useLocation();
   const params: { id: string } = useParams();
   const query = decodeUri(location.search);
 
-  const { theme } = useContext(NewExperienceContext);
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
@@ -126,52 +126,64 @@ const ChoixActivites = ({ activities, setActivities }: Props) => {
   return (
     <ParcoursLayout>
       {!showNewActivity ? (
-        <div className="container py-8 md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
-          <div className="relative min-h-full md:min-h-0">
-            <div className="text-lena-blue-dark">
-              Dans le cadre de la {theme?.title}, quelles sont les <strong>activités</strong> que vous pratiquez ?
+        <>
+          <button
+            onClick={() => history.goBack()}
+            className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
+          >
+            <ArrowLeftSvg />
+            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
+          </button>
+          <div className="container py-8 md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
+            <div className="relative min-h-full md:min-h-0 mb-8">
+              <div className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+                Dans le cadre de la {theme?.title},
+              </div>
+              <div className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+                quelles sont les <strong>activités</strong> que vous pratiquez ?
+              </div>
+              <div className="italic mt-2 text-center text-sm">Plusieurs choix possibles</div>
             </div>
-            <div className="italic mt-2">Plusieurs choix possibles</div>
-          </div>
-          <div className="w-full mt-8 relative mb-24">
-            <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
-              {todoRenameActivities.map((activity) => (
-                <SelectorTest
-                  key={activity.id}
-                  onClick={(e) => handleCheck(activity.id, e)}
-                  checked={activitiesChecked.find((v) => v.id === activity.id)}
-                >
-                  {activity.title}
-                </SelectorTest>
-              ))}
-            </div>
-            <div className="flex justify-center md:mt-10">
-              <button onClick={() => setShowNewActivity(true)} className="text-lena-blue-dark font-bold mt-2">
-                Ajouter une activité non listée
-              </button>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            {!mediaQueryMD && activitiesChecked.length === 0 ? (
-              <SaveButtonComponent isMobile={true} />
-            ) : (
-              <div className="fixed bottom-0 left-0 right-0 md:relative">
-                <button
-                  disabled={activitiesChecked.length === 0}
-                  onClick={handleValidateActivites}
-                  className={classNames(
-                    `focus:ring-0 focus:outline-none w-full
-                    text-white py-3 text-center font-bold
-                    text-lg md:w-72 md:rounded-lg`,
-                    activitiesChecked.length > 0 ? 'bg-lena-blue' : 'bg-gray-300',
-                  )}
-                >
-                  Valider
+            <div className="w-full mt-8 relative mb-24">
+              <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
+                {todoRenameActivities.map((activity) => (
+                  <SelectorTest
+                    key={activity.id}
+                    onClick={(e) => handleCheck(activity.id, e)}
+                    checked={activitiesChecked.find((v) => v.id === activity.id)}
+                  >
+                    {activity.title}
+                  </SelectorTest>
+                ))}
+              </div>
+              <div className="flex justify-center md:mt-10">
+                <button onClick={() => setShowNewActivity(true)} className="text-lena-blue-dark font-bold mt-2">
+                  Ajouter une activité non listée
                 </button>
               </div>
-            )}
+            </div>
+            <div className="flex justify-center">
+              {!mediaQueryMD && activitiesChecked.length === 0 ? (
+                <SaveButtonComponent isMobile={true} />
+              ) : (
+                <div className="fixed bottom-0 left-0 right-0 md:relative">
+                  <button
+                    disabled={activitiesChecked.length === 0}
+                    onClick={handleValidateActivites}
+                    className={classNames(
+                      `focus:ring-0 focus:outline-none w-full
+                    text-white py-3 text-center font-bold
+                    text-lg md:w-72 md:rounded-lg`,
+                      activitiesChecked.length > 0 ? 'bg-lena-blue' : 'bg-gray-300',
+                    )}
+                  >
+                    Valider
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />
       )}

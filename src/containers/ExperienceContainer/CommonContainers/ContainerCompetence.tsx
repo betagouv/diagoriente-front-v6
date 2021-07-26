@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
 
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
-import complexité from 'assets/svg/Picto_reflechir.svg';
-import Autonomie from 'assets/svg/Picto_organiser.svg';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
-import Environnement from 'assets/svg/Picto_communiquer.svg';
 import { Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
@@ -29,9 +26,9 @@ const types = [
     logo: Organiser,
     sub: 'organizational',
     text: (
-      <p>
+      <span>
         Quelles sont les <strong>compétences d’organisation</strong> que vous mettez en oeuvre ?
-      </p>
+      </span>
     ),
   },
   {
@@ -39,9 +36,9 @@ const types = [
     logo: Communication,
     sub: 'communication',
     text: (
-      <p>
+      <span>
         Quelles sont les <strong>compétences de communication</strong> que vous mettez en oeuvre ?
-      </p>
+      </span>
     ),
   },
   {
@@ -49,9 +46,9 @@ const types = [
     logo: Refleshir,
     sub: 'reflective',
     text: (
-      <p>
+      <span>
         Quelles sont les <p>compétences de réflexion</p> que vous mettez en oeuvre ?
-      </p>
+      </span>
     ),
   },
 ];
@@ -88,7 +85,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
     if (step < 2) {
       setStep(step + 1);
     } else {
-      history.push(`/experience/theme/${theme.id}/sommaire?type=${theme.domain}`);
+      history.push(`/experience/theme/${theme.id}/date?type=${theme.domain}`);
     }
   };
 
@@ -119,14 +116,15 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
           ))}
         </div>
         {competences.length !== 0 && (
-          <button
-            className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
+          <div className="fixed bottom-0 left-0 right-0 md:relative">
+            <button
+              className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
             text-white py-3 text-center font-bold text-lg`}
-            onClick={nextStep}
-          >
-            {' '}
-            Suivant
-          </button>
+              onClick={nextStep}
+            >
+              Suivant
+            </button>
+          </div>
         )}
       </div>
     );

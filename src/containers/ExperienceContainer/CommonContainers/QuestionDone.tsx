@@ -109,14 +109,14 @@ const QuestionDone = ({ theme }: Props) => {
     </div>
   );
   return (
-    <ParcoursLayout>
-      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full">
+    <>
+      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           {mediaQueryMD ? <Desckcontainer /> : <MobileContainer />}
         </div>
       </div>
       <ModalInfo open={open} onClose={() => setOpen(false)} />
-    </ParcoursLayout>
+    </>
   );
 };
 
