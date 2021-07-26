@@ -61,14 +61,9 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
     );
   };
 
-  const handleFinish = () => {
-    // TODO: make request to server
-    onFinish?.call(null);
-  };
-
   return (
     <ParcoursInterestsLayout>
-      <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-14">
+      <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-12">
         <div className={classNames()}>
           <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
             <p className="text-lena-blue-dark mb-5">
@@ -79,11 +74,11 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
               Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.
             </p>
             <p className="text-lena-blue-dark mt-5 font-bold">
-              Pour commencer, cliquez sur une famille pour sélectionner les centres d’intérêts associés :
+              Pour commencer, cliquez sur une famille pour sélectionner les centres d'intérêts associés :
             </p>
           </div>
           <p className={classNames('text-lena-blue-dark mt-5', mediaQueryMD && 'hidden')}>
-            Cliquez sur une famille pour sélectionner les centres d’intérêts associés :
+            Cliquez sur une famille pour sélectionner les centres d'intérêts associés :
           </p>
         </div>
         <div className="w-full">
@@ -105,7 +100,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
         <button
           className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
           text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50`}
-          onClick={handleFinish}
+          onClick={() => onFinish?.()}
           disabled={Object.keys(selectedFamilies).length <= 0}
         >
           Suivant
