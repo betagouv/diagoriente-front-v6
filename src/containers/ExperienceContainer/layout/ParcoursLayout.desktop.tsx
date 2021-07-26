@@ -1,26 +1,27 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
-
+import className from 'common/utils/classNames';
 import ProgressBar from 'components/design-system/ProgressBar';
-import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import AppHeader from 'layouts/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
-import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceContext';
+import PathPicto from 'assets/svg/pictoPath.svg';
+
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import { Activity } from 'common/requests/types';
 
 interface PropsBox {
   title: string;
   index: number;
+  stepUrlPath: string;
 }
 
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
-  const context = useContext(NewExperienceContext);
   const location = useLocation();
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
   const steps = ['Métier', 'Activités', 'Caracteristiques', 'Competences', 'Date'];
+  const stepsUrl = ['create', 'activite', 'question', 'competences', 'date'];
 
   const renderStep = () => {
     let ind = 0;
@@ -54,8 +55,8 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   };
   const path = () => {
     let text = '';
-    if (context.experienceType) {
-      switch (context.experienceType) {
+    if (params.type) {
+      switch (params.type) {
         case 'professional': {
           text = 'professionnelles';
           break;
@@ -76,13 +77,17 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
     }
     return text;
   };
-  const RenderOptions = ({ title, index }: PropsBox) => (
-    <div className="rounder p-4">
-      <p>
-        {index + 1}-{title}
-      </p>
-    </div>
-  );
+  const RenderOptions = ({ title, index, stepUrlPath }: PropsBox) => {
+    const urlStep = stepsUrl.indexOf(stepUrlPath);
+    return (
+      <div className="rounded-lg border p-4">
+        <p className={className('text-lena-blue-dark flex items-center', index < urlStep ? 'opacity-1' : 'opacity-50')}>
+          {index < urlStep ? <img src={PathPicto} alt="loup" className="mx-2 w-6" /> : index + 1}{' '}
+          {index >= urlStep && '-'} {title}
+        </p>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen h-full flex flex-col">
@@ -92,10 +97,10 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
           <ProgressBar value={renderStep()} maxValue={5} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center mt-10">
                 <div
                   className={`flex flex-col justify-center items-center
-                bg-white rounded-full h-44 w-44 xl:h-56 xl:w-56 space-y-2`}
+                space-y-2`}
                 >
                   <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
@@ -105,7 +110,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
               </div>
               <div className="flex flex-col space-y-4">
                 {steps.map((s, index) => (
-                  <RenderOptions index={index} title={s} />
+                  <RenderOptions index={index} title={s} stepUrlPath={step || 'create'} />
                 ))}
               </div>
             </div>

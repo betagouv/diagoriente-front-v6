@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import complexité from 'assets/svg/Picto_reflechir.svg';
 import Autonomie from 'assets/svg/Picto_organiser.svg';
 import { groupBy } from 'lodash';
-import Environnement from 'assets/svg/Picto_communiquer.svg';
 import { Theme } from 'common/requests/types';
-import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
 import ParcoursLayout from '../layout/ParcoursLayout';
 
@@ -38,16 +35,10 @@ const types = [
   }, */
 ];
 
-interface BoxType {
-  image: any;
-  title: string;
-  questions: { title: string; rank: string; reference: string; id: string }[];
-}
-
 const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
   const history = useHistory();
-  const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState('');
   const typesQuestion = groupBy(theme.levels, 'type');
 
   const isExist = (value: string) => {
@@ -59,21 +50,24 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
     const exist = isExist(value);
     if (exist) {
       const res = levels.filter((q) => q !== value);
+      setSelected('');
       setLevels(res);
     } else {
       const array = [...levels];
       array[step] = value;
+      setSelected(value);
       setLevels(array);
     }
   };
   const nextStep = () => {
     if (step < 1) {
       setStep(step + 1);
+      setSelected('');
     } else {
       history.push(`/experience/theme/${theme.id}/questions?type=${theme.domain}`);
     }
   };
-
+  console.log('selected', selected);
   const RendQuestionStep = ({ title, questions }: QuestionType) => {
     return (
       <div className="flex flex-col items-center p-8">
@@ -92,21 +86,20 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
         <div className="m-5">Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :</div>
         <div>
           {questions.map((q) => (
-            <div className={`mt-3 mb-3 p-3 `}>
+            <div className="mt-3 mb-3 p-3">
               <SelectorTest key={q.id} onClick={() => onSelectQuestion(q.id)} checked={isExist(q.id)}>
                 {q.title}
               </SelectorTest>
             </div>
           ))}
         </div>
-        {levels.length !== 0 && (
+        {selected && (
           <div className="fixed bottom-0 left-0 right-0 md:relative">
             <button
               className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
             text-white py-3 text-center font-bold text-lg`}
               onClick={nextStep}
             >
-              {' '}
               Suivant
             </button>
           </div>
@@ -115,52 +108,11 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
     );
   };
 
-  const RenderBox = ({ image, title, questions }: BoxType) => {
-    return (
-      <div className="bg-lena-blue-alt-light w-full mt-5 mb-5 flex p-5 rounded">
-        <div className="w-1/5 flex flex-col justify-center items-center">
-          <p className="w-11/12 text-center mb-3 font-bold text-lena-blue-dark">{title}</p>
-          <img alt="info" src={image} className="w-14" />
-        </div>
-        <div className="flex-1">
-          {questions?.map((q) => (
-            <div
-              className={`mt-3 mb-3 p-3 rounded cursor-pointer text-lena-black
-          font-thin text-center min-h-28p flex items-center justify-center`}
-              style={{ backgroundColor: '#F1FCFF' }}
-            >
-              <span>{q.title}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
   return (
     <ParcoursLayout>
-      {mediaQueryMD ? (
-        <>
-          <button
-            className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
-            onClick={() => history.goBack()}
-          >
-            <ArrowLeftSvg />
-            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-          </button>
-          <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
-            <p className="text-lena-blue-dark">
-              Pour chaque encadré, sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :{' '}
-            </p>
-            {types.map((q) => (
-              <RenderBox title={q.title} image={q.logo} questions={typesQuestion[q.sub]} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="w-full flex justify-center mt-10">
-          <RendQuestionStep title={types[step].title} questions={typesQuestion[types[step].sub]} />
-        </div>
-      )}
+      <div className="w-full flex justify-center mt-10">
+        <RendQuestionStep title={types[step].title} questions={typesQuestion[types[step].sub]} />
+      </div>
     </ParcoursLayout>
   );
 };

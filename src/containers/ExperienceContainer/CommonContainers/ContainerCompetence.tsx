@@ -26,8 +26,8 @@ const types = [
     logo: Organiser,
     sub: 'organizational',
     text: (
-      <span>
-        Quelles sont les <strong>compétences d’organisation</strong> que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+        Quelles sont les compétences d’organisation que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -36,8 +36,8 @@ const types = [
     logo: Communication,
     sub: 'communication',
     text: (
-      <span>
-        Quelles sont les <strong>compétences de communication</strong> que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+        Quelles sont les compétences de communication que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -46,8 +46,8 @@ const types = [
     logo: Refleshir,
     sub: 'reflective',
     text: (
-      <span>
-        Quelles sont les <p>compétences de réflexion</p> que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+        Quelles sont les compétences de réflexion que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -94,7 +94,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
       <div className="flex flex-col items-center p-8">
         <div
           className="rounded-full flex flex-col items-center justify-center font-mono relative"
-          style={{ height: 148, width: 148, color: '#000', backgroundColor: '#E1E7F7' }}
+          style={{ height: 148, width: 148, color: '#000', backgroundColor: '#F1FCFF' }}
         >
           <div
             className="rounded-full absolute -top-5 flex items-center justify-center"
@@ -103,7 +103,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
             <span className="text-white">{`${step + 1}/${types.length}`}</span>
           </div>
           <img src={types[step].logo} alt="pole" />
-          <span className="text-lena-blue-dark font-bold text-sm text-center mt-4">{title}</span>
+          <span className="font-bold text-sm text-center mt-4">{title}</span>
         </div>
         <div className="m-5">{types[step].text} </div>
         <div>
@@ -130,52 +130,15 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
     );
   };
 
-  const RenderBox = ({ image, title, competences }: BoxType) => {
-    return (
-      <div className="bg-lena-blue-alt-light w-full mt-5 mb-5 flex p-5 rounded">
-        <div className="w-1/5 flex flex-col justify-center items-center">
-          <p className="w-11/12 text-center mb-3 font-bold text-lena-blue-dark">{title}</p>
-          <img alt="info" src={image} className="w-14" />
-        </div>
-        <div className="flex-1">
-          {competences?.map((q) => (
-            <div
-              className={`mt-3 mb-3 p-3 rounded cursor-pointer text-lena-black
-          font-thin text-center min-h-28p flex items-center justify-center`}
-              style={{ backgroundColor: '#F1FCFF' }}
-            >
-              <span>{q.title}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
   return (
     <ParcoursLayout>
-      {mediaQueryMD ? (
-        <>
-          <button
-            className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
-            onClick={() => history.goBack()}
-          >
-            <ArrowLeftSvg />
-            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-          </button>
-          <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
-            <p className="text-lena-blue-dark">
-              Pour chaque encadré, sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :{' '}
-            </p>
-            {types.map((q) => (
-              <RenderBox title={q.title} image={q.logo} competences={typesCompetences[q.sub]} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className="w-full flex justify-center mt-10">
-          <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
-        </div>
-      )}
+      <button onClick={() => history.goBack()} className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none">
+        <ArrowLeftSvg />
+        <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
+      </button>
+      <div className="w-full flex justify-center mt-10">
+        <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
+      </div>
     </ParcoursLayout>
   );
 };
