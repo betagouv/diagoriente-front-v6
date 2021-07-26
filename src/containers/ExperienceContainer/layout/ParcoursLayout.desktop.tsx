@@ -10,32 +10,48 @@ import { EParcoursStep, NewExperienceContext } from 'contexts/NewExperienceConte
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import { Activity } from 'common/requests/types';
 
+interface PropsBox {
+  title: string;
+  index: number;
+}
+
 const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const context = useContext(NewExperienceContext);
   const location = useLocation();
   const params = decodeUri(location.search);
-  const theme = localStorage.getItem('theme');
-  const themeData = theme && JSON.parse(theme);
-  const activities = localStorage.getItem('activities');
-  const activityData = activities && JSON.parse(activities);
+  const step = location.pathname.split('/').pop();
+  const steps = ['Métier', 'Activités', 'Caracteristiques', 'Competences', 'Date'];
 
-  /*   const backStep = () => {
+  const renderStep = () => {
+    let ind = 0;
     switch (step) {
-      case 2:
-        setStep(EParcoursStep.THEME);
+      case 'domaine': {
+        ind = 1;
         break;
-      case 3:
-        setStep(EParcoursStep.ACTIVITIES);
+      }
+      case 'activite': {
+        ind = 2;
         break;
-      case 4:
-        setStep(EParcoursStep.ACTIVITIES_DONE);
+      }
+      case 'question': {
+        ind = 3;
         break;
-      case 5:
-        setStep(EParcoursStep.COMPETENCES);
+      }
+      case 'competences': {
+        ind = 4;
         break;
-      default:
+      }
+      case 'date': {
+        ind = 5;
+        break;
+      }
+      default: {
+        ind = 1;
+        break;
+      }
     }
-  }; */
+    return ind;
+  };
   const path = () => {
     let text = '';
     if (context.experienceType) {
@@ -60,13 +76,20 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
     }
     return text;
   };
+  const RenderOptions = ({ title, index }: PropsBox) => (
+    <div className="rounder p-4">
+      <p>
+        {index + 1}-{title}
+      </p>
+    </div>
+  );
 
   return (
     <div className="min-h-screen h-full flex flex-col">
       <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative">
-          <ProgressBar value={3} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
+          <ProgressBar value={renderStep()} maxValue={5} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center">
@@ -81,31 +104,9 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
                 </div>
               </div>
               <div className="flex flex-col space-y-4">
-                {themeData && (
-                  <div className="bg-lena-blue-lightest text-lena-blue-dark font-bold text-center rounded-md p-2">
-                    {themeData.title}
-                  </div>
-                )}
-                {activityData && activityData.activities?.length > 0 && (
-                  <div>
-                    <div className="font-bold text-lena-blue-dark">Activités pratiquées</div>
-                    <ul className="list-disc list-inside">
-                      {activityData.activities.map((v: Activity) => (
-                        <li key={v.id}>{v.title}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {/* {competences.length > 0 && (
-                  <div>
-                    <div className="font-bold text-lena-blue-dark">Compétences développées</div>
-                    <ul className="list-disc list-inside">
-                      {competences.map((v) => (
-                        <li key={v.id}>{v.title}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )} */}
+                {steps.map((s, index) => (
+                  <RenderOptions index={index} title={s} />
+                ))}
               </div>
             </div>
             <div className="px-5 bottom-0">

@@ -22,7 +22,7 @@ const DomainSelect = ({ theme }: Props) => {
 
   const handleNextStep = () => {
     if (theme) {
-      history.push(`/experience/theme/${theme?.id}/activite`);
+      history.push(`/experience/theme/${theme?.id}/activite?type=${theme.domain}`);
     }
   };
 
@@ -30,12 +30,9 @@ const DomainSelect = ({ theme }: Props) => {
     <ParcoursLayout>
       <div className="container py-8 md:p-14">
         <div className="flex flex-col space-y-4 items-center justify-start w-full">
-          <div className="flex flex-col justify-center items-center h-56 w-56 space-y-2">
-            <PictoExpPro />
-          </div>
-          <div className="text-lena-blue-dark">Vous avez sélectionné le domaine :</div>
+          <div className="text-lena-blue-dark mt-20">Vous avez sélectionné le domaine :</div>
           <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
-            {theme.title}
+            <span className="text-lena-blue-dark font-bold">{theme.title}</span>
           </div>
           {themeState.data && themeState.data?.theme.activities.length > 0 && (
             <ul className="list-disc list-inside">

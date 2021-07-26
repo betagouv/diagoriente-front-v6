@@ -13,7 +13,7 @@ import DoneActiviteContainer from 'containers/ExperienceContainer/CommonContaine
 import DoneQuestions from 'containers/ExperienceContainer/CommonContainers/QuestionDone';
 import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers/ContainerCompetence';
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
-
+import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
 import SelectionTheme from './SelectionTheme';
 import SelectionThemePro from '../XPPro/ParcoursContainer/containers/SelectionTheme';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -23,7 +23,6 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [activities, setActivities] = useState([] as Activity[]);
   const [levels, setLevels] = useState<string[]>([]);
   const [competencesValues, setCompetencesValues] = useState<string[]>([]);
-  const [competences, setCompetences] = useState<string[]>([]);
 
   const { skill: selectedSkillId } = decodeUri(location.search);
   const params = decodeUri(location.search);
@@ -144,7 +143,9 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
       <Route
         exact
         path="/experience/theme/:id/activite"
-        render={(props) => <ActiviteContainer {...props} activities={activities} setActivities={setActivities} />}
+        render={(props) => (
+          <ActiviteContainer theme={theme} {...props} activities={activities} setActivities={setActivities} />
+        )}
       />
       <Route exact path="/experience/theme/:id/doneAct" render={() => <DoneActiviteContainer theme={theme} />} />
       <Route
@@ -162,6 +163,13 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
             competencesValues={competencesValues}
             setCompetencesValues={setCompetencesValues}
           />
+        )}
+      />
+      <Route
+        exact
+        path="/experience/theme/:id/date"
+        render={() => (
+          <DateContainer theme={theme} activities={activities} levels={levels} competencesValues={competencesValues} />
         )}
       />
       <Route

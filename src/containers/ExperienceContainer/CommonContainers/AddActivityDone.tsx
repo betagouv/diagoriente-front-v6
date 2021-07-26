@@ -60,57 +60,97 @@ const AddActivityDone = ({ theme }: Props) => {
     <div className="container flex flex-col justify-center space-y-8">
       <div className="text-center">
         <div className="text-center">
-          <strong className="text-2xl font-bold">Merci !</strong>
+          {mediaQueryMD ? (
+            <>
+              <p className="text-2xl font-bold">Très bien, maintenant dites-nous en plus sur</p>
+              <p className="text-2xl font-bold">ces 3 familles de caractéristiques liées</p>
+            </>
+          ) : (
+            <p className="text-2xl font-bold">Merci ! étape 1 sur 3</p>
+          )}
         </div>
-        <div className="text-center mt-5">
-          Maintenant nous allons vous poser quelques questions afin de{' '}
-          <strong>déterminer et évaluer les compétences</strong> que vous mettez en oeuvre dans le cadre de ces
-          activités.
-        </div>
+        {mediaQueryMD ? (
+          <p className="mt-6">Lorem ipsum dolor sit amet</p>
+        ) : (
+          <p className="mt-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a consequat libero, eu auctor libero.
+            Etiam nec iaculis nunc. Maecenas sed rhoncus eros, vel mattis libero.{' '}
+          </p>
+        )}
+
         <div className="flex justify-evenly mt-12">
           <div
             className="rounded-full bg-white flex items-center justify-center font-mono p-4"
-            style={{ height: 110, width: 110, color: '#000', background: '#C4D2F8' }}
+            style={{
+              height: mediaQueryMD ? 162 : 110,
+              width: mediaQueryMD ? 162 : 110,
+              color: '#000',
+              background: '#C4D2F8',
+            }}
           >
-            <span className="text-xs font-bold">Environnement de travail</span>
+            <span className="text-xs md:text-base font-bold">Environnement de travail</span>
           </div>
           <div
-            className="rounded-full bg-white flex items-center justify-center font-mono mt-14 p-4"
-            style={{ height: 110, width: 110, color: '#000', background: '#C4D2F8' }}
+            className="rounded-full bg-white flex items-center justify-center font-mono mt-14 md:mt-0 p-4"
+            style={{
+              height: mediaQueryMD ? 162 : 110,
+              width: mediaQueryMD ? 162 : 110,
+              color: '#000',
+              background: '#C4D2F8',
+            }}
           >
-            <span className="text-xs font-bold">Complexité</span>
+            <span className="text-xs md:text-base font-bold">Complexité</span>
           </div>
           <div
             className="rounded-full bg-white flex items-center justify-center font-mono p-4"
-            style={{ height: 110, width: 110, color: '#000', background: '#C4D2F8' }}
+            style={{
+              height: mediaQueryMD ? 162 : 110,
+              width: mediaQueryMD ? 162 : 110,
+              color: '#000',
+              background: '#C4D2F8',
+            }}
           >
-            <span className="text-xs font-bold">Autonomie et responsabilité</span>
+            <span className="text-xs md:text-base font-bold">Autonomie et responsabilité</span>
           </div>
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 md:relative">
-        <button
-          onClick={() => history.push(`/experience/theme/${theme.id}/question?type=${theme.domain}`)}
-          className={`md:px-14 md:rounded-md
+      {mediaQueryMD ? (
+        <div className="flex justify-center ">
+          <button
+            onClick={() => history.push(`/experience/theme/${theme.id}/question?type=${theme.domain}`)}
+            className={`md:px-14 md:rounded-md
+              focus:ring-0 focus:outline-none w-full
+              bg-lena-blue text-white py-3 text-center font-bold text-lg  w-1/4 mt-10`}
+          >
+            Suivant
+          </button>
+        </div>
+      ) : (
+        <div className="fixed bottom-0 left-0 right-0 md:relative">
+          <button
+            onClick={() => history.push(`/experience/theme/${theme.id}/question?type=${theme.domain}`)}
+            className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}
-        >
-          C'est compris
-        </button>
-      </div>
+          >
+            Suivant
+          </button>
+        </div>
+      )}
     </div>
   );
 
   return (
-    <ParcoursLayout>
-      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full">
+    <>
+      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
-          {mediaQueryMD ? <DesktopContainer /> : <MobileContainer />}
+          {/* {mediaQueryMD ? <MobileContainer /> : <MobileContainer />} */}
+          <MobileContainer />
         </div>
       </div>
-      <ModalInfo open={open} onClose={() => setOpen(false)} />
-    </ParcoursLayout>
+      <ModalInfo open={open} onClose={() => setOpen(false)} />{' '}
+    </>
   );
 };
 

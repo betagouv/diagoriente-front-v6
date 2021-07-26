@@ -100,14 +100,16 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
           ))}
         </div>
         {levels.length !== 0 && (
-          <button
-            className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
+          <div className="fixed bottom-0 left-0 right-0 md:relative">
+            <button
+              className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
             text-white py-3 text-center font-bold text-lg`}
-            onClick={nextStep}
-          >
-            {' '}
-            Suivant
-          </button>
+              onClick={nextStep}
+            >
+              {' '}
+              Suivant
+            </button>
+          </div>
         )}
       </div>
     );
