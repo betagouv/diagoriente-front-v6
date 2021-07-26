@@ -11,7 +11,10 @@ export const CardResult = () => {
   const address = '292 RUE CAMILLE GUERIN\n59800 LILLE\n07 XX XX XX XX';
 
   return (
-    <div className="w-full bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none text-left space-y-4">
+    <div
+      className={`w-full bg-lena-lightgray px-5 py-7 rounded-lg mb-3
+    focus:ring-0 focus:outline-none text-left space-y-4`}
+    >
       <div className="flex flex-row justify-end items-end gap-x-2">
         <div className="bg-lena-blue-lightest text-lena-blue-dark rounded-full px-3 py-1 text-center">immersion</div>
         <div className="bg-lena-blue-lightest text-lena-blue-dark rounded-full px-3 py-1 text-center">

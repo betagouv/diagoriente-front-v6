@@ -19,7 +19,7 @@ const InterestDone: FunctionComponent = () => {
             </div>
             <div className="text-center">
               <div className="mt-5">
-                Grâce aux expériences et aux centres d’intérêts que vous avez renseigné, nous pouvons vous proposer des{' '}
+                Grâce aux expériences et aux centres d’intérêts que vous avez renseigné, nous pouvons vous proposer des
                 <strong>pistes métiers</strong>.
               </div>
             </div>

@@ -103,7 +103,8 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
       </div>
       <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
         <button
-          className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50"
+          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
+          text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50`}
           onClick={handleFinish}
           disabled={Object.keys(selectedFamilies).length <= 0}
         >

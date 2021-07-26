@@ -18,7 +18,6 @@ import { useInterest } from 'common/requests/interests';
 import InterestsParcoursLayout from '../layout/InterestsParcoursLayout';
 import AppLoader from '../../../../components/ui/AppLoader';
 
-
 type InterestContent = {
   id: string;
   title: string;
@@ -277,7 +276,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                   <div className="flex absolute w-full justify-center " style={{ marginTop: -3.7 }}>
                     {getInterestState.data?.interest.cursors.map((v, index) => (
                       <div
-                        key={index}
+                        key={`${index * 2}-a`}
                         style={{ width: `${100 / (getInterestState.data?.interest?.cursors?.length || 1)}%` }}
                         className="flex justify-center"
                       >
@@ -296,7 +295,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                 {getInterestState.data?.interest.cursors.map((v, index) => (
                   // eslint-disable-next-line react/no-array-index-key
                   <InterestCardForMobile
-                    key={index}
+                    key={`${index * 2}-b`}
                     content={v}
                     position={index}
                     onToggleInterest={handleToggleInterest}
@@ -336,7 +335,8 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
         </div>
         <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
           <button
-            className="focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50"
+            className={`focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3
+            text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50`}
             onClick={handleValidateInterests}
             disabled={selectedInterests.length <= 0}
           >
