@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import userContext from 'common/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import AppLayout from 'layouts/AppLayout';
+import Button from '../../components/design-system/Button';
 
 const HomeContainer = () => {
   const { user } = useContext(userContext);
@@ -10,74 +11,30 @@ const HomeContainer = () => {
     return <Redirect to="/connexion" />;
   }
 
+  const urls = [
+    { label: 'Onboarding', url: '/bienvenue' },
+    { label: 'Mon profil', url: '/profil' },
+    { label: 'Ma carte de compétences', url: '/skill_card' },
+    { label: 'Mes expériences', url: '/profil/mes-experiences' },
+    { label: "Mes centres d'intérêts", url: '/centres_interet' },
+    { label: "Ajouter mes centres d'intérêts", url: '/centres_interet/create' },
+    { label: 'Mon top métiers', url: '/top_metiers' },
+    { label: 'Rechercher une immersion', url: '/immersion/recherche' },
+  ];
+
   return (
     <AppLayout>
-      <div className="mt-5 container">
-        <div className="mb-2">
-          <Link to="/bienvenue">
-            <button
-              className={`bg-lena-blue w-full text-white font-bold
-            py-3 rounded-md focus:ring-0 focus:outline-none`}
-            >
-              Bienvenue
-            </button>
-          </Link>
-        </div>
-        <div className="mb-2">
-          <Link to="/profil/mes-experiences">
-            <button
-              className={`bg-lena-blue w-full text-white font-bold py-3
-              rounded-md focus:ring-0 focus:outline-none`}
-            >
-              Mes expériences
-            </button>
-          </Link>
-        </div>
-        <Link to="/centres_interet">
-          <button
-            className={`bg-lena-blue w-full text-white font-bold py-3
-          rounded-md focus:ring-0 focus:outline-none`}
-          >
-            Centres d'intérêt
-          </button>
-        </Link>
-        <div className="mt-2">
-          <Link to="/centres_interet/create">
-            <button
-              className={`bg-lena-blue w-full text-white font-bold py-3
-            rounded-md focus:ring-0 focus:outline-none`}
-            >
-              Ajouter centres d'intérêt
-            </button>
-          </Link>
-        </div>
-        <div className="mt-2">
-          <Link to="/top_metiers">
-            <button
-              className={`bg-lena-blue w-full text-white font-bold py-3
-            rounded-md focus:ring-0 focus:outline-none`}
-            >
-              Top métiers
-            </button>
-          </Link>
-        </div>
-        <div className="mt-2">
-          <Link to="/profil">
-            <button
-              className={`bg-lena-blue w-full text-white
-            font-bold py-3 rounded-md focus:ring-0 focus:outline-none`}
-            >
-              Profil
-            </button>
-          </Link>
-        </div>
-        <div className="mt-2">
-          <Link to="/immersion/recherche">
-            <button className="bg-lena-blue w-full text-white font-bold py-3 rounded-md focus:ring-0 focus:outline-none">
-              Recherche immersion
-            </button>
-          </Link>
-        </div>
+      <div className="grid grid-cols-2 gap-2 mt-5 container">
+        {urls.map((v) => (
+          <div key={v.url} className="mb-2">
+            <Link to={v.url}>
+              <Button variant="secondary" fullWidth={true}>
+                <div>{v.label}</div>
+                <div className="text-lena-turquoise">{v.url}</div>
+              </Button>
+            </Link>
+          </div>
+        ))}
       </div>
     </AppLayout>
   );
