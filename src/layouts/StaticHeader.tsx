@@ -57,16 +57,13 @@ const StaticHeader: FunctionComponent = () => {
                 </Link>
                 <div className="flex flex-row space-x-4">
                   <UIButtonComponent borderSize="lg" variant="outline-secondary">
-                    <a
-                      className="flex flex-row justify-center items-center space-x-2"
-                      href={`${process.env.GATSBY_APPV5_URL}/login`}
-                    >
+                    <Link className="flex flex-row justify-center items-center space-x-2" to="/connexion">
                       <span>Connexion</span>
                       <img src={LoginIcon} alt="Login Icon" />
-                    </a>
+                    </Link>
                   </UIButtonComponent>
                   <UIButtonComponent borderSize="lg">
-                    <a href={process.env.GATSBY_APPV5_PRO_URL}>Diagoriente PRO</a>
+                    <Link to="/404">Diagoriente PRO</Link>
                   </UIButtonComponent>
                 </div>
               </div>
@@ -92,21 +89,15 @@ const StaticHeader: FunctionComponent = () => {
                     <Link to="/a-propos">À propos</Link>
                   </li>
                 </ul>
-                <div className="pb-3 inline-block">
-                  <a
-                    href={`${process.env.GATSBY_APPV5_URL}/login`}
-                    className="bg-transparent border border-lena-lightgray text-white font-bold py-2 px-4 flex items-center space-x-4 focus:outline-none justify-center rounded-lg"
-                    style={{ width: 200, height: 43 }}
-                  >
-                    Connexion
-                    <img src={LoginIcon} alt="Login Icon" />
-                  </a>
-                </div>
-                <div className="pb-5">
-                  <UIButtonComponent width={200} height={43} borderSize="lg">
-                    <a href={process.env.GATSBY_APPV5_PRO_URL} hrefLang="fr">
-                      Diagoriente PRO
-                    </a>
+                <div className="flex flex-row items-center justify-between pb-4 space-x-4">
+                  <UIButtonComponent fullWidth={true} borderSize="lg" variant="outline-secondary">
+                    <Link className="flex flex-row justify-center items-center space-x-2" to="/connexion">
+                      <span>Connexion</span>
+                      <img src={LoginIcon} alt="Login Icon" />
+                    </Link>
+                  </UIButtonComponent>
+                  <UIButtonComponent fullWidth={true} borderSize="lg">
+                    <Link to="/404">Diagoriente PRO</Link>
                   </UIButtonComponent>
                 </div>
               </div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import HeroRegister from 'assets/illu/hero-register.png';
 import BgRegister from 'assets/images/bg/bg-register.jpg';
-import AppHeader from 'layouts/AppHeader';
 import { Link } from 'react-router-dom';
+import StaticHeader from 'layouts/StaticHeader';
 import RegisterForm from './components/RegisterForm';
 
 const RegisterContainer = () => (
   <div>
-    <AppHeader />
+    <StaticHeader />
     <div className="md:h-screen w-full flex-1 flex flex-row">
       <div className="flex-1 px-8 pt-8 md:px-16 md:pt-16 bg-lena-lightgray z-10 flex flex-col space-y-16">
         <div className="text-center md:text-left">

@@ -24,7 +24,7 @@ const HomeContainer = () => {
 
   return (
     <AppLayout>
-      <div className="grid grid-cols-2 gap-2 mt-5 container">
+      <div className="grid md:grid-cols-2 md:gap-2 mt-5 container">
         {urls.map((v) => (
           <div key={v.url} className="mb-2">
             <Link to={v.url}>
