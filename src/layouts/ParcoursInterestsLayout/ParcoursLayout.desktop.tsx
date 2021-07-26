@@ -35,11 +35,8 @@ const ParcoursInterestsLayoutForDesktop: FunctionComponent = ({ children }) => {
           <ProgressBar value={step} maxValue={Object.keys(EParcoursStep).length / 2 - 1} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
-              <div className="flex items-center justify-center">
-                <div
-                  className={`flex flex-col justify-center items-center
-                bg-white rounded-full h-44 w-44 xl:h-56 xl:w-56 space-y-2`}
-                >
+              <div className="flex items-center justify-center mt-10">
+                <div className="flex flex-col justify-center items-center space-y-2">
                   <HeartSvg className="w-12 h-12 xl:w-16 xl:h-16" />
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
                     Mes centres d'intérêt

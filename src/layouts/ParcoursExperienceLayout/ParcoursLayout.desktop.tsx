@@ -96,10 +96,7 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center mt-10">
-                <div
-                  className={`flex flex-col justify-center items-center
-                space-y-2`}
-                >
+                <div className="flex flex-col justify-center items-center space-y-2">
                   <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
                     Mes expériences {path()}

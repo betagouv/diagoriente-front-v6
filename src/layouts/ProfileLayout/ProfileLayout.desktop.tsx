@@ -16,22 +16,15 @@ const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
                 <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">Mon profil</div>
               </div>
               <div className="flex flex-col space-y-4">
-                <div>
-                  <Link className="text-lena-blue-dark font-bold" to="/profil/mes-experiences">
-                    Mes expériences
-                  </Link>
-                  <div className="flex flex-col">
-                    <Link to="/profil/mes-experiences/professionnal">Professionnelles</Link>
-                    <Link to="/profil/mes-experiences/personal">Personnelles</Link>
-                    <Link to="/profil/mes-experiences/voluntary">Bénévolat et volontariat</Link>
-                  </div>
-                </div>
-                <div>
-                  <strong className="text-lena-blue-dark font-bold">Mes centres d'intérêt</strong>
-                </div>
-                <div>
-                  <strong className="text-lena-blue-dark font-bold">Réglages</strong>
-                </div>
+                <Link className="text-lena-blue-dark font-bold" to="/profil/mes-experiences">
+                  Mes expériences
+                </Link>
+                <Link className="text-lena-blue-dark font-bold" to="/profil/mes-centres-d-interet">
+                  Mes centres d'intérêt
+                </Link>
+                <Link className="text-lena-blue-dark font-bold" to="/profil/reglages">
+                  Réglages
+                </Link>
               </div>
             </div>
           </div>
