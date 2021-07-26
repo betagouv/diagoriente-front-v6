@@ -10,7 +10,8 @@ import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
-import ParcoursLayout from '../layout/ParcoursLayout';
+import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import AppLoader from 'components/ui/AppLoader';
 
 type NewActivity = {
   onSend: (e: string) => void;
@@ -146,6 +147,7 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
             </div>
             <div className="w-full mt-8 relative mb-24">
               <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">
+                {themeState.loading && <AppLoader />}
                 {todoRenameActivities.map((activity) => (
                   <SelectorTest
                     key={activity.id}

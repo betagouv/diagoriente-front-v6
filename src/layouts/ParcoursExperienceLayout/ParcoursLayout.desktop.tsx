@@ -3,12 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
 import ProgressBar from 'components/design-system/ProgressBar';
-import AppHeader from 'layouts/AppHeader';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import PathPicto from 'assets/svg/pictoPath.svg';
-
 import SaveButtonComponent from 'components/design-system/SaveButton';
-import { Activity } from 'common/requests/types';
+import AppHeader from '../AppLayout/components/AppHeader';
 
 interface PropsBox {
   title: string;
