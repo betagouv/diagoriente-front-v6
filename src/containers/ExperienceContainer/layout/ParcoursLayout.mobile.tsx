@@ -7,9 +7,7 @@ import { decodeUri } from 'common/utils/url';
 
 const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
   const location = useLocation();
-  const [index, setIndex] = useState(0);
   const step = location.pathname.split('/').pop();
-  console.log('step', step);
   const params = decodeUri(location.search);
   const renderStep = () => {
     let title = '';
