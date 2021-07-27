@@ -6,7 +6,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import DatePicker from 'components/design-system/DatePicker';
 import { Theme, Activity } from 'common/requests/types';
 
-import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 interface Props {
   theme: Theme;

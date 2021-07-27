@@ -12,7 +12,7 @@ import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
-import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;

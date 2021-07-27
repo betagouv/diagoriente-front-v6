@@ -9,7 +9,7 @@ import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from '../../../layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 interface Props {
   theme: Theme;
