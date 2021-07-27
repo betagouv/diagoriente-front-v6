@@ -5,10 +5,18 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import { ReactComponent as DeleteSvg } from 'assets/svg/delete.svg';
 import ProfileLayout from '../../../layouts/ProfileLayout/ProfileLayout';
 import useMediaQuery from '../../../hooks/useMediaQuery';
+import { useMyInterests } from '../../../common/requests/interests';
+import { useDidMount } from '../../../common/hooks/useLifeCycle';
+import AppLoader from '../../../components/ui/AppLoader';
 
 const MyInterestsContainer = () => {
   const isDesktop = useMediaQuery('md');
   const history = useHistory();
+  const [fetchMyInterests, myInterestsState] = useMyInterests();
+
+  useDidMount(() => {
+    fetchMyInterests();
+  });
 
   return (
     <ProfileLayout>
@@ -24,30 +32,17 @@ const MyInterestsContainer = () => {
           <h2 className="font-bold text-lena-blue-dark mb-10 uppercase mt-3">Mes centres d'intérêt</h2>
         </div>
         <div>
-          <div className="flex border-b border-lena-blue-light pb-3 mb-3">
-            <span className="block flex-grow">Gérer le marketing et piloter l'image </span>
-            <button>
-              <DeleteSvg />
-            </button>
-          </div>
-          <div className="flex border-b border-lena-blue-light pb-3 mb-3">
-            <span className="block flex-grow mr-5">Concevoir des contenus, des supports de communication</span>
-            <button>
-              <DeleteSvg />
-            </button>
-          </div>
-          <div className="flex border-b border-lena-blue-light pb-3 mb-3">
-            <span className="block flex-grow mr-5">Créer un projet entrepreneurial</span>
-            <button>
-              <DeleteSvg />
-            </button>
-          </div>
-          <div className="flex border-b border-lena-blue-light pb-3 mb-3">
-            <span className="block flex-grow mr-5">Décider</span>
-            <button>
-              <DeleteSvg />
-            </button>
-          </div>
+          {myInterestsState.loading && <AppLoader />}
+          {myInterestsState.data?.me.interests.map((v) => {
+            return v.cursors.map((cursor) => (
+              <div key={cursor.id} className="flex border-b border-lena-blue-light pb-3 mb-3">
+                <span className="block flex-grow">{cursor.title}</span>
+                <button>
+                  <DeleteSvg />
+                </button>
+              </div>
+            ));
+          })}
         </div>
       </div>
       <div className="fixed bottom-0 left-0 right-0 md:relative">

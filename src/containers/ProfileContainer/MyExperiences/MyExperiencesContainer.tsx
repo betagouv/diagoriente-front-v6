@@ -1,14 +1,17 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { ReactComponent as StarIcon } from 'assets/svg/star.svg';
 import { Link, useHistory } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_professional.svg';
 import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso_white.svg';
-import { ReactComponent as ArrowLeftSvg } from '../../../assets/images/svg/picto/arrow-left.svg';
-import useMediaQuery from '../../../hooks/useMediaQuery';
-import AppLoader from '../../../components/ui/AppLoader';
-import classNames from '../../../common/utils/classNames';
-import { ReactComponent as PlusSvg } from '../../../assets/svg/plus.svg';
+import useMediaQuery from 'hooks/useMediaQuery';
+import AppLoader from 'components/ui/AppLoader';
+import classNames from 'common/utils/classNames';
+import { useListSkills } from 'common/requests/skills';
+import translateExperienceType from 'utils/translateExperienceType';
+import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
+import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
+import CardExperience from './components/CardExperience';
 
 const allExperienceTypes = [
   {
@@ -31,7 +34,14 @@ const allExperienceTypes = [
 const MyExperiencesContainer: FunctionComponent = () => {
   const isDesktop = useMediaQuery('md');
   const history = useHistory();
-  const [selectedType, setSelectedType] = useState('');
+  const [callSkills, skillsState] = useListSkills();
+  const [selectedType, setSelectedType] = useState<string>();
+
+  useEffect(() => {
+    if (selectedType) callSkills({ variables: { domain: selectedType } });
+  }, [selectedType]);
+
+  const localizedExperienceType = translateExperienceType(selectedType || '');
 
   const handleSelectCard = (param: string) => {
     return isDesktop ? setSelectedType(param) : history.push(`/profil/mes-experiences/${param}`);
@@ -68,15 +78,26 @@ const MyExperiencesContainer: FunctionComponent = () => {
               </button>
             ))}
           </div>
-          {selectedType === '' && <div>TODO: Load experiences on Desktop here instead of redirecting to URL</div>}
-          {selectedType !== '' && (
+          {selectedType && (
             <>
-              <AppLoader />
+              {skillsState.loading && <AppLoader />}
+              {skillsState.data?.skills.data.map((exp) => (
+                <CardExperience
+                  key={exp.id}
+                  title={exp.theme.title}
+                  startDate={exp.startDate}
+                  endDate={exp.endDate}
+                  description={exp.activities}
+                />
+              ))}
               <button
                 onClick={() => history.push(`/experience/theme/create?type=${selectedType}`)}
                 className="flex items-center focus:ring-0 focus:outline-none"
               >
-                <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience ({selectedType})</span>
+                <PlusSvg />{' '}
+                <span className="ml-3 text-lena-blue-dark">
+                  Ajouter une expérience {localizedExperienceType.singular}
+                </span>
               </button>
             </>
           )}
