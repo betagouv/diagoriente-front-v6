@@ -8,6 +8,7 @@ import { ReactComponent as ArrowLeftSvg } from '../../../assets/images/svg/picto
 import useMediaQuery from '../../../hooks/useMediaQuery';
 import AppLoader from '../../../components/ui/AppLoader';
 import classNames from '../../../common/utils/classNames';
+import { ReactComponent as PlusSvg } from '../../../assets/svg/plus.svg';
 
 const allExperienceTypes = [
   {
@@ -68,7 +69,17 @@ const MyExperiencesContainer: FunctionComponent = () => {
             ))}
           </div>
           {selectedType === '' && <div>TODO: Load experiences on Desktop here instead of redirecting to URL</div>}
-          {selectedType !== '' && <AppLoader />}
+          {selectedType !== '' && (
+            <>
+              <AppLoader />
+              <button
+                onClick={() => history.push(`/experience/theme/create?type=${selectedType}`)}
+                className="flex items-center focus:ring-0 focus:outline-none"
+              >
+                <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience ({selectedType})</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </ProfileLayout>
