@@ -12,7 +12,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import { useLazyThemes } from 'common/requests/themes';
 import { Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
-import ParcoursLayout from '../../../layout/ParcoursLayout';
+import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
 
 type JobTag = {
   id: string;
