@@ -5,10 +5,8 @@ import IlluSkillFull from 'assets/illu/illu_skill_full.png';
 import HelpSvg from 'assets/images/svg/picto/onboarding_help.svg';
 import BrainSvg from 'assets/svg/brain.svg';
 import LoveSvg from 'assets/svg/love.svg';
-import BagSvg from 'assets/svg/bag.svg';
-import MedailleSvg from 'assets/svg/medaille.svg';
-import ExpPersoSvg from 'assets/svg/exp_perso.svg';
-import EditSvg from 'assets/svg/edit.svg';
+import { ReactComponent as BagSvg } from 'assets/svg/bag.svg';
+import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso.svg';
 import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
 import ModalComponent from 'components/design-system/Modal';
@@ -19,7 +17,7 @@ import _ from 'lodash';
 import SkillCardExport from './SkillCardExport';
 import classNames from '../../common/utils/classNames';
 import ModalCardExport from './ModalCardExport';
-import CardExperience from '../ProfileContainer/MyExperiences/components/CardExperience';
+import ExperienceGroup from './components/ExperienceGroup';
 
 type SkillProps = {
   star: number;
@@ -36,51 +34,6 @@ const Skill = ({ star = 1, title, description }: SkillProps) => {
       <div className="-mt-1">
         <h3 className="text-lena-blue-dark font-bold">{title}</h3>
         <span>{description}</span>
-      </div>
-    </div>
-  );
-};
-
-type ExperienceRecommended = {
-  description?: string;
-  signature?: string;
-};
-
-type ExperienceProps = {
-  title: string;
-  date: string;
-  exp: Array<string>;
-  recommended?: ExperienceRecommended;
-};
-
-const Experience: FunctionComponent<ExperienceProps> = ({ title, date, exp, recommended }) => {
-  return (
-    <div className="flex mb-7">
-      <h3 className="text-lena-blue-dark font-bold mr-5">&bull;</h3>
-      <div className="flex-grow">
-        <h3 className="text-lena-blue-dark font-bold">{title}</h3>
-        <span className="text-lena-blue-dark inline-block mb-3">{date}</span>
-        <ul>
-          {exp.map((info) => (
-            <li>{info}</li>
-          ))}
-        </ul>
-        {typeof recommended !== 'undefined' && (
-          <div className="bg-lena-yellow-light mt-5 p-5 rounded-md">
-            <div className="flex items-center">
-              <img src={MedailleSvg} alt="Medaille Svg" />
-              <span className="bg-lena-yellow inline-block ml-4 px-3 text-sm py-1 rounded-md bg-opacity-50 font-bold uppercase">
-                EXPéRIENCE RECOMMANDéE
-              </span>
-            </div>
-            <div className="mt-3">
-              <span className="block" style={{ color: '#424242' }}>
-                "{recommended.description}"
-              </span>
-              <span className="block italic mt-2">{recommended.signature}</span>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -214,49 +167,16 @@ const SkillCardContainer: FunctionComponent = () => {
               <h3 className="text-lena-blue-dark uppercase font-bold text-lg">Mes expériences</h3>
             </div>
             <div className="py-7 bg-white rounded-b-md">
-              <div className="flex items-center mb-7 px-10">
-                <img className="mr-5" src={BagSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">MES EXPéRIENCES PRO</span>
-              </div>
-              <div className="px-10">
-                {groupedExperiences.professional?.map((v) => (
-                  <CardExperience
-                    id={v.id}
-                    title={v.theme.title}
-                    startDate={v.startDate}
-                    endDate={v.endDate}
-                    description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
-                  />
-                ))}
-              </div>
-              <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
-              <div className="px-10">
-                <div className="rounded-md relative">
-                  <div className="flex items-center justify-between mb-7">
-                    <div className="flex items-center">
-                      <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
-                      <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                        MES EXPéRIENCES PERSOS
-                      </span>
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                      <img src={EditSvg} alt="Edit Icon" />
-                      <span className="text-lena-blue-dark text-sm">Editer</span>
-                    </div>
-                  </div>
-                  <div>
-                    {groupedExperiences.personal?.map((v) => (
-                      <CardExperience
-                        id={v.id}
-                        title={v.theme.title}
-                        startDate={v.startDate}
-                        endDate={v.endDate}
-                        description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <ExperienceGroup
+                icon={<ExpPersoSvg />}
+                title="Mes expériences pro"
+                experiences={groupedExperiences.professional}
+              />
+              <ExperienceGroup
+                icon={<BagSvg />}
+                title="Mes expériences persos"
+                experiences={groupedExperiences.personal}
+              />
             </div>
           </div>
         </div>

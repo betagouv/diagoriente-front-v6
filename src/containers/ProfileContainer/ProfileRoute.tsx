@@ -1,11 +1,15 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import EditInfoContainer from './Settings/containers/EditInfoContainer';
-import ProfileSettingsContainer from './Settings/ProfileSettingsContainer';
-import EditLogin from './Settings/containers/EditLogin';
-import MyExperiencesContainer from './MyExperiences/MyExperiencesContainer';
-import MyExperiencesByThemeContainer from './MyExperiences/MyExperiencesByThemeContainer';
-import MyInterestsContainer from './Interests/MyInterestsContainer';
+import createLazyComponent from '../../utils/createLazyComponent';
+
+const EditInfoContainer = createLazyComponent(() => import('./Settings/containers/EditInfoContainer'));
+const ProfileSettingsContainer = createLazyComponent(() => import('./Settings/ProfileSettingsContainer'));
+const EditLogin = createLazyComponent(() => import('./Settings/containers/EditLogin'));
+const MyExperiencesContainer = createLazyComponent(() => import('./MyExperiences/MyExperiencesContainer'));
+const MyExperiencesByThemeContainer = createLazyComponent(
+  () => import('./MyExperiences/MyExperiencesByThemeContainer'),
+);
+const MyInterestsContainer = createLazyComponent(() => import('./Interests/MyInterestsContainer'));
 
 type Props = {
   path: string;

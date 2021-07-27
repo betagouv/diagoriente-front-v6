@@ -5,7 +5,7 @@ import SelectFamily from './containers/SelectFamily';
 import SelectInterest from './containers/SelectInterest';
 import InterestDone from './containers/InterestDone';
 import { useInterests, useUpdateUserInterests } from '../../../common/requests/interests';
-import FullScreenLoader from '../../../components/Layout/loader/FullScreenLoader';
+import FullScreenLoader from '../../../components/ui/FullScreenLoader';
 import { useDidMount } from '../../../common/hooks/useLifeCycle';
 
 const CenterInterestCreateContainer = () => {

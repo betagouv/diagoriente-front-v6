@@ -1,5 +1,5 @@
 import React from 'react';
-import AppLoader from '../../ui/AppLoader';
+import AppLoader from './AppLoader';
 
 const FullScreenLoader = () => (
   <div className="fixed top-0 left-0 h-screen w-screen bg-lena-lightgray opacity-80 flex items-center justify-center z-50">
