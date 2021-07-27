@@ -18,7 +18,7 @@ const ExperienceItem: FunctionComponent<ExperienceProps> = ({ title, date, activ
     <div className="flex mb-7">
       <h3 className="text-lena-blue-dark font-bold mr-5">&bull;</h3>
       <div className="flex-grow">
-        <h3 className="text-lena-blue-dark font-bold">{title}</h3>
+        <h3 className="text-lena-blue-dark font-bold lowercase first-letter:uppercase">{title}</h3>
         <span className="text-lena-blue-dark inline-block mb-3">{date}</span>
         <ul>
           {activities.map((info) => (
