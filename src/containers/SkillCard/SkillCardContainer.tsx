@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import ExportSvg from 'assets/svg/export.svg';
 import IlluSkill from 'assets/illu/illu_skill_cropped.png';
 import IlluSkillFull from 'assets/illu/illu_skill_full.png';
@@ -13,9 +13,13 @@ import Button from 'components/design-system/Button';
 import Star from 'components/design-system/Star';
 import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
+import { useListSkills } from 'common/requests/skills';
+import { useDidMount } from 'common/hooks/useLifeCycle';
+import _ from 'lodash';
 import SkillCardExport from './SkillCardExport';
 import classNames from '../../common/utils/classNames';
 import ModalCardExport from './ModalCardExport';
+import CardExperience from '../ProfileContainer/MyExperiences/components/CardExperience';
 
 type SkillProps = {
   star: number;
@@ -87,6 +91,15 @@ const SkillCardContainer: FunctionComponent = () => {
   const [showSelector, setShowSelector] = useState(false);
   const [showHelpComp, setShowHelpComp] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
+  const [fetchSkills, skillsState] = useListSkills({ fetchPolicy: 'network-only' });
+
+  useDidMount(() => {
+    fetchSkills();
+  });
+
+  const groupedExperiences = useMemo(() => {
+    return skillsState.data ? _.groupBy(skillsState.data.skills.data, (v) => v.domain) : {};
+  }, [skillsState.data]);
 
   return showSelector ? (
     <SkillCardExport onClose={() => setShowSelector(false)} />
@@ -206,41 +219,15 @@ const SkillCardContainer: FunctionComponent = () => {
                 <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">MES EXPéRIENCES PRO</span>
               </div>
               <div className="px-10">
-                <Experience
-                  title="Graphisme multimédia"
-                  date="Depuis Avril 2020"
-                  exp={[
-                    "J'analyse les besoins du client",
-                    'Je traite des images numériques (colorimétrie, recadrage...)',
-                    'Je modélise des éléments graphique',
-                  ]}
-                />
-                <Experience
-                  title="Programmation"
-                  date="Avril 2020 - Mai 2021"
-                  exp={[
-                    "J'écris les notices techniques d'installation",
-                    'Je code des logiciels (ou parties de logiciels)',
-                  ]}
-                  recommended={{
-                    description:
-                      '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
-                    signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
-                  }}
-                />
-                <Experience
-                  title="Programmation"
-                  date="Avril 2020 - Mai 2021"
-                  exp={[
-                    "J'écris les notices techniques d'installation",
-                    'Je code des logiciels (ou parties de logiciels)',
-                  ]}
-                  recommended={{
-                    description:
-                      '“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam neque ac laoreet lobortis.”',
-                    signature: 'Maurice Michon, Pâtissier à Saint Quentin en Yvelines (91), le 12/01/20',
-                  }}
-                />
+                {groupedExperiences.professional?.map((v) => (
+                  <CardExperience
+                    id={v.id}
+                    title={v.theme.title}
+                    startDate={v.startDate}
+                    endDate={v.endDate}
+                    description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
+                  />
+                ))}
               </div>
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
               <div className="px-10">
@@ -252,20 +239,21 @@ const SkillCardContainer: FunctionComponent = () => {
                         MES EXPéRIENCES PERSOS
                       </span>
                     </div>
-                    <div className="absolute right-6 top-6 flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center">
                       <img src={EditSvg} alt="Edit Icon" />
                       <span className="text-lena-blue-dark text-sm">Editer</span>
                     </div>
                   </div>
                   <div>
-                    <Experience
-                      title="Programmation"
-                      date="Avril 2020 - Mai 2021"
-                      exp={[
-                        "J'écris les notices techniques d'installation",
-                        'Je code des logiciels (ou parties de logiciels)',
-                      ]}
-                    />
+                    {groupedExperiences.personal?.map((v) => (
+                      <CardExperience
+                        id={v.id}
+                        title={v.theme.title}
+                        startDate={v.startDate}
+                        endDate={v.endDate}
+                        description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
