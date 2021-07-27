@@ -8,7 +8,6 @@ import LoveSvg from 'assets/svg/love.svg';
 import { ReactComponent as BagSvg } from 'assets/svg/bag.svg';
 import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso.svg';
 import Button from 'components/design-system/Button';
-import Star from 'components/design-system/Star';
 import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useListSkills } from 'common/requests/skills';
@@ -18,26 +17,7 @@ import SkillCardExport from './SkillCardExport';
 import classNames from '../../common/utils/classNames';
 import ModalCardExport from './ModalCardExport';
 import ExperienceGroup from './components/ExperienceGroup';
-
-type SkillProps = {
-  star: number;
-  title: string;
-  description: string;
-};
-
-const Skill = ({ star = 1, title, description }: SkillProps) => {
-  return (
-    <div className="md:flex items-start mb-4">
-      <div className="flex-shrink-0 mb-3 md:mb-0 w-auto md:w-20">
-        <Star star={star} />
-      </div>
-      <div className="-mt-1">
-        <h3 className="text-lena-blue-dark font-bold">{title}</h3>
-        <span>{description}</span>
-      </div>
-    </div>
-  );
-};
+import CompetenceItem from './components/CompetenceItem';
 
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
@@ -52,6 +32,16 @@ const SkillCardContainer: FunctionComponent = () => {
 
   const groupedExperiences = useMemo(() => {
     return skillsState.data ? _.groupBy(skillsState.data.skills.data, (v) => v.domain) : {};
+  }, [skillsState.data]);
+
+  const groupedCompetences = useMemo(() => {
+    const result: any = {};
+    skillsState.data?.skills.data?.forEach((skill) => {
+      skill.ranks.forEach((r) => {
+        if (!result[r.competence.id] || result[r.competence.id].rank < r.rank) result[r.competence.id] = r;
+      });
+    });
+    return result;
   }, [skillsState.data]);
 
   return showSelector ? (
@@ -97,83 +87,57 @@ const SkillCardContainer: FunctionComponent = () => {
                 <img src={HelpSvg} alt="Help Icon" />
               </button>
             </div>
-            <div className="py-7 bg-white rounded-b-md">
-              <div className="flex items-center mb-7 px-8">
+            <div className="px-8 py-6 bg-white rounded-b-md">
+              <div className="flex items-center mb-7">
                 <img className="mr-5" src={BrainSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                  MES COMPéTENCES TRANSVERSALES
-                </span>
+                <div>
+                  <div className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                    Mes compétences transversales
+                  </div>
+                  <div className="italic text-lena-blue-dark text-sm">
+                    Les competences transversales sont orem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                </div>
               </div>
-              <div className="px-8">
-                <Skill
-                  star={1}
-                  title="Agir collectivement"
-                  description={`Je fais des propositions au groupe,
-                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
-                />
-                <Skill
-                  star={2}
-                  title="Organiser son activité"
-                  description="Je m’organise en fonction d'imprévus, je prends quelques initiatives."
-                />
-                <Skill
-                  star={3}
-                  title="Utiliser les mathématiques"
-                  description={`J'applique toutes les consignes et procédures en autonomie au travail,
-                  dans les activités manuelles... et j'identifie les risques de non respect`}
-                />
-                <Skill
-                  star={4}
-                  title="Organiser son activité"
-                  description={`Je fais des opérations et des mesures pour des petits travaux,
-                  des dosages pour des produits..."`}
-                />
+              <div className="space-y-8">
+                {Object.keys(groupedCompetences).map((v) => (
+                  <CompetenceItem
+                    key={v}
+                    level={groupedCompetences[v].rank}
+                    title={groupedCompetences[v].competence.title}
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  />
+                ))}
               </div>
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
-              <div className="flex items-center mb-7 px-8">
+              <div className="flex items-center mb-7">
                 <img className="mr-5" src={LoveSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                  MES COMPéTENCES D’ENGAGEMENT
-                </span>
+                <div>
+                  <div className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                    Mes compétences d'engagement
+                  </div>
+                  <div className="italic text-lena-blue-dark text-sm">
+                    Les competences d'engagement sont orem ipsum dolor sit amet, consectetur adipiscing.
+                  </div>
+                </div>
               </div>
-              <div className="px-8">
-                <Skill
-                  star={1}
-                  title="Prendre en compte les codes sociaux dans l’activité"
-                  description={`Je fais des propositions au groupe,
-                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
-                />
-                <Skill
-                  star={2}
-                  title="Prendre en compte les règlements dans le cadre de sa mission"
-                  description="Je m’organise en fonction d'imprévus, je prends quelques initiatives."
-                />
-                <Skill
-                  star={3}
-                  title="Agir collectivement"
-                  description="J’explique mes manières de communiquer suivant les enjeux des interactions"
-                />
-                <Skill
-                  star={4}
-                  title="Lorem ipsum"
-                  description={`Je fais des opérations et des mesures pour des petits travaux,
-                  des dosages pour des produits...`}
-                />
-              </div>
+              <div>... WIP ...</div>
             </div>
           </div>
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-blue-lightest rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
               <h3 className="text-lena-blue-dark uppercase font-bold text-lg">Mes expériences</h3>
             </div>
-            <div className="py-7 bg-white rounded-b-md">
+            <div className="bg-white rounded-b-md divide-y divide-lena-lightgray">
               <ExperienceGroup
                 icon={<ExpPersoSvg />}
+                type="professional"
                 title="Mes expériences pro"
                 experiences={groupedExperiences.professional}
               />
               <ExperienceGroup
                 icon={<BagSvg />}
+                type="personal"
                 title="Mes expériences persos"
                 experiences={groupedExperiences.personal}
               />

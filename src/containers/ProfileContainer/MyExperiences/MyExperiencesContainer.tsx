@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { ReactComponent as StarIcon } from 'assets/svg/star.svg';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_professional.svg';
 import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso_white.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -12,6 +12,7 @@ import translateExperienceType from 'utils/translateExperienceType';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import CardExperience from './components/CardExperience';
+import { useDidMount } from '../../../common/hooks/useLifeCycle';
 
 const allExperienceTypes = [
   {
@@ -33,9 +34,15 @@ const allExperienceTypes = [
 
 const MyExperiencesContainer: FunctionComponent = () => {
   const isDesktop = useMediaQuery('md');
+  const location = useLocation();
   const history = useHistory();
   const [callSkills, skillsState] = useListSkills();
   const [selectedType, setSelectedType] = useState<string>();
+
+  useDidMount(() => {
+    const query = new URLSearchParams(location.search);
+    if (query.has('type')) setSelectedType(query.get('type') || undefined);
+  });
 
   useEffect(() => {
     if (selectedType) callSkills({ variables: { domain: selectedType } });
