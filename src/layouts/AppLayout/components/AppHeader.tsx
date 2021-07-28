@@ -54,7 +54,7 @@ const AppHeader: FunctionComponent = () => {
                   <div className="text-lena-blue-dark font-bold">Mes expériences</div>
                 </li>
               </Link>
-              <Link to="/centres_interet">
+              <Link to="/profil/mes-centres-d-interet">
                 <li className="flex flex-row items-center space-x-4 hover:bg-lena-turquoise-light px-5 py-2">
                   <HeartSvg height={18} width={18} />
                   <div className="text-lena-blue-dark font-bold">Mes centres d'intérêt</div>

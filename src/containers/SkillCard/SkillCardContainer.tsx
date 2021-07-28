@@ -5,12 +5,9 @@ import IlluSkillFull from 'assets/illu/illu_skill_full.png';
 import HelpSvg from 'assets/images/svg/picto/onboarding_help.svg';
 import BrainSvg from 'assets/svg/brain.svg';
 import LoveSvg from 'assets/svg/love.svg';
-import BagSvg from 'assets/svg/bag.svg';
-import MedailleSvg from 'assets/svg/medaille.svg';
-import ExpPersoSvg from 'assets/svg/exp_perso.svg';
-import EditSvg from 'assets/svg/edit.svg';
+import { ReactComponent as BagSvg } from 'assets/svg/bag.svg';
+import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso.svg';
 import Button from 'components/design-system/Button';
-import Star from 'components/design-system/Star';
 import ModalComponent from 'components/design-system/Modal';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useListSkills } from 'common/requests/skills';
@@ -19,72 +16,8 @@ import _ from 'lodash';
 import SkillCardExport from './SkillCardExport';
 import classNames from '../../common/utils/classNames';
 import ModalCardExport from './ModalCardExport';
-import CardExperience from '../ProfileContainer/MyExperiences/components/CardExperience';
-
-type SkillProps = {
-  star: number;
-  title: string;
-  description: string;
-};
-
-const Skill = ({ star = 1, title, description }: SkillProps) => {
-  return (
-    <div className="md:flex items-start mb-4">
-      <div className="flex-shrink-0 mb-3 md:mb-0 w-auto md:w-20">
-        <Star star={star} />
-      </div>
-      <div className="-mt-1">
-        <h3 className="text-lena-blue-dark font-bold">{title}</h3>
-        <span>{description}</span>
-      </div>
-    </div>
-  );
-};
-
-type ExperienceRecommended = {
-  description?: string;
-  signature?: string;
-};
-
-type ExperienceProps = {
-  title: string;
-  date: string;
-  exp: Array<string>;
-  recommended?: ExperienceRecommended;
-};
-
-const Experience: FunctionComponent<ExperienceProps> = ({ title, date, exp, recommended }) => {
-  return (
-    <div className="flex mb-7">
-      <h3 className="text-lena-blue-dark font-bold mr-5">&bull;</h3>
-      <div className="flex-grow">
-        <h3 className="text-lena-blue-dark font-bold">{title}</h3>
-        <span className="text-lena-blue-dark inline-block mb-3">{date}</span>
-        <ul>
-          {exp.map((info) => (
-            <li>{info}</li>
-          ))}
-        </ul>
-        {typeof recommended !== 'undefined' && (
-          <div className="bg-lena-yellow-light mt-5 p-5 rounded-md">
-            <div className="flex items-center">
-              <img src={MedailleSvg} alt="Medaille Svg" />
-              <span className="bg-lena-yellow inline-block ml-4 px-3 text-sm py-1 rounded-md bg-opacity-50 font-bold uppercase">
-                EXPéRIENCE RECOMMANDéE
-              </span>
-            </div>
-            <div className="mt-3">
-              <span className="block" style={{ color: '#424242' }}>
-                "{recommended.description}"
-              </span>
-              <span className="block italic mt-2">{recommended.signature}</span>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+import ExperienceGroup from './components/ExperienceGroup';
+import CompetenceItem from './components/CompetenceItem';
 
 const SkillCardContainer: FunctionComponent = () => {
   const [showModalExport, setShowModalExport] = useState(false);
@@ -99,6 +32,16 @@ const SkillCardContainer: FunctionComponent = () => {
 
   const groupedExperiences = useMemo(() => {
     return skillsState.data ? _.groupBy(skillsState.data.skills.data, (v) => v.domain) : {};
+  }, [skillsState.data]);
+
+  const groupedCompetences = useMemo(() => {
+    const result: any = {};
+    skillsState.data?.skills.data?.forEach((skill) => {
+      skill.ranks.forEach((r) => {
+        if (!result[r.competence.id] || result[r.competence.id].rank < r.rank) result[r.competence.id] = r;
+      });
+    });
+    return result;
   }, [skillsState.data]);
 
   return showSelector ? (
@@ -144,119 +87,60 @@ const SkillCardContainer: FunctionComponent = () => {
                 <img src={HelpSvg} alt="Help Icon" />
               </button>
             </div>
-            <div className="py-7 bg-white rounded-b-md">
-              <div className="flex items-center mb-7 px-8">
+            <div className="px-8 py-6 bg-white rounded-b-md">
+              <div className="flex items-center mb-7">
                 <img className="mr-5" src={BrainSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                  MES COMPéTENCES TRANSVERSALES
-                </span>
+                <div>
+                  <div className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                    Mes compétences transversales
+                  </div>
+                  <div className="italic text-lena-blue-dark text-sm">
+                    Les competences transversales sont orem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </div>
+                </div>
               </div>
-              <div className="px-8">
-                <Skill
-                  star={1}
-                  title="Agir collectivement"
-                  description={`Je fais des propositions au groupe,
-                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
-                />
-                <Skill
-                  star={2}
-                  title="Organiser son activité"
-                  description="Je m’organise en fonction d'imprévus, je prends quelques initiatives."
-                />
-                <Skill
-                  star={3}
-                  title="Utiliser les mathématiques"
-                  description={`J'applique toutes les consignes et procédures en autonomie au travail,
-                  dans les activités manuelles... et j'identifie les risques de non respect`}
-                />
-                <Skill
-                  star={4}
-                  title="Organiser son activité"
-                  description={`Je fais des opérations et des mesures pour des petits travaux,
-                  des dosages pour des produits..."`}
-                />
+              <div className="space-y-8">
+                {Object.keys(groupedCompetences).map((v) => (
+                  <CompetenceItem
+                    key={v}
+                    level={groupedCompetences[v].rank}
+                    title={groupedCompetences[v].competence.title}
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                  />
+                ))}
               </div>
               <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
-              <div className="flex items-center mb-7 px-8">
+              <div className="flex items-center mb-7">
                 <img className="mr-5" src={LoveSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                  MES COMPéTENCES D’ENGAGEMENT
-                </span>
+                <div>
+                  <div className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
+                    Mes compétences d'engagement
+                  </div>
+                  <div className="italic text-lena-blue-dark text-sm">
+                    Les competences d'engagement sont orem ipsum dolor sit amet, consectetur adipiscing.
+                  </div>
+                </div>
               </div>
-              <div className="px-8">
-                <Skill
-                  star={1}
-                  title="Prendre en compte les codes sociaux dans l’activité"
-                  description={`Je fais des propositions au groupe,
-                  j'écoute et prends en compte l'avis de chacun, exprime des avis contraires.`}
-                />
-                <Skill
-                  star={2}
-                  title="Prendre en compte les règlements dans le cadre de sa mission"
-                  description="Je m’organise en fonction d'imprévus, je prends quelques initiatives."
-                />
-                <Skill
-                  star={3}
-                  title="Agir collectivement"
-                  description="J’explique mes manières de communiquer suivant les enjeux des interactions"
-                />
-                <Skill
-                  star={4}
-                  title="Lorem ipsum"
-                  description={`Je fais des opérations et des mesures pour des petits travaux,
-                  des dosages pour des produits...`}
-                />
-              </div>
+              <div>... WIP ...</div>
             </div>
           </div>
           <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.1)' }} className="rounded-md bg-white">
             <div className="bg-lena-blue-lightest rounded-t-md py-3 pl-9 pr-5 flex items-center justify-between">
               <h3 className="text-lena-blue-dark uppercase font-bold text-lg">Mes expériences</h3>
             </div>
-            <div className="py-7 bg-white rounded-b-md">
-              <div className="flex items-center mb-7 px-10">
-                <img className="mr-5" src={BagSvg} alt="Brain Icon" />
-                <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">MES EXPéRIENCES PRO</span>
-              </div>
-              <div className="px-10">
-                {groupedExperiences.professional?.map((v) => (
-                  <CardExperience
-                    id={v.id}
-                    title={v.theme.title}
-                    startDate={v.startDate}
-                    endDate={v.endDate}
-                    description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
-                  />
-                ))}
-              </div>
-              <div className="bg-lena-lightgray mt-6 mb-6" style={{ height: 1 }} />
-              <div className="px-10">
-                <div className="rounded-md relative">
-                  <div className="flex items-center justify-between mb-7">
-                    <div className="flex items-center">
-                      <img className="mr-5" src={ExpPersoSvg} alt="Brain Icon" />
-                      <span className="text-lena-blue-dark font-bold mt-2 text-lg uppercase">
-                        MES EXPéRIENCES PERSOS
-                      </span>
-                    </div>
-                    <div className="flex flex-col justify-center items-center">
-                      <img src={EditSvg} alt="Edit Icon" />
-                      <span className="text-lena-blue-dark text-sm">Editer</span>
-                    </div>
-                  </div>
-                  <div>
-                    {groupedExperiences.personal?.map((v) => (
-                      <CardExperience
-                        id={v.id}
-                        title={v.theme.title}
-                        startDate={v.startDate}
-                        endDate={v.endDate}
-                        description={v.activities.map((a) => ({ id: a.id, title: a.title }))}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+            <div className="bg-white rounded-b-md divide-y divide-lena-lightgray">
+              <ExperienceGroup
+                icon={<ExpPersoSvg />}
+                type="professional"
+                title="Mes expériences pro"
+                experiences={groupedExperiences.professional}
+              />
+              <ExperienceGroup
+                icon={<BagSvg />}
+                type="personal"
+                title="Mes expériences persos"
+                experiences={groupedExperiences.personal}
+              />
             </div>
           </div>
         </div>

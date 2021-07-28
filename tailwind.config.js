@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   purge: ['./public/**/*.html', './src/**/*.{js,jsx/ts,tsx}'],
   mode: 'jit',
@@ -32,8 +34,8 @@ module.exports = {
         '1/4': '25%',
         '1/2': '50%',
         '3/4': '75%',
-        full: '100%',
-        '28p': '78px',
+        'full': '100%',
+        '28p': '78px'
       },
       colors: {
         'lena-lightgray': '#F3F2F4',
@@ -81,5 +83,12 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'),
+    plugin(function({ addVariant, e }) {
+      addVariant('first-letter', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`first-letter${separator}${className}`)}::first-letter`
+        })
+      })
+  })],
 };
