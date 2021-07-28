@@ -6,7 +6,7 @@ import Autonomie from 'assets/svg/Picto_organiser.svg';
 import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -108,11 +108,11 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
   };
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <div className="w-full flex justify-center mt-10">
         <RendQuestionStep title={types[step].title} questions={typesQuestion[types[step].sub]} />
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

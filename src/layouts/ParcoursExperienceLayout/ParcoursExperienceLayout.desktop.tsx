@@ -14,7 +14,7 @@ interface PropsBox {
   stepUrlPath: string;
 }
 
-const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
+const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => {
   const location = useLocation();
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
@@ -130,4 +130,4 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   );
 };
 
-export default ParcoursLayoutForDesktop;
+export default ParcoursExperienceLayoutForDesktop;

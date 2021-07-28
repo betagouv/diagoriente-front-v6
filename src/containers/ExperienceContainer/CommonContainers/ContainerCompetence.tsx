@@ -9,7 +9,7 @@ import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -131,7 +131,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
   };
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <button onClick={() => history.goBack()} className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none">
         <ArrowLeftSvg />
         <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
@@ -139,7 +139,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
       <div className="w-full flex justify-center mt-10">
         <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

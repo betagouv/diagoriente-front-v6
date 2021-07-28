@@ -6,7 +6,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import DatePicker from 'components/design-system/DatePicker';
 import { Theme, Activity } from 'common/requests/types';
 
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -58,7 +58,7 @@ const DateContainer = ({ theme, activities, levels, competencesValues }: Props) 
     }
   }, [addSkillState.data]);
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <button onClick={() => history.goBack()} className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none">
         <ArrowLeftSvg />
         <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
@@ -97,7 +97,7 @@ const DateContainer = ({ theme, activities, levels, competencesValues }: Props) 
           Valider
         </button>
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

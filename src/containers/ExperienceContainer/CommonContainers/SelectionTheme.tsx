@@ -12,7 +12,7 @@ import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -173,7 +173,7 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
   const mediaQueryMD = useMediaQuery('md');
 
   return !showMobileChoice ? (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5 w-full">
           {mediaQueryMD ? (
@@ -208,7 +208,7 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
           )}
         </div>
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   ) : (
     <MobileChoiceDomain onClose={() => setShowMobileChoice(false)} data={data} theme={theme} setTheme={setTheme} />
   );

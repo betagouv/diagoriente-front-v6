@@ -4,6 +4,7 @@ import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   competencesValues: string[];
@@ -97,37 +98,39 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
   );
 
   return (
-    <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center py-4">
-      <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
-        <div className="text-2xl font-bold">Très bien.</div>
-        <div className="text-base text-center">
-          Vous avez ajouté une expérience et identifié de nouvelles compétences. Les voici ci dessous récapitulées en
-          fonction du CEC. Vous pourrez les retrouver dans votre profil / carte de compétences.
-        </div>
+    <ParcoursExperienceLayout>
+      <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center py-4">
+        <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
+          <div className="text-2xl font-bold">Très bien.</div>
+          <div className="text-base text-center">
+            Vous avez ajouté une expérience et identifié de nouvelles compétences. Les voici ci dessous récapitulées en
+            fonction du CEC. Vous pourrez les retrouver dans votre profil / carte de compétences.
+          </div>
 
-        <div>
-          {Object.keys(groupedCmp).map((key) => (
-            <RenderBox title={key} competences={groupedCmp[key]} />
-          ))}
-        </div>
-        <div className="text-base text-center">
-          Vous pouvez maintenant demander une <strong>recommandation</strong> pour cette expérience, elle donnera
-          confiance à vos futurs recruteurs.
-        </div>
-        <div className="flex flex-col space-y-4 w-full">
-          <button
-            className={`mt-2 rounded-md focus:ring-0
+          <div>
+            {Object.keys(groupedCmp).map((key) => (
+              <RenderBox title={key} competences={groupedCmp[key]} />
+            ))}
+          </div>
+          <div className="text-base text-center">
+            Vous pouvez maintenant demander une <strong>recommandation</strong> pour cette expérience, elle donnera
+            confiance à vos futurs recruteurs.
+          </div>
+          <div className="flex flex-col space-y-4 w-full">
+            <button
+              className={`mt-2 rounded-md focus:ring-0
             focus:outline-none w-full bg-lena-pink-dark
             text-white py-3 text-center font-bold text-lg`}
-          >
-            Être recommandé.e
-          </button>
-          <div className="text-center">
-            <button className="font-bold text-lg mt-3 focus:ring-0, focus:outline-none">Passer cette étape</button>
+            >
+              Être recommandé.e
+            </button>
+            <div className="text-center">
+              <button className="font-bold text-lg mt-3 focus:ring-0, focus:outline-none">Passer cette étape</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ParcoursExperienceLayout>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import useMediaQuery from 'hooks/useMediaQuery';
-import ParcoursInterestsLayoutForMobile from './ParcoursLayout.mobile';
-import ParcoursInterestsLayoutForDesktop from './ParcoursLayout.desktop';
+import ParcoursInterestsLayoutForMobile from './ParcoursInterestsLayout.mobile';
+import ParcoursInterestsLayoutForDesktop from './ParcoursInterestsLayout.desktop';
 
 type Props = {
   withMobile?: boolean;
