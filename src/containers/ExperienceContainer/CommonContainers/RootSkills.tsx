@@ -23,7 +23,10 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [activities, setActivities] = useState([] as Activity[]);
   const [levels, setLevels] = useState<string[]>([]);
   const [competencesValues, setCompetencesValues] = useState<string[]>([]);
-
+  const [monthStart, setMonthStart] = useState('Janvier');
+  const [yearStart, setYearStart] = useState('');
+  const [monthEnd, setMonthEnd] = useState('Janvier');
+  const [yearEnd, setYearEnd] = useState('');
   const { skill: selectedSkillId } = decodeUri(location.search);
   const params = decodeUri(location.search);
 
@@ -162,6 +165,12 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
             theme={theme}
             competencesValues={competencesValues}
             setCompetencesValues={setCompetencesValues}
+            activities={activities}
+            levels={levels}
+            monthStart={monthStart}
+            yearStart={yearStart}
+            monthEnd={monthEnd}
+            yearEnd={yearEnd}
           />
         )}
       />
@@ -169,7 +178,17 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         exact
         path="/experience/theme/:id/date"
         render={() => (
-          <DateContainer theme={theme} activities={activities} levels={levels} competencesValues={competencesValues} />
+          <DateContainer
+            theme={theme}
+            monthStart={monthStart}
+            setMonthStart={setMonthStart}
+            yearStart={yearStart}
+            setYearStart={setYearStart}
+            monthEnd={monthEnd}
+            setMonthEnd={setMonthEnd}
+            yearEnd={yearEnd}
+            setYearEnd={setYearEnd}
+          />
         )}
       />
       <Route

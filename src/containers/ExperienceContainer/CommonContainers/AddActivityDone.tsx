@@ -142,7 +142,7 @@ const AddActivityDone = ({ theme }: Props) => {
 
   return (
     <>
-      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full h-screen">
+      <div className="bg-lena-blue-dark flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           {/* {mediaQueryMD ? <MobileContainer /> : <MobileContainer />} */}
           <MobileContainer />

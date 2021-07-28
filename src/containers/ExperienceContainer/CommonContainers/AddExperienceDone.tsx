@@ -1,10 +1,12 @@
 import React from 'react';
 import { Competence, Theme } from 'common/requests/types';
+import { useHistory } from 'react-router-dom';
 import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 interface Props {
   competencesValues: string[];
@@ -16,6 +18,9 @@ interface PropsBox {
 }
 
 const AddExperienceDone = ({ competencesValues, theme }: Props) => {
+  const history = useHistory();
+  const mediaQueryMD = useMediaQuery('md');
+
   const cmpSelected = theme.reference?.competences.filter((cmp) => competencesValues.find((c) => cmp.id === c));
   const groupedCmp = groupBy(cmpSelected, 'type');
 
@@ -63,12 +68,11 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
   };
 
   const RenderBox = ({ title, competences }: PropsBox) => (
-    <div className="rounded mt-3 mb-3 p-3" style={{ backgroundColor: '#F3F2F4' }}>
+    <div className="rounded mt-3 mb-3 mx-1 p-2 md:w-45p" style={{ backgroundColor: '#F3F2F4' }}>
       <div className="flex items-center mb-3">
         <img src={renderLogo(title)} alt="logo" />
         <p className="text-black ml-4 font-bold">{renderTitle(title)}</p>
       </div>
-
       <div className="divide-y divide-white">
         {competences.map((c) => {
           return (
@@ -99,33 +103,49 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
 
   return (
     <ParcoursExperienceLayout>
-      <div className="bg-lena-blue-darkest text-white flex flex-col flex-1 items-center justify-center py-4">
-        <div className="container flex flex-col items-center justify-center text-center space-y-8 lg:w-1/2">
-          <div className="text-2xl font-bold">Très bien.</div>
+      <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4">
+        <div className="container mt-8 text-center lg:w-4/5">
+          {mediaQueryMD ? (
+            <p className="text-2xl font-bold leading-loose">Bravo ! </p>
+          ) : (
+            <p className="text-lg font-bold leading-loose">Très bien. </p>
+          )}
+          {mediaQueryMD && (
+            <p className="text-2xl font-bold leading-loose">Vous avez ajouté une expérience professionnelle </p>
+          )}
           <div className="text-base text-center">
             Vous avez ajouté une expérience et identifié de nouvelles compétences. Les voici ci dessous récapitulées en
             fonction du CEC. Vous pourrez les retrouver dans votre profil / carte de compétences.
           </div>
+          <div className="flex justify-center py-8">
+            <div className="flex flex-col md:flex-row flex-wrap justify-between">
+              {Object.keys(groupedCmp).map((key) => (
+                <RenderBox title={key} competences={groupedCmp[key]} />
+              ))}
+            </div>
+          </div>
 
-          <div>
-            {Object.keys(groupedCmp).map((key) => (
-              <RenderBox title={key} competences={groupedCmp[key]} />
-            ))}
-          </div>
-          <div className="text-base text-center">
-            Vous pouvez maintenant demander une <strong>recommandation</strong> pour cette expérience, elle donnera
-            confiance à vos futurs recruteurs.
-          </div>
-          <div className="flex flex-col space-y-4 w-full">
-            <button
-              className={`mt-2 rounded-md focus:ring-0
+          <div className="flex flex-col items-center justify-center text-center space-y-8">
+            <div className="text-base text-center space-y-8">
+              Vous pouvez maintenant demander une <strong>recommandation</strong> pour cette expérience, elle donnera
+              confiance à vos futurs recruteurs.
+            </div>
+            <div className="flex flex-col space-y-4">
+              <button
+                className={`mt-2 rounded-md focus:ring-0
             focus:outline-none w-full bg-lena-pink-dark
-            text-white py-3 text-center font-bold text-lg`}
-            >
-              Être recommandé.e
-            </button>
-            <div className="text-center">
-              <button className="font-bold text-lg mt-3 focus:ring-0, focus:outline-none">Passer cette étape</button>
+            text-white py-3 text-center font-bold text-lg px-16`}
+              >
+                Être recommandé.e
+              </button>
+              <div className="text-center">
+                <button
+                  className="font-bold text-lg mt-3 focus:ring-0, focus:outline-none"
+                  onClick={() => history.push('/')}
+                >
+                  Passer cette étape
+                </button>
+              </div>
             </div>
           </div>
         </div>

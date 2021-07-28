@@ -54,7 +54,7 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
     if (selectedDomain) {
       setTheme(selectedDomain);
       if (theme) {
-        history.push(`${activeDomain}/activite?type=${selectedDomain.domain}`);
+        history.push(`${activeDomain}/date?type=${selectedDomain.domain}`);
       }
     }
   };
@@ -119,7 +119,7 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
   const handleNext = () => {
     setTheme(theme);
     if (theme) {
-      history.push(`${theme?.id}/activite?type=${theme.domain}`);
+      history.push(`${theme?.id}/date?type=${theme.domain}`);
     }
   };
 
