@@ -36,7 +36,7 @@ const MyExperiencesByThemeContainer = () => {
           </Link>
         </div>
       </div>
-      <div style={{ background: 'rgb(250,250,250)' }} className="pt-9 flex flex-col justify-start flex-1">
+      <div style={{ background: 'rgb(250,250,250)' }} className="py-8 flex flex-col justify-start flex-1">
         <div className="container">
           <h2 className="text-sm mb-10">
             Vous pouvez ici modifier les expériences que vous avez renseigné, ou bien ajouter de nouvelles expériences.

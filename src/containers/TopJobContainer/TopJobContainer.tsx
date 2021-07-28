@@ -5,6 +5,8 @@ import { ReactComponent as TopJobSvg } from 'assets/svg/top_job.svg';
 import { ReactComponent as InfoSvg } from 'assets/svg/info.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
+import JobsLayout from '../../layouts/JobsLayout/JobsLayout';
+import useMediaQuery from '../../hooks/useMediaQuery';
 
 // TODO remove default and use ids from DB
 export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54sdf41dsf213' }) => {
@@ -28,33 +30,37 @@ export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54s
 
 const TopJobContainer = () => {
   const history = useHistory();
+  const isDesktop = useMediaQuery('md');
 
   return (
-    <div>
-      <header style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
-        <div className="container flex justify-between items-center">
-          <button
-            className="focus:ring-0 focus:outline-none flex items-center space-x-3"
-            onClick={() => history.push('/metiers/recherche')}
-          >
-            <SearchSvg fill="#223A7A" />
-            <span className="inline-block mt-1 text-lena-blue-dark text-sm">Rechercher un métier</span>
-          </button>
-          <button className="focus:ring-0 focus:outline-none">
-            <UserSvg />
-          </button>
+    <JobsLayout>
+      {!isDesktop && (
+        <div style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
+          <div className="container flex justify-between items-center">
+            <button
+              className="focus:ring-0 focus:outline-none flex items-center space-x-3"
+              onClick={() => history.push('/metiers/recherche')}
+            >
+              <SearchSvg fill="#223A7A" />
+              <span className="inline-block mt-1 text-lena-blue-dark text-sm">Rechercher un métier</span>
+            </button>
+            <button className="focus:ring-0 focus:outline-none">
+              <UserSvg />
+            </button>
+          </div>
         </div>
-      </header>
-      <div className="container flex flex-col items-center mt-16 mb-5">
-        <TopJobSvg />
-        <h1 className="text-lena-blue-dark font-bold text-xl mt-2">Mon Top Métiers</h1>
-        <p className="text-lena-blue-dark text-sm text-center mt-5">
-          En fonction des expériences, compétences et centres d’intérets que vous avez renseignés, voici{' '}
-          <strong>10 métiers qui pourraient vous plaire :</strong>
-        </p>
-        <button className="flex items-center space-x-3 focus:ring-0 focus:outline-none mt-5">
+      )}
+      <div className="container flex flex-col items-center py-8 space-y-8">
+        <div className="flex flex-col items-center justify-center space-y-2">
+          {!isDesktop && <TopJobSvg />}
+          <h2 className="text-lena-blue-dark font-bold text-xl">10 métiers pour vous</h2>
+          <p className="text-lena-blue-dark text-sm text-center md:w-3/4">
+            En fonction des expériences, compétences et centres d’intérets que vous avez renseignés
+          </p>
+        </div>
+        <button className="flex items-center space-x-3 focus:ring-0 focus:outline-none">
           <InfoSvg />
-          <span className="text-lena-blue-dark text-sm">Comment ça marche ?</span>
+          <span className="text-lena-blue-dark text-sm">Pourquoi ces métiers ?</span>
         </button>
       </div>
       <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
@@ -68,7 +74,7 @@ const TopJobContainer = () => {
           <CardJob />
         </div>
       </div>
-    </div>
+    </JobsLayout>
   );
 };
 

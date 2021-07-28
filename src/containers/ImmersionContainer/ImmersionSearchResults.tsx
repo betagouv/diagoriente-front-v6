@@ -8,17 +8,15 @@ import classNames from '../../common/utils/classNames';
 
 const ImmersionSearchResults = () => {
   const [openFilters, setOpenFilters] = useState(false);
-  const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
+  const [viewMode, setViewMode] = useState<'map' | 'list'>('list');
 
   if (openFilters) return <ImmersionSearchFilters onClose={() => setOpenFilters(false)} />;
 
   return (
     <ImmersionLayout showSearch={true}>
       <div className="flex flex-row items-center justify-between p-8">
-        <div />
-        <div className="text-lena-blue-dark text-centertext-lg">
-          <strong>1337</strong> engagements trouvés
-        </div>
+        <div className="hidden md:block md:invisible" />
+        <div className="text-lena-blue-dark text-center text-lg font-bold">1337 engagements trouvés</div>
         <div className="flex flex-row justify-center items-center space-x-2 text-lena-pink-dark">
           <div
             className={classNames(

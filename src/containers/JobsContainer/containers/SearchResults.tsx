@@ -10,14 +10,14 @@ const SearchResults = () => {
 
   return (
     <div>
-      <header style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
+      <div style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
         <div className="container flex justify-between items-center">
           <div />
           <button className="focus:ring-0 focus:outline-none">
             <UserSvg />
           </button>
         </div>
-      </header>
+      </div>
       <div className="mt-3 container mb-5">
         <button onClick={() => history.push('/metiers/recherche')} className="flex items-center space-x-2">
           <ArrowLeftSvg style={{ width: 13, height: 13 }} />

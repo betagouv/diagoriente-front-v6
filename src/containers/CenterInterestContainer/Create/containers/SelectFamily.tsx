@@ -20,7 +20,7 @@ type Props = {
 };
 
 const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Props) => {
-  const mediaQueryMD = useMediaQuery('md');
+  const isDesktop = useMediaQuery('md');
   const [getInterestsCall, getInterestsState] = useInterests();
 
   useDidMount(() => {
@@ -63,48 +63,52 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
 
   return (
     <ParcoursInterestsLayout>
-      <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-12">
-        <div className={classNames()}>
-          <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
-            <p className="text-lena-blue-dark mb-5">
-              Pour votre futur métier, vous êtes peut-être intéressé.e par des choses que vous avez déjà faites ou des
-              choses nouvelles, des choses très précises ou très générales...
+      <div className="container pt-8 pb-16 md:pb-8 flex flex-col items-center justify-start space-y-8 md:p-12">
+        <div>
+          {isDesktop && (
+            <div className="xl:w-3/4 w-full mx-auto">
+              <p className="text-lena-blue-dark mb-5">
+                Pour votre futur métier, vous êtes peut-être intéressé.e par des choses que vous avez déjà faites ou des
+                choses nouvelles, des choses très précises ou très générales...
+              </p>
+              <p className="text-lena-blue-dark">
+                Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.
+              </p>
+              <p className="text-lena-blue-dark mt-5 font-bold">
+                Pour commencer, cliquez sur une famille pour sélectionner les centres d'intérêts associés :
+              </p>
+            </div>
+          )}
+          {!isDesktop && (
+            <p className={classNames('text-lena-blue-dark', isDesktop && 'hidden')}>
+              Cliquez sur une famille pour sélectionner les centres d'intérêts associés :
             </p>
-            <p className="text-lena-blue-dark">
-              Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.
-            </p>
-            <p className="text-lena-blue-dark mt-5 font-bold">
-              Pour commencer, cliquez sur une famille pour sélectionner les centres d'intérêts associés :
-            </p>
-          </div>
-          <p className={classNames('text-lena-blue-dark mt-5', mediaQueryMD && 'hidden')}>
-            Cliquez sur une famille pour sélectionner les centres d'intérêts associés :
-          </p>
+          )}
         </div>
         <div className="w-full">
-          <ul className={classNames('space-y-2', mediaQueryMD && 'xl:w-1/2 w-full mx-auto')}>
+          <ul className={classNames('space-y-2', isDesktop && 'xl:w-1/2 w-full mx-auto')}>
             {getInterestsState.loading && <AppLoader variant="blue" />}
             {getInterestsState.data?.interests.data.map((v) =>
               family(v.title, v.id, CollectifSvg, IndividuelSvg, v.id in selectedFamilies),
             )}
           </ul>
-          <div className="flex justify-center">
+          <div className="flex items-center justify-center">
             <button className="focus:outline-none focus:ring-0 flex flex justify-center items-center mt-7 space-x-2">
               <InfoSvg />
               <span className="text-lena-blue-dark">En quoi cela va m’aider à trouver mon orientation ?</span>
             </button>
           </div>
         </div>
-      </div>
-      <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
-        <button
-          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
+        <div className="fixed bottom-0 left-0 right-0 md:relative md:flex md:justify-center">
+          <button
+            className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
           text-white py-3 text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50`}
-          onClick={() => onFinish?.()}
-          disabled={Object.keys(selectedFamilies).length <= 0}
-        >
-          Suivant
-        </button>
+            onClick={() => onFinish?.()}
+            disabled={Object.keys(selectedFamilies).length <= 0}
+          >
+            Suivant
+          </button>
+        </div>
       </div>
     </ParcoursInterestsLayout>
   );
