@@ -63,7 +63,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
 
   return (
     <ParcoursInterestsLayout>
-      <div className="container pt-14 flex flex-col items-center justify-start space-y-8 md:p-12">
+      <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-12">
         <div className={classNames()}>
           <div className={classNames(!mediaQueryMD ? 'hidden' : 'xl:w-3/4 w-full mx-auto')}>
             <p className="text-lena-blue-dark mb-5">

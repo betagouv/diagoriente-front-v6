@@ -4,8 +4,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import DatePicker from 'components/design-system/DatePicker';
 import { Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
-
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -88,7 +87,7 @@ const DateContainer = ({
     </div>
   );
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       {mediaQueryMD && (
         <button
           onClick={() => history.goBack()}
@@ -122,7 +121,7 @@ const DateContainer = ({
           </button>
         </div>
       )}
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

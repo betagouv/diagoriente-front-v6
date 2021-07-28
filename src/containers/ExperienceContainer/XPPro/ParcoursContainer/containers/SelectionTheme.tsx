@@ -12,7 +12,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import { useLazyThemes } from 'common/requests/themes';
 import { Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 type JobTag = {
   id: string;
@@ -276,7 +276,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   }, [text]);
 
   return !showSearch ? (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
         <div
           style={{ width: mediaQuery2XL ? '50%' : mediaQueryXL ? '70%' : mediaQueryLG ? '85%' : '100%' }}
@@ -315,7 +315,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
           </div>
         </div>
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   ) : (
     <WIPSearchTheme open={showSearch} setTheme={setTheme} theme={theme} onClose={() => setShowSearch(false)} />
   );

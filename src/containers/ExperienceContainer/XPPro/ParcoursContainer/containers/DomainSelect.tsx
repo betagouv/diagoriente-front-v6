@@ -4,7 +4,7 @@ import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import { Activity, Theme } from 'common/requests/types';
 import { useLazyTheme } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -27,7 +27,7 @@ const DomainSelect = ({ theme }: Props) => {
   };
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <div className="container py-8 md:p-14">
         <div className="flex flex-col space-y-4 items-center justify-start w-full">
           <div className="text-lena-blue-dark mt-20">Vous avez sélectionné le domaine :</div>
@@ -53,7 +53,7 @@ const DomainSelect = ({ theme }: Props) => {
           </button>
         </div>
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

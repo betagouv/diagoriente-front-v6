@@ -5,7 +5,7 @@ import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import useMediaQuery from 'hooks/useMediaQuery';
 
 interface Props {
@@ -102,7 +102,7 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
   );
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4">
         <div className="container mt-8 text-center lg:w-4/5">
           {mediaQueryMD ? (
@@ -150,7 +150,7 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
           </div>
         </div>
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

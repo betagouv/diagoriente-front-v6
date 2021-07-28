@@ -10,7 +10,7 @@ import { groupBy } from 'lodash';
 import { Theme, Activity } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
   theme: Theme;
@@ -181,7 +181,7 @@ const QuestionsContainer = ({
   };
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       {mediaQueryMD && (
         <button
           onClick={() => history.goBack()}
@@ -194,7 +194,7 @@ const QuestionsContainer = ({
       <div className="w-full flex justify-center mt-2 md:mt-10">
         <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
       </div>
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 

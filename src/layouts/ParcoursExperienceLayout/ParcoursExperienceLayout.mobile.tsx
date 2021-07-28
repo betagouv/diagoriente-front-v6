@@ -5,7 +5,7 @@ import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
 import { decodeUri } from 'common/utils/url';
 
-const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
+const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
   const location = useLocation();
   const step = location.pathname.split('/').pop();
   const params = decodeUri(location.search);
@@ -88,4 +88,4 @@ const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
   );
 };
 
-export default ParcoursLayoutForMobile;
+export default ParcoursExperienceLayoutForMobile;

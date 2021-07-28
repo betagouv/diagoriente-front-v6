@@ -10,7 +10,7 @@ import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
-import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import AppLoader from 'components/ui/AppLoader';
 
 type NewActivity = {
@@ -125,7 +125,7 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
   };
 
   return (
-    <ParcoursLayout>
+    <ParcoursExperienceLayout>
       {!showNewActivity ? (
         <>
           {mediaQueryMD && (
@@ -197,7 +197,7 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
       ) : (
         <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />
       )}
-    </ParcoursLayout>
+    </ParcoursExperienceLayout>
   );
 };
 
