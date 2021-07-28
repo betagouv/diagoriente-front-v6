@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { ReactComponent as StarIcon } from 'assets/svg/star.svg';
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -7,10 +7,11 @@ import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso_white.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
 import AppLoader from 'components/ui/AppLoader';
 import classNames from 'common/utils/classNames';
-import { useListSkills } from 'common/requests/skills';
+import { useListSkills, useSkillCountPerDomain } from 'common/requests/skills';
 import translateExperienceType from 'utils/translateExperienceType';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
+import _ from 'lodash';
 import CardExperience from './components/CardExperience';
 import { useDidMount } from '../../../common/hooks/useLifeCycle';
 
@@ -38,15 +39,22 @@ const MyExperiencesContainer: FunctionComponent = () => {
   const history = useHistory();
   const [callSkills, skillsState] = useListSkills();
   const [selectedType, setSelectedType] = useState<string>();
+  const [callSkillCount, skillCountState] = useSkillCountPerDomain();
 
   useDidMount(() => {
     const query = new URLSearchParams(location.search);
     if (query.has('type')) setSelectedType(query.get('type') || undefined);
+    // Fetch skill count for all domains
+    callSkillCount();
   });
 
   useEffect(() => {
     if (selectedType) callSkills({ variables: { domain: selectedType } });
   }, [selectedType]);
+
+  const groupedExperiencesCount = useMemo(() => {
+    return skillCountState.data ? _.groupBy(skillCountState.data.skills.data, (v) => v.domain) : {};
+  }, [skillCountState.data]);
 
   const localizedExperienceType = translateExperienceType(selectedType || '');
 
@@ -81,22 +89,29 @@ const MyExperiencesContainer: FunctionComponent = () => {
                 )}
               >
                 {v.icon}
-                <span className="inline-block text-center mt-5 text-lena-blue-dark font-bold">{v.label}</span>
+                <div className="text-center mt-5 text-lena-blue-dark font-bold">
+                  <span className="inline-block">{v.label}</span>
+                  <span>({groupedExperiencesCount[v.param]?.length || 0})</span>
+                </div>
               </button>
             ))}
           </div>
           {selectedType && (
             <>
               {skillsState.loading && <AppLoader />}
-              {skillsState.data?.skills.data.map((exp) => (
-                <CardExperience
-                  key={exp.id}
-                  title={exp.theme.title}
-                  startDate={exp.startDate}
-                  endDate={exp.endDate}
-                  description={exp.activities}
-                />
-              ))}
+              {skillsState.data && (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {skillsState.data?.skills.data.map((exp) => (
+                    <CardExperience
+                      key={exp.id}
+                      title={exp.theme.title}
+                      startDate={exp.startDate}
+                      endDate={exp.endDate}
+                      description={exp.activities}
+                    />
+                  ))}
+                </div>
+              )}
               <button
                 onClick={() => history.push(`/experience/theme/create?type=${selectedType}`)}
                 className="flex items-center focus:ring-0 focus:outline-none"

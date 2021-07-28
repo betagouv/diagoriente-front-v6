@@ -4,25 +4,16 @@ import ParcoursInterestsLayoutForMobile from './ParcoursLayout.mobile';
 import ParcoursInterestsLayoutForDesktop from './ParcoursLayout.desktop';
 
 type Props = {
-  withRange?: boolean;
   withMobile?: boolean;
-  backgroundColor?: string;
 };
 
-const ParcoursInterestsLayout: FunctionComponent<Props> = ({
-  withRange,
-  withMobile = true,
-  backgroundColor,
-  children,
-}) => {
+const ParcoursInterestsLayout: FunctionComponent<Props> = ({ withMobile = true, children }) => {
   const isDesktop = useMediaQuery('md');
 
   return isDesktop ? (
     <ParcoursInterestsLayoutForDesktop>{children}</ParcoursInterestsLayoutForDesktop>
   ) : withMobile ? (
-    <ParcoursInterestsLayoutForMobile backgroundColor={backgroundColor} withRange={withRange}>
-      {children}
-    </ParcoursInterestsLayoutForMobile>
+    <ParcoursInterestsLayoutForMobile>{children}</ParcoursInterestsLayoutForMobile>
   ) : (
     <div>{children}</div>
   );

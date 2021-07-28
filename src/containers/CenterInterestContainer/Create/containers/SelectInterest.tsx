@@ -202,10 +202,10 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   return (
     <ParcoursInterestsLayout withMobile={false}>
       <div
-        className="flex flex-col flex-1 min-h-screen h-full flex flex-col overflow-x-hidden"
+        className="flex flex-col flex-1 min-h-screen md:min-h-0 h-full flex flex-col overflow-x-hidden"
         style={{ backgroundColor: mediaQueryMD ? '#fff' : '#e5e5e5' }}
       >
-        <header style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-white pt-2">
+        <header className="bg-white pt-2 shadow-md">
           <div className="flex justify-between items-center container">
             <button
               className="flex items-center space-x-2 focus:outline-none focus:ring-0"
@@ -237,7 +237,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
           </h2>
         </header>
 
-        <div className={classNames('container', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'mt-4')}>
+        <div className={classNames('container flex-1', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'py-8')}>
           {getInterestState.loading && <AppLoader variant="yellow" />}
           {getInterestState.data && (
             <>
@@ -286,52 +286,56 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                   </div>
                 </div>
               </div>
-              <div
-                className={classNames(mediaQueryMD && 'hidden', 'relative')}
-                style={{
-                  transform: `translate(-${translate}px, 0px)`,
-                }}
-              >
-                {getInterestState.data?.interest.cursors.map((v, index) => (
-                  <FamilyCardForMobile
-                    key={`${index * 2}-b`}
-                    content={v}
-                    position={index}
-                    onToggleInterest={handleToggleInterest}
-                    selectedInterests={selectedInterests}
-                  />
-                ))}
-              </div>
-              <div className={classNames(!mediaQueryMD && 'hidden')}>
-                {getInterestState.data && (
-                  <Flicking
-                    circularEnabled={false}
-                    onMoveEnd={(e) => {
-                      setRangeValue(e.currentTarget.index + 1);
-                      setFlickingDisabled(false);
-                    }}
-                    defaultIndex={0}
-                    ref={flickingRef}
-                    horizontal={true}
-                    plugins={plugins}
-                  >
-                    {getInterestState.data?.interest.cursors.map((v, index) => (
-                      <div key={index} className="relative flickingDiv">
-                        <FamilyCardForDesktop
-                          content={v}
-                          position={index}
-                          onToggleInterest={handleToggleInterest}
-                          selectedInterests={selectedInterests}
-                        />
-                      </div>
-                    ))}
-                  </Flicking>
-                )}
-              </div>
+              {!mediaQueryMD && (
+                <div
+                  className="relative mt-1"
+                  style={{
+                    transform: `translate(-${translate}px, 0px)`,
+                  }}
+                >
+                  {getInterestState.data?.interest.cursors.map((v, index) => (
+                    <FamilyCardForMobile
+                      key={`${index * 2}-b`}
+                      content={v}
+                      position={index}
+                      onToggleInterest={handleToggleInterest}
+                      selectedInterests={selectedInterests}
+                    />
+                  ))}
+                </div>
+              )}
+              {mediaQueryMD && (
+                <div>
+                  {getInterestState.data && (
+                    <Flicking
+                      circularEnabled={false}
+                      onMoveEnd={(e) => {
+                        setRangeValue(e.currentTarget.index + 1);
+                        setFlickingDisabled(false);
+                      }}
+                      defaultIndex={0}
+                      ref={flickingRef}
+                      horizontal={true}
+                      plugins={plugins}
+                    >
+                      {getInterestState.data?.interest.cursors.map((v, index) => (
+                        <div key={index} className="relative flickingDiv">
+                          <FamilyCardForDesktop
+                            content={v}
+                            position={index}
+                            onToggleInterest={handleToggleInterest}
+                            selectedInterests={selectedInterests}
+                          />
+                        </div>
+                      ))}
+                    </Flicking>
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>
-        <div className="fixed bottom-0 left-0 right-0 md:relative md:mt-4 md:flex md:justify-center">
+        <div className="fixed bottom-0 left-0 right-0 md:relative md:py-4 md:flex md:justify-center">
           <button
             className={`focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3
             text-center font-bold text-lg md:w-96 md:rounded-md disabled:opacity-50`}

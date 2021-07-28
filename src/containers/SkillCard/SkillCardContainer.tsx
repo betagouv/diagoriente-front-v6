@@ -130,13 +130,13 @@ const SkillCardContainer: FunctionComponent = () => {
             </div>
             <div className="bg-white rounded-b-md divide-y divide-lena-lightgray">
               <ExperienceGroup
-                icon={<ExpPersoSvg />}
+                icon={<BagSvg />}
                 type="professional"
                 title="Mes expériences pro"
                 experiences={groupedExperiences.professional}
               />
               <ExperienceGroup
-                icon={<BagSvg />}
+                icon={<ExpPersoSvg />}
                 type="personal"
                 title="Mes expériences persos"
                 experiences={groupedExperiences.personal}
