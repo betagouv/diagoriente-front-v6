@@ -33,8 +33,8 @@ const types = [
     logo: Organiser,
     sub: 'organizational',
     text: (
-      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
-        Quelles sont les compétences d’organisation que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
+        Quelles sont les compétences <strong>d’organisation</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -43,8 +43,8 @@ const types = [
     logo: Communication,
     sub: 'communication',
     text: (
-      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
-        Quelles sont les compétences de communication que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
+        Quelles sont les compétences de <strong>communication</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -53,8 +53,8 @@ const types = [
     logo: Refleshir,
     sub: 'reflective',
     text: (
-      <span className="text-lena-blue-dark text-center font-bold text-xl leading-10">
-        Quelles sont les compétences de réflexion que vous mettez en oeuvre ?
+      <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
+        Quelles sont les compétences de <strong>réflexion</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -83,6 +83,8 @@ const QuestionsContainer = ({
   const [addSkillCall, addSkillState] = useAddSkill();
   const typesCompetences = groupBy(theme.reference?.competences, 'type');
   const [error, setError] = useState('');
+  const [selected, setSelected] = useState('');
+
   const isExist = (value: string) => {
     const res = competencesValues.includes(value);
     return res;
@@ -93,15 +95,18 @@ const QuestionsContainer = ({
     if (exist) {
       const res = competencesValues.filter((q) => q !== value);
       setCompetencesValues(res);
+      setSelected('');
     } else {
       const array = [...competencesValues];
       array.push(value);
+      setSelected(value);
       setCompetencesValues(array);
     }
   };
   const nextStep = () => {
     if (step < 2) {
       setStep(step + 1);
+      setSelected('');
     } else if (theme?.id && activities.length && competencesValues.length && levels.length) {
       const dataToSend: {
         theme: string;
@@ -160,7 +165,7 @@ const QuestionsContainer = ({
             </div>
           ))}
         </div>
-        {competences.length !== 0 && (
+        {selected && (
           <div className="fixed bottom-0 left-0 right-0 md:relative">
             <button
               className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
