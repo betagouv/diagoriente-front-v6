@@ -18,26 +18,27 @@ const ParcoursLayoutForMobile: FunctionComponent = ({ children }) => {
         ind = 1;
         break;
       }
+      case 'date': {
+        title = '> Sélection de date';
+        ind = 2;
+        break;
+      }
       case 'activite': {
         title = '> Choix des activités';
-        ind = 2;
+        ind = 3;
         break;
       }
       case 'question': {
         title = '> Sélection des question';
-        ind = 3;
+        ind = 4;
         break;
       }
       case 'competences': {
         title = '> Sélection des compétences';
-        ind = 4;
-        break;
-      }
-      case 'date': {
-        title = '> Sélection de date';
         ind = 5;
         break;
       }
+
       default: {
         title = '> Choix du domaine';
         ind = 1;

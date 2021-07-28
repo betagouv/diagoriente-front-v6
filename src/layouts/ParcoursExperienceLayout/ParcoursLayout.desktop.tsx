@@ -2,7 +2,6 @@ import React, { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
-import ProgressBar from 'components/design-system/ProgressBar';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
 import PathPicto from 'assets/svg/pictoPath.svg';
 import SaveButtonComponent from 'components/design-system/SaveButton';
@@ -18,8 +17,8 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
   const location = useLocation();
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
-  const steps = ['Métier', 'Activités', 'Caracteristiques', 'Competences', 'Date'];
-  const stepsUrl = ['create', 'activite', 'question', 'competences', 'date'];
+  const steps = ['Métier', 'Date', 'Activités', 'Caracteristiques', 'Competences'];
+  const stepsUrl = ['create', 'date', 'activite', 'question', 'competences', 'sommaire'];
 
   const renderStep = () => {
     let ind = 0;
@@ -28,22 +27,27 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
         ind = 1;
         break;
       }
-      case 'activite': {
+      case 'date': {
         ind = 2;
         break;
       }
-      case 'question': {
+      case 'activite': {
         ind = 3;
         break;
       }
-      case 'competences': {
+      case 'question': {
         ind = 4;
         break;
       }
-      case 'date': {
+      case 'competences': {
         ind = 5;
         break;
       }
+      case 'sommaire': {
+        ind = 6;
+        break;
+      }
+
       default: {
         ind = 1;
         break;
@@ -92,7 +96,6 @@ const ParcoursLayoutForDesktop: FunctionComponent = ({ children }) => {
       <AppHeader />
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative">
-          <ProgressBar value={renderStep()} maxValue={5} />
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center mt-10">

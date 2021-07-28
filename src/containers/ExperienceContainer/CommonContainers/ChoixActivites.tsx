@@ -128,22 +128,30 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
     <ParcoursLayout>
       {!showNewActivity ? (
         <>
-          <button
-            onClick={() => history.goBack()}
-            className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
-          >
-            <ArrowLeftSvg />
-            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-          </button>
+          {mediaQueryMD && (
+            <button
+              onClick={() => history.goBack()}
+              className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
+            >
+              <ArrowLeftSvg />
+              <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
+            </button>
+          )}
           <div className="container py-8 md:p-14 2xl:w-3/4 md:w-full md:mx-auto">
             <div className="relative min-h-full md:min-h-0 mb-8">
-              <div className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+              <div
+                className={`text-lena-blue-dark text-left md:text-center
+              md:font-bold text-base md:text-xl md:leading-8`}
+              >
                 Dans le cadre de la {theme?.title},
               </div>
-              <div className="text-lena-blue-dark text-center font-bold text-xl leading-10">
+              <div
+                className={`text-lena-blue-dark text-left md:text-center
+              md:font-bold text-base md:text-xl md:leading-8`}
+              >
                 quelles sont les <strong>activités</strong> que vous pratiquez ?
               </div>
-              <div className="italic mt-2 text-center text-sm">Plusieurs choix possibles</div>
+              <div className="italic mt-2 text-left md:text-center text-sm">Plusieurs choix possibles</div>
             </div>
             <div className="w-full mt-8 relative mb-24">
               <div className="md:grid xl:grid-cols-2 gap-4 space-y-3 md:space-y-0">

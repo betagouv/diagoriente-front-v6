@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-
+import { useAddSkill } from 'common/requests/skills';
+import moment from 'moment';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
-import { Theme } from 'common/requests/types';
+import { Theme, Activity } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
 import ParcoursLayout from 'layouts/ParcoursExperienceLayout/ParcoursLayout';
@@ -15,6 +16,12 @@ interface Props {
   theme: Theme;
   setCompetencesValues: (competence: string[]) => void;
   competencesValues: string[];
+  activities: Activity[];
+  levels: string[];
+  monthStart: string;
+  yearStart: string;
+  monthEnd: string;
+  yearEnd: string;
 }
 interface QuestionType {
   title: string;
@@ -59,12 +66,23 @@ interface BoxType {
   competences: { title: string; type: string; id: string }[];
 }
 
-const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: Props) => {
+const QuestionsContainer = ({
+  theme,
+  setCompetencesValues,
+  competencesValues,
+  activities,
+  levels,
+  monthStart,
+  yearStart,
+  monthEnd,
+  yearEnd,
+}: Props) => {
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(0);
+  const [addSkillCall, addSkillState] = useAddSkill();
   const typesCompetences = groupBy(theme.reference?.competences, 'type');
-
+  const [error, setError] = useState('');
   const isExist = (value: string) => {
     const res = competencesValues.includes(value);
     return res;
@@ -84,11 +102,38 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
   const nextStep = () => {
     if (step < 2) {
       setStep(step + 1);
+    } else if (theme?.id && activities.length && competencesValues.length && levels.length) {
+      const dataToSend: {
+        theme: string;
+        activities: string[];
+        competences: string[];
+        levels: string[];
+        startDate?: string;
+        endDate?: string;
+      } = {
+        theme: theme?.id,
+        activities: activities.map((act) => act.id),
+        competences: competencesValues,
+        levels,
+      };
+      if (monthStart && yearStart) {
+        const sD = moment(`01-${monthStart}-${yearStart}`).toISOString();
+        dataToSend.startDate = sD;
+      }
+      if (monthEnd && yearEnd) {
+        const sE = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
+        dataToSend.endDate = sE;
+      }
+      addSkillCall({ variables: dataToSend });
     } else {
-      history.push(`/experience/theme/${theme.id}/date?type=${theme.domain}`);
+      setError('veuillez compléter tous les étapes');
     }
   };
-
+  useEffect(() => {
+    if (addSkillState.data) {
+      history.push(`/experience/theme/${theme.id}/sommaire?type=${theme.domain}`);
+    }
+  }, [addSkillState.data]);
   const RendQuestionStep = ({ title, competences }: QuestionType) => {
     return (
       <div className="flex flex-col items-center p-8">
@@ -96,12 +141,12 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
           className="rounded-full flex flex-col items-center justify-center font-mono relative"
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#F1FCFF' }}
         >
-          <div
+          {/* <div
             className="rounded-full absolute -top-5 flex items-center justify-center"
             style={{ height: 45, width: 45, color: '#000', backgroundColor: '#223A7A' }}
           >
             <span className="text-white">{`${step + 1}/${types.length}`}</span>
-          </div>
+          </div> */}
           <img src={types[step].logo} alt="pole" />
           <span className="font-bold text-sm text-center mt-4">{title}</span>
         </div>
@@ -132,11 +177,16 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues }: 
 
   return (
     <ParcoursLayout>
-      <button onClick={() => history.goBack()} className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none">
-        <ArrowLeftSvg />
-        <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-      </button>
-      <div className="w-full flex justify-center mt-10">
+      {mediaQueryMD && (
+        <button
+          onClick={() => history.goBack()}
+          className="flex items-center mt-5 ml-5 focus:ring-0 focus:outline-none"
+        >
+          <ArrowLeftSvg />
+          <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
+        </button>
+      )}
+      <div className="w-full flex justify-center mt-2 md:mt-10">
         <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
       </div>
     </ParcoursLayout>

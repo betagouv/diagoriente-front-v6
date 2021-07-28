@@ -69,7 +69,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
   };
   const RendQuestionStep = ({ title, questions }: QuestionType) => {
     return (
-      <div className="flex flex-col items-center p-8">
+      <div className="flex flex-col items-center p-4">
         <div
           className="rounded-full flex items-center justify-center font-mono relative"
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#E1E7F7' }}
@@ -82,7 +82,9 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
           </div>
           <span className="text-lena-blue-dark font-bold text-sm text-center">{title}</span>
         </div>
-        <div className="m-5">Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :</div>
+        <div className="m-5 md:font-bold text-lena-blue-dark text-center">
+          Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :
+        </div>
         <div>
           {questions.map((q) => (
             <div className="mt-3 mb-3 p-3">

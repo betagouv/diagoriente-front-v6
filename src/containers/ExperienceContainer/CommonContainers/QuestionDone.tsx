@@ -20,7 +20,19 @@ const QuestionDone = ({ theme }: Props) => {
     <div className="container flex flex-col justify-center space-y-8">
       <div className="text-center">
         <div className="text-center">
-          <strong className="text-2xl font-bold">Merci !</strong>
+          <strong className="text-2xl font-bold">
+            {mediaQueryMD ? (
+              <div>
+                <p>Très bien, enfin dites-nous en plus sur ces</p>
+                <p> 3 familles de compétences liées</p>
+              </div>
+            ) : (
+              <div>
+                <p>Merci !</p>
+                <p>t’as complété 2 sur 3</p>
+              </div>
+            )}
+          </strong>
         </div>
         <div className="text-center mt-5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a consequat libero, eu auctor libero.
@@ -40,7 +52,7 @@ const QuestionDone = ({ theme }: Props) => {
             <span className="text-xs md:text-base font-bold mt-3">S’organiser</span>
           </div>
           <div
-            className="rounded-full bg-white flex flex-col  items-center justify-center font-mono mt-14 md:mt:0 p-4"
+            className="rounded-full bg-white flex flex-col  items-center justify-center font-mono mt-14 md:mt-0 p-4"
             style={{
               height: mediaQueryMD ? 162 : 110,
               width: mediaQueryMD ? 162 : 110,
@@ -93,7 +105,7 @@ const QuestionDone = ({ theme }: Props) => {
   );
   return (
     <>
-      <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full h-screen">
+      <div className="bg-lena-blue-dark flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           <MobileContainer />
         </div>

@@ -11,9 +11,14 @@ module.exports = {
       width: {
         '58p': '58.33333%',
         '41p': '41.66667%',
-
+        '45p': '45.9%',
         '69p': '69.33333%',
         '30p': '30.66667%',
+        dateInputMd: '159px',
+        dateInput: '192px',
+      },
+      divideColor: {
+        blue: '#C4D2F8',
       },
       maxWidth: {
         '58p': '58.33333%',
@@ -23,13 +28,13 @@ module.exports = {
         '30p': '30.66667%',
       },
       minHeight: {
-        '0': '0',
+        0: '0',
         '1/4': '25%',
         '1/2': '50%',
         '3/4': '75%',
-        'full': '100%',
-        '28p': '78px' 
-       },
+        full: '100%',
+        '28p': '78px',
+      },
       colors: {
         'lena-lightgray': '#F3F2F4',
         'lena-lightgray2': '#C9C9C7',
