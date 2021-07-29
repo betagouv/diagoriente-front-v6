@@ -16,8 +16,10 @@ module.exports = {
         '45p': '45.9%',
         '69p': '69.33333%',
         '30p': '30.66667%',
+        dateInputSm: '149px',
         dateInputMd: '159px',
         dateInput: '192px',
+        logoExp:155
       },
       divideColor: {
         blue: '#C4D2F8',
@@ -36,6 +38,9 @@ module.exports = {
         '3/4': '75%',
         'full': '100%',
         '28p': '78px'
+      },
+      height:{
+        logoExp:143
       },
       colors: {
         'lena-lightgray': '#F3F2F4',

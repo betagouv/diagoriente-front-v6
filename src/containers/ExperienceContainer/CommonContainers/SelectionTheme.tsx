@@ -1,12 +1,11 @@
 /* eslint-disable max-len */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
 import { useLazyTheme } from 'common/requests/themes';
-
+import { isEmpty } from 'lodash';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
-import { ReactComponent as LoveSvg } from 'assets/svg/comp_eng.svg';
 import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import classNames from 'common/utils/classNames';
@@ -69,12 +68,19 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
                 onClick={() => controlSelected(d)}
                 key={d.id}
                 className={classNames(
-                  'w-full py-3 flex items-center px-10 focus:outline-none focus:ring-0',
+                  'w-full py-3 flex items-center px-6 focus:outline-none focus:ring-0 relative',
                   selectedDomain?.id === d.id ? 'bg-lena-turquoise-light' : '',
                 )}
               >
-                <LoveSvg />
-                <span className={classNames('ml-8', selectedDomain?.id === d.id && 'font-bold')}>{d.title}</span>
+                <LoveWhiteSvg />
+                <p className={classNames('ml-6 text-base truncate', selectedDomain?.id === d.id && 'font-bold')}>
+                  {d.title.replaceAll('/', ',')}
+                </p>
+                {selectedDomain?.id === d.id && (
+                  <div className="absolute right-4 ">
+                    <ArrowDownSvg className="transform rotate-180 " />
+                  </div>
+                )}
               </button>
               {activeDomain === d.id && selectedDomain?.id === d.id && themeState.data?.theme.activities.length !== 0 && (
                 <div className="px-14 py-4">
@@ -111,7 +117,6 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
 
 const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
   const history = useHistory();
-  const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const controlSelected = (dataSelected: any) => {
     setTheme(dataSelected);
@@ -122,40 +127,38 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
       history.push(`${theme?.id}/date?type=${theme.domain}`);
     }
   };
-
   return (
     <>
-      <div className="mx-auto w-3/5">
-        <div className="grid grid-cols-4 gap-5 mt-10">
+      <div className="mx-auto w-11/12">
+        <div className="flex flex-wrap mt-10 justify-start">
           {data?.map((f) => (
             <button
               onClick={() => controlSelected(f)}
               className={classNames(
-                'rounded-xl p-5 cursor-pointer border-4  focus:ring-0 focus:outline-none',
+                'rounded-xl m-2 cursor-pointer border-4 focus:ring-0 focus:outline-none w-logoExp h-logoExp justify-center',
                 theme && theme?.id === f.id
                   ? 'bg-lena-blue-light border-lena-blue-inter'
                   : 'hover:bg-lena-turquoise-light border-transparent',
               )}
               data-tip="Info"
               data-for={f.id}
-              /* onMouseEnter={() => themeCall({ variables: { id: f.id } })} */
             >
               <div className="flex flex-col items-center">
-                {theme && theme.id === f.id ? <LoveWhiteSvg /> : <LoveSvg />}
+                <LoveWhiteSvg />
                 <span className="block mt-5">{f.title}</span>
               </div>
-              {/* <ReactTooltip id={f.id} place="right" type="light" effect="solid">
+              <ReactTooltip id={f.id} place="right" type="light" effect="solid">
                 <ul className="list-disc text-left">
-                  {themeState.data?.theme.activities.map((a) => (
+                  {f.activities.map((a) => (
                     <li>{a.title}</li>
                   ))}
                 </ul>
-              </ReactTooltip> */}
+              </ReactTooltip>
             </button>
           ))}
         </div>
       </div>
-      {theme && (
+      {!isEmpty(theme) && (
         <button
           className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
           text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`}

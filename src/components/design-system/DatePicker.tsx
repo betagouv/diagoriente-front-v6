@@ -34,12 +34,12 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
         {subTitle && <span className="text-lena-blue-dark">{subTitle}</span>}
       </div>
       <div>
-        <div className="flex flex-row items-center justify-evenly mt-5">
+        <div className="flex flex-row items-center justify-between mt-5">
           <div className="flex flex-col md:items-center relative md:flex-row relative">
             <span className="text-lena-blue-dark text-left ml-0 mb-3 md:mn-0 md:ml0">Mois</span>{' '}
             <div
               style={{ borderColor: '#e1e7f7' }}
-              className={`flex w-dateInputMd md:w-dateInput items-center justify-between
+              className={`flex w-dateInputMd md:w-dateInput sm:w-dateInputSm items-center justify-between
               border rounded-md focus:ring-0 focus:outline-none
               pt-2 pb-2 ml-0 md:ml-5 px-6 shadow text-lena-blue-dark cursor-pointer`}
               onClick={() => setOpen(!open)}
