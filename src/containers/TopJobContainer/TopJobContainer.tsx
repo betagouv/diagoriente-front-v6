@@ -15,7 +15,7 @@ export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54s
   return (
     <button
       onClick={() => history.push(`/metiers/${jobId}`)}
-      className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none text-left"
+      className="bg-lena-lightgray px-5 py-7 rounded-lg focus:ring-0 focus:outline-none text-left"
     >
       <h3 style={{ color: '#424242' }} className="font-bold mb-1">
         Technicien/ne démonstrateur/trice en matériel agricole
@@ -64,7 +64,7 @@ const TopJobContainer = () => {
         </button>
       </div>
       <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
-        <div className="container py-5">
+        <div className="container py-5 grid md:grid-cols-2 gap-4 md:w-3/4">
           <CardJob />
           <CardJob />
           <CardJob />

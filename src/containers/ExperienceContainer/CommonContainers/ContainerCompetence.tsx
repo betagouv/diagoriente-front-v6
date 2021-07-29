@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
 import { useAddSkill } from 'common/requests/skills';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
-import { Theme, Activity } from 'common/requests/types';
+import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
@@ -88,8 +88,7 @@ const QuestionsContainer = ({
   const [selected, setSelected] = useState('');
 
   const isExist = (value: string) => {
-    const res = competencesValues.includes(value);
-    return res;
+    return competencesValues.includes(value);
   };
 
   const onSelectCompetence = (value: string) => {
@@ -124,12 +123,10 @@ const QuestionsContainer = ({
         levels,
       };
       if (monthStart && yearStart) {
-        const sD = moment(`01-${monthStart}-${yearStart}`).toISOString();
-        dataToSend.startDate = sD;
+        dataToSend.startDate = moment(`01-${monthStart}-${yearStart}`).toISOString();
       }
       if (monthEnd && yearEnd) {
-        const sE = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
-        dataToSend.endDate = sE;
+        dataToSend.endDate = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
       }
       addSkillCall({ variables: dataToSend });
     } else {
@@ -143,7 +140,7 @@ const QuestionsContainer = ({
   }, [addSkillState.data]);
   const RendQuestionStep = ({ title, competences }: QuestionType) => {
     return (
-      <div className="flex flex-col items-center p-8">
+      <div className="flex flex-col items-center p-4 py-8 pb-16 md:pb-8">
         <div
           className="rounded-full flex flex-col items-center justify-center font-mono relative"
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#F1FCFF' }}

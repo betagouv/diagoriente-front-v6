@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
 import Illustration from 'assets/svg/illu_01.svg';
 import InfoPicto from 'assets/svg/picto_info.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import ModalInfo from './Modals/InfoQuestionnaire';
 
 interface Props {
@@ -141,7 +142,7 @@ const AddActivityDone = ({ theme }: Props) => {
   );
 
   return (
-    <>
+    <ParcoursExperienceLayout>
       <div className="bg-lena-blue-dark flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           {/* {mediaQueryMD ? <MobileContainer /> : <MobileContainer />} */}
@@ -149,7 +150,7 @@ const AddActivityDone = ({ theme }: Props) => {
         </div>
       </div>
       <ModalInfo open={open} onClose={() => setOpen(false)} />{' '}
-    </>
+    </ParcoursExperienceLayout>
   );
 };
 

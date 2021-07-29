@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
 import classNames from 'common/utils/classNames';
 
 export type ButtonProps = {
-  size?: 'normal' | 'md' | 'lg';
+  size?: 'sm' | 'normal' | 'md' | 'lg';
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -19,6 +19,7 @@ const variants = {
 };
 
 const sizes = {
+  sm: 'px-4 py-2 text-sm',
   normal: 'px-4 py-2',
   md: 'px-24 py-3 text-md',
   lg: 'px-32 py-3 text-lg',

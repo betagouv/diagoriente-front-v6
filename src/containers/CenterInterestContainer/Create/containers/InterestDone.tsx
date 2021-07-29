@@ -9,7 +9,7 @@ const InterestDone: FunctionComponent = () => {
   return (
     <ParcoursInterestsLayout>
       <div className="bg-lena-blue-darkest flex flex-col flex-1 w-full">
-        <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
+        <div className="w-full text-white flex flex-col flex-1 items-center justify-center space-y-8">
           <div className="container flex flex-col items-center justify-center space-y-8">
             <div className="text-center">
               <strong className="text-2xl font-bold">Merci !</strong>
@@ -19,8 +19,10 @@ const InterestDone: FunctionComponent = () => {
             </div>
             <div className="text-center">
               <div className="mt-5">
-                Grâce aux expériences et aux centres d’intérêts que vous avez renseigné, nous pouvons vous proposer des
-                <strong>pistes métiers</strong>.
+                <span>Grâce aux expériences et aux centres d’intérêts que vous avez renseigné,</span>
+                <span>
+                  nous pouvons vous proposer des <strong>pistes métiers</strong>.
+                </span>
               </div>
             </div>
           </div>
