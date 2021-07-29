@@ -26,7 +26,10 @@ const PublicHeader: FunctionComponent = () => {
                   <img src={LogoDiago} className="w-40 lg:w-52" alt="Logo de Diagoriente" />
                 </div>
               </Link>
-              <div className="pro:hidden pro:lg:flex hidden sm:flex flex-col space-y-2 md:space-y-1 items-center justify-center">
+              <div
+                className={`pro:hidden pro:lg:flex hidden sm:flex flex-col
+              space-y-2 md:space-y-1 items-center justify-center`}
+              >
                 <img height={43} width={79} src={LogoRepublique} alt="Logo de la République Française" />
                 <LogoBeta />
               </div>

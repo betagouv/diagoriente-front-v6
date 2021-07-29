@@ -5,7 +5,8 @@ const InterestItem: FunctionComponent<{ title: string; id: string }> = ({ id, ti
   return (
     <div
       key={id}
-      className="md:bg-lena-gray-light-2 flex flex-row items-start justify-between p-4 md:rounded-lg md:font-bold space-x-8"
+      className={`md:bg-lena-gray-light-2 flex flex-row items-start
+      justify-between p-4 md:rounded-lg md:font-bold space-x-8`}
     >
       <div>{title}</div>
       <button className="outline-none focus:outline-none focus:ring-0">

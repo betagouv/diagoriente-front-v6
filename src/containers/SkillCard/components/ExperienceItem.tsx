@@ -29,7 +29,10 @@ const ExperienceItem: FunctionComponent<ExperienceProps> = ({ title, date, activ
           <div className="bg-lena-yellow-light mt-5 p-5 rounded-md">
             <div className="flex items-center">
               <img src={MedailleSvg} alt="Medaille Svg" />
-              <span className="bg-lena-yellow inline-block ml-4 px-3 text-sm py-1 rounded-md bg-opacity-50 font-bold uppercase">
+              <span
+                className={`bg-lena-yellow inline-block ml-4 px-3 text-sm
+              py-1 rounded-md bg-opacity-50 font-bold uppercase`}
+              >
                 Expérience recommandée
               </span>
             </div>

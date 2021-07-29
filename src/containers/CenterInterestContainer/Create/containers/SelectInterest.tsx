@@ -319,7 +319,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                       plugins={plugins}
                     >
                       {getInterestState.data?.interest.cursors.map((v, index) => (
-                        <div key={index} className="relative flickingDiv">
+                        <div key={`${index * 3}-a`} className="relative flickingDiv">
                           <FamilyCardForDesktop
                             content={v}
                             position={index}

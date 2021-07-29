@@ -16,39 +16,41 @@ import AppLoader from 'components/ui/AppLoader';
 type NewActivity = {
   onSend: (e: string) => void;
   onClose: () => void;
+  extraAct: string;
+  setExtraAct: (s: string) => void;
 };
 
 interface Props {
   theme: Theme;
   activities: Activity[];
   setActivities: (activities: Activity[]) => void;
+  extraAct: string;
+  setExtraAct: (s: string) => void;
 }
 
-const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
-  const [text, setText] = useState(String);
-
+const AddNewActivity = ({ onSend, onClose, extraAct, setExtraAct }: NewActivity) => {
   const handleSend = () => {
-    if (text.length > 0) {
-      onSend.call(null, text);
+    if (extraAct.length > 0) {
+      onSend.call(null, extraAct);
       onClose.call(null);
     }
   };
 
   return (
-    <div className="md:p-14 2xl:w-1/2 mx-auto">
+    <div className="md:p-14 p-6 2xl:w-1/2 mx-auto">
       <h3 className="text-lena-blue-dark mb-7">
         Si elle n’est pas dans la liste, décrivez vous-même <strong>une activité</strong> que vous pratiquez :
       </h3>
       <textarea
         placeholder="ex: J'invente des recettes"
         maxLength={140}
-        value={text}
-        onChange={(e) => setText(e.currentTarget.value)}
+        value={extraAct}
+        onChange={(e) => setExtraAct(e.currentTarget.value)}
         className="w-full rounded-md ring-0 border-lena-lightgray2"
         rows={2}
       />
       <span className="text-sm text-lena-pink mt-2 block">
-        {140 - text.length} caractère{140 - text.length > 1 && 's'} restant{140 - text.length > 1 && 's'}
+        {140 - extraAct.length} caractère{140 - extraAct.length > 1 && 's'} restant{140 - extraAct.length > 1 && 's'}
       </span>
       <button
         onClick={handleSend}
@@ -68,7 +70,7 @@ const AddNewActivity = ({ onSend, onClose }: NewActivity) => {
   );
 };
 
-const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
+const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivities }: Props) => {
   const history = useHistory();
   const location = useLocation();
   const params: { id: string } = useParams();
@@ -195,7 +197,12 @@ const ChoixActivites = ({ activities, theme, setActivities }: Props) => {
           </div>
         </>
       ) : (
-        <AddNewActivity onSend={(e: string) => handleAddNewActivity(e)} onClose={() => setShowNewActivity(false)} />
+        <AddNewActivity
+          onSend={(e: string) => handleAddNewActivity(e)}
+          onClose={() => setShowNewActivity(false)}
+          setExtraAct={setExtraAct}
+          extraAct={extraAct}
+        />
       )}
     </ParcoursExperienceLayout>
   );

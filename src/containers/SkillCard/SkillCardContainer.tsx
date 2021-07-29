@@ -105,7 +105,8 @@ const SkillCardContainer: FunctionComponent = () => {
                     key={v}
                     level={groupedCompetences[v].rank}
                     title={groupedCompetences[v].competence.title}
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    description={`Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}
                   />
                 ))}
               </div>

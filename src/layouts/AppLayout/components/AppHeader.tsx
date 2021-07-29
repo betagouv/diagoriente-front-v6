@@ -24,7 +24,10 @@ const AppHeader: FunctionComponent = () => {
 
   return (
     <div>
-      <header className="bg-white flex flex-row items-center justify-between px-4 md:px-16 py-4 space-x-4 shadow-md sticky top-0 z-50">
+      <header
+        className={`bg-white flex flex-row items-center justify-between px-4
+      md:px-16 py-4 space-x-4 shadow-md sticky top-0 z-50`}
+      >
         <div className="flex flex-row items-center justify-center space-x-4">
           <Link to="/">
             <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="h-8" />

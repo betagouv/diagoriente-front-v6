@@ -44,7 +44,10 @@ const CardExperience: FunctionComponent<ExperienceProps> = ({ title, startDate, 
     )}
     {certified && (
       <div className="bg-lena-yellow-light mt-2 px-5 py-4 rounded-lg">
-        <div className="uppercase font-bold text-sm inline-block bg-lena-yellow bg-opacity-50 px-2 pt-1 rounded-md uppercase">
+        <div
+          className={`uppercase font-bold text-sm inline-block
+        bg-lena-yellow bg-opacity-50 px-2 pt-1 rounded-md uppercase`}
+        >
           Expérience recommandée
         </div>
         <p className="mt-2 text-sm" style={{ color: '#424242' }}>

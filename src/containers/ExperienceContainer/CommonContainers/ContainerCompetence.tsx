@@ -22,6 +22,7 @@ interface Props {
   yearStart: string;
   monthEnd: string;
   yearEnd: string;
+  extraAct: string;
 }
 interface QuestionType {
   title: string;
@@ -70,6 +71,7 @@ const QuestionsContainer = ({
   theme,
   setCompetencesValues,
   competencesValues,
+  extraAct,
   activities,
   levels,
   monthStart,

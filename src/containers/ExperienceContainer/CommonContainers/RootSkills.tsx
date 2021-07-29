@@ -23,6 +23,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [activities, setActivities] = useState([] as Activity[]);
   const [levels, setLevels] = useState<string[]>([]);
   const [competencesValues, setCompetencesValues] = useState<string[]>([]);
+  const [extraAct, setExtraAct] = useState('');
   const [monthStart, setMonthStart] = useState('Janvier');
   const [yearStart, setYearStart] = useState('');
   const [monthEnd, setMonthEnd] = useState('Janvier');
@@ -147,7 +148,14 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         exact
         path="/experience/theme/:id/activite"
         render={(props) => (
-          <ActiviteContainer theme={theme} {...props} activities={activities} setActivities={setActivities} />
+          <ActiviteContainer
+            theme={theme}
+            {...props}
+            activities={activities}
+            setActivities={setActivities}
+            setExtraAct={setExtraAct}
+            extraAct={extraAct}
+          />
         )}
       />
       <Route exact path="/experience/theme/:id/doneAct" render={() => <DoneActiviteContainer theme={theme} />} />
@@ -171,6 +179,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
             yearStart={yearStart}
             monthEnd={monthEnd}
             yearEnd={yearEnd}
+            extraAct={extraAct}
           />
         )}
       />
