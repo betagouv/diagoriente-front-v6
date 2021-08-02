@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ReactComponent as CloseIcon } from 'assets/svg/cross3.svg';
+import { ReactComponent as CloseIcon } from 'assets/svg/cross.svg';
 import Checkbox from 'components/design-system/Checkbox';
 import classNames from 'common/utils/classNames';
-import Button from 'components/design-system/Button';
-import { Link } from 'react-router-dom';
 
 type Props = {
   choices: { label: string; value: string }[];

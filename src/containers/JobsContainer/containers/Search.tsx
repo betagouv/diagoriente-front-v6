@@ -1,102 +1,85 @@
-import React, { ReactComponentElement, useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
+import { ReactComponent as SearchTitleSvg } from 'assets/svg/search_job.svg';
 import { ReactComponent as SearchSvg } from 'assets/svg/search.svg';
-import { ReactComponent as UserSvg } from 'assets/svg/user_profile.svg';
+import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
+import Button from 'components/design-system/Button';
+import TextField from 'components/design-system/TextField';
 import ListSvg from 'assets/svg/list.svg';
-import { ReactComponent as ChevronRightSvg } from 'assets/svg/chevron_right.svg';
 import { useHistory } from 'react-router-dom';
-import classNames from 'common/utils/classNames';
-import DomainActivity, { DomainActivityType } from '../../TopJobContainer/containers/DomainActivity';
+import ButtonFilter from 'components/design-system/ButtonFilter';
 
-const SearchModal = () => {
-  return <div>lol</div>;
-};
+const domaines = [
+  { label: 'Domaine 1', value: '1' },
+  { label: 'Domaine 2', value: '2' },
+  { label: 'Domaine 3', value: '3' },
+];
 
-type ButtonFilterProps = {
-  icon?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+const niveaux = [
+  { label: 'Inférieur au Bac', value: '0' },
+  { label: 'Bac', value: '1' },
+  { label: 'Bac+2 / BTS, DUT', value: '2' },
+  { label: 'Supérieur à Bac+5', value: '5' },
+];
 
-const ButtonFilter: React.FC<ButtonFilterProps> = ({ icon, title, children, ...rest }) => {
-  return (
-    <button
-      className="border-2 border-lena-blue-lightest py-4 px-4 w-full rounded-md flex justify-between items-center mb-3"
-      style={{ boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)' }}
-      {...rest}
-    >
-      <div className="flex items-center space-x-3 overflow-ellipsis overflow-hidden whitespace-nowrap">
-        {icon && <img src={icon} alt="Svg" />}
-        <span className="text-lena-blue-dark text-left overflow-ellipsis overflow-hidden whitespace-nowrap">
-          {children}
-        </span>
-      </div>
-      <div>
-        <ChevronRightSvg />
-      </div>
-    </button>
-  );
-};
-
-const Search = () => {
+const Search: FunctionComponent = () => {
   const history = useHistory();
-  const [showDomainActivity, setShowDomainActivity] = useState(false);
-  const [selectedDomainActivity, setSelectedDomainActivity] = useState<Array<DomainActivityType>>();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDomains, setSelectedDomains] = useState<string[]>([]);
+  const [selectedJobTypes, setSelectedJobTypes] = useState<string[]>([]);
+  const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
 
-  const handleParseDomainActivity = () => {
-    const domainsString: Array<string> = [];
-    const map = selectedDomainActivity?.map((e) => domainsString.push(e.title));
-    return domainsString.join();
+  const handleSearch = () => {
+    // TODO: implement search
   };
 
-  if (showDomainActivity) {
-    return (
-      <DomainActivity
-        domains={selectedDomainActivity}
-        onValid={(data) => setSelectedDomainActivity(data)}
-        onClose={() => setShowDomainActivity(false)}
-      />
-    );
-  }
-
   return (
-    <div>
-      <header className="bg-lena-blue-darkest py-3 bg-opacity-50">
-        <div className="flex container flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <SearchSvg fill="#fff" />
-            <span className="inline-block mt-1 text-white text-sm">Rechercher un métier</span>
-          </div>
-          <button>
-            <UserSvg />
-          </button>
+    <div className="bg-lena-lightgray h-screen p-4 flex flex-col justify-between">
+      <div className="space-y-8">
+        <div className="flex items-center justify-end text-right">
+          <CrossIcon className="fill-current text-lena-blue-dark" onClick={() => history.goBack()} />
         </div>
-      </header>
-      <div className="mt-5 container">
-        <div>
-          <div className="w-full border border-lena-gray-light px-2 flex bg-white rounded-md flex items-center mb-5">
-            <SearchSvg fill="#C9C9C7" />
-            <input placeholder="test" className="w-full bg-transparent focus:ring-0 focus:outline-none py-3 ml-3" />
-          </div>
-          <div>
-            <ButtonFilter onClick={() => setShowDomainActivity(true)} icon={ListSvg}>
-              {selectedDomainActivity ? <strong>{handleParseDomainActivity()}</strong> : <>Domain d'activité</>}
-            </ButtonFilter>
-            <ButtonFilter>Type de métier</ButtonFilter>
-            <ButtonFilter>Niveau d'accès</ButtonFilter>
-          </div>
+        <div className="flex flex-col justify-center items-center space-y-4">
+          <SearchTitleSvg />
+          <div className="text-lena-blue-dark text-lg font-bold">Rechercher un métier</div>
         </div>
-        <div className="fixed bottom-10 left-10 right-10 md:relative">
-          <button
-            disabled={!(selectedDomainActivity && selectedDomainActivity?.length > 0)}
-            onClick={() => history.push('/metiers/recherche/resultats')}
-            className={classNames(
-              `focus:ring-0 focus:outline-none w-full
-                    text-white py-3 text-center font-bold
-                    text-lg md:w-72 md:rounded-lg rounded-md`,
-              selectedDomainActivity && selectedDomainActivity?.length > 0 ? 'bg-lena-blue' : 'bg-lena-blue-inter',
-            )}
-          >
-            Rechercher
-          </button>
+        <div className="space-y-2">
+          <TextField
+            icon={<SearchSvg className="fill-current text-lena-lightgray2" />}
+            placeholder="Ex : Boulanger..."
+            onChange={(e) => setSearchQuery(e.currentTarget.value)}
+            value={searchQuery}
+          />
+          <ButtonFilter
+            title="Domaine d'activité"
+            icon={ListSvg}
+            choices={domaines}
+            values={selectedDomains}
+            onSetValues={setSelectedDomains}
+          />
+          <ButtonFilter
+            title="Type de métier"
+            choices={[]}
+            values={selectedJobTypes}
+            onSetValues={setSelectedJobTypes}
+          />
+          <ButtonFilter
+            title="Niveau d'accès"
+            choices={niveaux}
+            values={selectedLevels}
+            onSetValues={setSelectedLevels}
+          />
         </div>
+      </div>
+      <div className="pb-4">
+        <Button
+          variant="secondary"
+          size="md"
+          fullWidth={true}
+          disabled={selectedDomains.length <= 0 || searchQuery.length <= 0}
+          onClick={handleSearch}
+        >
+          Rechercher un métier
+        </Button>
       </div>
     </div>
   );

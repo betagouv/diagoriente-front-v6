@@ -5,8 +5,8 @@ import { ReactComponent as TopJobSvg } from 'assets/svg/top_job.svg';
 import { ReactComponent as InfoSvg } from 'assets/svg/info.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
-import JobsLayout from '../../layouts/JobsLayout/JobsLayout';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import JobsLayout from 'layouts/JobsLayout/JobsLayout';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 // TODO remove default and use ids from DB
 export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54sdf41dsf213' }) => {
@@ -33,8 +33,8 @@ const TopJobContainer = () => {
   const isDesktop = useMediaQuery('md');
 
   return (
-    <JobsLayout>
-      {!isDesktop && (
+    <JobsLayout mobileHeaderMode="search_jobs">
+      {false && (
         <div style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
           <div className="container flex justify-between items-center">
             <button

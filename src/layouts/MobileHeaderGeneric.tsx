@@ -1,10 +1,10 @@
-import React, { FunctionComponent, ReactElement, useContext, useRef, useState } from 'react';
+import React, { FunctionComponent, ReactElement, ReactNode, useContext, useRef, useState } from 'react';
 import IconProfile, { ReactComponent as UserProfileIcon } from '../assets/svg/user_profile.svg';
 import useOnClickOutside from '../common/hooks/useOnclickOutside';
 import UserContext from '../common/contexts/UserContext';
 import { AppUserMenu } from './AppUserMenu';
 
-const MobileHeaderGeneric: FunctionComponent<{ left?: ReactElement; center?: ReactElement }> = ({ left, center }) => {
+const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactElement }> = ({ left, center }) => {
   const { user } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef: any = useRef();

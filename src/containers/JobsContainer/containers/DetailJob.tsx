@@ -6,25 +6,24 @@ import { ReactComponent as LoveTSvg } from 'assets/svg/love_turquoise.svg';
 import classNames from 'common/utils/classNames';
 import { ReactComponent as ArrowBottomSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as SearchInputSvg } from 'assets/svg/search.svg';
+import { Redirect, useHistory } from 'react-router-dom';
 import JobInterestItem from '../components/JobInterestItem';
 import JobStatistics from '../components/JobStatistics';
 import JobHeader from '../components/JobHeader';
 import useMediaQuery from '../../../hooks/useMediaQuery';
 
 const DetailJob: FunctionComponent = () => {
+  const history = useHistory();
   const [showAbout, setShowAbout] = useState(false);
   const isDesktop = useMediaQuery('md');
 
-  if (!isDesktop && showAbout)
-    return (
-      <JobsLayout>
-        <JobHeader />
-        <JobStatistics />
-      </JobsLayout>
-    );
+  const handleOpenStatistics = () => {
+    if (isDesktop) setShowAbout(!showAbout);
+    else history.push('/metiers/123456789/statistiques');
+  };
 
   return (
-    <JobsLayout>
+    <JobsLayout mobileHeaderMode="back">
       <div className="flex flex-col pb-8 md:pb-8">
         <JobHeader />
         <div className="px-4 md:px-64 py-8 space-y-4 divide-y divide-lena-blue-alt-light">
@@ -37,7 +36,7 @@ const DetailJob: FunctionComponent = () => {
             </p>
             {showAbout && <JobStatistics />}
             <div className="text-right">
-              <Button onClick={() => setShowAbout(!showAbout)} variant="secondary" size="sm">
+              <Button onClick={handleOpenStatistics} variant="secondary" size="sm">
                 Détails &gt;
               </Button>
             </div>

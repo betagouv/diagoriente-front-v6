@@ -6,8 +6,8 @@ import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import AppLoader from 'components/ui/AppLoader';
+import translateExperienceType from 'utils/translateExperienceType';
 import CardExperience from './components/CardExperience';
-import translateExperienceType from '../../../utils/translateExperienceType';
 
 const MyExperiencesByThemeContainer = () => {
   const history = useHistory();
@@ -26,7 +26,7 @@ const MyExperiencesByThemeContainer = () => {
 
   return (
     <div className="min-h-screen h-full flex flex-col">
-      <div style={{ boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.15)' }} className="bg-lena-blue-light py-5">
+      <div className="shadow-lg border-lena-gray-light bg-lena-blue-light py-4">
         <div className="container flex justify-between items-center w-full">
           <div className="flex items-center">
             <ExpProSvg />
