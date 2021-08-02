@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import createLazyComponent from '../../utils/createLazyComponent';
 
 const DetailJob = createLazyComponent(() => import('./containers/DetailJob'));
-const Search = createLazyComponent(() => import('./containers/Search'));
+const Search = createLazyComponent(() => import('./containers/SearchV2'));
 const SearchResults = createLazyComponent(() => import('./containers/SearchResults'));
 
 const JobsRoute: FunctionComponent = () => {

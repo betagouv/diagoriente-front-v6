@@ -5,6 +5,7 @@ import { useDidMount } from 'common/hooks/useLifeCycle';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_pro_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
+import AppLoader from 'components/ui/AppLoader';
 import CardExperience from './components/CardExperience';
 import translateExperienceType from '../../../utils/translateExperienceType';
 
@@ -42,6 +43,7 @@ const MyExperiencesByThemeContainer = () => {
             Vous pouvez ici modifier les expériences que vous avez renseigné, ou bien ajouter de nouvelles expériences.
           </h2>
           <div className="mt-4">
+            {skillsState.loading && <AppLoader />}
             {skillsState.data?.skills.data.map((exp) => {
               return (
                 <CardExperience

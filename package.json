@@ -9,6 +9,7 @@
     "@egjs/flicking": "^4.0.0",
     "@egjs/flicking-plugins": "^4.1.0",
     "@egjs/react-flicking": "^4.1.2",
+    "@headlessui/react": "^1.4.0",
     "@popperjs/core": "^2.9.2",
     "@types/react-transition-group": "^4.4.1",
     "apollo-upload-client": "^16.0.0",
