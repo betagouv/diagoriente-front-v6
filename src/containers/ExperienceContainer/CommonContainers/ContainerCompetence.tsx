@@ -95,6 +95,9 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
   };
 
   const RendQuestionStep = ({ title, competences }: QuestionType) => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return (
       <div className="flex flex-col items-center p-4 md:p-8">
         <div
@@ -112,7 +115,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
         </div>
         <div className="m-5">{types[step].text} </div>
         <div className="italic mt-2 text-left md:text-center text-sm">Plusieurs choix possibles</div>
-        <div>
+        <div className="pb-10">
           {competences.map((q) => (
             <div className={`mt-3 mb-3 p-3 `}>
               <SelectorTest key={q.id} onClick={() => onSelectCompetence(q.id)} checked={isExist(q.id)}>

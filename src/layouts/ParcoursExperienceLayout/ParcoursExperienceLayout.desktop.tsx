@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
@@ -22,7 +22,9 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   const step = location.pathname.split('/').pop();
   const steps = ['Métier', 'Date', 'Activités', 'Caracteristiques', 'Competences'];
   const stepsUrl = ['create', 'date', 'activite', 'doneAct', 'question', 'questions', 'competences', 'sommaire'];
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const path = () => {
     let text = '';
     if (params.type) {
