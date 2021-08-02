@@ -76,7 +76,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
   };
 
   const RenderBox = ({ title, competences }: PropsBox) => (
-    <div className="rounded mt-3 mb-3 mx-1 p-2 md:w-45p" style={{ backgroundColor: '#F3F2F4' }}>
+    <div className="rounded mt-3 mb-3 mx-1 p-2 h-auto md:w-45p" style={{ backgroundColor: '#F3F2F4' }}>
       <div className="flex items-center mb-3">
         <img src={renderLogo(title)} alt="logo" />
         <p className="text-black ml-4 font-bold">{renderTitle(title)}</p>

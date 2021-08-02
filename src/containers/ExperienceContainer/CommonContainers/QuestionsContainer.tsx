@@ -67,6 +67,9 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
     }
   };
   const RendQuestionStep = ({ title, questions }: QuestionType) => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     return (
       <div className="flex flex-col items-center p-4">
         <div
@@ -84,7 +87,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
         <div className="m-5 md:font-bold text-lena-blue-dark text-center">
           Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :
         </div>
-        <div>
+        <div className="pb-20">
           {questions.map((q) => (
             <div className="mt-3 mb-3 p-3">
               <SelectorTest key={q.id} onClick={() => onSelectQuestion(q.id)} checked={isExist(q.id)}>

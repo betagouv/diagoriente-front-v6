@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useRef } from 'react';
+import React, { FunctionComponent, useState, useRef, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import useOnclickOutside from 'common/hooks/useOnclickOutside';
 
@@ -84,6 +84,9 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     showMenu && setShowMenu(false);
   });
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
       <div className="sticky top-0 shadow-md z-50">
