@@ -5,7 +5,7 @@ const ImmersionLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <MobileHeaderGeneric />
-      <div className="flex-1">{children}</div>
+      <div className="flex flex-col flex-1">{children}</div>
     </div>
   );
 };

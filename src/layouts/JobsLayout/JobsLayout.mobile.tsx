@@ -3,9 +3,9 @@ import MobileHeaderGeneric from '../MobileHeaderGeneric';
 
 const JobsLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <MobileHeaderGeneric />
-      <div>{children}</div>
+      <div className="flex flex-col flex-1">{children}</div>
     </div>
   );
 };
