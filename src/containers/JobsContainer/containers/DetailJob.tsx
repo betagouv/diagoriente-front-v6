@@ -1,33 +1,32 @@
 import React, { FunctionComponent, useState } from 'react';
 import JobsLayout from 'layouts/JobsLayout/JobsLayout';
 import Button from 'components/design-system/Button';
-import DetailJobImg from 'assets/illu/topjob.svg';
 import { ReactComponent as SearchSvg } from 'assets/svg/search_job.svg';
 import { ReactComponent as LoveTSvg } from 'assets/svg/love_turquoise.svg';
 import classNames from 'common/utils/classNames';
 import { ReactComponent as ArrowBottomSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as SearchInputSvg } from 'assets/svg/search.svg';
 import JobInterestItem from '../components/JobInterestItem';
-import JobStatistics from './JobStatistics';
+import JobStatistics from '../components/JobStatistics';
+import JobHeader from '../components/JobHeader';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 const DetailJob: FunctionComponent = () => {
   const [showAbout, setShowAbout] = useState(false);
+  const isDesktop = useMediaQuery('md');
 
-  if (showAbout)
+  if (!isDesktop && showAbout)
     return (
       <JobsLayout>
+        <JobHeader />
         <JobStatistics />
       </JobsLayout>
     );
 
   return (
     <JobsLayout>
-      <div className="pb-8 md:pb-8">
-        <div style={{ background: `url(${DetailJobImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
-          <div className="container text-center py-8">
-            <h2 className="font-bold text-white text-xl">Technicien/ne démonstrateur/trice en matériel agricole</h2>
-          </div>
-        </div>
+      <div className="flex flex-col pb-8 md:pb-8">
+        <JobHeader />
         <div className="px-4 md:px-64 py-8 space-y-4 divide-y divide-lena-blue-alt-light">
           <div className="flex flex-col space-y-4">
             <p>
@@ -36,8 +35,9 @@ const DetailJob: FunctionComponent = () => {
               adipiscing elit. Nulla placerat nisl erat, quis cursus felis posuere in. Donec et volutpat turpis, ut
               scelerisque elit.
             </p>
+            {showAbout && <JobStatistics />}
             <div className="text-right">
-              <Button onClick={() => setShowAbout(true)} variant="secondary" size="sm">
+              <Button onClick={() => setShowAbout(!showAbout)} variant="secondary" size="sm">
                 Détails &gt;
               </Button>
             </div>
@@ -108,7 +108,7 @@ const DetailJob: FunctionComponent = () => {
         <div className="flex items-center justify-center">
           <button
             className={classNames(
-              'fixed bottom-0 left-0 focus:ring-0 focus:outline-none w-full',
+              'fixed md:static bottom-0 left-0 focus:ring-0 focus:outline-none w-full',
               'text-white py-4 text-center font-bold text-xl md:w-auto px-8 md:rounded-lg',
               'bg-lena-blue',
             )}

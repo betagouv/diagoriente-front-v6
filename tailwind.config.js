@@ -48,7 +48,7 @@ module.exports = {
         'lena-gray': '#6B6B6A',
         'lena-gray-light': '#C4C4C4',
         'lena-gray-light-2': '#ECE8F0',
-        'lena-black': '#232323',
+        'lena-black': '#424242',
         'lena-yellow': {
           light: '#FFEBC6',
           DEFAULT: '#FFBF47',
