@@ -23,6 +23,9 @@ module.exports = {
       divideColor: {
         blue: '#C4D2F8',
       },
+      dropShadow: {
+        'md': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
       maxWidth: {
         '58p': '58.33333%',
         '41p': '41.66667%',
@@ -78,7 +81,7 @@ module.exports = {
         'lena-purple': {
           light: '#ECE8F0',
         },
-      },
+      }
     },
     fontFamily: {
       sans: ['Atkinson Hyperlegible', 'sans-serif'],
@@ -94,5 +97,5 @@ module.exports = {
           return `.${e(`first-letter${separator}${className}`)}::first-letter`
         })
       })
-  })],
+    })],
 };

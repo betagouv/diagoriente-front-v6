@@ -27,16 +27,16 @@ const HomeContainer = () => {
 
   return (
     <AppLayout>
-      <div className="grid md:grid-cols-2 md:gap-2 mt-5 container">
+      <div className="grid md:grid-cols-2 gap-2 md:gap-4 py-4 container">
         {urls.map((v) => (
-          <div key={v.url} className="mb-2">
-            <Link to={v.url}>
-              <Button variant="secondary" fullWidth={true}>
+          <Link key={v.url} to={v.url}>
+            <Button variant="secondary" fullWidth={true}>
+              <div className="flex flex-col items-center justify-center">
                 <div>{v.label}</div>
                 <div className="text-lena-turquoise">{v.url}</div>
-              </Button>
-            </Link>
-          </div>
+              </div>
+            </Button>
+          </Link>
         ))}
       </div>
     </AppLayout>

@@ -6,6 +6,7 @@ import { useMyInterests } from 'common/requests/interests';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import InterestItem from './components/InterestItem';
 import AppLoader from '../../../components/ui/AppLoader';
+import Button from '../../../components/design-system/Button';
 
 const MyInterestsContainer: FunctionComponent = () => {
   const [fetchMyInterests, myInterestsState] = useMyInterests();
@@ -31,14 +32,9 @@ const MyInterestsContainer: FunctionComponent = () => {
           </div>
         )}
         <div>
-          <div className="fixed bottom-0 left-0 right-0 md:relative">
-            <button
-              className={`focus:ring-0 focus:outline-none w-full bg-lena-pink-dark
-        hover:bg-lena-pink-darkest text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg`}
-            >
-              <Link to="/centres_interet/create">Modifier mes centres d'intérêt</Link>
-            </button>
-          </div>
+          <Button variant="primary" size="md" mobileStacked>
+            <Link to="/centres_interet/create">Modifier mes centres d'intérêt</Link>
+          </Button>
         </div>
       </div>
     </ProfileLayout>

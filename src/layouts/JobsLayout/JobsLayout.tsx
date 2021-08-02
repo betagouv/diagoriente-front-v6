@@ -3,13 +3,19 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import JobsLayoutForDesktop from './JobsLayout.desktop';
 import JobsLayoutForMobile from './JobsLayout.mobile';
 
-const JobsLayout: FunctionComponent = ({ children }) => {
+const JobsLayout: FunctionComponent<{ mobileHeaderMode?: 'back' | 'search_jobs'; onBack?: () => void }> = ({
+  mobileHeaderMode,
+  children,
+  onBack,
+}) => {
   const isDesktop = useMediaQuery('md');
 
   return isDesktop ? (
     <JobsLayoutForDesktop>{children}</JobsLayoutForDesktop>
   ) : (
-    <JobsLayoutForMobile>{children}</JobsLayoutForMobile>
+    <JobsLayoutForMobile headerMode={mobileHeaderMode} onBack={onBack}>
+      {children}
+    </JobsLayoutForMobile>
   );
 };
 
