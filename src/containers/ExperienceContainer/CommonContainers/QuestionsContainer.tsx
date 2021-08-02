@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import complexité from 'assets/svg/Picto_reflechir.svg';
 import Autonomie from 'assets/svg/Picto_organiser.svg';
 import { groupBy } from 'lodash';
@@ -75,10 +74,10 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#E1E7F7' }}
         >
           <div
-            className="rounded-full absolute -top-5 flex items-center justify-center"
+            className="rounded-full absolute -top-5 flex items-center justify-center "
             style={{ height: 45, width: 45, color: '#000', backgroundColor: '#223A7A' }}
           >
-            <span className="text-white">{`${step + 1}/${types.length}`}</span>
+            <span className="text-white font-bold">{`${step + 1}/${types.length}`}</span>
           </div>
           <span className="text-lena-blue-dark font-bold text-sm text-center">{title}</span>
         </div>
@@ -108,7 +107,9 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
       </div>
     );
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <ParcoursExperienceLayout>
       <div className="w-full flex justify-center mt-10">

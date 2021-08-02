@@ -83,7 +83,7 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
             <span className="mr-5 text-lena-blue-dark text-left md:ml0 mb-3 md:mb-0 md:mn-0">Année</span>{' '}
             <div
               style={{ borderColor: '#e1e7f7' }}
-              className={`flex w-dateInputMd md:w-dateInput items-center justify-between
+              className={`flex w-dateInputMd md:w-dateInput sm:w-dateInputSm items-center justify-between
               border rounded-md focus:ring-0 focus:outline-none
               pt-2 pb-2 px-6 shadow text-lena-blue-dark cursor-pointer`}
               onClick={() => {

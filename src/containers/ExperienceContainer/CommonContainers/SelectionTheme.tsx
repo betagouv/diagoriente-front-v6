@@ -1,10 +1,11 @@
 /* eslint-disable max-len */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
 import { useLazyTheme } from 'common/requests/themes';
 import { isEmpty } from 'lodash';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
+import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
@@ -12,6 +13,7 @@ import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
+import { decodeUri } from 'common/utils/url';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -104,13 +106,14 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
           <CrossSvg fill="#fff" />
         </button>
       </div>
-      {selectedDomain && (
-        <div className="fixed bottom-0 left-0 right-0">
+
+      <div className="fixed bottom-0 left-0 right-0">
+        {selectedDomain && (
           <button onClick={handleValidate} className="bg-lena-blue py-3 font-bold w-full text-white">
             Valider
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -174,6 +177,8 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
 const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
+  const location = useLocation();
+  const params = decodeUri(location.search);
 
   return !showMobileChoice ? (
     <ParcoursExperienceLayout>
@@ -192,8 +197,14 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
                 className={`flex flex-col justify-center items-center
               bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden`}
               >
-                <PictoExpPerso style={{ height: 60 }} />
-                <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences personnelles</div>
+                {params.type === 'voluntary' ? (
+                  <PictoExpBenevolat style={{ height: 60 }} />
+                ) : (
+                  <PictoExpPerso style={{ height: 60 }} />
+                )}
+                <div className="text-center text-lena-blue-dark font-bold text-xl">
+                  Mes expériences {params.type === 'voluntary' ? 'de bénévolat et volontariat' : 'personnelles'}
+                </div>
               </div>
               <div className="flex flex-col justify-start w-full px-5">
                 <div className="text-lena-blue-dark mb-5">Selectionnez un domaine :</div>
