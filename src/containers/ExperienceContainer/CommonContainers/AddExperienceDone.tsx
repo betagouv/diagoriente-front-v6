@@ -1,8 +1,12 @@
 import React from 'react';
 import { Competence, Theme } from 'common/requests/types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { decodeUri } from 'common/utils/url';
+
 import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
+import Help from 'assets/images/svg/picto/help_white.svg';
+import { SkillAddResponse } from 'common/requests/skills';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
@@ -11,19 +15,23 @@ import useMediaQuery from 'hooks/useMediaQuery';
 interface Props {
   competencesValues: string[];
   theme: Theme;
+  data: SkillAddResponse | undefined | null;
 }
 interface PropsBox {
   title: string;
-  competences: Competence[];
+  competences: {
+    competence: { title: string };
+    level: { title: string };
+    rank: number;
+  }[];
 }
 
-const AddExperienceDone = ({ competencesValues, theme }: Props) => {
+const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
-
-  const cmpSelected = theme.reference?.competences.filter((cmp) => competencesValues.find((c) => cmp.id === c));
-  const groupedCmp = groupBy(cmpSelected, 'type');
-
+  const location = useLocation();
+  const params = decodeUri(location.search);
+  const groupedCmp = groupBy(data?.createSkill.ranks, 'competence.type');
   const renderTitle = (title: string) => {
     let text = '';
     switch (title) {
@@ -79,7 +87,7 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
             <div>
               <div className="flex mt-3 mb-3 w-full">
                 <div className="flex-1">
-                  <p className="text-lena-blue-dark text-left font-bold">{c.title.toLocaleLowerCase()}</p>
+                  <p className="text-lena-blue-dark text-left font-bold">{c.competence.title.toLocaleLowerCase()}</p>
                   <p className="text-thin text-sm text-black text-left">
                     Met en oeuvre la procédure adaptée aux problèmes courants liés à son activité
                   </p>
@@ -90,7 +98,7 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
                     className="rounded-full flex items-center text-lena-blue-dark font-bold justify-center"
                     style={{ height: 28, width: 28, backgroundColor: '#72D9F1' }}
                   >
-                    f
+                    {c.rank}
                   </div>
                 </div>
               </div>
@@ -100,7 +108,30 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
       </div>
     </div>
   );
-
+  const path = () => {
+    let text = '';
+    if (params.type) {
+      switch (params.type) {
+        case 'professional': {
+          text = 'professionnelles';
+          break;
+        }
+        case 'personnel': {
+          text = 'personnelles';
+          break;
+        }
+        case 'voluntary': {
+          text = 'bénévolat';
+          break;
+        }
+        default: {
+          text = 'personnelles';
+          break;
+        }
+      }
+    }
+    return text;
+  };
   return (
     <ParcoursExperienceLayout>
       <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4">
@@ -111,11 +142,15 @@ const AddExperienceDone = ({ competencesValues, theme }: Props) => {
             <p className="text-lg font-bold leading-loose">Très bien. </p>
           )}
           {mediaQueryMD && (
-            <p className="text-2xl font-bold leading-loose">Vous avez ajouté une expérience professionnelle </p>
+            <p className="text-2xl font-bold leading-loose">Vous avez ajouté une expérience {path()} </p>
           )}
           <div className="text-base text-center">
             Vous avez ajouté une expérience et identifié de nouvelles compétences. Les voici ci dessous récapitulées en
             fonction du CEC. Vous pourrez les retrouver dans votre profil / carte de compétences.
+          </div>
+          <div className="flex items-center justify-center mt-8">
+            <img src={Help} alt="help" />
+            <p className="ml-2">Comment sont définis les niveaux ?</p>
           </div>
           <div className="flex justify-center py-8">
             <div className="flex flex-col md:flex-row flex-wrap justify-between">

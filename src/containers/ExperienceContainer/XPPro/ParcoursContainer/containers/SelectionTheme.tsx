@@ -99,12 +99,6 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, idActive, onActive
         >
           {children}
         </button>
-        <button
-          className="focus:ring-0 focus:outline-none pl-5"
-          onClick={() => onActive.call(null, job.id === idActive ? undefined : job.id)}
-        >
-          <img className="ml-3" src={job.id === idActive ? HelpLightSvg : HelpSvg} alt="Aide" />
-        </button>
       </div>
       <div className="px-9">
         <ul className="list-disc px-4 py-1 list-inside">

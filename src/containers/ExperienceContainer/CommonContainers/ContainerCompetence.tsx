@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-import { useAddSkill } from 'common/requests/skills';
-import moment from 'moment';
+// import { useAddSkill } from 'common/requests/skills';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
@@ -16,13 +15,7 @@ interface Props {
   theme: Theme;
   setCompetencesValues: (competence: string[]) => void;
   competencesValues: string[];
-  activities: Activity[];
-  levels: string[];
-  monthStart: string;
-  yearStart: string;
-  monthEnd: string;
-  yearEnd: string;
-  extraAct: string;
+  onAddSkill: () => void;
 }
 interface QuestionType {
   title: string;
@@ -67,22 +60,10 @@ interface BoxType {
   competences: { title: string; type: string; id: string }[];
 }
 
-const QuestionsContainer = ({
-  theme,
-  setCompetencesValues,
-  competencesValues,
-  extraAct,
-  activities,
-  levels,
-  monthStart,
-  yearStart,
-  monthEnd,
-  yearEnd,
-}: Props) => {
+const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, onAddSkill }: Props) => {
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(0);
-  const [addSkillCall, addSkillState] = useAddSkill();
   const typesCompetences = groupBy(theme.reference?.competences, 'type');
   const [error, setError] = useState('');
   const [selected, setSelected] = useState('');
@@ -108,36 +89,11 @@ const QuestionsContainer = ({
     if (step < 2) {
       setStep(step + 1);
       setSelected('');
-    } else if (theme?.id && activities.length && competencesValues.length && levels.length) {
-      const dataToSend: {
-        theme: string;
-        activities: string[];
-        competences: string[];
-        levels: string[];
-        startDate?: string;
-        endDate?: string;
-      } = {
-        theme: theme?.id,
-        activities: activities.map((act) => act.id),
-        competences: competencesValues,
-        levels,
-      };
-      if (monthStart && yearStart) {
-        dataToSend.startDate = moment(`01-${monthStart}-${yearStart}`).toISOString();
-      }
-      if (monthEnd && yearEnd) {
-        dataToSend.endDate = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
-      }
-      addSkillCall({ variables: dataToSend });
     } else {
-      setError('veuillez compléter tous les étapes');
+      onAddSkill();
     }
   };
-  useEffect(() => {
-    if (addSkillState.data) {
-      history.push(`/experience/theme/${theme.id}/sommaire?type=${theme.domain}`);
-    }
-  }, [addSkillState.data]);
+
   const RendQuestionStep = ({ title, competences }: QuestionType) => {
     return (
       <div className="flex flex-col items-center p-4 md:p-8">

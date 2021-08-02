@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { RouteComponentProps, Route, Switch } from 'react-router-dom';
+import { RouteComponentProps, Route, Switch, useHistory } from 'react-router-dom';
 import { Theme, Activity, ThemeDomain } from 'common/requests/types';
 import { decodeUri } from 'common/utils/url';
 import { isEmpty } from 'lodash';
 import { useWillUnmount } from 'common/hooks/useLifeCycle';
 import { useLazyThemes } from 'common/requests/themes';
-import { useSkill } from 'common/requests/skills';
+import moment from 'moment';
+import { useSkill, useAddSkill } from 'common/requests/skills';
 
 import QuestionXPContainer from 'containers/ExperienceContainer/CommonContainers/QuestionsContainer';
 import ActiviteContainer from 'containers/ExperienceContainer/CommonContainers/ChoixActivites';
@@ -19,7 +20,9 @@ import SelectionThemePro from '../XPPro/ParcoursContainer/containers/SelectionTh
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
 
 const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) => {
+  const history = useHistory();
   const [theme, setTheme] = useState({} as Theme);
+  const [addSkillCall, addSkillState] = useAddSkill();
   const [activities, setActivities] = useState([] as Activity[]);
   const [levels, setLevels] = useState<string[]>([]);
   const [competencesValues, setCompetencesValues] = useState<string[]>([]);
@@ -125,10 +128,41 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     }
   }, [params.type]);
 
+  useEffect(() => {
+    if (addSkillState.data) {
+      history.push(`/experience/theme/${theme.id}/sommaire?type=${theme.domain}`);
+    }
+  }, [addSkillState.data]);
+
   useWillUnmount(() => {
     localStorage.removeItem('theme');
     localStorage.removeItem('activities');
   });
+
+  const onAddSkill = () => {
+    const dataToSend: {
+      theme: string;
+      activities: string[];
+      competences: string[];
+      levels: string[];
+      startDate?: string;
+      endDate?: string;
+    } = {
+      theme: theme?.id,
+      activities: activities.map((act) => act.id),
+      competences: competencesValues,
+      levels,
+    };
+    if (monthStart && yearStart) {
+      const sD = moment(`01-${monthStart}-${yearStart}`).toISOString();
+      dataToSend.startDate = sD;
+    }
+    if (monthEnd && yearEnd) {
+      const sE = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
+      dataToSend.endDate = sE;
+    }
+    addSkillCall({ variables: { ...dataToSend } });
+  };
 
   return (
     <Switch>
@@ -173,13 +207,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
             theme={theme}
             competencesValues={competencesValues}
             setCompetencesValues={setCompetencesValues}
-            activities={activities}
-            levels={levels}
-            monthStart={monthStart}
-            yearStart={yearStart}
-            monthEnd={monthEnd}
-            yearEnd={yearEnd}
-            extraAct={extraAct}
+            onAddSkill={onAddSkill}
           />
         )}
       />
@@ -203,7 +231,9 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
       <Route
         exact
         path="/experience/theme/:id/sommaire"
-        render={() => <SommaireContainer theme={theme} competencesValues={competencesValues} />}
+        render={() => (
+          <SommaireContainer theme={theme} competencesValues={competencesValues} data={addSkillState.data} />
+        )}
       />
     </Switch>
   );
