@@ -35,7 +35,7 @@ const types = [
     sub: 'organizational',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les compétences <strong>d’organisation</strong> que vous mettez en oeuvre ?
+        Quelles sont les <strong>compétencesd’organisation</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -45,7 +45,7 @@ const types = [
     sub: 'communication',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les compétences de <strong>communication</strong> que vous mettez en oeuvre ?
+        Quelles sont les <strong>compétences de communication</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -55,7 +55,7 @@ const types = [
     sub: 'reflective',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les compétences de <strong>réflexion</strong> que vous mettez en oeuvre ?
+        Quelles sont les <strong>compétences de réflexion</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -140,7 +140,7 @@ const QuestionsContainer = ({
   }, [addSkillState.data]);
   const RendQuestionStep = ({ title, competences }: QuestionType) => {
     return (
-      <div className="flex flex-col items-center p-4 py-8 pb-16 md:pb-8">
+      <div className="flex flex-col items-center p-4 md:p-8">
         <div
           className="rounded-full flex flex-col items-center justify-center font-mono relative"
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#F1FCFF' }}
@@ -155,6 +155,7 @@ const QuestionsContainer = ({
           <span className="font-bold text-sm text-center mt-4">{title}</span>
         </div>
         <div className="m-5">{types[step].text} </div>
+        <div className="italic mt-2 text-left md:text-center text-sm">Plusieurs choix possibles</div>
         <div>
           {competences.map((q) => (
             <div className={`mt-3 mb-3 p-3 `}>

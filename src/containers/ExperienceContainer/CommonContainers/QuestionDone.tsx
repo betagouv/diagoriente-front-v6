@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
-
+import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
@@ -104,13 +104,13 @@ const QuestionDone = ({ theme }: Props) => {
     </div>
   );
   return (
-    <>
+    <ParcoursExperienceLayout>
       <div className="bg-lena-blue-dark flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           <MobileContainer />
         </div>
       </div>
-    </>
+    </ParcoursExperienceLayout>
   );
 };
 

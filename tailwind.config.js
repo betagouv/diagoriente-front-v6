@@ -16,8 +16,7 @@ module.exports = {
         '45p': '45.9%',
         '69p': '69.33333%',
         '30p': '30.66667%',
-        dateInputSm: '149px',
-        dateInputMd: '159px',
+        dateInputMd: '149px',
         dateInput: '192px',
         logoExp:155
       },

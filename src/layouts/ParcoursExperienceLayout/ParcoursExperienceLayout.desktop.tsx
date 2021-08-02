@@ -3,6 +3,9 @@ import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
+import { ReactComponent as PictoExpPro } from 'assets/svg/exp_pro_white.svg';
+import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.svg';
+
 import PathPicto from 'assets/svg/pictoPath.svg';
 import SaveButtonComponent from 'components/design-system/SaveButton';
 import AppHeader from '../AppLayout/components/AppHeader';
@@ -18,43 +21,8 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
   const steps = ['Métier', 'Date', 'Activités', 'Caracteristiques', 'Competences'];
-  const stepsUrl = ['create', 'date', 'activite', 'question', 'competences', 'sommaire'];
+  const stepsUrl = ['create', 'date', 'activite', 'doneAct', 'question', 'questions', 'competences', 'sommaire'];
 
-  const renderStep = () => {
-    let ind = 0;
-    switch (step) {
-      case 'domaine': {
-        ind = 1;
-        break;
-      }
-      case 'date': {
-        ind = 2;
-        break;
-      }
-      case 'activite': {
-        ind = 3;
-        break;
-      }
-      case 'question': {
-        ind = 4;
-        break;
-      }
-      case 'competences': {
-        ind = 5;
-        break;
-      }
-      case 'sommaire': {
-        ind = 6;
-        break;
-      }
-
-      default: {
-        ind = 1;
-        break;
-      }
-    }
-    return ind;
-  };
   const path = () => {
     let text = '';
     if (params.type) {
@@ -90,6 +58,22 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
       </div>
     );
   };
+  const renderPicto = () => {
+    switch (params.type) {
+      case 'professional': {
+        return <PictoExpPro className="w-12 h-12 xl:w-16 xl:h-16" />;
+      }
+      case 'personnel': {
+        return <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />;
+      }
+      case 'voluntary': {
+        return <PictoExpBenevolat className="w-12 h-12 xl:w-16 xl:h-16" />;
+      }
+      default: {
+        return <PictoExpPro className="w-12 h-12 xl:w-16 xl:h-16" />;
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen h-full flex flex-col">
@@ -100,7 +84,7 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center mt-10">
                 <div className="flex flex-col justify-center items-center space-y-2">
-                  <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />
+                  {renderPicto()}
                   <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
                     Mes expériences {path()}
                   </div>

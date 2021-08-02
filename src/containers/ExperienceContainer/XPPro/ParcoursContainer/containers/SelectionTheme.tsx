@@ -323,7 +323,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
             <PictoExpPro />
             <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
           </div>
-          <div className="text-lena-blue-dark text-xl font-bold">
+          <div className="text-lena-blue-dark md:text-xl md:font-bold">
             Décrivez en quelques mots votre expérience professionnelle :{' '}
           </div>
           <div className="flex items-center w-3/4 border border-gray-200 rounded px-2">
