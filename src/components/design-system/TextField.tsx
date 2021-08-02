@@ -12,13 +12,13 @@ export type TextFieldProps = {
 const TextField: FunctionComponent<TextFieldProps> = ({ isInvalid = null, type = 'text', icon, ...rest }) => {
   const [showPassword, setShowPassword] = useState(false);
   const inputClasses = classNames([
-    'w-full border rounded-md focus:ring-0 focus:outline-none',
+    'w-full border rounded-md focus:ring-0 focus:outline-none py-3',
     !isInvalid && 'border-lena-lightgray2 focus:border-lena-gray',
     isInvalid === true && 'border-lena-pink-dark focus:border-lena-pink-dark text-lena-pink-dark',
     // TODO: find a way to display both valid/invalid/neutral
     // isInvalid === false && "border-lena-turquoise-dark focus:border-lena-turquoise-dark",
     (type === 'password' || isInvalid !== null) && 'pr-8',
-    icon && 'pl-8',
+    icon && 'pl-10',
   ]);
 
   return (
