@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
-import InputComponent from 'components/Register/Input';
+import useOnclickOutside from 'common/hooks/useOnclickOutside';
 import Checkbox from 'components/design-system/Checkbox';
 import { mois } from 'utils/staticMonths';
 import classNames from 'common/utils/classNames';
@@ -27,6 +27,10 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
     const years = new Date().getFullYear();
     return Array.from({ length: back }, (v, i) => years - back + i + 1);
   };
+  const divMonth = useRef<HTMLDivElement>(null);
+  useOnclickOutside(divMonth, () => setOpen(false));
+  const divYear = useRef<HTMLDivElement>(null);
+  useOnclickOutside(divYear, () => setOpenYear(false));
   return (
     <div className={mediaQueryMD ? 'p-14' : 'p-2'}>
       <div>
@@ -34,15 +38,18 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
         {subTitle && <span className="text-lena-blue-dark">{subTitle}</span>}
       </div>
       <div>
-        <div className="flex flex-row items-center justify-evenly mt-5">
-          <div className="flex flex-col md:items-center relative md:flex-row relative">
-            <span className="text-lena-blue-dark text-left ml-0 mb-3 md:mn-0 md:ml0">Mois</span>{' '}
+        <div className="flex flex-row items-center justify-between mt-5">
+          <div className="flex flex-col md:items-center relative md:flex-row relative" ref={divMonth}>
+            <span className="text-lena-blue-dark text-left ml-0 mb-3 md:mb-0 md:mn-0 md:ml0">Mois</span>{' '}
             <div
               style={{ borderColor: '#e1e7f7' }}
-              className={`flex w-dateInputMd md:w-dateInput items-center justify-between
+              className={`flex w-dateInputMd md:w-dateInput sm:w-dateInputSm items-center justify-between
               border rounded-md focus:ring-0 focus:outline-none
               pt-2 pb-2 ml-0 md:ml-5 px-6 shadow text-lena-blue-dark cursor-pointer`}
-              onClick={() => setOpen(!open)}
+              onClick={() => {
+                setOpen(!open);
+                setOpenYear(false);
+              }}
             >
               <strong>{mois[Number(month) - 1]?.title || 'Choisir'}</strong>
               <div className=" ml-6">
@@ -72,8 +79,8 @@ const DatePicker = ({ title, subTitle, month, year, hasCheckBox, setMonth, setYe
               </div>
             )}
           </div>
-          <div className="flex flex-col md:items-center md:ml-20 md:flex-row relative">
-            <span className="mr-5 text-lena-blue-dark text-left md:ml0 mb-3 md:mn-0">Année</span>{' '}
+          <div className="flex flex-col md:items-center md:ml-20 md:flex-row relative" ref={divYear}>
+            <span className="mr-5 text-lena-blue-dark text-left md:ml0 mb-3 md:mb-0 md:mn-0">Année</span>{' '}
             <div
               style={{ borderColor: '#e1e7f7' }}
               className={`flex w-dateInputMd md:w-dateInput items-center justify-between

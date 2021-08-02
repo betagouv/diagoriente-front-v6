@@ -14,6 +14,37 @@ import { Tag, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
+const renderTitle = (text: string, fText: string) => {
+  const fullText = text.toLowerCase();
+  const textToFind = fText.toLowerCase();
+  const lengthS = textToFind.length;
+  const index = fullText.indexOf(textToFind);
+
+  let result = null;
+  if (index === 0) {
+    const firstPartStrong = fullText.slice(0, lengthS);
+    const secondPart = fullText.slice(lengthS);
+    result = (
+      <p>
+        <strong className="capitalize">{firstPartStrong}</strong>
+        {secondPart}
+      </p>
+    );
+  } else {
+    const firstPart = fullText.slice(0, index);
+    const firstPartStrong = fullText.slice(index, index + lengthS);
+    const secondPart = fullText.slice(index + lengthS);
+    result = (
+      <p>
+        {firstPart}
+        <strong>{firstPartStrong}</strong>
+        {secondPart}
+      </p>
+    );
+  }
+  return result;
+};
+
 type JobTag = {
   id: string;
   domains: Theme[];
@@ -25,7 +56,7 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
     <div>
       <div
         className={`focus:ring-0 focus:outline-none w-full py-1 text-left
-      flex justify-between border-b border-lena-lightgray2 `}
+      flex border-b border-lena-lightgray2 `}
       >
         #{children}
       </div>
@@ -46,9 +77,10 @@ type JobDomain = {
   idActive?: string;
   onActive: (e: string | undefined) => void;
   onSelect: (job: Theme) => void;
+  text: string;
 };
 
-const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, idActive, onActive, onSelect, children }) => {
+const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, idActive, onActive, onSelect, children, text }) => {
   return (
     <div>
       <div
@@ -75,16 +107,13 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, idActive, onActive
         </button>
       </div>
       <div className="px-9">
-        {job.id === idActive && (
-          <ul className="list-disc px-4 py-1 list-inside">
-            {/** {activities &&
-              activities.map((activity) => (
-                <li key={activity.id} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm">
-                  {activity.title}
-                </li>
-              ))} */}
-          </ul>
-        )}
+        <ul className="list-disc px-4 py-1 list-inside">
+          {job.activities.slice(0, 3).map((activity) => (
+            <li key={activity.id} className="whitespace-nowrap overflow-ellipsis overflow-hidden text-sm leading-6">
+              {activity.title}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -97,7 +126,7 @@ type SearchProps = {
   theme: Theme;
 };
 
-const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setTheme, theme }) => {
+const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setTheme }) => {
   const history = useHistory();
   const inputRef = useRef<any>(null);
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
@@ -109,8 +138,10 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
 
   const handleThemes = (title: string) => {
     setText(title);
-    getThemesCall({ variables: { domain: 'professional', title } });
-    getTagsCall({ variables: { title } });
+    if (title.length >= 3) {
+      getThemesCall({ variables: { domain: 'professional', title } });
+      getTagsCall({ variables: { title } });
+    }
   };
 
   useEffect(() => {
@@ -162,8 +193,9 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
                   key={domain.id}
                   job={domain}
                   onSelect={handleSelectJob}
+                  text={text}
                 >
-                  {domain.title}
+                  {renderTitle(domain.title, text)}
                 </SearchJobDomain>
               ))}
           </div>
@@ -176,7 +208,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
             {getTagsState &&
               getTagsState.data?.tags.data.map((domain) => (
                 <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
-                  {domain.title}
+                  {renderTitle(domain.title, text)}
                 </SearchJobTag>
               ))}
           </div>
@@ -191,12 +223,12 @@ type DomainListProps = {
   tags: Tag[] | undefined;
   setTheme: (theme: Theme) => void;
   theme: Theme;
+  text: string;
 };
 
-const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, theme }) => {
+const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, text }) => {
   const history = useHistory();
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
-
   // TODO: pass job object
   const handleSelectJob = (job: Theme) => {
     setTheme(job);
@@ -204,7 +236,6 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
       history.push(`${job?.id}/domaine?type=${job.domain}`);
     }
   };
-
   return (
     <div
       style={{
@@ -226,8 +257,9 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
                 key={domain.id}
                 job={domain}
                 onSelect={handleSelectJob}
+                text={text}
               >
-                {domain.title}
+                {renderTitle(domain.title, text)}
               </SearchJobDomain>
             ))}
         </div>
@@ -242,7 +274,7 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
             tags.map((domain) => {
               return (
                 <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
-                  {domain.title}
+                  {renderTitle(domain.title, text)}
                 </SearchJobTag>
               );
             })}
@@ -271,8 +303,10 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   };
 
   useEffect(() => {
-    getThemesCall({ variables: { domain: 'professional', title: text } });
-    getTagsCall({ variables: { title: text } });
+    if (text.length >= 3) {
+      getThemesCall({ variables: { domain: 'professional', title: text } });
+      getTagsCall({ variables: { title: text } });
+    }
   }, [text]);
 
   return !showSearch ? (
@@ -310,6 +344,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
                 theme={theme}
                 tags={getTagsState.data?.tags.data}
                 data={getThemesState.data?.themes.data}
+                text={text}
               />
             )}
           </div>
