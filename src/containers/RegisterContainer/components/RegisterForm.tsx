@@ -5,6 +5,9 @@ import { FormControl, FormLabel } from 'components/Register/FormController';
 import FormComment from 'components/Register/FormComment';
 import classNames from 'common/utils/classNames';
 
+import CodeField from 'components/design-system/CodeField';
+import InputWrapper from 'components/Register/InputWrapper';
+
 import useRegister from 'common/container/auth/useRegister';
 import { hasLowercase, hasNumber, hasSpecial, hasUppercase } from 'common/utils/validation';
 import Button from 'components/design-system/Button';
@@ -193,13 +196,9 @@ const RegisterForm: FunctionComponent = () => {
         <div className="mb-2">
           <FormControl>
             <FormLabel htmlFor="codeGroup">Code groupe</FormLabel>
-            <InputComponent
-              value={formik.values.code}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="codeGroup"
-              name="codeGroup"
-            />
+            <InputWrapper>
+              <CodeField value={formik.values.code} onChange={formik.handleChange('code')} />
+            </InputWrapper>
           </FormControl>
         </div>
         <div className="mt-4 flex justify-center">
