@@ -1,3 +1,5 @@
+@import 'styles/leaflet-overrides.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,8 +8,8 @@
   @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: local('Atkinson Hyperlegible Regular'), local('Atkinson-Hyperlegible-Regular'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff2') format('woff2'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff') format('woff');
+      url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,8 +18,8 @@
   @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: local('Atkinson Hyperlegible Bold'), local('Atkinson-Hyperlegible-Bold'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff2') format('woff2'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff') format('woff');
+      url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -26,8 +28,8 @@
   @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: local('Atkinson Hyperlegible Bold Italic'), local('Atkinson-Hyperlegible-BoldItalic'),
-    url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff2') format('woff2'),
-    url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff') format('woff');
+      url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -36,8 +38,8 @@
   @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: local('Atkinson Hyperlegible Italic'), local('Atkinson-Hyperlegible-Italic'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff2') format('woff2'),
-    url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff') format('woff');
+      url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff2') format('woff2'),
+      url('./assets/fonts/Atkinson-Hyperlegible-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -62,15 +64,15 @@ html {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 15px;
   padding: 15px 30px;
-  opacity: 1!important;
+  opacity: 1 !important;
 }
 
 .__react_component_tooltip.place-right::before {
   z-index: 9;
   content: url(https://app-dev-standard.projetttv.org/images/arrow_tooltip.png);
-  border: none!important;
-  left: -20px!important;
-  margin-top: -16px!important;
+  border: none !important;
+  left: -20px !important;
+  margin-top: -16px !important;
 }
 
 .thumb,
@@ -79,8 +81,8 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-input[type=range] {
-  -webkit-appearance: none
+input[type='range'] {
+  -webkit-appearance: none;
 }
 
 .thumb {
@@ -98,7 +100,7 @@ input[type=range] {
   z-index: 4;
 }
 
-input[type=range]:focus {
+input[type='range']:focus {
   outline: none;
 }
 
@@ -139,10 +141,15 @@ input[type=range]:focus {
   --circle-radius: 50px;
   height: 100%;
   width: 100%;
-  --mask: radial-gradient(farthest-side at 50% 50%, transparent var(--circle-radius), #fff calc(var(--circle-radius) + 2px) 10%) 100% 100%/100% 100% no-repeat;
+  --mask: radial-gradient(
+      farthest-side at 50% 50%,
+      transparent var(--circle-radius),
+      #fff calc(var(--circle-radius) + 2px) 10%
+    )
+    100% 100%/100% 100% no-repeat;
   -webkit-mask: var(--mask);
   mask: var(--mask);
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .overlay-2 {
@@ -155,29 +162,19 @@ input[type=range]:focus {
   --circle-radius: 50px;
   height: 100%;
   width: 100%;
-  --mask: radial-gradient(circle farthest-side at 50% 170px, transparent var(--circle-radius), #000 calc(var(--circle-radius) + 2px) 10%) 90% 90%/100% 100% no-repeat;
+  --mask: radial-gradient(
+      circle farthest-side at 50% 170px,
+      transparent var(--circle-radius),
+      #000 calc(var(--circle-radius) + 2px) 10%
+    )
+    90% 90%/100% 100% no-repeat;
   -webkit-mask: var(--mask);
   mask: var(--mask);
   mask-position: 50% 50%;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .flickingDiv {
   width: calc(84%);
   margin: 5px;
-}
-
-.leaflet-container {
-  flex: 1; /* Auto extends */
-}
-
-.leaflet-map-pane {
-  /* AppHeader becomes partially invisible otherwise */
-  z-index: auto !important;
-}
-
-.leaflet-bottom.leaflet-right {
-  /* Hides the attribution when on mobile to prevent it
-     from appearing in the popups */
-  z-index: 0 !important;
 }

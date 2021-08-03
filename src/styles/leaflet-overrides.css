@@ -1,0 +1,15 @@
+.leaflet-container {
+  /* Auto extends */
+  flex: 1;
+}
+
+.leaflet-map-pane {
+  /* AppHeader becomes partially invisible otherwise */
+  z-index: auto !important;
+}
+
+.leaflet-bottom.leaflet-right {
+  /* Hides the attribution when on mobile to prevent it
+       from appearing in the popups */
+  z-index: 0 !important;
+}
