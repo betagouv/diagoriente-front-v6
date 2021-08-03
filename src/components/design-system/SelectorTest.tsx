@@ -20,7 +20,7 @@ const SelectorTest: FunctionComponent<SelectorTestProps> = ({
     <div
       onClick={() => onClick?.call(null, !checked)}
       className={classNames(
-        'group px-6 rounded-md flex items-center border-2 cursor-pointer',
+        'group px-6 rounded-md flex items-center border-2 cursor-pointer w-full',
         size === 'normal' ? 'py-4' : 'py-3',
         checked
           ? color !== 'yellow'
