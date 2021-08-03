@@ -76,7 +76,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
   };
 
   const RenderBox = ({ title, competences }: PropsBox) => (
-    <div className="rounded mt-3 mb-3 mx-1 p-2 h-auto md:w-45p" style={{ backgroundColor: '#F3F2F4' }}>
+    <div className="rounded mt-3 mb-3 mx-1 p-2 md:w-45p" style={{ backgroundColor: '#F3F2F4', height: 'fit-content' }}>
       <div className="flex items-center mb-3">
         <img src={renderLogo(title)} alt="logo" />
         <p className="text-black ml-4 font-bold">{renderTitle(title)}</p>
@@ -88,9 +88,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
               <div className="flex mt-3 mb-3 w-full">
                 <div className="flex-1">
                   <p className="text-lena-blue-dark text-left font-bold">{c.competence.title.toLocaleLowerCase()}</p>
-                  <p className="text-thin text-sm text-black text-left">
-                    Met en oeuvre la procédure adaptée aux problèmes courants liés à son activité
-                  </p>
+                  <p className="text-thin text-sm text-black text-left">{c.level.title}</p>
                 </div>
                 <div className="mx-4 flex flex-col items-center" style={{ width: 40 }}>
                   <p className="text-lena-blue-dark text-thin text-sm">Niveau</p>
