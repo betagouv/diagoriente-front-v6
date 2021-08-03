@@ -1,24 +1,21 @@
+import Pill from 'components/design-system/Pill';
 import React, { FunctionComponent } from 'react';
-import { ReactComponent as PictoFormation } from 'assets/svg/picto_formation.svg';
-import Pill from '../../../components/design-system/Pill';
+import { ReactComponent as PictoFormation } from '../../../assets/svg/picto_formation.svg';
 
-const ImmersionResultItem: FunctionComponent = () => {
-  const address = '292 RUE CAMILLE GUERIN\n59800 LILLE\n07 XX XX XX XX';
+const ImmersionMarkerPopup: FunctionComponent = () => {
+  const address = '292 RUE DU SAVOIR\n59800 LILLE\n07 XX XX XX XX';
   const tags = ['stage', 'immersion en entreprise', 'formation', 'apprentissage', 'emploi', "mission d'engagement"];
 
   return (
-    <div
-      className={`w-full bg-lena-lightgray px-4 py-4 rounded-lg
-    focus:ring-0 focus:outline-none text-left space-y-4`}
-    >
-      <div className="w-full flex flex-row justify-end items-end flex-wrap space-x-2 space-y-2">
+    <div className="shadow-md bg-white md:rounded-lg p-4 flex flex-col space-y-4">
+      <div className="flex flex-row justify-end items-end flex-wrap space-x-2 space-y-2 max-w-md">
         {tags.map((v) => (
           <Pill key={v}>{v}</Pill>
         ))}
       </div>
       <div>
-        <h3 className="font-bold text-lena-blue-dark">K2M GENIE CLIMATIQUE</h3>
-        <p className="text-lena-black text-sm">Travaux d'installation d'eau et de gaz en tous locaux</p>
+        <div className="text-lg text-lena-blue-dark font-bold">K2M GENIE CLIMATIQUE</div>
+        <div>Travaux d'installation d'eau et de gaz en tous locaux</div>
       </div>
       <div>
         <pre>{address}</pre>
@@ -40,4 +37,4 @@ const ImmersionResultItem: FunctionComponent = () => {
   );
 };
 
-export default ImmersionResultItem;
+export default ImmersionMarkerPopup;

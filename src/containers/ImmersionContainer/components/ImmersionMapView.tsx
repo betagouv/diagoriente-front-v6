@@ -3,6 +3,7 @@ import { Map, Marker, TileLayer } from 'react-leaflet';
 import MarkerIcon from 'assets/svg/leaflet_marker_icon.svg';
 import MarkerIconActive from 'assets/svg/leaflet_marker_icon_active.svg';
 import Leaflet from 'leaflet';
+import ImmersionMarkerPopup from './ImmersionMarkerPopup';
 import 'leaflet/dist/leaflet.css';
 
 const iconMarker = new Leaflet.Icon({
@@ -19,7 +20,10 @@ const iconMarkerActive = new Leaflet.Icon({
 
 const ImmersionMapView: FunctionComponent = () => {
   return (
-    <div className="flex-1 flex-grow flex">
+    <div className="relative flex-1 flex-grow flex">
+      <div className="z-10 absolute bottom-0 md:bottom-auto md:right-2 md:top-2">
+        <ImmersionMarkerPopup />
+      </div>
       <Map center={[48.8584, 2.2945]} zoom={16}>
         <TileLayer
           attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
