@@ -6,6 +6,8 @@ import { ReactComponent as LoveTSvg } from 'assets/svg/love_turquoise.svg';
 import classNames from 'common/utils/classNames';
 import { ReactComponent as ArrowBottomSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as SearchInputSvg } from 'assets/svg/search.svg';
+import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
+import { ReactComponent as LessSvg } from 'assets/svg/less.svg';
 import { useHistory } from 'react-router-dom';
 import JobInterestItem from '../components/JobInterestItem';
 import JobStatistics from '../components/JobStatistics';
@@ -36,8 +38,9 @@ const DetailJob: FunctionComponent = () => {
             </p>
             {showAbout && <JobStatistics />}
             <div className="text-right">
-              <Button onClick={handleOpenStatistics} variant="secondary" size="sm">
-                Détails &gt;
+              <Button onClick={handleOpenStatistics} variant="outline-light" size="sm">
+                <span>Détails</span>
+                <div>{showAbout ? <LessSvg /> : <PlusSvg />}</div>
               </Button>
             </div>
           </div>

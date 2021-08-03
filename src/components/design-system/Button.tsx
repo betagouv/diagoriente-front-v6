@@ -3,7 +3,7 @@ import classNames from 'common/utils/classNames';
 
 export type ButtonProps = {
   size?: 'sm' | 'normal' | 'md' | 'lg';
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'outline-light';
   fullWidth?: boolean;
   mobileStacked?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -16,6 +16,9 @@ const variants = {
   secondary: [
     'bg-lena-blue hover:bg-lena-blue-dark border border-transparent text-white',
     'disabled:hover:bg-lena-blue',
+  ],
+  'outline-light': [
+    'bg-lena-white border border-lena-lightgray2 text-lena-blue-dark font-bold hover:bg-lena-lightgray',
   ],
 };
 
