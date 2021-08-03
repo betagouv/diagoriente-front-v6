@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-import complexité from 'assets/svg/Picto_reflechir.svg';
+import Reflechir from 'assets/svg/Picto_reflechir.svg';
 import Autonomie from 'assets/svg/Picto_organiser.svg';
 import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
@@ -25,7 +25,7 @@ const types = [
   },
   {
     title: 'Complexité',
-    logo: complexité,
+    logo: Reflechir,
     sub: 'complexity',
   },
   /* {
@@ -72,7 +72,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
       window.scrollTo(0, 0);
     }, []); */
     return (
-      <div className="flex flex-col items-center p-4">
+      <div className="flex flex-col items-center px-4 py-8 pb-16 md:pb-8">
         <div
           className="rounded-full flex items-center justify-center font-mono relative"
           style={{ height: 148, width: 148, color: '#000', backgroundColor: '#E1E7F7' }}

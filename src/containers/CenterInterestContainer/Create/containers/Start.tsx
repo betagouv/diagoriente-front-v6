@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/interet.svg';
 import ParcoursInterestsLayout from '../../../../layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
+import Button from '../../../../components/design-system/Button';
 
 type Props = {
   onStep: () => void;
@@ -25,17 +26,9 @@ const Start = ({ onStep }: Props) => {
         <p className="text-lena-blue-dark">
           Plus de 200 centres d'intérêt sont disponibles et classés par familles pour vous faciliter la tâche.
         </p>
-      </div>
-      <div
-        onClick={() => onStep.call(null)}
-        className="fixed bottom-0 left-0 right-0 md:relative md:flex md:justify-center"
-      >
-        <button
-          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue text-white py-3
-        text-center font-bold text-lg md:w-72 md:rounded-lg`}
-        >
+        <Button variant="secondary" size="md" onClick={() => onStep?.()} mobileStacked>
           Commencer
-        </button>
+        </Button>
       </div>
     </ParcoursInterestsLayout>
   );

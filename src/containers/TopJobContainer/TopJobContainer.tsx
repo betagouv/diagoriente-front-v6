@@ -5,8 +5,8 @@ import { ReactComponent as TopJobSvg } from 'assets/svg/top_job.svg';
 import { ReactComponent as InfoSvg } from 'assets/svg/info.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
-import JobsLayout from '../../layouts/JobsLayout/JobsLayout';
-import useMediaQuery from '../../hooks/useMediaQuery';
+import JobsLayout from 'layouts/JobsLayout/JobsLayout';
+import useMediaQuery from 'hooks/useMediaQuery';
 
 // TODO remove default and use ids from DB
 export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54sdf41dsf213' }) => {
@@ -15,7 +15,7 @@ export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54s
   return (
     <button
       onClick={() => history.push(`/metiers/${jobId}`)}
-      className="bg-lena-lightgray px-5 py-7 rounded-lg mb-3 focus:ring-0 focus:outline-none text-left"
+      className="bg-lena-lightgray px-5 py-7 rounded-lg focus:ring-0 focus:outline-none text-left"
     >
       <h3 style={{ color: '#424242' }} className="font-bold mb-1">
         Technicien/ne démonstrateur/trice en matériel agricole
@@ -33,8 +33,8 @@ const TopJobContainer = () => {
   const isDesktop = useMediaQuery('md');
 
   return (
-    <JobsLayout>
-      {!isDesktop && (
+    <JobsLayout mobileHeaderMode="search_jobs">
+      {false && (
         <div style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
           <div className="container flex justify-between items-center">
             <button
@@ -64,7 +64,7 @@ const TopJobContainer = () => {
         </button>
       </div>
       <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
-        <div className="container py-5">
+        <div className="container py-5 grid md:grid-cols-2 gap-4 md:w-3/4">
           <CardJob />
           <CardJob />
           <CardJob />

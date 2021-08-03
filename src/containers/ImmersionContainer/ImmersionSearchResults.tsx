@@ -14,7 +14,7 @@ const ImmersionSearchResults = () => {
 
   return (
     <ImmersionLayout showSearch={true}>
-      <div className="flex flex-row items-center justify-between p-8">
+      <div className="flex flex-row items-center justify-between px-4 md:px-8 py-8">
         <div className="hidden md:block md:invisible" />
         <div className="text-lena-blue-dark text-center text-lg font-bold">1337 engagements trouvés</div>
         <div className="flex flex-row justify-center items-center space-x-2 text-lena-pink-dark">

@@ -1,21 +1,22 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as SettingsSvg } from 'assets/svg/settings.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as SaveSvg } from 'assets/svg/save_white.svg';
 import userContext from 'common/contexts/UserContext';
 import TextField from 'components/design-system/TextField';
 import InputComponent from 'components/Register/Input';
-import PrivateBarLayout from 'layouts/ProfileLayout/components/ProfileHeader';
+import Button from 'components/design-system/Button';
+import useMediaQuery from 'hooks/useMediaQuery';
+import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 
 const EditInfoContainer = () => {
   const history = useHistory();
   const { user } = useContext(userContext);
+  const isDesktop = useMediaQuery('md');
 
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <PrivateBarLayout />
-      <div style={{ background: 'rgb(250,250,250)' }} className="pt-3 flex flex-col justify-start flex-1 pb-20">
+    <ProfileLayout>
+      <div className="bg-white py-4 flex flex-col justify-start flex-1">
         <div className="container">
           <button
             onClick={() => history.push('/profil/reglages')}
@@ -25,7 +26,7 @@ const EditInfoContainer = () => {
             <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
           </button>
           <div className="flex flex-col items-center mb-7">
-            <h2 className="font-bold text-lena-pink-dark uppercase mt-3">Modifier mes infos</h2>
+            <h2 className="font-bold text-lena-pink-dark text-xl uppercase mt-3">Modifier mes infos</h2>
           </div>
           <div className="mx-4 mb-12">
             <div className="mb-4">
@@ -61,20 +62,16 @@ const EditInfoContainer = () => {
               <span className="font-bold w-2/5 block flex-shrink-0">Code groupe</span>
               <TextField placeholder={user?.group} />
             </div>
+            <div className="flex flex-row items-center justify-center py-8">
+              <Button variant="primary" mobileStacked={true} size="md">
+                {!isDesktop && <SaveSvg />}
+                <span>Enregistrer</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 right-0">
-        <button
-          className={`focus:ring-0 focus:outline-none w-full 
-          bg-lena-pink-dark hover:bg-lena-pink-darkest text-white py-3
-        text-center font-bold text-lg flex justify-center`}
-        >
-          <SaveSvg />
-          <span className="ml-5">Enregistrer</span>
-        </button>
-      </div>
-    </div>
+    </ProfileLayout>
   );
 };
 

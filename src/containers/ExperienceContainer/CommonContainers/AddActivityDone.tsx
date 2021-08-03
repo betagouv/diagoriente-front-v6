@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
 import Illustration from 'assets/svg/illu_01.svg';

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ReactComponent as ProfileIcon } from 'assets/svg/user_profile.svg';
 import { Link } from 'react-router-dom';
+import classNames from 'common/utils/classNames';
 import AppHeader from '../AppLayout/components/AppHeader';
 
 const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
@@ -8,7 +9,12 @@ const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
     <div className="min-h-screen h-full flex flex-col">
       <AppHeader />
       <div className="flex flex-row flex-1">
-        <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative">
+        <div
+          className={classNames(
+            'drop-shadow-md w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative',
+            'filter drop-shadow-md z-10',
+          )}
+        >
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex flex-col items-center justify-center space-y-4">

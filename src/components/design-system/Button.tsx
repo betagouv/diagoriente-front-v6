@@ -2,9 +2,10 @@ import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
 import classNames from 'common/utils/classNames';
 
 export type ButtonProps = {
-  size?: 'normal' | 'md' | 'lg';
+  size?: 'sm' | 'normal' | 'md' | 'lg';
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  mobileStacked?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const variants = {
@@ -19,29 +20,32 @@ const variants = {
 };
 
 const sizes = {
+  sm: 'px-4 py-2 text-sm',
   normal: 'px-4 py-2',
-  md: 'px-24 py-3 text-md',
-  lg: 'px-32 py-3 text-lg',
+  md: 'px-4 md:px-24 py-3 text-lg md:text-md',
+  lg: 'px-4 md:px-32 py-3 text-lg',
 };
 
 const Button: FunctionComponent<ButtonProps> = ({
   variant,
   size = 'normal',
   fullWidth = false,
+  mobileStacked = false,
   children,
   className,
   ...rest
 }) => {
   const classes = classNames([
-    'rounded font-bold focus:outline-none focus:ring-0',
+    'md:rounded font-bold focus:outline-none focus:ring-0',
     'disabled:cursor-default disabled:opacity-50',
     variant && variants[variant],
     sizes[size],
     fullWidth && 'w-full',
+    mobileStacked && 'fixed bottom-0 left-0 right-0 w-full md:w-auto md:static',
   ]);
   return (
     <button className={classes} {...rest}>
-      {children}
+      <div className="flex flex-row items-center justify-center space-x-2">{children}</div>
     </button>
   );
 };

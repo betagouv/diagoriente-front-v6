@@ -41,7 +41,7 @@
     ],*/
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],
-    "max-len": [1, 120],
+    "max-len": ["error", 120],
     "prefer-template": "error",
     "react/no-unescaped-entities": "off",
     "prettier/prettier": "warn",

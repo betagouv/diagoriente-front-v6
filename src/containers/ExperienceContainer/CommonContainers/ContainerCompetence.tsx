@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
 // import { useAddSkill } from 'common/requests/skills';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
@@ -6,7 +6,7 @@ import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
-import { Theme, Activity } from 'common/requests/types';
+import { Activity, Theme } from 'common/requests/types';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
@@ -70,8 +70,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
   const [selected, setSelected] = useState('');
 
   const isExist = (value: string) => {
-    const res = competencesValues.includes(value);
-    return res;
+    return competencesValues.includes(value);
   };
 
   const onSelectCompetence = (value: string) => {
