@@ -1,6 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { ReactComponent as SearchSvg } from 'assets/svg/search.svg';
-import { ReactComponent as UserSvg } from 'assets/svg/user_profile.svg';
 import { ReactComponent as TopJobSvg } from 'assets/svg/top_job.svg';
 import { ReactComponent as InfoSvg } from 'assets/svg/info.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
@@ -29,27 +27,10 @@ export const CardJob: FunctionComponent<{ jobId?: string }> = ({ jobId = 'djs54s
 };
 
 const TopJobContainer = () => {
-  const history = useHistory();
   const isDesktop = useMediaQuery('md');
 
   return (
     <JobsLayout mobileHeaderMode="search_jobs">
-      {false && (
-        <div style={{ background: '#E5E5E5', boxShadow: '0px 4px 4px 0px #00000040' }} className="py-3">
-          <div className="container flex justify-between items-center">
-            <button
-              className="focus:ring-0 focus:outline-none flex items-center space-x-3"
-              onClick={() => history.push('/metiers/recherche')}
-            >
-              <SearchSvg fill="#223A7A" />
-              <span className="inline-block mt-1 text-lena-blue-dark text-sm">Rechercher un métier</span>
-            </button>
-            <button className="focus:ring-0 focus:outline-none">
-              <UserSvg />
-            </button>
-          </div>
-        </div>
-      )}
       <div className="container flex flex-col items-center py-8 space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
           {!isDesktop && <TopJobSvg />}
@@ -63,7 +44,7 @@ const TopJobContainer = () => {
           <span className="text-lena-blue-dark text-sm">Pourquoi ces métiers ?</span>
         </button>
       </div>
-      <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
+      <div className="flex-1" style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
         <div className="px-4 xl:px-16 py-4 grid md:grid-cols-2 gap-4">
           <CardJob />
           <CardJob />

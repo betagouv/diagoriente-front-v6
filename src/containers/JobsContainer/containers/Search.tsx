@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { ReactComponent as SearchTitleSvg } from 'assets/svg/search_job.svg';
 import { ReactComponent as SearchSvg } from 'assets/svg/search.svg';
-import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
+import { ReactComponent as CrossIcon } from 'assets/svg/cross3.svg';
 import Button from 'components/design-system/Button';
 import TextField from 'components/design-system/TextField';
 import ListSvg from 'assets/svg/list.svg';

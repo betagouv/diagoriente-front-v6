@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { ReactComponent as CloseIcon } from 'assets/svg/cross.svg';
+import { ReactComponent as CloseIcon } from 'assets/svg/cross3.svg';
 import Checkbox from 'components/design-system/Checkbox';
 import classNames from 'common/utils/classNames';
 
@@ -43,7 +43,7 @@ const ModalFilter: FunctionComponent<Props> = ({ title, choices, values, onSetVa
             >
               <Checkbox
                 checked={selectedValues.includes(v.value)}
-                onClick={() => handleSelectValue(v.value)}
+                onChange={() => handleSelectValue(v.value)}
                 label={v.label}
                 value={v.value}
               />
