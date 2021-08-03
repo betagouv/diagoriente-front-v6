@@ -64,7 +64,7 @@ const TopJobContainer = () => {
         </button>
       </div>
       <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
-        <div className="container py-5 grid md:grid-cols-2 gap-4 md:w-3/4">
+        <div className="px-4 xl:px-16 py-4 grid md:grid-cols-2 gap-4">
           <CardJob />
           <CardJob />
           <CardJob />

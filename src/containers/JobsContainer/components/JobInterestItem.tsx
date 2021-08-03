@@ -4,7 +4,7 @@ import { ReactComponent as LoveTLSvg } from 'assets/svg/love_turquoise_light.svg
 const JobInterestItem: FunctionComponent = () => {
   return (
     <>
-      <div className="px-4 py-1 flex items-start space-x-3">
+      <div className="px-2 py-1 flex items-start space-x-4">
         <LoveTLSvg />
         <div className="mt-1">
           <span className="text-lena-black block">Assurer un transport</span>
