@@ -161,15 +161,18 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
           ))}
         </div>
       </div>
-      {!isEmpty(theme) && (
-        <button
-          className={`focus:ring-0 focus:outline-none w-full bg-lena-blue
-          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`}
-          onClick={handleNext}
-        >
-          Valider
-        </button>
-      )}
+
+      <button
+        className={classNames(
+          `focus:ring-0 focus:outline-none w-full bg-lena-blue
+          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`,
+          isEmpty(theme) && 'bg-gray-300',
+        )}
+        onClick={handleNext}
+        disabled={isEmpty(theme)}
+      >
+        Valider
+      </button>
     </>
   );
 };

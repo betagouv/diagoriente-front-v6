@@ -6,6 +6,7 @@ import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
 import { useHistory } from 'react-router-dom';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
+import classNames from 'common/utils/classNames';
 
 interface Props {
   theme: Theme;
@@ -67,9 +68,9 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
     }
   };
   const RendQuestionStep = ({ title, questions }: QuestionType) => {
-    useEffect(() => {
+    /* useEffect(() => {
       window.scrollTo(0, 0);
-    }, []);
+    }, []); */
     return (
       <div className="flex flex-col items-center p-4">
         <div
@@ -87,26 +88,29 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
         <div className="m-5 md:font-bold text-lena-blue-dark text-center">
           Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :
         </div>
-        <div className="pb-20">
+        <div className="pb-20 w-full">
           {questions.map((q) => (
-            <div className="mt-3 mb-3 p-3">
+            <div className="mt-3 mb-3 p-3 w-full">
               <SelectorTest key={q.id} onClick={() => onSelectQuestion(q.id)} checked={isExist(q.id)}>
                 {q.title}
               </SelectorTest>
             </div>
           ))}
         </div>
-        {selected && (
-          <div className="fixed bottom-0 left-0 right-0 md:relative">
-            <button
-              className={`focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
-            text-white py-3 text-center font-bold text-lg`}
-              onClick={nextStep}
-            >
-              Suivant
-            </button>
-          </div>
-        )}
+
+        <div className="fixed bottom-0 left-0 right-0 md:relative">
+          <button
+            className={classNames(
+              `focus:ring-0 focus:outline-none w-full md:w-72 md:rounded-md bg-lena-blue
+            text-white py-3 text-center font-bold text-lg`,
+              !selected && 'bg-gray-300',
+            )}
+            disabled={!selected}
+            onClick={nextStep}
+          >
+            Suivant
+          </button>
+        </div>
       </div>
     );
   };
