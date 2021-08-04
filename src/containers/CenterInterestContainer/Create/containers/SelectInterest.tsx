@@ -3,20 +3,18 @@ import { ReactComponent as HelpSvg } from 'assets/svg/help_yellow.svg';
 import { ReactComponent as ArrowSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import { ReactComponent as PointSvg } from 'assets/svg/point.svg';
 import { ReactComponent as PolygoneSvg } from 'assets/svg/polygon.svg';
-import { ReactComponent as StepInactiveSvg } from 'assets/svg/step_inactive.svg';
-import { ReactComponent as StepActiveSvg } from 'assets/svg/step_active.svg';
 import CollectifSvg from 'assets/svg/collectif.svg';
 import IndividuelSvg from 'assets/svg/individuel.svg';
 import SelectorTest from 'components/design-system/SelectorTest';
 import useWindowSize from 'hooks/useWindowSize';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
-import Flicking, { ERROR_CODE, FlickingError } from '@egjs/react-flicking';
+import Flicking from '@egjs/react-flicking';
 import { Fade } from '@egjs/flicking-plugins';
 import '@egjs/flicking-plugins/dist/arrow.css';
 import { useInterest } from 'common/requests/interests';
-import ParcoursInterestsLayout from '../../../../layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
-import AppLoader from '../../../../components/ui/AppLoader';
+import ParcoursInterestsLayout from 'layouts/ParcoursInterestsLayout/ParcoursInterestsLayout';
+import AppLoader from 'components/ui/AppLoader';
 
 type InterestContent = {
   id: string;
@@ -152,7 +150,6 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   const mediaQueryMD = useMediaQuery('md');
   const plugins: any = [new Fade('', 0.7)];
   const flickingRef = useRef<any>();
-  const [flickingDisabled, setFlickingDisabled] = useState(false);
   const [getInterestCall, getInterestState] = useInterest();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
@@ -160,26 +157,31 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
     if (familyId) getInterestCall({ variables: { familyId } });
   }, [familyId]);
 
-  const handleChange = async (e: any) => {
-    if (!flickingDisabled) {
-      setRangeValue(e);
-    }
-    if (mediaQueryMD) {
-      try {
-        setFlickingDisabled(true);
-        await flickingRef.current.moveTo(e);
-      } catch (err) {
-        /* if (err instanceof FlickingError) {
-          if (err.code === ERROR_CODE.ANIMATION_ALREADY_PLAYING) {
-            console.error('Animation is already playing!');
-          } else if (err.code === ERROR_CODE.ANIMATION_INTERRUPTED) {
-            console.error('Animation is interrupted by user.');
-          }
-        } */
+  useEffect(() => {
+    async function update(index: number) {
+      if (mediaQueryMD) {
+        try {
+          await flickingRef.current.moveTo(index);
+        } catch (err) {
+          /* if (err instanceof FlickingError) {
+            if (err.code === ERROR_CODE.ANIMATION_ALREADY_PLAYING) {
+              console.error('Animation is already playing!');
+            } else if (err.code === ERROR_CODE.ANIMATION_INTERRUPTED) {
+              console.error('Animation is interrupted by user.');
+            }
+          } */
+        }
+      } else {
+        // TODO: when changing from desktop to mobile, it becomes misaligned
+        setTranslate(width * index);
       }
-    } else {
-      setTranslate(width * e);
     }
+
+    update(rangeValue);
+  }, [mediaQueryMD, width, rangeValue]);
+
+  const handleChange = async (e: any) => {
+    setRangeValue(e);
   };
 
   useEffect(() => {
@@ -280,7 +282,12 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                         style={{ width: `${100 / (getInterestState.data?.interest?.cursors?.length || 1)}%` }}
                         className="flex justify-center"
                       >
-                        <PointSvg height={20} width={20} />
+                        <PointSvg
+                          height={20}
+                          width={20}
+                          className="cursor-pointer"
+                          onClick={() => handleChange(index)}
+                        />
                       </div>
                     ))}
                   </div>
@@ -309,10 +316,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                   {getInterestState.data && (
                     <Flicking
                       circularEnabled={false}
-                      onMoveEnd={(e) => {
-                        setRangeValue(e.currentTarget.index + 1);
-                        setFlickingDisabled(false);
-                      }}
+                      onChanged={(e) => setRangeValue(e.currentTarget.index)}
                       defaultIndex={0}
                       ref={flickingRef}
                       horizontal={true}

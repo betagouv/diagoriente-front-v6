@@ -3,6 +3,7 @@ import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
 import { ReactComponent as StarIcon } from 'assets/svg/star.svg';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_professional.svg';
+import { ReactComponent as ExpBenevolatSvg } from 'assets/svg/exp-benevolat.svg';
 import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso_white.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
 import AppLoader from 'components/ui/AppLoader';
@@ -17,19 +18,19 @@ import { useDidMount } from '../../../common/hooks/useLifeCycle';
 
 const allExperienceTypes = [
   {
-    label: 'Mes expériences professionnelles',
+    label: 'Professionnelles',
     param: 'professional',
     icon: <ExpProSvg height={40} />,
   },
   {
-    label: 'Mes expériences personnelles',
+    label: 'Personnelles',
     param: 'personal',
     icon: <ExpPersoSvg height={40} />,
   },
   {
-    label: 'Mes expériences de bénévolat',
+    label: 'Bénévolat & volontariat',
     param: 'voluntary',
-    icon: <ExpProSvg height={40} />,
+    icon: <ExpBenevolatSvg height={40} />,
   },
 ];
 
@@ -76,7 +77,7 @@ const MyExperiencesContainer: FunctionComponent = () => {
           <h2 className="font-bold text-lena-blue-dark text-lg uppercase">Mes expériences</h2>
         </div>
         <div className="flex flex-col items-center space-y-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 md:w-1/2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 w-full lg:w-3/4 xl:w-1/2 gap-4">
             {allExperienceTypes.map((v) => (
               <button
                 key={v.param}
@@ -90,7 +91,7 @@ const MyExperiencesContainer: FunctionComponent = () => {
               >
                 {v.icon}
                 <div className="text-center mt-5 text-lena-blue-dark font-bold">
-                  <span className="inline-block">{v.label}</span>
+                  <span className="inline-block">{v.label}</span>{' '}
                   <span>({groupedExperiencesCount[v.param]?.length || 0})</span>
                 </div>
               </button>

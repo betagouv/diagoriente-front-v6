@@ -16,6 +16,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import { decodeUri } from 'common/utils/url';
+import translateExperienceType from '../../../utils/translateExperienceType';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -200,7 +201,8 @@ const SelectionTheme = ({ theme, setTheme }: SelectionProps) => {
           {mediaQueryMD ? (
             <div className="flex flex-col w-full items-center">
               <h2 className="text-lena-blue-dark text-center font-bold text-xl leading-10">
-                Sélectionnez le domaine de l’expérience personnelle que vous souhaitez ajouter :
+                Sélectionnez le domaine de l’expérience {translateExperienceType(params.type).singular} que vous
+                souhaitez ajouter :
               </h2>
               <WebDomainDisplay data={stateLoadTheme.data?.themes.data} />
             </div>

@@ -95,6 +95,8 @@ type WelcomeProps = {
 
 const WelcomeComponent = ({ onClick }: WelcomeProps) => {
   const mediaQueryMD = useMediaQuery('md');
+  const history = useHistory();
+
   return (
     <div
       className="fixed w-full h-full"
@@ -130,6 +132,7 @@ const WelcomeComponent = ({ onClick }: WelcomeProps) => {
             <div>vers quel métier m'orienter</div>
           </button>
           <button
+            onClick={() => history.push('/immersion/recherche')}
             className={`bg-white md:w-auto md:px-14 rounded-md py-4 px-2 w-full
           block text-lena-blue-dark font-bold text-sm`}
           >
