@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import ThemeContext from 'common/contexts/ThemeContext';
 import { Theme } from 'common/requests/types';
 import { useLazyThemes, useLazyTheme, ThemeListItem } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
@@ -28,22 +29,21 @@ type WebChoiceDomainProps = {
 
 const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   const history = useHistory();
+  const { setTheme } = useContext(ThemeContext);
   const [selectedDomain, setSelectedDomain] = useState<Omit<Theme, 'activities'> | null>(null);
   const [activeDomain, setActiveDomain] = useState(String);
   const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
-  useEffect(() => {
-    if (selectedDomain) {
-      localStorage.setItem('theme', selectedDomain?.id);
-    }
-  }, [selectedDomain]);
+
   const controlSelected = (dataSelected: any) => {
     if (activeDomain === dataSelected.id && selectedDomain?.id === dataSelected.id) {
       setSelectedDomain(dataSelected);
       setActiveDomain('');
+      setTheme(dataSelected);
     } else if (selectedDomain?.id !== dataSelected.id && activeDomain !== dataSelected.id) {
       setActiveDomain(dataSelected.id);
       setSelectedDomain(dataSelected);
       themeCall({ variables: { id: dataSelected.id } });
+      setTheme(dataSelected);
     } else {
       setActiveDomain('');
       setSelectedDomain(null);
@@ -52,7 +52,7 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   const handleValidate = () => {
     if (selectedDomain) {
       if (selectedDomain) {
-        history.push(`${activeDomain}/date?type=${selectedDomain.domain}`);
+        history.push(`${activeDomain}/date`);
       }
     }
   };
@@ -117,18 +117,15 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
 
 const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   const history = useHistory();
+  const { setTheme } = useContext(ThemeContext);
   const [selectedTheme, setSelectedTheme] = useState<Omit<Theme, 'activities'> | null>(null);
-  useEffect(() => {
-    if (selectedTheme) {
-      localStorage.setItem('theme', selectedTheme?.id);
-    }
-  }, [selectedTheme]);
   const controlSelected = (dataSelected: any) => {
     setSelectedTheme(dataSelected);
+    setTheme(dataSelected);
   };
   const handleNext = () => {
     if (selectedTheme) {
-      history.push(`${selectedTheme?.id}/date?type=${selectedTheme.domain}`);
+      history.push(`${selectedTheme?.id}/date`);
     }
   };
   return (
@@ -154,7 +151,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
               </div>
               <ReactTooltip id={f.id} place="right" type="light" effect="solid">
                 <ul className="list-disc text-left">
-                  {f.activities.map((a) => (
+                  {f.activities.map((a: any) => (
                     <li>{a.title}</li>
                   ))}
                 </ul>

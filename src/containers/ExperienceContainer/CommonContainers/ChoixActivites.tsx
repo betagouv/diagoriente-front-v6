@@ -113,7 +113,7 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
   const handleValidateActivites = () => {
     if (activitiesChecked.length !== 0) {
       if (params.id && query) {
-        history.push(`/experience/${params?.id}/doneAct?type=${query.type}`);
+        history.push(`/experience/${params?.id}/doneAct`);
       }
       setActivities(activitiesChecked);
     }
