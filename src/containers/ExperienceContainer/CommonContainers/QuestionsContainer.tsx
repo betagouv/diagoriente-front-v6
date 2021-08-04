@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SelectorTest from 'components/design-system/SelectorTest';
-import Reflechir from 'assets/svg/Picto_reflechir.svg';
-import Autonomie from 'assets/svg/Picto_organiser.svg';
+
 import { groupBy } from 'lodash';
 import { Theme } from 'common/requests/types';
 import { useHistory } from 'react-router-dom';
@@ -20,19 +19,16 @@ interface QuestionType {
 const types = [
   {
     title: 'Autonomie & responsabilité',
-    logo: Autonomie,
     sub: 'responsibility',
   },
   {
     title: 'Complexité',
-    logo: Reflechir,
     sub: 'complexity',
   },
-  /* {
+  {
     title: 'Environnement de travail',
-    logo: Environnement,
-    sub: 'Environnement',
-  }, */
+    sub: 'environment',
+  },
 ];
 
 const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
@@ -40,7 +36,6 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState('');
   const typesQuestion = groupBy(theme.levels, 'type');
-
   const isExist = (value: string) => {
     const res = levels.includes(value);
     return res;
@@ -60,7 +55,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
     }
   };
   const nextStep = () => {
-    if (step < 1) {
+    if (step < 2) {
       setStep(step + 1);
       setSelected('');
     } else {
