@@ -25,10 +25,9 @@ const MyInterestsContainer: FunctionComponent = () => {
         {myInterestsState.loading && <AppLoader />}
         {myInterestsState.data && (
           <div className="divide-y divide-lena-blue-alt-light md:grid lg:grid-cols-2 md:gap-4 lg:px-48">
-            <InterestItem title="Gérer le marketing et piloter l’image" id="123" />
-            <InterestItem title="Concevoir des contenus, des supports de communication" id="123" />
-            <InterestItem title="Créer un projet entrepeunarial" id="123" />
-            <InterestItem title="Décider" id="123" />
+            {myInterestsState.data.me.interests.map((v) =>
+              v.cursors.map((w) => <InterestItem title={w.title} id={w.id} />),
+            )}
           </div>
         )}
         <div>
