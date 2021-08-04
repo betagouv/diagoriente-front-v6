@@ -21,7 +21,7 @@ type NewActivity = {
 };
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
   activities: Activity[];
   setActivities: (activities: Activity[]) => void;
   extraAct: string;
@@ -113,7 +113,7 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
   const handleValidateActivites = () => {
     if (activitiesChecked.length !== 0) {
       if (params.id && query) {
-        history.push(`/experience/theme/${params?.id}/doneAct?type=${query.type}`);
+        history.push(`/experience/${params?.id}/doneAct?type=${query.type}`);
       }
       setActivities(activitiesChecked);
     }

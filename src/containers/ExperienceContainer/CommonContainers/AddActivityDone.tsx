@@ -8,7 +8,7 @@ import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursE
 import ModalInfo from './Modals/InfoQuestionnaire';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
 }
 
 const AddActivityDone = ({ theme }: Props) => {
@@ -77,7 +77,7 @@ const AddActivityDone = ({ theme }: Props) => {
       {mediaQueryMD ? (
         <div className="flex justify-center ">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/question?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/${theme?.id}/question?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
               focus:ring-0 focus:outline-none w-full
               bg-lena-blue text-white py-3 text-center font-bold text-lg  w-1/4 mt-10`}
@@ -88,7 +88,7 @@ const AddActivityDone = ({ theme }: Props) => {
       ) : (
         <div className="fixed bottom-0 left-0 right-0 md:relative">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/question?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/${theme?.id}/question?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}

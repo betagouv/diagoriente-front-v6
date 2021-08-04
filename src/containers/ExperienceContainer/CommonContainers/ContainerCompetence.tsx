@@ -14,7 +14,7 @@ import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursE
 import classNames from 'common/utils/classNames';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
   setCompetencesValues: (competence: string[]) => void;
   competencesValues: string[];
   onAddSkill: () => void;
@@ -63,10 +63,11 @@ interface BoxType {
 }
 
 const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, onAddSkill }: Props) => {
+  console.log('theme in competenece', theme);
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(0);
-  const typesCompetences = groupBy(theme.reference?.competences, 'type');
+  const typesCompetences = groupBy(theme?.reference?.competences, 'type');
   const [error, setError] = useState('');
   const [selected, setSelected] = useState('');
 

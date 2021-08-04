@@ -7,7 +7,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
   monthStart: string;
   yearStart: string;
   setYearStart: (s: any) => void;
@@ -37,7 +37,7 @@ const DateContainer = ({
       <div>
         <div className="text-lena-blue-dark font-bold text-lg">
           À quelles dates s’est déroulée cette expérience de
-          <strong> {theme.title} </strong> ? (facultatif){' '}
+          <strong> {theme?.title} </strong> ? (facultatif){' '}
         </div>
       </div>
       <DatePicker
@@ -62,7 +62,7 @@ const DateContainer = ({
     <div className="divide-y-2 divide-blue divide-solid">
       <div className="text-lena-blue-dark py-8 px-6 font-bold text-base">
         À quelles dates s’est déroulée cette expérience de
-        <strong> {theme.title} </strong> ? (facultatif){' '}
+        <strong> {theme?.title} </strong> ? (facultatif){' '}
       </div>
       <div className="py-8 px-6">
         <DatePicker
@@ -101,7 +101,7 @@ const DateContainer = ({
       {mediaQueryMD ? (
         <div className="flex justify-center ">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/activite?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/theme/${theme?.id}/activite?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
               focus:ring-0 focus:outline-none w-full
               bg-lena-blue text-white py-3 text-center font-bold text-lg  w-1/4 mt-10`}
@@ -112,7 +112,7 @@ const DateContainer = ({
       ) : (
         <div className="fixed bottom-0 left-0 right-0 md:relative">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/activite?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/theme/${theme?.id}/activite?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}

@@ -8,7 +8,7 @@ import Refleshir from 'assets/svg/reflechir.svg';
 import useMediaQuery from 'hooks/useMediaQuery';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
 }
 
 const QuestionDone = ({ theme }: Props) => {
@@ -81,7 +81,7 @@ const QuestionDone = ({ theme }: Props) => {
       {mediaQueryMD ? (
         <div className="flex justify-center ">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/competences?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/${theme?.id}/competences?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
               focus:ring-0 focus:outline-none w-full
               bg-lena-blue text-white py-3 text-center font-bold text-lg  w-1/4 mt-10`}
@@ -92,7 +92,7 @@ const QuestionDone = ({ theme }: Props) => {
       ) : (
         <div className="fixed bottom-0 left-0 right-0 md:relative">
           <button
-            onClick={() => history.push(`/experience/theme/${theme.id}/competences?type=${theme.domain}`)}
+            onClick={() => history.push(`/experience/${theme?.id}/competences?type=${theme?.domain}`)}
             className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}
