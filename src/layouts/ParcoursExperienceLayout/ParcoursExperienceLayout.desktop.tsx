@@ -94,7 +94,7 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
               </div>
               <div className="flex flex-col space-y-4">
                 {steps.map((s, index) => (
-                  <RenderOptions index={index} title={s} stepUrlPath={step || 'create'} />
+                  <RenderOptions key={s} index={index} title={s} stepUrlPath={step || 'create'} />
                 ))}
               </div>
             </div>

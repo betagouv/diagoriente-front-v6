@@ -62,6 +62,7 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
       </div>
       {domains.map((t) => (
         <div
+          key={t.id}
           onClick={() => onSelect.call(null, t)}
           className="cursor-pointer px-5 py-2 divide-y divide-lena-lightgray2 border-b border-lena-lightgray2"
         >
@@ -132,10 +133,8 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
 
   const handleThemes = (title: string) => {
     setText(title);
-    if (title.length >= 3) {
-      getThemesCall({ variables: { domain: 'professional', title } });
-      getTagsCall({ variables: { title } });
-    }
+    getThemesCall({ variables: { domain: 'professional', title, perPage: 5 } });
+    getTagsCall({ variables: { title, perPage: 5 } });
   };
 
   useEffect(() => {
@@ -287,21 +286,16 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   const mediaQueryLG = useMediaQuery('lg');
   const mediaQueryXL = useMediaQuery('xl');
   const mediaQuery2XL = useMediaQuery('2xl');
-  const [text, setText] = useState(String);
+  const [text, setText] = useState('');
 
   const [getThemesCall, getThemesState] = useLazyThemes();
   const [getTagsCall, getTagsState] = useListTags();
 
   const handleThemes = (title: string) => {
     setText(title);
+    getThemesCall({ variables: { domain: 'professional', title, perPage: 5 } });
+    getTagsCall({ variables: { title, perPage: 5 } });
   };
-
-  useEffect(() => {
-    if (text.length >= 3) {
-      getThemesCall({ variables: { domain: 'professional', title: text } });
-      getTagsCall({ variables: { title: text } });
-    }
-  }, [text]);
 
   return !showSearch ? (
     <ParcoursExperienceLayout>
@@ -332,7 +326,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
             />
           </div>
           <div className="w-full">
-            {mediaQueryMD && text.length > 2 && (
+            {mediaQueryMD && text.length !== 0 && (
               <DomainList
                 setTheme={setTheme}
                 theme={theme}
