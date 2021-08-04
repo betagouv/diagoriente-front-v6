@@ -16,6 +16,7 @@ import ProfileRoute from './ProfileContainer/ProfileRoute';
 import TopJobRoute from './TopJobContainer/TopJobRoute';
 import JobsRoute from './JobsContainer/JobsRoute';
 import ImmersionRoute from './ImmersionContainer/ImmersionRoute';
+import ExperienceIntroContainer from './ExperienceContainer/ExperienceIntroContainer';
 
 const RootContainer = () => {
   const { startupEnd, user, setUser } = useRoot();
@@ -36,8 +37,9 @@ const RootContainer = () => {
           <Route path="/metiers" component={JobsRoute} />
           <Route path="/immersion" component={ImmersionRoute} />
           <CenterInterestRoute path="/centres_interet" />
-          <Route exact path="/skill_card" component={SkillCardContainer} />
-          <TopJobRoute path="/top_metiers" />
+          <Route exact path="/mon-cv-competences" component={SkillCardContainer} />
+          <TopJobRoute path="/mon-top-metiers" />
+          <Route path="/ajout-exp" component={ExperienceIntroContainer} />
           <Route exact path="/404" component={PageNotFoundContainer} />
           <Route component={PageNotFoundContainer} />
         </Switch>

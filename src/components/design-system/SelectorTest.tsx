@@ -5,23 +5,14 @@ export type SelectorTestProps = {
   checked: boolean;
   onClick?: (value: boolean) => void;
   color?: string;
-  size?: 'normal' | 'small';
 };
 
-const SelectorTest: FunctionComponent<SelectorTestProps> = ({
-  color,
-  size = 'normal',
-  checked = false,
-  onClick,
-  children,
-  ...rest
-}) => {
+const SelectorTest: FunctionComponent<SelectorTestProps> = ({ color, checked = false, onClick, children, ...rest }) => {
   return (
     <div
       onClick={() => onClick?.call(null, !checked)}
       className={classNames(
-        'group px-6 rounded-md flex items-center border-2 cursor-pointer w-full',
-        size === 'normal' ? 'py-4' : 'py-3',
+        'group px-6 rounded-md flex items-center border-2 cursor-pointer w-full py-4',
         checked
           ? color !== 'yellow'
             ? 'bg-lena-turquoise border-lena-turquoise-dark'

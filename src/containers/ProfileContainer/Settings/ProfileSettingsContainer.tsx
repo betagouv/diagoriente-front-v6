@@ -3,17 +3,21 @@ import { useHistory } from 'react-router-dom';
 import userContext from 'common/contexts/UserContext';
 import { ReactComponent as EditSvg } from 'assets/svg/edit_white.svg';
 import ProfileLayout from '../../../layouts/ProfileLayout/ProfileLayout';
+import useMediaQuery from '../../../hooks/useMediaQuery';
 
 const ProfileSettingsContainer = () => {
   const history = useHistory();
   const { user } = useContext(userContext);
+  const isDesktop = useMediaQuery('md');
 
   return (
     <ProfileLayout>
       <div className="container py-8 flex flex-col space-y-8 items-center">
-        <div className="flex flex-col items-center">
-          <h2 className="font-bold text-lena-blue-dark text-xl">Réglages</h2>
-        </div>
+        {isDesktop && (
+          <div className="flex flex-col items-center">
+            <h2 className="font-bold text-lena-blue-dark text-xl">Réglages</h2>
+          </div>
+        )}
         <div className="w-3/4 flex flex-col space-y-8">
           <div>
             <div className="flex justify-between items-center mb-4">

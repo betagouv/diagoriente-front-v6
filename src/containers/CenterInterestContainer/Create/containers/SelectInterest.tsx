@@ -72,7 +72,6 @@ const FamilyCardForMobile = ({ position, content, onToggleInterest, selectedInte
                 <SelectorTest
                   key={v.id}
                   color="yellow"
-                  size="small"
                   checked={selectedInterests.includes(v.id)}
                   onClick={(value) => onToggleInterest?.call(null, v.id)}
                 >

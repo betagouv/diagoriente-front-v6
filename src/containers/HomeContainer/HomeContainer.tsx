@@ -14,14 +14,14 @@ const HomeContainer = () => {
   const urls = [
     { label: 'Onboarding', url: '/bienvenue' },
     { label: 'Mon profil', url: '/profil' },
-    { label: 'Ma carte de compétences', url: '/skill_card' },
+    { label: 'Ma carte de compétences', url: '/mon-cv-competences' },
     { label: 'Mes expériences', url: '/profil/mes-experiences' },
     { label: 'Ajouter une expérience PRO', url: '/experience/theme-pro' },
     { label: 'Ajouter une expérience PERSO', url: '/experience/theme?type=personal' },
     { label: 'Ajouter une expérience BENEVOLAT', url: '/experience/theme?type=voluntary' },
     { label: "Mes centres d'intérêts", url: '/profil/mes-centres-d-interet/' },
     { label: "Ajouter mes centres d'intérêts", url: '/centres_interet/create' },
-    { label: 'Mon top métiers', url: '/top_metiers' },
+    { label: 'Mon top métiers', url: '/mon-top-metiers' },
     { label: 'Rechercher une immersion', url: '/immersion/recherche' },
   ];
 
