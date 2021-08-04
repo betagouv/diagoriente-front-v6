@@ -63,7 +63,6 @@ interface BoxType {
 }
 
 const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, onAddSkill }: Props) => {
-  console.log('theme in competenece', theme);
   const history = useHistory();
   const mediaQueryMD = useMediaQuery('md');
   const [step, setStep] = useState(0);

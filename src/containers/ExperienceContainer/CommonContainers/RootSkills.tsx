@@ -128,7 +128,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
 
   useEffect(() => {
     if (addSkillState.data) {
-      history.push(`/experience/theme/${match.params.id}/sommaire?type=${dataTheme?.theme.domain}`);
+      history.push(`/experience/${match.params.id}/sommaire?type=${dataTheme?.theme.domain}`);
     }
   }, [addSkillState.data]);
 
