@@ -24,7 +24,7 @@ const MyInterestsContainer: FunctionComponent = () => {
         </div>
         {myInterestsState.loading && <AppLoader />}
         {myInterestsState.data && (
-          <div className="divide-y divide-lena-blue-alt-light md:grid md:grid-cols-2 md:gap-4 md:px-48">
+          <div className="divide-y divide-lena-blue-alt-light md:grid lg:grid-cols-2 md:gap-4 lg:px-48">
             <InterestItem title="Gérer le marketing et piloter l’image" id="123" />
             <InterestItem title="Concevoir des contenus, des supports de communication" id="123" />
             <InterestItem title="Créer un projet entrepeunarial" id="123" />

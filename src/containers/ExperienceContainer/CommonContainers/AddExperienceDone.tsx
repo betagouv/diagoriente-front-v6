@@ -76,7 +76,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
   };
 
   const RenderBox = ({ title, competences }: PropsBox) => (
-    <div className="rounded mt-3 mb-3 mx-1 p-2 md:w-45p" style={{ backgroundColor: '#F3F2F4', height: 'fit-content' }}>
+    <div className="rounded p-4 bg-lena-lightgray">
       <div className="flex items-center mb-3">
         <img src={renderLogo(title)} alt="logo" />
         <p className="text-black ml-4 font-bold">{renderTitle(title)}</p>
@@ -151,7 +151,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
             <p className="ml-2">Comment sont définis les niveaux ?</p>
           </div>
           <div className="flex justify-center py-8">
-            <div className="flex flex-col md:flex-row flex-wrap justify-between">
+            <div className="grid xl:grid-cols-2 gap-2">
               {Object.keys(groupedCmp).map((key) => (
                 <RenderBox title={key} competences={groupedCmp[key]} />
               ))}

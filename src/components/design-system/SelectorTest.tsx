@@ -43,7 +43,7 @@ const SelectorTest: FunctionComponent<SelectorTestProps> = ({
           )}
           {...rest}
         />
-        <div className={classNames(checked && 'text-lena-black font-bold')}>{children}</div>
+        <div>{children}</div>
       </div>
     </div>
   );

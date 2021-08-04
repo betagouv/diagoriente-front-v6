@@ -81,9 +81,9 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
           <span className="text-lena-blue-dark font-bold text-sm text-center">{title}</span>
         </div>
         <div className="m-5 md:font-bold text-lena-blue-dark text-center">
-          Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title} :
+          Sélectionnez la phrase qui décrit le mieux vos compétences en {theme?.title}&nbsp;:
         </div>
-        <div className="pb-20 w-full">
+        <div className="pb-20 xl:w-2/3 2xl:w-1/2">
           {questions.map((q) => (
             <div className="mt-3 mb-3 p-3 w-full">
               <SelectorTest key={q.id} onClick={() => onSelectQuestion(q.id)} checked={isExist(q.id)}>
