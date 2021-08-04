@@ -62,6 +62,7 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
       </div>
       {domains.map((t) => (
         <div
+          key={t.id}
           onClick={() => onSelect.call(null, t)}
           className="cursor-pointer px-5 py-2 divide-y divide-lena-lightgray2 border-b border-lena-lightgray2"
         >
@@ -132,8 +133,8 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
 
   const handleThemes = (title: string) => {
     setText(title);
-    getThemesCall({ variables: { domain: 'professional', title } });
-    getTagsCall({ variables: { title } });
+    getThemesCall({ variables: { domain: 'professional', title, perPage: 5 } });
+    getTagsCall({ variables: { title, perPage: 5 } });
   };
 
   useEffect(() => {
