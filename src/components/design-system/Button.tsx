@@ -39,12 +39,13 @@ const Button: FunctionComponent<ButtonProps> = ({
   ...rest
 }) => {
   const classes = classNames([
-    'md:rounded font-bold focus:outline-none focus:ring-0',
+    'font-bold focus:outline-none focus:ring-0',
     'disabled:cursor-default disabled:opacity-50',
     variant && variants[variant],
     sizes[size],
     fullWidth && 'w-full',
-    mobileStacked && 'fixed bottom-0 left-0 right-0 w-full md:w-auto md:static',
+    mobileStacked && 'fixed bottom-0 left-0 right-0 w-full md:w-auto md:static md:rounded',
+    !mobileStacked && 'rounded',
   ]);
   return (
     <button className={classes} {...rest}>
