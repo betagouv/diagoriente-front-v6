@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect, useRef, useState } from 'react';
+import React, { FunctionComponent, useContext, useEffect, useRef, useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import SearchSvg from 'assets/images/svg/picto/search.svg';
@@ -9,8 +9,8 @@ import HelpLightSvg from 'assets/images/svg/picto/help_light.svg';
 import classNames from 'common/utils/classNames';
 
 import useMediaQuery from 'hooks/useMediaQuery';
-import { useLazyThemes } from 'common/requests/themes';
-import { Tag, Theme } from 'common/requests/types';
+import { ThemeListItem, useLazyThemes } from 'common/requests/themes';
+import { Tag, TagList, Theme } from 'common/requests/types';
 import { useListTags } from 'common/requests/tags';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
@@ -74,10 +74,10 @@ const SearchJobTag: FunctionComponent<JobTag> = ({ domains, onSelect, children }
 };
 
 type JobDomain = {
-  job: Theme;
+  job: ThemeListItem;
   idActive?: string;
-  onActive: (e: string | undefined) => void;
-  onSelect: (job: Theme) => void;
+  onActive: (e?: string) => void;
+  onSelect: (job: ThemeListItem) => void;
   text: string;
 };
 
@@ -117,25 +117,26 @@ const SearchJobDomain: FunctionComponent<JobDomain> = ({ job, idActive, onActive
 type SearchProps = {
   open: boolean;
   onClose: () => void;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  setTheme: (theme: ThemeListItem) => void;
+  theme: ThemeListItem;
+  themes: ThemeListItem[];
+  tags: Tag[];
+  handleThemes: (text: string) => void;
+  text: string;
 };
 
-const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setTheme }) => {
+const WIPSearchTheme: FunctionComponent<SearchProps> = ({
+  open,
+  onClose,
+  setTheme,
+  text,
+  handleThemes,
+  themes,
+  tags,
+}) => {
   const history = useHistory();
   const inputRef = useRef<any>(null);
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
-
-  const [text, setText] = useState(String);
-
-  const [getThemesCall, getThemesState] = useLazyThemes();
-  const [getTagsCall, getTagsState] = useListTags();
-
-  const handleThemes = (title: string) => {
-    setText(title);
-    getThemesCall({ variables: { domain: 'professional', title, perPage: 5 } });
-    getTagsCall({ variables: { title, perPage: 5 } });
-  };
 
   useEffect(() => {
     if (open) {
@@ -144,7 +145,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
   }, [open]);
 
   // TODO: pass job object
-  const handleSelectJob = (job: Theme) => {
+  const handleSelectJob = (job: ThemeListItem) => {
     setTheme(job);
     if (job) {
       history.push(`${job?.id}/domaine?type=${job.domain}`);
@@ -178,19 +179,18 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
             <strong>Métiers</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2">
-            {getThemesState &&
-              getThemesState.data?.themes.data.map((domain) => (
-                <SearchJobDomain
-                  onActive={(e: string | undefined) => setDomainHelp(e)}
-                  idActive={domainHelp}
-                  key={domain.id}
-                  job={domain}
-                  onSelect={handleSelectJob}
-                  text={text}
-                >
-                  {renderTitle(domain.title, text)}
-                </SearchJobDomain>
-              ))}
+            {themes.map((domain) => (
+              <SearchJobDomain
+                onActive={(e: string | undefined) => setDomainHelp(e)}
+                idActive={domainHelp}
+                key={domain.id}
+                job={domain}
+                onSelect={handleSelectJob}
+                text={text}
+              >
+                {renderTitle(domain.title, text)}
+              </SearchJobDomain>
+            ))}
           </div>
         </div>
         <div>
@@ -198,12 +198,11 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
             <strong>Tags</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2 px-8">
-            {getTagsState &&
-              getTagsState.data?.tags.data.map((domain) => (
-                <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
-                  {renderTitle(domain.title, text)}
-                </SearchJobTag>
-              ))}
+            {tags.map((domain) => (
+              <SearchJobTag key={domain.id} id={domain.id} domains={domain.themes} onSelect={handleSelectJob}>
+                {renderTitle(domain.title, text)}
+              </SearchJobTag>
+            ))}
           </div>
         </div>
       </div>
@@ -212,19 +211,16 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({ open, onClose, setThem
 };
 
 type DomainListProps = {
-  data: Theme[] | undefined;
-  tags: Tag[] | undefined;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  data: ThemeListItem[];
+  tags: Tag[];
   text: string;
 };
 
-const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, text }) => {
+const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, text }) => {
   const history = useHistory();
   const [domainHelp, setDomainHelp] = useState<string | undefined>(undefined);
   // TODO: pass job object
-  const handleSelectJob = (job: Theme) => {
-    setTheme(job);
+  const handleSelectJob = (job: ThemeListItem) => {
     if (job) {
       history.push(`${job?.id}/domaine?type=${job.domain}`);
     }
@@ -277,8 +273,8 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, setTheme, 
   );
 };
 type SelectionProps = {
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  setTheme: (theme: ThemeListItem) => void;
+  theme: ThemeListItem;
 };
 const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   const [showSearch, setShowSearch] = useState(false);
@@ -290,6 +286,16 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
 
   const [getThemesCall, getThemesState] = useLazyThemes();
   const [getTagsCall, getTagsState] = useListTags();
+
+  const themes = useMemo(() => {
+    if (getThemesState.data) return getThemesState.data.themes.data;
+    return [];
+  }, [getThemesState.data]);
+
+  const tags = useMemo(() => {
+    if (getTagsState.data) return getTagsState.data.tags.data;
+    return [];
+  }, [getTagsState.data]);
 
   const handleThemes = (title: string) => {
     setText(title);
@@ -326,21 +332,22 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
             />
           </div>
           <div className="w-full">
-            {mediaQueryMD && text.length !== 0 && (
-              <DomainList
-                setTheme={setTheme}
-                theme={theme}
-                tags={getTagsState.data?.tags.data}
-                data={getThemesState.data?.themes.data}
-                text={text}
-              />
-            )}
+            {mediaQueryMD && text.length !== 0 && <DomainList tags={tags} data={themes} text={text} />}
           </div>
         </div>
       </div>
     </ParcoursExperienceLayout>
   ) : (
-    <WIPSearchTheme open={showSearch} setTheme={setTheme} theme={theme} onClose={() => setShowSearch(false)} />
+    <WIPSearchTheme
+      themes={themes}
+      tags={tags}
+      text={text}
+      handleThemes={handleThemes}
+      open={showSearch}
+      setTheme={setTheme}
+      theme={theme}
+      onClose={() => setShowSearch(false)}
+    />
   );
 };
 

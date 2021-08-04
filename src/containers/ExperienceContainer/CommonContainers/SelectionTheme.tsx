@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
-import { useLazyTheme } from 'common/requests/themes';
+import { useLazyThemes, useLazyTheme, ThemeListItem } from 'common/requests/themes';
+import { useDidMount } from 'common/hooks/useLifeCycle';
 import { isEmpty } from 'lodash';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
 import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.svg';
@@ -19,27 +20,22 @@ import translateExperienceType from '../../../utils/translateExperienceType';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
-  data: Theme[] | undefined;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  data: ThemeListItem[] | undefined;
 };
 type WebChoiceDomainProps = {
-  data: Theme[] | undefined;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
-};
-type SelectionProps = {
-  data: Theme[] | undefined;
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  data: ThemeListItem[] | undefined;
 };
 
-const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDomainProps) => {
+const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   const history = useHistory();
-  const [selectedDomain, setSelectedDomain] = useState<Theme>();
+  const [selectedDomain, setSelectedDomain] = useState<Omit<Theme, 'activities'> | null>(null);
   const [activeDomain, setActiveDomain] = useState(String);
   const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
-
+  useEffect(() => {
+    if (selectedDomain) {
+      localStorage.setItem('theme', selectedDomain?.id);
+    }
+  }, [selectedDomain]);
   const controlSelected = (dataSelected: any) => {
     if (activeDomain === dataSelected.id && selectedDomain?.id === dataSelected.id) {
       setSelectedDomain(dataSelected);
@@ -50,13 +46,12 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
       themeCall({ variables: { id: dataSelected.id } });
     } else {
       setActiveDomain('');
-      setSelectedDomain(undefined);
+      setSelectedDomain(null);
     }
   };
   const handleValidate = () => {
     if (selectedDomain) {
-      setTheme(selectedDomain);
-      if (theme) {
+      if (selectedDomain) {
         history.push(`${activeDomain}/date?type=${selectedDomain.domain}`);
       }
     }
@@ -120,16 +115,20 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
   );
 };
 
-const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
+const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   const history = useHistory();
-
+  const [selectedTheme, setSelectedTheme] = useState<Omit<Theme, 'activities'> | null>(null);
+  useEffect(() => {
+    if (selectedTheme) {
+      localStorage.setItem('theme', selectedTheme?.id);
+    }
+  }, [selectedTheme]);
   const controlSelected = (dataSelected: any) => {
-    setTheme(dataSelected);
+    setSelectedTheme(dataSelected);
   };
   const handleNext = () => {
-    setTheme(theme);
-    if (theme) {
-      history.push(`${theme?.id}/date?type=${theme.domain}`);
+    if (selectedTheme) {
+      history.push(`${selectedTheme?.id}/date?type=${selectedTheme.domain}`);
     }
   };
   return (
@@ -138,10 +137,11 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
         <div className="flex flex-wrap mt-10 justify-start">
           {data?.map((f) => (
             <button
+              key={f.id}
               onClick={() => controlSelected(f)}
               className={classNames(
                 'rounded-xl m-2 cursor-pointer border-4 focus:ring-0 focus:outline-none w-logoExp h-logoExp justify-center',
-                theme && theme?.id === f.id
+                selectedTheme?.id === f.id
                   ? 'bg-lena-blue-light border-lena-blue-inter'
                   : 'hover:bg-lena-turquoise-light border-transparent',
               )}
@@ -168,10 +168,10 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
         className={classNames(
           `focus:ring-0 focus:outline-none w-full bg-lena-blue
           text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`,
-          isEmpty(theme) && 'bg-gray-300',
+          isEmpty(selectedTheme) && 'bg-gray-300',
         )}
         onClick={handleNext}
-        disabled={isEmpty(theme)}
+        disabled={isEmpty(selectedTheme)}
       >
         Valider
       </button>
@@ -179,12 +179,18 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
   );
 };
 
-const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
+const SelectionTheme = () => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
+
   const mediaQueryMD = useMediaQuery('md');
   const location = useLocation();
   const params = decodeUri(location.search);
-
+  const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only' });
+  useDidMount(() => {
+    if (params.type) {
+      loadThemes({ variables: { domain: params.type as 'personal' | 'professional' | 'voluntary' } });
+    }
+  });
   return !showMobileChoice ? (
     <ParcoursExperienceLayout>
       <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
@@ -195,7 +201,7 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
                 Sélectionnez le domaine de l’expérience {translateExperienceType(params.type).singular} que vous
                 souhaitez ajouter :
               </h2>
-              <WebDomainDisplay data={data} theme={theme} setTheme={setTheme} />
+              <WebDomainDisplay data={stateLoadTheme.data?.themes.data} />
             </div>
           ) : (
             <>
@@ -230,7 +236,7 @@ const SelectionTheme = ({ data, theme, setTheme }: SelectionProps) => {
       </div>
     </ParcoursExperienceLayout>
   ) : (
-    <MobileChoiceDomain onClose={() => setShowMobileChoice(false)} data={data} theme={theme} setTheme={setTheme} />
+    <MobileChoiceDomain onClose={() => setShowMobileChoice(false)} data={stateLoadTheme.data?.themes.data} />
   );
 };
 

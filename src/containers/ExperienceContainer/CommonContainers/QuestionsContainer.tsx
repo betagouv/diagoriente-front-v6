@@ -8,7 +8,7 @@ import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursE
 import classNames from 'common/utils/classNames';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
   levels: string[];
   setLevels: (levels: string[]) => void;
 }
@@ -35,7 +35,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
   const history = useHistory();
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState('');
-  const typesQuestion = groupBy(theme.levels, 'type');
+  const typesQuestion = groupBy(theme?.levels, 'type');
   const isExist = (value: string) => {
     const res = levels.includes(value);
     return res;
@@ -59,7 +59,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
       setStep(step + 1);
       setSelected('');
     } else {
-      history.push(`/experience/theme/${theme.id}/questions?type=${theme.domain}`);
+      history.push(`/experience/${theme?.id}/questions?type=${theme?.domain}`);
     }
   };
   const RendQuestionStep = ({ title, questions }: QuestionType) => {

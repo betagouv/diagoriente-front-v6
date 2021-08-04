@@ -15,7 +15,7 @@ import useMediaQuery from 'hooks/useMediaQuery';
 
 interface Props {
   competencesValues: string[];
-  theme: Theme;
+  theme: Theme | undefined;
   data: SkillAddResponse | undefined | null;
 }
 interface PropsBox {

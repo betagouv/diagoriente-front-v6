@@ -7,7 +7,7 @@ import { useDidMount } from 'common/hooks/useLifeCycle';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 
 interface Props {
-  theme: Theme;
+  theme: Theme | undefined;
 }
 
 const DomainSelect = ({ theme }: Props) => {
@@ -32,7 +32,7 @@ const DomainSelect = ({ theme }: Props) => {
         <div className="flex flex-col space-y-4 items-center justify-start w-full">
           <div className="text-lena-blue-dark mt-20">Vous avez sélectionné le domaine :</div>
           <div className="bg-lena-blue-lightest font-bold md:w-auto md:px-24 w-full text-center py-3 rounded-md">
-            <span className="text-lena-blue-dark font-bold">{theme.title}</span>
+            <span className="text-lena-blue-dark font-bold">{theme?.title}</span>
           </div>
           {themeState.data && themeState.data?.theme.activities.length > 0 && (
             <ul className="list-disc list-inside">
