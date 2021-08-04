@@ -26,14 +26,15 @@ const AppHeader: FunctionComponent = () => {
     <div>
       <header
         className={`bg-white flex flex-row items-center justify-between px-4
-      md:px-16 py-4 space-x-4 shadow-md sticky top-0 z-50`}
+      md:px-8 py-4 space-x-4 shadow-md sticky top-0 z-50`}
+        style={{ height: 58 }}
       >
-        <div className="flex flex-row items-center justify-center space-x-4">
+        <div className="flex flex-row items-center justify-center space-x-6">
           <Link to="/">
-            <img src={LogoDiagoriente} alt="Logo de Diagoriente" className="h-8" />
+            <img src={LogoDiagoriente} alt="Logo de Diagoriente" style={{ width: 155, height: 37 }} />
           </Link>
-          <img src={RepubliqueSvg} alt="Logo de la République Française" className="h-8" />
-          <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" className="h-4 md:h-6" />
+          <img src={RepubliqueSvg} alt="Logo de la République Française" style={{ width: 68, height: 36 }} />
+          <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" style={{ width: 80, height: 14 }} />
         </div>
         <div>
           {user && (
