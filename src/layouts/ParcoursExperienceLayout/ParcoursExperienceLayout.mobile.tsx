@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useState, useRef, useEffect } from 'react';
+import React, { FunctionComponent, useState, useRef, useEffect, useContext } from 'react';
+import ThemeContext from 'common/contexts/ThemeContext';
 import { useLocation, Link } from 'react-router-dom';
 import useOnclickOutside from 'common/hooks/useOnclickOutside';
-
 import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
 import { ReactComponent as StarSvg } from 'assets/svg/star_m.svg';
 import { ReactComponent as HeartSvg } from 'assets/svg/heart_m.svg';
@@ -16,7 +16,8 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const step = location.pathname.split('/').pop();
-  const params = decodeUri(location.search);
+  const { theme } = useContext(ThemeContext);
+
   const renderStep = () => {
     let title = '';
     let ind = 0;
@@ -57,8 +58,8 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
   };
   const renderTitleExp = () => {
     let title = '';
-    if (params.type) {
-      switch (params.type) {
+    if (theme) {
+      switch (theme.domain) {
         case 'personal': {
           title = 'EXPÉRIENCE PERSO';
           break;

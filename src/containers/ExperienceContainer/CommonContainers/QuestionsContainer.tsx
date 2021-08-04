@@ -59,7 +59,7 @@ const QuestionsContainer = ({ theme, setLevels, levels }: Props) => {
       setStep(step + 1);
       setSelected('');
     } else {
-      history.push(`/experience/${theme?.id}/questions?type=${theme?.domain}`);
+      history.push(`/experience/${theme?.id}/questions`);
     }
   };
   const RendQuestionStep = ({ title, questions }: QuestionType) => {

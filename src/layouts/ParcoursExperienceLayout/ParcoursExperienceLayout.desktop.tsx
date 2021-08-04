@@ -1,4 +1,5 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useContext } from 'react';
+import ThemeContext from 'common/contexts/ThemeContext';
 import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
@@ -18,6 +19,7 @@ interface PropsBox {
 
 const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => {
   const location = useLocation();
+  const { theme } = useContext(ThemeContext);
   const params = decodeUri(location.search);
   const step = location.pathname.split('/').pop();
   const steps = ['Métier', 'Date', 'Activités', 'Caracteristiques', 'Competences'];
@@ -27,13 +29,13 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   }, []);
   const path = () => {
     let text = '';
-    if (params.type) {
-      switch (params.type) {
+    if (theme) {
+      switch (theme.domain) {
         case 'professional': {
           text = 'professionnelles';
           break;
         }
-        case 'personnel': {
+        case 'personal': {
           text = 'personnelles';
           break;
         }
@@ -65,7 +67,7 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
       case 'professional': {
         return <PictoExpPro className="w-12 h-12 xl:w-16 xl:h-16" />;
       }
-      case 'personnel': {
+      case 'personal': {
         return <PictoExpPerso className="w-12 h-12 xl:w-16 xl:h-16" />;
       }
       case 'voluntary': {

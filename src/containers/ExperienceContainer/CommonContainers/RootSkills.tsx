@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { RouteComponentProps, Route, Switch, useHistory } from 'react-router-dom';
-import { Theme, Activity, ThemeDomain } from 'common/requests/types';
+import { Theme, Activity } from 'common/requests/types';
 import { decodeUri } from 'common/utils/url';
-import { isEmpty } from 'lodash';
 import { useWillUnmount } from 'common/hooks/useLifeCycle';
-import { useLazyThemes, useTheme } from 'common/requests/themes';
+import { useTheme } from 'common/requests/themes';
 import moment from 'moment';
 import { useSkill, useAddSkill } from 'common/requests/skills';
 
@@ -34,37 +33,12 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [yearEnd, setYearEnd] = useState('');
   const params = decodeUri(location.search);
 
-  const theme = useMemo(() => {
+  const themeSelected = useMemo(() => {
     if (dataTheme) return dataTheme.theme;
     return null;
   }, [dataTheme]);
 
   const [callSkill, skillsState] = useSkill();
-
-  const renderType = () => {
-    let type = '';
-    if (params.type) {
-      switch (params.type) {
-        case 'professional': {
-          type = 'professional';
-          break;
-        }
-        case 'personal': {
-          type = 'personal';
-          break;
-        }
-        case 'voluntary': {
-          type = 'voluntary';
-          break;
-        }
-        default: {
-          type = 'personal';
-          break;
-        }
-      }
-    }
-    return type;
-  };
 
   useEffect(() => {
     if (selectedSkillId) callSkill({ variables: { id: selectedSkillId } });
@@ -94,22 +68,6 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     // eslint-disable-next-line
   }, [activities, match.params.id]);
 
-  /* useEffect(() => {
-    const d = localStorage.getItem('theme');
-    if (d && !selectedSkillId) {
-      const themeData = JSON.parse(d);
-      setTheme(themeData.id === match.params.id ? themeData : {});
-    }
-    // eslint-disable-next-line
-  }, [match.params.id]);
-
-  useEffect(() => {
-    if (!isEmpty(theme)) {
-      localStorage.setItem('theme', JSON.stringify(theme));
-    }
-    // eslint-disable-next-line
-  }, [theme, match.params.id]); */
-
   useEffect(() => {
     const d = localStorage.getItem('levels');
     if (d && !selectedSkillId) {
@@ -126,15 +84,9 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     // eslint-disable-next-line
   }, [levels]);
 
-  /* useEffect(() => {
-    if (params.type && params.type !== 'professional') {
-      loadThemes({ variables: { domain: renderType() as ThemeDomain } });
-    }
-  }, [params.type]); */
-
   useEffect(() => {
     if (addSkillState.data) {
-      history.push(`/experience/${match.params.id}/sommaire?type=${dataTheme?.theme.domain}`);
+      history.push(`/experience/${match.params.id}/sommaire`);
     }
   }, [addSkillState.data]);
 
@@ -174,15 +126,19 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     }
   };
 
-  if (!theme && called) return <PageNotFoundContainer />;
-  if (!theme) return <div />;
+  if (!themeSelected && called) return <PageNotFoundContainer />;
+  if (!themeSelected) return <div />;
 
   return (
     <Switch>
-      <Route exact path="/experience/:id/domaine" render={(props) => <DomainSelect {...props} theme={theme} />} />
       <Route
         exact
-        path="/experience/theme/:id/activite"
+        path="/experience/:id/domaine"
+        render={(props) => <DomainSelect {...props} theme={themeSelected} />}
+      />
+      <Route
+        exact
+        path="/experience/:id/activite"
         render={(props) => (
           <ActiviteContainer
             theme={dataTheme?.theme}
@@ -194,19 +150,19 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
-      <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={theme} />} />
+      <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={themeSelected} />} />
       <Route
         exact
         path="/experience/:id/question"
-        render={() => <QuestionXPContainer theme={theme} levels={levels} setLevels={setLevels} />}
+        render={() => <QuestionXPContainer theme={themeSelected} levels={levels} setLevels={setLevels} />}
       />
-      <Route exact path="/experience/:id/questions" render={() => <DoneQuestions theme={theme} />} />
+      <Route exact path="/experience/:id/questions" render={() => <DoneQuestions theme={themeSelected} />} />
       <Route
         exact
         path="/experience/:id/competences"
         render={() => (
           <CompetenceContainer
-            theme={theme}
+            theme={themeSelected}
             competencesValues={competencesValues}
             setCompetencesValues={setCompetencesValues}
             onAddSkill={onAddSkill}
@@ -218,7 +174,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         path="/experience/:id/date"
         render={() => (
           <DateContainer
-            theme={theme}
+            theme={themeSelected}
             monthStart={monthStart}
             setMonthStart={setMonthStart}
             yearStart={yearStart}
@@ -234,7 +190,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         exact
         path="/experience/:id/sommaire"
         render={() => (
-          <SommaireContainer theme={theme} competencesValues={competencesValues} data={addSkillState.data} />
+          <SommaireContainer theme={themeSelected} competencesValues={competencesValues} data={addSkillState.data} />
         )}
       />
     </Switch>

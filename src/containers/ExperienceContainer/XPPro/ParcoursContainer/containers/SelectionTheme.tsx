@@ -148,7 +148,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({
   const handleSelectJob = (job: ThemeListItem) => {
     setTheme(job);
     if (job) {
-      history.push(`${job?.id}/domaine?type=${job.domain}`);
+      history.push(`${job?.id}/domaine`);
     }
   };
 
@@ -222,7 +222,7 @@ const DomainList: FunctionComponent<DomainListProps> = ({ data, tags, text }) =>
   // TODO: pass job object
   const handleSelectJob = (job: ThemeListItem) => {
     if (job) {
-      history.push(`${job?.id}/domaine?type=${job.domain}`);
+      history.push(`${job?.id}/domaine`);
     }
   };
   return (
