@@ -22,7 +22,7 @@ const DomainSelect = ({ theme }: Props) => {
 
   const handleNextStep = () => {
     if (theme) {
-      history.push(`/experience/theme/${theme?.id}/activite?type=${theme.domain}`);
+      history.push(`/experience/theme/${theme?.id}/date?type=${theme.domain}`);
     }
   };
 

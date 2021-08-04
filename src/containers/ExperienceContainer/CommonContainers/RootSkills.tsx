@@ -147,6 +147,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
       levels: string[];
       startDate?: string;
       endDate?: string;
+      extraActivity?: string;
     } = {
       theme: theme?.id,
       activities: activities.map((act) => act.id),
@@ -160,6 +161,9 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     if (monthEnd && yearEnd) {
       const sE = moment(`01-${monthEnd}-${yearEnd}`).toISOString();
       dataToSend.endDate = sE;
+    }
+    if (extraAct) {
+      dataToSend.extraActivity = extraAct;
     }
     addSkillCall({ variables: { ...dataToSend } });
   };
