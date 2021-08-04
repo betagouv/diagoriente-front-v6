@@ -65,13 +65,7 @@ const MyExperiencesContainer: FunctionComponent = () => {
 
   return (
     <ProfileLayout>
-      <div className="container flex flex-col space-y-8 py-4 md:py-8">
-        {!isDesktop && (
-          <Link to="/profil" className="flex items-center mb-5 focus:ring-0 focus:outline-none">
-            <ArrowLeftSvg />
-            <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
-          </Link>
-        )}
+      <div className="container flex flex-col space-y-8 py-8">
         <div className="flex flex-col items-center justify-center space-y-2">
           <StarIcon height={25} />
           <h2 className="font-bold text-lena-blue-dark text-lg uppercase">Mes expériences</h2>
