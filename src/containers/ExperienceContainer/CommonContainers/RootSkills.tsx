@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { RouteComponentProps, Route, Switch, useHistory } from 'react-router-dom';
 import { Theme, Activity, ThemeDomain } from 'common/requests/types';
 import { decodeUri } from 'common/utils/url';
@@ -16,12 +16,13 @@ import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
 
+import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
 
 const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) => {
   const history = useHistory();
   const { skill: selectedSkillId } = decodeUri(location.search);
-  const { data: dataTheme, loading } = useTheme({ variables: { id: match.params.id } });
+  const { data: dataTheme, loading, called } = useTheme({ variables: { id: match.params.id } });
   const [addSkillCall, addSkillState] = useAddSkill();
   const [activities, setActivities] = useState([] as Activity[]);
   const [levels, setLevels] = useState<string[]>([]);
@@ -32,6 +33,11 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [monthEnd, setMonthEnd] = useState('Janvier');
   const [yearEnd, setYearEnd] = useState('');
   const params = decodeUri(location.search);
+
+  const theme = useMemo(() => {
+    if (dataTheme) return dataTheme.theme;
+    return null;
+  }, [dataTheme]);
 
   const [callSkill, skillsState] = useSkill();
 
@@ -168,13 +174,12 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
     }
   };
 
+  if (!theme && called) return <PageNotFoundContainer />;
+  if (!theme) return <div />;
+
   return (
     <Switch>
-      <Route
-        exact
-        path="/experience/:id/domaine"
-        render={(props) => <DomainSelect {...props} theme={dataTheme?.theme} />}
-      />
+      <Route exact path="/experience/:id/domaine" render={(props) => <DomainSelect {...props} theme={theme} />} />
       <Route
         exact
         path="/experience/theme/:id/activite"
@@ -189,19 +194,19 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
-      <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={dataTheme?.theme} />} />
+      <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={theme} />} />
       <Route
         exact
         path="/experience/:id/question"
-        render={() => <QuestionXPContainer theme={dataTheme?.theme} levels={levels} setLevels={setLevels} />}
+        render={() => <QuestionXPContainer theme={theme} levels={levels} setLevels={setLevels} />}
       />
-      <Route exact path="/experience/:id/questions" render={() => <DoneQuestions theme={dataTheme?.theme} />} />
+      <Route exact path="/experience/:id/questions" render={() => <DoneQuestions theme={theme} />} />
       <Route
         exact
         path="/experience/:id/competences"
         render={() => (
           <CompetenceContainer
-            theme={dataTheme?.theme}
+            theme={theme}
             competencesValues={competencesValues}
             setCompetencesValues={setCompetencesValues}
             onAddSkill={onAddSkill}
@@ -213,7 +218,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         path="/experience/:id/date"
         render={() => (
           <DateContainer
-            theme={dataTheme?.theme}
+            theme={theme}
             monthStart={monthStart}
             setMonthStart={setMonthStart}
             yearStart={yearStart}
@@ -229,7 +234,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
         exact
         path="/experience/:id/sommaire"
         render={() => (
-          <SommaireContainer theme={dataTheme?.theme} competencesValues={competencesValues} data={addSkillState.data} />
+          <SommaireContainer theme={theme} competencesValues={competencesValues} data={addSkillState.data} />
         )}
       />
     </Switch>

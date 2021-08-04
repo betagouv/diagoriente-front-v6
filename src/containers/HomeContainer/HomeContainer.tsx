@@ -16,7 +16,7 @@ const HomeContainer = () => {
     { label: 'Mon profil', url: '/profil' },
     { label: 'Ma carte de compétences', url: '/skill_card' },
     { label: 'Mes expériences', url: '/profil/mes-experiences' },
-    { label: 'Ajouter une expérience PRO', url: '/experience/theme?type=professional' },
+    { label: 'Ajouter une expérience PRO', url: '/experience/theme-pro' },
     { label: 'Ajouter une expérience PERSO', url: '/experience/theme?type=personal' },
     { label: 'Ajouter une expérience BENEVOLAT', url: '/experience/theme?type=voluntary' },
     { label: "Mes centres d'intérêts", url: '/profil/mes-centres-d-interet/' },

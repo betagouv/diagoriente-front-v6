@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Theme } from 'common/requests/types';
-import { useLazyThemes, useLazyTheme } from 'common/requests/themes';
+import { useLazyThemes, useLazyTheme, ThemeListItem } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { isEmpty } from 'lodash';
 import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
@@ -20,14 +20,10 @@ import translateExperienceType from '../../../utils/translateExperienceType';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
-  data: Theme[] | undefined;
+  data: ThemeListItem[] | undefined;
 };
 type WebChoiceDomainProps = {
-  data: Theme[] | undefined;
-};
-type SelectionProps = {
-  setTheme: (theme: Theme) => void;
-  theme: Theme;
+  data: ThemeListItem[] | undefined;
 };
 
 const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
@@ -141,6 +137,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
         <div className="flex flex-wrap mt-10 justify-start">
           {data?.map((f) => (
             <button
+              key={f.id}
               onClick={() => controlSelected(f)}
               className={classNames(
                 'rounded-xl m-2 cursor-pointer border-4 focus:ring-0 focus:outline-none w-logoExp h-logoExp justify-center',
@@ -182,7 +179,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   );
 };
 
-const SelectionTheme = ({ theme, setTheme }: SelectionProps) => {
+const SelectionTheme = () => {
   const [showMobileChoice, setShowMobileChoice] = useState(false);
 
   const mediaQueryMD = useMediaQuery('md');
