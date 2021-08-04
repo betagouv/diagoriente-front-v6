@@ -9,6 +9,7 @@ import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.sv
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
+import { capitalizeFirstLetter } from 'common/utils/capitalize';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ReactTooltip from 'react-tooltip';
@@ -76,7 +77,7 @@ const MobileChoiceDomain = ({ onClose, setTheme, theme, data }: MobileChoiceDoma
               >
                 <LoveWhiteSvg />
                 <p className={classNames('ml-6 text-base truncate', selectedDomain?.id === d.id && 'font-bold')}>
-                  {d.title.replaceAll('/', ',')}
+                  {capitalizeFirstLetter(d.title.replaceAll('/', ','))}
                 </p>
                 {selectedDomain?.id === d.id && (
                   <div className="absolute right-4 ">
@@ -148,7 +149,7 @@ const WebDomainDisplay = ({ data, theme, setTheme }: WebChoiceDomainProps) => {
             >
               <div className="flex flex-col items-center">
                 <LoveWhiteSvg />
-                <span className="block mt-5">{f.title}</span>
+                <span className="block mt-5">{capitalizeFirstLetter(f.title)}</span>
               </div>
               <ReactTooltip id={f.id} place="right" type="light" effect="solid">
                 <ul className="list-disc text-left">

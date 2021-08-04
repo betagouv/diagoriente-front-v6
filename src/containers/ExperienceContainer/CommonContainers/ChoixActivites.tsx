@@ -12,9 +12,9 @@ import SaveButtonComponent from 'components/design-system/SaveButton';
 import classNames from 'common/utils/classNames';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import AppLoader from 'components/ui/AppLoader';
+import AddNewActivityModal from './Modals/AddNewActivity';
 
 type NewActivity = {
-  onSend: (e: string) => void;
   onClose: () => void;
   extraAct: string;
   setExtraAct: (s: string) => void;
@@ -28,10 +28,9 @@ interface Props {
   setExtraAct: (s: string) => void;
 }
 
-const AddNewActivity = ({ onSend, onClose, extraAct, setExtraAct }: NewActivity) => {
+const AddNewActivity = ({ onClose, extraAct, setExtraAct }: NewActivity) => {
   const handleSend = () => {
     if (extraAct.length > 0) {
-      onSend.call(null, extraAct);
       onClose.call(null);
     }
   };
@@ -79,6 +78,8 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
   const [activitiesChecked, setActivitiesChecked] = useState<Array<any>>(activities);
   const [todoRenameActivities, setTodoRenameActivities] = useState<Activity[]>([]);
   const [showNewActivity, setShowNewActivity] = useState(false);
+  const [showNewActivityMobile, setShowNewActivityMobile] = useState(false);
+
   const [themeCall, themeState] = useLazyTheme({ fetchPolicy: 'network-only' });
 
   const mediaQueryMD = useMediaQuery('md');
@@ -109,14 +110,6 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
     }
   };
 
-  const handleAddNewActivity = (value: string) => {
-    // TODO find a new logic for this ...
-    const newId = uniqueId('local-');
-    const data = { id: newId, title: value, description: '', extra: true };
-    setTodoRenameActivities([...todoRenameActivities, data]);
-    setActivitiesChecked([...activitiesChecked, data]);
-  };
-
   const handleValidateActivites = () => {
     if (activitiesChecked.length !== 0) {
       if (params.id && query) {
@@ -125,10 +118,9 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
       setActivities(activitiesChecked);
     }
   };
-
   return (
     <ParcoursExperienceLayout>
-      {!showNewActivity ? (
+      {!showNewActivityMobile ? (
         <>
           {mediaQueryMD && (
             <button
@@ -169,7 +161,10 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
                 ))}
               </div>
               <div className="flex justify-center md:mt-10">
-                <button onClick={() => setShowNewActivity(true)} className="text-lena-blue-dark font-bold mt-2">
+                <button
+                  onClick={() => (mediaQueryMD ? setShowNewActivity(true) : setShowNewActivityMobile(true))}
+                  className="text-lena-blue-dark font-bold mt-2"
+                >
                   Ajouter une activité non listée
                 </button>
               </div>
@@ -195,14 +190,15 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
               )}
             </div>
           </div>
+          <AddNewActivityModal
+            open={showNewActivity}
+            onClose={() => setShowNewActivity(false)}
+            extraAct={extraAct}
+            setExtraAct={setExtraAct}
+          />
         </>
       ) : (
-        <AddNewActivity
-          onSend={(e: string) => handleAddNewActivity(e)}
-          onClose={() => setShowNewActivity(false)}
-          setExtraAct={setExtraAct}
-          extraAct={extraAct}
-        />
+        <AddNewActivity onClose={() => setShowNewActivityMobile(false)} setExtraAct={setExtraAct} extraAct={extraAct} />
       )}
     </ParcoursExperienceLayout>
   );

@@ -7,6 +7,7 @@ import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
 import { Activity, Theme } from 'common/requests/types';
+import { capitalizeFirstLetter } from 'common/utils/capitalize';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
@@ -117,7 +118,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
           {competences.map((q) => (
             <div className={`mt-3 mb-3 p-3 `}>
               <SelectorTest key={q.id} onClick={() => onSelectCompetence(q.id)} checked={isExist(q.id)}>
-                {q.title}
+                {capitalizeFirstLetter(q.title)}
               </SelectorTest>
             </div>
           ))}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Competence, Theme } from 'common/requests/types';
 import { useHistory, useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
+import { capitalizeFirstLetter } from 'common/utils/capitalize';
 
 import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
@@ -87,8 +88,8 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
             <div>
               <div className="flex mt-3 mb-3 w-full">
                 <div className="flex-1">
-                  <p className="text-lena-blue-dark text-left font-bold">{c.competence.title.toLocaleLowerCase()}</p>
-                  <p className="text-thin text-sm text-black text-left">{c.level.title}</p>
+                  <p className="text-lena-blue-dark text-left font-bold">{capitalizeFirstLetter(c.competence.title)}</p>
+                  <p className="text-thin text-sm text-black text-left">{capitalizeFirstLetter(c.level.title)}</p>
                 </div>
                 <div className="mx-4 flex flex-col items-center" style={{ width: 40 }}>
                   <p className="text-lena-blue-dark text-thin text-sm">Niveau</p>
