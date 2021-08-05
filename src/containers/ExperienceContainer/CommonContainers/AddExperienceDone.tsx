@@ -167,8 +167,8 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
             <div className="flex flex-col space-y-4">
               <button
                 className={`mt-2 rounded-md focus:ring-0
-            focus:outline-none w-full bg-lena-pink-dark
-            text-white py-3 text-center font-bold text-lg px-16`}
+            focus:outline-none w-full bg-lena-yellow
+            text-lena-blue-darkest py-3 text-center font-bold text-lg px-16`}
               >
                 Être recommandé.e
               </button>

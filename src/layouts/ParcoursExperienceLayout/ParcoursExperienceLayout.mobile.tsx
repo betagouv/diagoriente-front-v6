@@ -1,10 +1,9 @@
-import React, { FunctionComponent, useState, useRef, useEffect, useContext } from 'react';
+import React, { FunctionComponent, useState, useRef, useEffect, useContext, useMemo } from 'react';
 import ThemeContext from 'common/contexts/ThemeContext';
 import { useLocation } from 'react-router-dom';
 import useOnclickOutside from 'common/hooks/useOnclickOutside';
-import { ReactComponent as UserProfileIcon } from 'assets/svg/user_profile.svg';
+import { ReactComponent as CrossIcon } from 'assets/svg/cross3.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
-import { AppUserMenu } from '../AppUserMenu';
 
 const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
   const location = useLocation();
@@ -50,30 +49,39 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
     }
     return { title, ind };
   };
-  const renderTitleExp = () => {
-    let title = '';
+
+  const title = useMemo(() => {
     if (theme) {
       switch (theme.domain) {
-        case 'personal': {
-          title = 'EXPéRIENCE PERSO';
+        case 'professional':
+          return 'EXPéRIENCE PRO';
+        case 'personal':
+          return 'EXPéRIENCE PERSO';
+        case 'voluntary':
+          return 'EXPéRIENCE BENEVOLAT';
+        default:
           break;
-        }
-        case 'professional': {
-          title = 'EXPéRIENCE PRO';
-          break;
-        }
-        case 'voluntary': {
-          title = 'EXPéRIENCE BENEVOLAT';
-          break;
-        }
-        default: {
-          title = 'EXPéRIENCE PERSO';
-          break;
-        }
       }
     }
-    return title;
-  };
+    return 'EXPéRIENCE PERSO';
+  }, [theme]);
+
+  const progressColor = useMemo(() => {
+    if (theme) {
+      switch (theme.domain) {
+        case 'professional':
+          return 'bg-parcours-pro';
+        case 'personal':
+          return 'bg-parcours-perso';
+        case 'voluntary':
+          return 'bg-parcours-voluntary';
+        default:
+          break;
+      }
+    }
+    return 'bg-lena-blue';
+  }, [theme]);
+
   const menuRef: any = useRef();
   useOnclickOutside(menuRef, () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -86,14 +94,13 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
       {!(step === 'doneAct' || step === 'questions' || step === 'sommaire') && (
         <div className="sticky top-0 shadow-md z-50">
-          <ProgressBar value={renderStep().ind} maxValue={5} />
-          <div className="p-2 bg-lena-lightgray flex flex-row items-center justify-between">
+          <div className="h-14 p-2 bg-lena-blue-dark text-white flex flex-row items-center justify-between">
             <div>
-              <strong className="text-lena-blue">{renderTitleExp()}</strong> {renderStep().title}
+              <span className="font-bold uppercase">{title}</span> {renderStep().title}
             </div>
-            <UserProfileIcon onClick={() => setShowMenu(!showMenu)} />
+            <CrossIcon onClick={() => setShowMenu(!showMenu)} />
           </div>
-          {showMenu && <AppUserMenu ref={menuRef} />}
+          <ProgressBar color={progressColor} value={renderStep().ind} maxValue={5} />
         </div>
       )}
       <div className="flex flex-col items-center justify-start flex-1">{children}</div>
