@@ -7,7 +7,7 @@ import PictoInterests from 'assets/svg/heart.svg';
 import PictoPlaceholder from 'assets/svg/cross3.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 
-const AppDeskopMenu: FunctionComponent = () => {
+const AppDesktopMenu: FunctionComponent = () => {
   const links = [
     { label: 'Ajouter une expérience', icon: PictoExperience, link: '/ajout-exp' },
     { label: "Ajouter mes centres d'intérêt", icon: PictoInterests, link: '/centres_interet/create' },
@@ -32,7 +32,7 @@ const AppDeskopMenu: FunctionComponent = () => {
   };
 
   return (
-    <Popover className="relative">
+    <Popover>
       <Popover.Button
         className={classNames(
           'rounded px-4 py-2 bg-lena-lightgray text-lena-blue-dark uppercase',
@@ -52,7 +52,7 @@ const AppDeskopMenu: FunctionComponent = () => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform opacity-0"
       >
-        <Popover.Panel className="absolute z-10 bg-white rounded-md w-max  filter drop-shadow-md">
+        <Popover.Panel className="absolute z-10 bg-white rounded-md w-max filter drop-shadow-md">
           <div className="p-2 divide-y divide-lena-lightgray2">
             <div className="pb-2">
               {links.map((v) => (
@@ -67,4 +67,4 @@ const AppDeskopMenu: FunctionComponent = () => {
   );
 };
 
-export default AppDeskopMenu;
+export default AppDesktopMenu;

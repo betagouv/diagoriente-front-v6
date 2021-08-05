@@ -87,7 +87,7 @@ const SelectFamily = ({ onStep, onRemoveFamily, selectedFamilies, onFinish }: Pr
         </div>
         <div className="w-full">
           <ul className={classNames('space-y-2', isDesktop && 'xl:w-1/2 w-full mx-auto')}>
-            {getInterestsState.loading && <AppLoader variant="blue" />}
+            {getInterestsState.loading && <AppLoader />}
             {getInterestsState.data?.interests.data.map((v) =>
               family(v.title, v.id, CollectifSvg, IndividuelSvg, v.id in selectedFamilies),
             )}

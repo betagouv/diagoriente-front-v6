@@ -16,17 +16,17 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
     let ind: number;
     switch (step) {
       case 'domaine': {
-        title = '> Choix du domaine';
+        title = '> Domaine';
         ind = 1;
         break;
       }
       case 'date': {
-        title = '> Sélection de date';
+        title = '> Dates';
         ind = 2;
         break;
       }
       case 'activite': {
-        title = '> Choix des activités';
+        title = '> Activités';
         ind = 3;
         break;
       }
@@ -36,13 +36,13 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
         break;
       }
       case 'competences': {
-        title = '> Sélection des compétences';
+        title = '> Compétences';
         ind = 5;
         break;
       }
 
       default: {
-        title = '> Choix du domaine';
+        title = '> Domaine';
         ind = 1;
         break;
       }
