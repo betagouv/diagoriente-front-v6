@@ -98,9 +98,9 @@ const MyExperiencesContainer: FunctionComponent = () => {
           {selectedType && (
             <>
               {skillsState.loading && <AppLoader />}
-              {skillsState.data && (
-                <div className="grid md:grid-cols-2 gap-4">
-                  {skillsState.data?.skills.data.map((exp) => (
+              {skillsState.data && skillsState.data.skills.count > 0 && (
+                <div className="grid md:grid-cols-2 gap-4 w-full md:w-auto">
+                  {skillsState.data.skills.data.map((exp) => (
                     <CardExperience
                       key={exp.id}
                       title={exp.theme.title}
