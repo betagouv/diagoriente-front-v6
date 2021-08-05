@@ -9,8 +9,8 @@ import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 
 const AppDeskopMenu: FunctionComponent = () => {
   const links = [
-    { label: 'Ajouter une expérience', icon: PictoExperience, link: '/experience' },
-    { label: "Ajouter mes centres d'intérêt", icon: PictoInterests, link: '/interests/create' },
+    { label: 'Ajouter une expérience', icon: PictoExperience, link: '/ajout-exp' },
+    { label: "Ajouter mes centres d'intérêt", icon: PictoInterests, link: '/centres_interet/create' },
     { label: 'Rechercher engagement', icon: PictoPlaceholder, link: '/immersion/recherche' },
     { label: 'Rechercher métier', icon: PictoPlaceholder, link: '/metiers/recherche' },
   ];
@@ -37,7 +37,7 @@ const AppDeskopMenu: FunctionComponent = () => {
         leaveTo="transform opacity-0"
       >
         <Popover.Panel className="absolute z-10 mt-2 shadow-md bg-white rounded-md w-max  filter drop-shadow-md">
-          <div className="p-2 space-y-2">
+          <div className="p-2">
             {links.map((v) => (
               <div key={v.label}>
                 <Link to={v.link}>

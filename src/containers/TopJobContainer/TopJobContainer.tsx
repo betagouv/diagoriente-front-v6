@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { ReactComponent as TopJobSvg } from 'assets/svg/top_job.svg';
-import { ReactComponent as InfoSvg } from 'assets/svg/info.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
 import JobsLayout from 'layouts/JobsLayout/JobsLayout';
@@ -39,10 +38,6 @@ const TopJobContainer = () => {
             En fonction des expériences, compétences et centres d’intérets que vous avez renseignés
           </p>
         </div>
-        <button className="flex items-center space-x-3 focus:ring-0 focus:outline-none">
-          <InfoSvg />
-          <span className="text-lena-blue-dark text-sm">Pourquoi ces métiers ?</span>
-        </button>
       </div>
       <div className="flex-1" style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
         <div className="px-4 xl:px-16 py-4 grid md:grid-cols-2 gap-4">

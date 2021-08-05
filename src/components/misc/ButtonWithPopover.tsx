@@ -36,7 +36,12 @@ const ButtonWithPopover: FunctionComponent<Props> = ({ popover, path, children }
   return (
     <>
       <div className="flex flex-wrap">
-        {popoverShow && <div className="fixed bg-lena-blue-dark bg-opacity-50 z-10 w-full h-full top-0 left-0" />}
+        {popoverShow && (
+          <div
+            className="fixed bg-lena-blue-dark bg-opacity-50 z-10 w-full h-full top-0 left-0"
+            onClick={() => setPopoverShow(false)}
+          />
+        )}
         <div className="w-full text-center">
           <div ref={btnRef} className={classNames('flex mb-5 md:block md:mb-8', popoverShow && 'z-30 relative')}>
             <button

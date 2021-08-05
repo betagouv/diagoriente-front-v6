@@ -30,7 +30,7 @@ const AppHeader: FunctionComponent = () => {
           </Link>
           <img src={RepubliqueSvg} alt="Logo de la République Française" style={{ width: 68, height: 36 }} />
           <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" style={{ width: 80, height: 14 }} />
-          <AppDeskopMenu />
+          {user && <AppDeskopMenu />}
         </div>
         <div>
           {user && (

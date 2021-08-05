@@ -82,6 +82,7 @@ module.exports = {
         'lena-purple': {
           light: '#ECE8F0',
         },
+        'modal-blue': '#1E2E58'
       }
     },
     fontFamily: {

@@ -17,21 +17,17 @@ const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactE
   });
 
   return (
-    <div className="sticky top-0 shadow-md z-50">
-      <div className="py-2 px-4 bg-lena-lightgray flex flex-row items-center justify-between">
+    <div className="sticky top-0 shadow-md z-50 h-14">
+      <div className="py-2 px-4 bg-lena-lightgray flex flex-row items-center justify-between h-full">
         <div>
-          <button onClick={() => setShowDrawer(!showDrawer)}>
-            <BurgerMenuSvg />
-          </button>
+          <BurgerMenuSvg onClick={() => setShowDrawer(!showDrawer)} />
         </div>
         <div className="font-bold text-lena-blue-dark">{document.title}</div>
-        <div>
-          {user && (
-            <button onClick={() => setShowMenu(!showMenu)} className="focus:ring-0 focus:outline-none">
-              <UserProfileIcon />
-            </button>
-          )}
-        </div>
+        {user && (
+          <button onClick={() => setShowMenu(!showMenu)} className="focus:ring-0 focus:outline-none">
+            <UserProfileIcon />
+          </button>
+        )}
       </div>
       {showMenu && <AppUserMenu ref={menuRef} />}
       <AppDrawer open={showDrawer} onClose={() => setShowDrawer(false)} />
