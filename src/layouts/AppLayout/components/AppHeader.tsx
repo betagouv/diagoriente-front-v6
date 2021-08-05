@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import useOnclickOutside from 'common/hooks/useOnclickOutside';
 import { AppUserMenu } from 'layouts/AppUserMenu';
 import UserContext from '../../../common/contexts/UserContext';
+import AppDeskopMenu from '../../AppDeskopMenu';
 
 const AppHeader: FunctionComponent = () => {
   const { user } = useContext(UserContext);
@@ -29,6 +30,7 @@ const AppHeader: FunctionComponent = () => {
           </Link>
           <img src={RepubliqueSvg} alt="Logo de la République Française" style={{ width: 68, height: 36 }} />
           <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" style={{ width: 80, height: 14 }} />
+          <AppDeskopMenu />
         </div>
         <div>
           {user && (
