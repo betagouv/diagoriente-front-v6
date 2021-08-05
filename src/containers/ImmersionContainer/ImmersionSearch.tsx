@@ -8,7 +8,7 @@ const ImmersionSearch: FunctionComponent = () => {
   return (
     <ImmersionLayout>
       <div
-        className="min-h-screen md:min-h-0 flex flex-1 items-center justify-center"
+        className="flex flex-1 items-center justify-center bg-cover"
         style={{ backgroundImage: `url(${BgImmersion})`, backgroundSize: 'cover' }}
       >
         <div className="flex flex-col items-center justify-center">

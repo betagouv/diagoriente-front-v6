@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PeintureImg from 'assets/illu/topjob.svg';
+import BgImmersion from 'assets/images/bg/bg-immersion.jpg';
 import ImmersionSearchFilters from './ImmersionSearchFilters';
 import ImmersionResultItem from './components/ImmersionResultItem';
 import ImmersionLayout from '../../layouts/ImmersionLayout/ImmersionLayout';
@@ -40,7 +40,7 @@ const ImmersionSearchResults = () => {
         </div>
       </div>
       {viewMode === 'list' && (
-        <div style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
+        <div style={{ background: `url(${BgImmersion}) no-repeat fixed`, backgroundSize: 'cover' }}>
           <div className="px-4 xl:px-16 py-4 grid xl:grid-cols-2 gap-4">
             <ImmersionResultItem />
             <ImmersionResultItem />

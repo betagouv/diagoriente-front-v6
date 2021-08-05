@@ -28,7 +28,7 @@ const InterestDone: FunctionComponent = () => {
           </div>
           <div className="fixed bottom-0 left-0 right-0 md:relative">
             <button
-              onClick={() => history.push('/top_metiers')}
+              onClick={() => history.push('/mon-top-metiers')}
               className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}

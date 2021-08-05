@@ -38,9 +38,11 @@ const AppDrawer: FunctionComponent<{ open: boolean; onClose: () => void }> = ({ 
         beforeEnter={() => setShowOverlay(true)}
         afterLeave={() => setShowOverlay(false)}
       >
-        <div className="px-8 flex flex-col divide divide-y-2 divide-lena-blue-dark">
+        <div className="px-8 flex flex-col divide divide-y divide-lena-lightgray2">
           <div className="flex flex-col justify-center space-y-2 py-8">
-            <img src={LogoDiagoriente} alt="Logo de Diagoriente" style={{ width: 155, height: 37 }} />
+            <Link to="/">
+              <img src={LogoDiagoriente} alt="Logo de Diagoriente" style={{ width: 155, height: 37 }} />
+            </Link>
             <div className="flex items-center space-x-4">
               <img src={RepubliqueSvg} alt="Logo de la République Française" style={{ width: 68, height: 36 }} />
               <img src={LogoBetagouv} alt="Logo de Beta.gouv.fr" style={{ width: 80, height: 14 }} />
@@ -48,7 +50,7 @@ const AppDrawer: FunctionComponent<{ open: boolean; onClose: () => void }> = ({ 
           </div>
           <div className="py-8 space-y-4">
             {links.map((v) => (
-              <div key={v.label} className="flex flex-row items-center space-x-2 text-lena-blue-dark">
+              <div key={v.label} className="flex flex-row items-center space-x-4 text-lena-blue-dark">
                 {v.icon && <img src={v.icon} alt={v.label} height={16} width={16} />}
                 <Link to={v.link}>{v.label}</Link>
               </div>

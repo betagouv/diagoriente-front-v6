@@ -8,7 +8,7 @@ const ImmersionLayoutForDesktop: FunctionComponent<{ showSearch: boolean }> = ({
     <div className="min-h-screen h-full flex flex-col">
       <AppHeader />
       <div className="flex flex-row flex-1">
-        <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-md z-10">
+        <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex flex-col items-center justify-center space-y-4">

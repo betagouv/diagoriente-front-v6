@@ -24,7 +24,7 @@ const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactE
             <BurgerMenuSvg />
           </button>
         </div>
-        <div className="font-bold text-lena-blue-dark">[!!WIP!!]</div>
+        <div className="font-bold text-lena-blue-dark">{document.title}</div>
         <div>
           {user && (
             <button onClick={() => setShowMenu(!showMenu)} className="focus:ring-0 focus:outline-none">

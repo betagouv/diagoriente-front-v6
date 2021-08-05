@@ -58,7 +58,7 @@ const MyExperiencesByThemeContainer = () => {
           </div>
           <div className="flex justify-center mt-10">
             <button
-              onClick={() => history.push(`/experience/theme/create?type=${path().url}`)}
+              onClick={() => history.push(`/experience/theme/?type=${path().url}`)}
               className="flex items-center focus:ring-0 focus:outline-none"
             >
               <PlusSvg /> <span className="ml-3 text-lena-blue-dark">Ajouter une expérience {path().singular}</span>

@@ -7,7 +7,6 @@ import classNames from 'common/utils/classNames';
 import Button from 'components/design-system/Button';
 
 const searchOptions = [
-  { label: 'un stage', value: '1' },
   { label: 'une immersion en entreprise', value: '2' },
   { label: 'une formation ou un apprentissage', value: '3' },
   { label: "une mission d'engagement", value: '4' },

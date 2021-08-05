@@ -7,10 +7,12 @@ import { useDidMount } from 'common/hooks/useLifeCycle';
 import AppLoader from 'components/ui/AppLoader';
 import Button from 'components/design-system/Button';
 import classNames from 'common/utils/classNames';
+import useMediaQuery from 'hooks/useMediaQuery';
 import InterestItem from './components/InterestItem';
 
 const MyInterestsContainer: FunctionComponent = () => {
   const [fetchMyInterests, myInterestsState] = useMyInterests();
+  const isDesktop = useMediaQuery('md');
 
   useDidMount(() => {
     fetchMyInterests();
@@ -19,10 +21,12 @@ const MyInterestsContainer: FunctionComponent = () => {
   return (
     <ProfileLayout>
       <div className="flex flex-col items-center justify-center space-y-12 py-8 container">
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <HeartSvg />
-          <h2 className="font-bold text-lena-blue-dark uppercase">Mes centres d'intérêt</h2>
-        </div>
+        {isDesktop && (
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <HeartSvg />
+            <h2 className="font-bold text-lena-blue-dark uppercase">Mes centres d'intérêt</h2>
+          </div>
+        )}
         {myInterestsState.loading && <AppLoader />}
         {myInterestsState.data && (
           <div
