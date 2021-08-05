@@ -7,15 +7,15 @@ import classNames from 'common/utils/classNames';
 import Button from 'components/design-system/Button';
 
 const searchOptions = [
-  { label: 'une immersion en entreprise', value: '2' },
-  { label: 'une formation ou un apprentissage', value: '3' },
-  { label: "une mission d'engagement", value: '4' },
-  { label: 'un emploi', value: '5' },
+  { label: 'une immersion en entreprise', value: 'immersion' },
+  { label: 'une formation ou un apprentissage', value: 'formation' },
+  { label: "une mission d'engagement", value: 'engagement' },
+  { label: 'un emploi', value: 'emploi' },
 ];
 
 const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant }) => {
   const history = useHistory();
-  const [searchType, setSearchType] = useState('1');
+  const [searchType, setSearchType] = useState<string>();
   const [accordionOpened, setAccordionOpened] = useState(false);
   const isVariantBold = variant === 'bold';
 
@@ -75,7 +75,7 @@ const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant 
         </div>
       </div>
       <div>
-        <Button variant="primary" fullWidth={true} onClick={handleStartSearch}>
+        <Button variant="primary" size="md" fullWidth={true} onClick={handleStartSearch} disabled={!searchType}>
           Rechercher
         </Button>
       </div>

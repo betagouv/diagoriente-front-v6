@@ -15,6 +15,22 @@ const AppDeskopMenu: FunctionComponent = () => {
     { label: 'Rechercher métier', icon: PictoPlaceholder, link: '/metiers/recherche' },
   ];
 
+  const link = (icon: any, label: string, url: string) => {
+    return (
+      <Link to={url}>
+        <div
+          className={classNames(
+            'flex flex-row items-center space-x-2 text-lena-blue-dark',
+            'hover:bg-lena-lightgray2 rounded px-4 py-2',
+          )}
+        >
+          {icon && <img src={icon} alt={label} height={16} width={16} />}
+          <span>{label}</span>
+        </div>
+      </Link>
+    );
+  };
+
   return (
     <Popover className="relative">
       <Popover.Button
@@ -36,23 +52,14 @@ const AppDeskopMenu: FunctionComponent = () => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform opacity-0"
       >
-        <Popover.Panel className="absolute z-10 mt-2 shadow-md bg-white rounded-md w-max  filter drop-shadow-md">
-          <div className="p-2">
-            {links.map((v) => (
-              <div key={v.label}>
-                <Link to={v.link}>
-                  <div
-                    className={classNames(
-                      'flex flex-row items-center space-x-2 text-lena-blue-dark',
-                      'hover:bg-lena-lightgray2 rounded px-4 py-2',
-                    )}
-                  >
-                    {v.icon && <img src={v.icon} alt={v.label} height={16} width={16} />}
-                    <span>{v.label}</span>
-                  </div>
-                </Link>
-              </div>
-            ))}
+        <Popover.Panel className="absolute z-10 bg-white rounded-md w-max  filter drop-shadow-md">
+          <div className="p-2 divide-y divide-lena-lightgray2">
+            <div className="pb-2">
+              {links.map((v) => (
+                <div key={v.label}>{link(v.icon, v.label, v.link)}</div>
+              ))}
+            </div>
+            <div className="pt-2">{link(null, 'Aide', '/aide')}</div>
           </div>
         </Popover.Panel>
       </Transition>
