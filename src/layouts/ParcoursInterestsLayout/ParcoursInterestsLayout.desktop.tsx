@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import AppHeader from 'layouts/AppLayout/components/AppHeader';
 import { ReactComponent as HeartSvg } from 'assets/svg/heart_yellow.svg';
 import SaveButtonComponent from 'components/design-system/SaveButton';
+import AppLayout from '../AppLayout/AppLayout';
 
 const ParcoursInterestsLayoutForDesktop: FunctionComponent = ({ children }) => {
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <AppHeader />
+    <AppLayout>
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
           <div className="flex flex-col justify-between flex-grow">
@@ -30,7 +29,7 @@ const ParcoursInterestsLayoutForDesktop: FunctionComponent = ({ children }) => {
         </div>
         <div className="w-full flex flex-col md:relative">{children}</div>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

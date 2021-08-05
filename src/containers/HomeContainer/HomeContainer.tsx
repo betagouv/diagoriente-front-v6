@@ -16,6 +16,7 @@ const HomeContainer = () => {
     { label: 'Mon profil', url: '/profil' },
     { label: 'Ma carte de compétences', url: '/mon-cv-competences' },
     { label: 'Mes expériences', url: '/profil/mes-experiences' },
+    { label: '// WIP // Ajouter une expérience - intro', url: '/ajout-exp' },
     { label: 'Ajouter une expérience PRO', url: '/experience/theme-pro' },
     { label: 'Ajouter une expérience PERSO', url: '/experience/theme?type=personal' },
     { label: 'Ajouter une expérience BENEVOLAT', url: '/experience/theme?type=voluntary' },

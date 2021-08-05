@@ -2,12 +2,11 @@ import React, { FunctionComponent } from 'react';
 import { ReactComponent as ProfileIcon } from 'assets/svg/user_profile.svg';
 import { Link } from 'react-router-dom';
 import classNames from 'common/utils/classNames';
-import AppHeader from '../AppLayout/components/AppHeader';
+import AppLayout from '../AppLayout/AppLayout';
 
 const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <AppHeader />
+    <AppLayout>
       <div className="flex flex-row flex-1">
         <div
           className={classNames(
@@ -49,7 +48,7 @@ const ProfileLayoutForDesktop: FunctionComponent = ({ children }) => {
         </div>
         <div className="w-full flex flex-col md:relative">{children}</div>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 

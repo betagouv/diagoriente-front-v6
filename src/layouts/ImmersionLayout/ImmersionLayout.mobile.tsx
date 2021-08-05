@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import MobileHeaderGeneric from '../MobileHeaderGeneric';
+import AppLayout from '../AppLayout/AppLayout';
 
 const ImmersionLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <MobileHeaderGeneric />
+    <AppLayout>
       <div className="flex flex-col flex-1">{children}</div>
-    </div>
+    </AppLayout>
   );
 };
 
