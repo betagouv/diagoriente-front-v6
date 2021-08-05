@@ -3,13 +3,13 @@ import ThemeContext from 'common/contexts/ThemeContext';
 import { useLocation } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import className from 'common/utils/classNames';
-import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_white.svg';
-import { ReactComponent as PictoExpPro } from 'assets/svg/exp_pro_white.svg';
-import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.svg';
+import { ReactComponent as PictoExpPerso } from 'assets/svg/picto-ajout-xp-perso.svg';
+import { ReactComponent as PictoExpPro } from 'assets/svg/picto-ajout-xp-pro.svg';
+import { ReactComponent as PictoExpBenevolat } from 'assets/svg/picto-ajout-xp-benevolat.svg';
 
 import PathPicto from 'assets/svg/pictoPath.svg';
 import SaveButtonComponent from 'components/design-system/SaveButton';
-import AppHeader from '../AppLayout/components/AppHeader';
+import AppLayout from '../AppLayout/AppLayout';
 
 interface PropsBox {
   title: string;
@@ -24,9 +24,11 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   const step = location.pathname.split('/').pop();
   const steps = ['Métier', 'Date', 'Activités', 'Caracteristiques', 'Competences'];
   const stepsUrl = ['create', 'date', 'activite', 'doneAct', 'question', 'questions', 'competences', 'sommaire'];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const path = () => {
     let text = '';
     if (theme) {
@@ -54,11 +56,11 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   const RenderOptions = ({ title, index, stepUrlPath }: PropsBox) => {
     const urlStep = stepsUrl.indexOf(stepUrlPath);
     return (
-      <div className="rounded-lg border p-4">
+      <div className="rounded-lg border px-4 py-3 bg-lena-lightgray flex items-center justify-between">
         <p className={className('text-lena-blue-dark flex items-center', index < urlStep ? 'opacity-1' : 'opacity-50')}>
-          {index < urlStep ? <img src={PathPicto} alt="loup" className="mx-2 w-6" /> : index + 1}{' '}
-          {index >= urlStep && '-'} {title}
+          {`${index + 1} - ${title}`}
         </p>
+        {index < urlStep ? <img src={PathPicto} alt="loup" className="mx-2 w-6" /> : null}
       </div>
     );
   };
@@ -80,21 +82,20 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
   };
 
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <AppHeader />
+    <AppLayout>
       <div className="flex flex-row flex-1">
-        <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
+        <div className="w-96 bg-lena-blue-dark flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex flex-col space-y-8 p-8">
               <div className="flex items-center justify-center mt-10">
-                <div className="flex flex-col justify-center items-center space-y-2">
+                <div className="flex flex-col justify-center items-center space-y-4">
                   {renderPicto()}
-                  <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">
-                    Mes expériences {path()}
+                  <div className="text-center text-white font-bold md:text-md xl:text-xl">
+                    Ajout d'expériences {path()}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-2">
                 {steps.map((s, index) => (
                   <RenderOptions key={s} index={index} title={s} stepUrlPath={step || 'create'} />
                 ))}
@@ -102,7 +103,7 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
             </div>
             <div className="px-4">
               <SaveButtonComponent />
-              <div className="p-4 text-sm italic text-justify">
+              <div className="p-4 text-sm italic text-justify text-white">
                 Cette expérience est modifiable à tout moment dans votre profil (en haut à droite)
               </div>
             </div>
@@ -117,7 +118,7 @@ const ParcoursExperienceLayoutForDesktop: FunctionComponent = ({ children }) => 
           {children}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 
