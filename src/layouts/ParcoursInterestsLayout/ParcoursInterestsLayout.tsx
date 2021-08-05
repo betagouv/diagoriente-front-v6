@@ -1,21 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import useMediaQuery from 'hooks/useMediaQuery';
-import ParcoursInterestsLayoutForMobile from './ParcoursInterestsLayout.mobile';
-import ParcoursInterestsLayoutForDesktop from './ParcoursInterestsLayout.desktop';
+import AppLayout from '../AppLayout/AppLayout';
+import ParcoursInterestsSidebar from './ParcoursInterestsSidebar';
 
 type Props = {
-  withMobile?: boolean;
+  showHeader?: boolean;
 };
 
-const ParcoursInterestsLayout: FunctionComponent<Props> = ({ withMobile = true, children }) => {
+const ParcoursInterestsLayout: FunctionComponent<Props> = ({ showHeader, children }) => {
   const isDesktop = useMediaQuery('md');
 
-  return isDesktop ? (
-    <ParcoursInterestsLayoutForDesktop>{children}</ParcoursInterestsLayoutForDesktop>
-  ) : withMobile ? (
-    <ParcoursInterestsLayoutForMobile>{children}</ParcoursInterestsLayoutForMobile>
-  ) : (
-    <div>{children}</div>
+  return (
+    <AppLayout showHeader={showHeader}>
+      <div className="flex flex-row flex-1 absolute top-14 bottom-0 left-0 right-0">
+        {isDesktop && <ParcoursInterestsSidebar />}
+        <div className="flex flex-col flex-1 overflow-auto">{children}</div>
+      </div>
+    </AppLayout>
   );
 };
 

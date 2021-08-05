@@ -29,8 +29,8 @@ const TopJobContainer = () => {
   const isDesktop = useMediaQuery('md');
 
   return (
-    <JobsLayout mobileHeaderMode="search_jobs">
-      <div className="container flex flex-col items-center py-8 space-y-8">
+    <JobsLayout>
+      <div className="container flex flex-col items-center py-8 space-y-8 md:overflow-auto">
         <div className="flex flex-col items-center justify-center space-y-2">
           {!isDesktop && <TopJobSvg />}
           <h2 className="text-lena-blue-dark font-bold text-xl">10 métiers pour vous</h2>
@@ -39,8 +39,14 @@ const TopJobContainer = () => {
           </p>
         </div>
       </div>
-      <div className="flex-1" style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}>
-        <div className="px-4 xl:px-16 py-4 grid md:grid-cols-2 gap-4">
+      <div
+        className="flex flex-1 md:overflow-auto"
+        style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}
+      >
+        <div className="flex-1 px-4 xl:px-16 py-4 grid md:grid-cols-2 gap-4">
+          <CardJob />
+          <CardJob />
+          <CardJob />
           <CardJob />
           <CardJob />
           <CardJob />

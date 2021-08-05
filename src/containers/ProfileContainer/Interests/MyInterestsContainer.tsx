@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
-import { ReactComponent as HeartSvg } from 'assets/svg/picto_interets.svg';
 import { Link } from 'react-router-dom';
 import { useMyInterests } from 'common/requests/interests';
 import { useDidMount } from 'common/hooks/useLifeCycle';
@@ -21,12 +20,7 @@ const MyInterestsContainer: FunctionComponent = () => {
   return (
     <ProfileLayout>
       <div className="flex flex-col items-center justify-center space-y-12 py-8 container">
-        {isDesktop && (
-          <div className="flex flex-col items-center justify-center space-y-2">
-            <HeartSvg />
-            <h2 className="font-bold text-lena-blue-dark uppercase">Mes centres d'intérêt</h2>
-          </div>
-        )}
+        {isDesktop && <h2 className="font-bold text-2xl text-lena-blue-dark">Mes centres d'intérêt</h2>}
         {myInterestsState.loading && <AppLoader />}
         {myInterestsState.data && (
           <div

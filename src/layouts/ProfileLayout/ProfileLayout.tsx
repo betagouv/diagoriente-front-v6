@@ -1,15 +1,18 @@
+import AppLayout from 'layouts/AppLayout/AppLayout';
 import React, { FunctionComponent } from 'react';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import ProfileLayoutForDesktop from './ProfileLayout.desktop';
-import ProfileLayoutForMobile from './ProfileLayout.mobile';
+import ProfileSidebar from './ProfileSidebar';
 
 const ProfileLayout: FunctionComponent = ({ children }) => {
-  const mediaQueryMD = useMediaQuery('md');
+  const isDesktop = useMediaQuery('md');
 
-  return mediaQueryMD ? (
-    <ProfileLayoutForDesktop>{children}</ProfileLayoutForDesktop>
-  ) : (
-    <ProfileLayoutForMobile>{children}</ProfileLayoutForMobile>
+  return (
+    <AppLayout>
+      <div className="flex flex-row flex-1 absolute top-14 bottom-0 left-0 right-0">
+        {isDesktop && <ProfileSidebar />}
+        <div className="flex flex-col flex-1 bg-lena-lightgray md:bg-transparent overflow-auto">{children}</div>
+      </div>
+    </AppLayout>
   );
 };
 

@@ -26,7 +26,7 @@ const EditInfoContainer = () => {
             <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
           </button>
           <div className="flex flex-col items-center mb-7">
-            <h2 className="font-bold text-lena-pink-dark text-xl uppercase mt-3">Modifier mes infos</h2>
+            <h2 className="font-bold text-lena-pink-dark text-xl mt-3">Modifier mes infos</h2>
           </div>
           <div className="mx-4 mb-12">
             <div className="mb-4">

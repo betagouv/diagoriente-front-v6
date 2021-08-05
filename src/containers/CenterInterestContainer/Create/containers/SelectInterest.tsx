@@ -146,7 +146,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   const [rangeValue, setRangeValue] = useState(0);
   const [width, setWidth] = useState(0);
   const sizeWindow = useWindowSize();
-  const mediaQueryMD = useMediaQuery('md');
+  const isDesktop = useMediaQuery('md');
   const plugins: any = [new Fade('', 0.7)];
   const flickingRef = useRef<any>();
   const [getInterestCall, getInterestState] = useInterest();
@@ -158,7 +158,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
 
   useEffect(() => {
     async function update(index: number) {
-      if (mediaQueryMD) {
+      if (isDesktop) {
         try {
           await flickingRef.current.moveTo(index);
         } catch (err) {
@@ -177,7 +177,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
     }
 
     update(rangeValue);
-  }, [mediaQueryMD, width, rangeValue]);
+  }, [isDesktop, width, rangeValue]);
 
   const handleChange = async (e: any) => {
     setRangeValue(e);
@@ -201,10 +201,10 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
   };
 
   return (
-    <ParcoursInterestsLayout withMobile={false}>
+    <ParcoursInterestsLayout showHeader={isDesktop}>
       <div
         className="flex flex-col flex-1 min-h-screen md:min-h-0 h-full flex flex-col overflow-x-hidden"
-        style={{ backgroundColor: mediaQueryMD ? '#fff' : '#e5e5e5' }}
+        style={{ backgroundColor: isDesktop ? '#fff' : '#e5e5e5' }}
       >
         <header className="bg-white pt-2 shadow-md">
           <div className="flex justify-between items-center container">
@@ -215,7 +215,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
               <ArrowSvg />
               <span className="mt-1 text-sm text-lena-blue-dark">Retour</span>
             </button>
-            {!mediaQueryMD && (
+            {!isDesktop && (
               <button className="focus:ring-0 focus:outline-none">
                 <HelpSvg />
               </button>
@@ -224,10 +224,10 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
           <h2
             className={classNames(
               'text-lena-blue-dark text-center text-sm px-7 mx-auto py-3',
-              !mediaQueryMD ? 'font-bold' : 'text-md pb-5',
+              !isDesktop ? 'font-bold' : 'text-md pb-5',
             )}
           >
-            {mediaQueryMD ? (
+            {isDesktop ? (
               <>
                 Faites glisser le curseur le long de l'axe et <br />
                 sélectionnez autant de centres d'intérêts que vous le souhaitez :
@@ -238,17 +238,17 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
           </h2>
         </header>
 
-        <div className={classNames('flex-1', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'container py-8')}>
+        <div className={classNames('flex-1', isDesktop ? 'bg-lena-gray-light-2 py-14' : 'container py-8')}>
           {getInterestState.loading && <AppLoader />}
           {getInterestState.data && (
             <>
               <div className="relative">
                 <div className="flex items-center flex-col w-full">
                   <div
-                    style={{ width: mediaQueryMD ? 'calc(80% + 110px)' : 'calc(80% + 60px)' }}
+                    style={{ width: isDesktop ? 'calc(80% + 110px)' : 'calc(80% + 60px)' }}
                     className={classNames(
                       'flex justify-between text-center text-lena-blue-dark mx-4 relative',
-                      mediaQueryMD && 'mb-3',
+                      isDesktop && 'mb-3',
                     )}
                   >
                     <span className="flex flex-col items-center">
@@ -266,7 +266,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                     <input
                       max={(getInterestState.data?.interest.cursors.length || 1) - 1}
                       min={0}
-                      step={mediaQueryMD ? 1 : 1}
+                      step={isDesktop ? 1 : 1}
                       value={rangeValue}
                       onChange={(e) => handleChange(e.currentTarget.value)}
                       type="range"
@@ -292,7 +292,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                   </div>
                 </div>
               </div>
-              {!mediaQueryMD && (
+              {!isDesktop && (
                 <div
                   className="relative mt-1"
                   style={{
@@ -310,7 +310,7 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
                   ))}
                 </div>
               )}
-              {mediaQueryMD && (
+              {isDesktop && (
                 <div>
                   {getInterestState.data && (
                     <Flicking

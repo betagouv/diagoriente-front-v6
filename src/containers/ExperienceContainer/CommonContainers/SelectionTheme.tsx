@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import ThemeContext from 'common/contexts/ThemeContext';
 import { Theme } from 'common/requests/types';
@@ -164,7 +164,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
       <button
         className={classNames(
           `focus:ring-0 focus:outline-none w-full bg-lena-blue
-          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-10`,
+          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-4`,
           isEmpty(selectedTheme) && 'bg-gray-300',
         )}
         onClick={handleNext}
@@ -189,8 +189,6 @@ const SelectionTheme = () => {
       loadThemes({ variables: { domain: params.type as 'personal' | 'professional' | 'voluntary' } });
     }
   });
-
-  const fxColor = params.type === 'voluntary' ? 'bg-parcours-voluntary' : 'bg-parcours-perso';
 
   return !showMobileChoice ? (
     <ParcoursExperienceLayout>

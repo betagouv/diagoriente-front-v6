@@ -1,18 +1,23 @@
 import React, { FunctionComponent } from 'react';
 import classNames from 'common/utils/classNames';
-import AppFooter from './components/AppFooter';
-import AppHeader from './components/AppHeader';
+import AppFooter from './AppFooter';
+import AppHeaderDesktop from './AppHeader.desktop';
 import useMediaQuery from '../../hooks/useMediaQuery';
-import MobileHeaderGeneric from '../MobileHeaderGeneric';
+import AppHeaderMobile from './AppHeader.mobile';
 
-const AppLayout: FunctionComponent<{ className?: string }> = ({ className, children }) => {
+const AppLayout: FunctionComponent<{ showHeader?: boolean; showFooter?: boolean; className?: string }> = ({
+  showHeader = true,
+  showFooter = true,
+  className,
+  children,
+}) => {
   const isDesktop = useMediaQuery('md');
 
   return (
     <div className="flex flex-col min-h-screen">
-      {isDesktop ? <AppHeader /> : <MobileHeaderGeneric />}
+      {showHeader && (isDesktop ? <AppHeaderDesktop /> : <AppHeaderMobile />)}
       <main className={classNames('flex flex-col flex-1', className)}>{children}</main>
-      <AppFooter />
+      {showFooter && <AppFooter />}
     </div>
   );
 };
