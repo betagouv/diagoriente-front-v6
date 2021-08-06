@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useAddReco } from 'common/requests/recommendation';
 import ThemeContext from 'common/contexts/ThemeContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,6 +13,9 @@ import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
 
 const RecommandationMobile = () => {
   const history = useHistory();
+  const param: { idSkill: string } = useParams();
+  const [addRecoCall, setAddRecoCall] = useAddReco();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -47,9 +51,22 @@ const RecommandationMobile = () => {
   }, [formik.values.nom, formik.values.prenom]);
 
   const onAddReco = () => {
-    const dataToSend = {};
-    setStep(2);
+    if (param.idSkill) {
+      const dataToSend = {
+        skill: param.idSkill,
+        firstName: formik.values.nom,
+        lastName: formik.values.prenom,
+        email: formik.values.email,
+        message: formik.values.text,
+      };
+      addRecoCall({ variables: dataToSend });
+    }
   };
+  useEffect(() => {
+    if (setAddRecoCall.data) {
+      setStep(2);
+    }
+  }, [setAddRecoCall.data]);
   const renderStep = () => {
     switch (step) {
       case 0:

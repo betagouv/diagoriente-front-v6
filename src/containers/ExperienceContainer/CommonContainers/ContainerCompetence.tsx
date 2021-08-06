@@ -151,7 +151,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
           <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
         </button>
       )}
-      <div className="w-full flex justify-center mt-2 md:mt-10">
+      <div className="w-full flex justify-center mt-2 md:mt-4">
         <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
       </div>
     </ParcoursExperienceLayout>

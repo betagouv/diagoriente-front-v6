@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ThemeContext from 'common/contexts/ThemeContext';
 import ModalContext from 'common/contexts/ModalContext';
+import { useAddReco } from 'common/requests/recommendation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FormControlReco, FormLabelReco } from 'components/Register/FormController';
@@ -12,11 +13,14 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/svg/picto_mail.svg';
 interface ModalArgs {
   isMobile: boolean;
   onClose: () => void;
+  param: string;
 }
 
-const InfoQuestionnaire = ({ isMobile, onClose }: ModalArgs) => {
+const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
   const { theme } = useContext(ThemeContext);
+
   const { setChildrenModal, setOpenModal, setVariant, setBgColor } = useContext(ModalContext);
+  const [addRecoCall, setAddRecoCall] = useAddReco();
   const formik = useFormik({
     initialValues: {
       nom: '',
@@ -47,28 +51,42 @@ const InfoQuestionnaire = ({ isMobile, onClose }: ModalArgs) => {
   }, [formik.values.nom, formik.values.prenom]);
   const [step, setStep] = useState(0);
   const onAddReco = () => {
-    const dataToSend = {};
-    setChildrenModal(
-      <div className="bg-lena-blue-dark w-full flex flex-col justify-center p-6">
-        <div className="flex justify-center pb-12">
-          <ArrowLeftSvg />
-        </div>
-        <div className="px-4">
-          <p className="text-bold text-white text-lg text-center py-4">Le message a bien été envoyé !</p>
-          <p className="text-white text-lg text-center py-4">
-            Une fois rédigée, sa recommandation apparaîtra dans votre carte de compétences.
-          </p>
-          <div className="text-center mt-6 pb-10">
-            <Button variant="darkBlue" size="md" onClick={() => setOpenModal(false)} className="bg-lena-blue-dark">
-              J’ai compris
-            </Button>
-          </div>
-        </div>
-      </div>,
-    );
-    setVariant('mail');
-    setBgColor('bg-lena-blue-backdrop');
+    console.log(param);
+    if (param) {
+      const dataToSend = {
+        skill: param,
+        firstName: formik.values.nom,
+        lastName: formik.values.prenom,
+        email: formik.values.email,
+        message: formik.values.text,
+      };
+      addRecoCall({ variables: dataToSend });
+    }
   };
+  useEffect(() => {
+    if (setAddRecoCall.data) {
+      setChildrenModal(
+        <div className="bg-lena-blue-dark w-full flex flex-col justify-center p-6">
+          <div className="flex justify-center pb-12">
+            <ArrowLeftSvg />
+          </div>
+          <div className="px-4">
+            <p className="text-bold text-white text-lg text-center py-4">Le message a bien été envoyé !</p>
+            <p className="text-white text-lg text-center py-4">
+              Une fois rédigée, sa recommandation apparaîtra dans votre carte de compétences.
+            </p>
+            <div className="text-center mt-6 pb-10">
+              <Button variant="darkBlue" size="md" onClick={() => setOpenModal(false)} className="bg-lena-blue-dark">
+                J’ai compris
+              </Button>
+            </div>
+          </div>
+        </div>,
+      );
+      setVariant('mail');
+      setBgColor('bg-lena-blue-backdrop');
+    }
+  }, [setAddRecoCall.data]);
   const renderStep = () => {
     switch (step) {
       case 0:

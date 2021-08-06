@@ -18,9 +18,7 @@ const ModalComponent: FunctionComponent<ModalProps> = ({ open, variant = 'primar
   const mediaQueryMD = useMediaQuery('md');
 
   return !open ? null : (
-    <div
-      className={classNames('absolute w-full h-full flex items-center justify-center top-0 left-0 md:absolute z-50')}
-    >
+    <div className={classNames('fixed w-full h-full flex items-center justify-center top-0 left-0 md:absolute z-50')}>
       <div
         onClick={() => onClose?.call(null)}
         className={classNames(`modal-overlay absolute md:fixed w-full h-full top-0 left-0 opacity-90 ${bgColor}`)}
