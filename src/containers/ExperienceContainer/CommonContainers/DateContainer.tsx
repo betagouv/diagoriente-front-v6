@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
+import ThemeContext from 'common/contexts/ThemeContext';
+
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-left.svg';
 import DatePicker from 'components/design-system/DatePicker';
@@ -31,6 +33,13 @@ const DateContainer = ({
 }: Props) => {
   const mediaQueryMD = useMediaQuery('md');
   const history = useHistory();
+  const onNavigate = () => {
+    if (theme?.title === 'Service civique') {
+      history.push(`/experience/${theme?.id}/benevolat`);
+    } else {
+      history.push(`/experience/${theme?.id}/activite`);
+    }
+  };
 
   const DesktopContainer = () => (
     <div className="flex flex-col items-center justify-start space-y-8 container py-8 md:p-14 relative">
@@ -101,7 +110,7 @@ const DateContainer = ({
       {mediaQueryMD ? (
         <div className="flex justify-center ">
           <button
-            onClick={() => history.push(`/experience/${theme?.id}/activite`)}
+            onClick={() => onNavigate()}
             className={`md:px-14 md:rounded-md
               focus:ring-0 focus:outline-none w-full
               bg-lena-blue text-white py-3 text-center font-bold text-lg  w-1/4 mt-10`}
@@ -112,7 +121,7 @@ const DateContainer = ({
       ) : (
         <div className="fixed bottom-0 left-0 right-0 md:relative">
           <button
-            onClick={() => history.push(`/experience/${theme?.id}/activite`)}
+            onClick={() => onNavigate()}
             className={`md:px-14 md:rounded-md
                   focus:ring-0 focus:outline-none w-full
                   bg-lena-blue text-white py-3 text-center font-bold text-lg`}

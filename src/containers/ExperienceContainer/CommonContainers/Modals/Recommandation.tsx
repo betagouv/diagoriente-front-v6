@@ -51,7 +51,6 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
   }, [formik.values.nom, formik.values.prenom]);
   const [step, setStep] = useState(0);
   const onAddReco = () => {
-    console.log(param);
     if (param) {
       const dataToSend = {
         skill: param,
