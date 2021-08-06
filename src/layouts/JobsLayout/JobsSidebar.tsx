@@ -3,7 +3,7 @@ import { ReactComponent as TopJobsIcon } from 'assets/svg/picto_top_metiers.svg'
 
 const JobsSidebar: FunctionComponent = () => {
   return (
-    <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
+    <div className="w-80 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
       <div className="flex flex-col justify-between flex-grow">
         <div className="flex flex-col space-y-8 p-8">
           <div className="flex flex-col items-center justify-center space-y-4">
