@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ModalContext from 'common/contexts/ModalContext';
 import ThemeContext from 'common/contexts/ThemeContext';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import { capitalizeFirstLetter } from 'common/utils/capitalize';
 import { groupBy } from 'lodash';
@@ -28,6 +28,7 @@ interface PropsBox {
 
 const AddExperienceDone = ({ data }: Props) => {
   const history = useHistory();
+  const param: { idSkill: string } = useParams();
   const { setChildrenModal, setOpenModal, setVariant, setBgColor } = useContext(ModalContext);
   const mediaQueryMD = useMediaQuery('md');
   const location = useLocation();
@@ -135,11 +136,11 @@ const AddExperienceDone = ({ data }: Props) => {
   const showModal = () => {
     if (mediaQueryMD) {
       setOpenModal(true);
-      setChildrenModal(<ModalReco isMobile={mediaQueryMD} onClose={() => setOpenModal(false)} />);
+      setChildrenModal(<ModalReco isMobile={mediaQueryMD} onClose={() => setOpenModal(false)} param={param.idSkill} />);
       setVariant('reco');
       setBgColor('bg-lena-blue-backdrop');
     } else {
-      history.push(`/experience/${theme?.id}/recommendation`);
+      history.push(`/experience/${theme?.id}/recommendation/${param.idSkill}`);
     }
   };
   return (

@@ -15,6 +15,7 @@ import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
 import RecommandationMobile from 'containers/ExperienceContainer/CommonContainers/RecommandationMobile';
+import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -87,7 +88,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
 
   useEffect(() => {
     if (addSkillState.data) {
-      history.push(`/experience/${match.params.id}/sommaire`);
+      history.push(`/experience/${match.params.id}/sommaire/${addSkillState.data.createSkill.id}`);
     }
   }, [addSkillState.data]);
 
@@ -151,6 +152,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
+      <Route exact path="/experience/:id/Benevolat" render={() => <Benevolat />} />
       <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={themeSelected} />} />
       <Route
         exact
@@ -187,8 +189,12 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
-      <Route exact path="/experience/:id/sommaire" render={() => <SommaireContainer data={addSkillState.data} />} />
-      <Route exact path="/experience/:id/recommendation" render={() => <RecommandationMobile />} />
+      <Route
+        exact
+        path="/experience/:id/sommaire/:idSkill"
+        render={() => <SommaireContainer data={addSkillState.data} />}
+      />
+      <Route exact path="/experience/:id/recommendation/:idSkill" render={() => <RecommandationMobile />} />
     </Switch>
   );
 };
