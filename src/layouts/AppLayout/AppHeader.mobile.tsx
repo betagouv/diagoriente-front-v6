@@ -14,7 +14,7 @@ const AppHeaderMobile: FunctionComponent<{ left?: ReactNode; center?: ReactEleme
         <div>
           <BurgerMenuSvg onClick={() => setShowDrawer(!showDrawer)} />
         </div>
-        <div className="font-bold text-lena-blue-dark">{document.title}</div>
+        <div className="font-bold text-lena-blue-dark text-xl">{document.title}</div>
         {user && <AppUserMenu />}
       </div>
       <AppDrawer open={showDrawer} onClose={() => setShowDrawer(false)} />

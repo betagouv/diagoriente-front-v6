@@ -131,7 +131,7 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   };
   return (
     <>
-      <div className="w-11/12">
+      <div className="w-11/12 flex-1">
         {!data && <AppLoader />}
         {data && (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-2 justify-start">
@@ -200,7 +200,7 @@ const SelectionTheme = () => {
       <div className="container py-8 flex flex-col flex-1 items-center justify-start space-y-8 md:px-14 bg-lena-blue-dark md:bg-transparent">
         <div className="flex flex-col items-center flex-1 space-y-8 md:space-y-5 w-full">
           {mediaQueryMD ? (
-            <div className="flex flex-col w-full items-center justify-between flex-1 space-y-6">
+            <div className="flex flex-col w-full items-center justify-start flex-1 space-y-8">
               <h2 className="text-lena-blue-dark text-center font-bold text-xl leading-10">
                 Sélectionnez le domaine de l’expérience {translateExperienceType(params.type).singular} que vous
                 souhaitez ajouter :

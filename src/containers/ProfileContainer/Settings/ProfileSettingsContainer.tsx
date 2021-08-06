@@ -15,7 +15,7 @@ const ProfileSettingsContainer = () => {
       <div className="container py-8 flex flex-col space-y-8 items-center">
         {isDesktop && (
           <div className="flex flex-col items-center">
-            <h2 className="font-bold text-lena-blue-dark text-xl">Réglages</h2>
+            <h2 className="font-bold text-lena-blue-dark text-xl">Mon compte</h2>
           </div>
         )}
         <div className="w-3/4 flex flex-col space-y-8">

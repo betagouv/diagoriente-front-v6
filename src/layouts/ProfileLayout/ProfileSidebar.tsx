@@ -28,7 +28,7 @@ const ProfileSidebar: FunctionComponent = () => {
             </div>
             <div className="flex flex-col py-4">
               <Link className="text-lena-blue-dark px-8" to="/profil/reglages">
-                Mes réglages
+                Mon compte
               </Link>
             </div>
             <div className="flex flex-col py-4">

@@ -83,7 +83,7 @@ const ImmersionSearchResults = () => {
               className="flex-1 overflow-auto"
               style={{ background: `url(${BgImmersion}) no-repeat fixed`, backgroundSize: 'cover' }}
             >
-              <div className="px-4 xl:px-16 py-4 grid xl:grid-cols-2 gap-4">
+              <div className="px-4 xl:px-8 py-8 grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
                 {immersionResults?.companies &&
                   immersionResults.companies.map((result: any) => (
                     <ImmersionResultItem key={result.siret} result={result} />

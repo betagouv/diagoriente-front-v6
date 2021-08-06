@@ -30,7 +30,7 @@ export const AppUserMenu = () => {
     ],
     [
       {
-        label: 'Réglages',
+        label: 'Mon compte',
         icon: SettingsSvg,
         link: '/profil/reglages',
       },
