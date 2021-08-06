@@ -182,7 +182,7 @@ const SelectionTheme = () => {
   const mediaQueryMD = useMediaQuery('md');
   const location = useLocation();
   const params = decodeUri(location.search);
-  const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only' });
+  const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only', variables: { sort: 'title' } });
 
   useDidMount(() => {
     if (params.type) {
