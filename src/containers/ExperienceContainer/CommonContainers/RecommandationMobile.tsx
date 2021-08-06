@@ -274,8 +274,8 @@ const RecommandationMobile = () => {
                 Une fois rédigée, sa recommandation apparaîtra dans votre carte de compétences.
               </p>
               <div className="text-center mt-6 pb-10 w-full">
-                <Button variant="secondary" fullWidth onClick={() => setStep(1)}>
-                  Suivant
+                <Button variant="secondary" fullWidth onClick={() => history.goBack()}>
+                  J’ai compris
                 </Button>
               </div>
             </div>
