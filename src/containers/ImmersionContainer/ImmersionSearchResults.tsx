@@ -62,8 +62,8 @@ const ImmersionSearchResults = () => {
 
   return (
     <ImmersionLayout showSearch={true}>
-      {immersionState.data && (
-        <div className="flex flex-row items-center justify-between px-4 md:px-8 py-8">
+      {immersionState.data && !immersionState.loading && (
+        <div className="flex flex-row items-center justify-between px-4 md:px-8 py-8 filter drop-shadow-md">
           <div className="hidden md:block md:invisible" />
           <div className="text-lena-blue-dark text-center text-lg font-bold">
             {immersionResults?.companies_count} engagements trouvés
@@ -76,11 +76,14 @@ const ImmersionSearchResults = () => {
         </div>
       )}
       {immersionState.loading && <AppLoader />}
-      {immersionState.data && (
-        <>
+      {immersionState.data && !immersionState.loading && (
+        <div className="flex flex-1 overflow-auto">
           {viewMode === 'list' && (
-            <div style={{ background: `url(${BgImmersion}) no-repeat fixed`, backgroundSize: 'cover' }}>
-              <div className="px-4 xl:px-16 py-4 grid xl:grid-cols-2 gap-4">
+            <div
+              className="flex-1 overflow-auto"
+              style={{ background: `url(${BgImmersion}) no-repeat fixed`, backgroundSize: 'cover' }}
+            >
+              <div className="px-4 xl:px-8 py-8 grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2">
                 {immersionResults?.companies &&
                   immersionResults.companies.map((result: any) => (
                     <ImmersionResultItem key={result.siret} result={result} />
@@ -88,12 +91,8 @@ const ImmersionSearchResults = () => {
               </div>
             </div>
           )}
-          {viewMode === 'map' && (
-            <div className="flex flex-1">
-              <ImmersionMapView results={immersionResults?.companies} />
-            </div>
-          )}
-        </>
+          {viewMode === 'map' && <ImmersionMapView results={immersionResults?.companies} />}
+        </div>
       )}
     </ImmersionLayout>
   );

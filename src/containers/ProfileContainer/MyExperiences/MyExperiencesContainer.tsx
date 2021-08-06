@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
-import { ReactComponent as StarIcon } from 'assets/svg/star.svg';
 import { useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_professional.svg';
 import { ReactComponent as ExpBenevolatSvg } from 'assets/svg/exp-benevolat.svg';
@@ -12,8 +11,8 @@ import { useListSkills, useSkillCountPerDomain } from 'common/requests/skills';
 import translateExperienceType from 'utils/translateExperienceType';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import _ from 'lodash';
+import { useDidMount } from 'common/hooks/useLifeCycle';
 import CardExperience from './components/CardExperience';
-import { useDidMount } from '../../../common/hooks/useLifeCycle';
 
 const allExperienceTypes = [
   {
@@ -63,13 +62,8 @@ const MyExperiencesContainer: FunctionComponent = () => {
 
   return (
     <ProfileLayout>
-      <div className="container flex flex-col space-y-8 py-8">
-        {isDesktop && (
-          <div className="flex flex-col items-center justify-center space-y-2">
-            <StarIcon height={25} />
-            <h2 className="font-bold text-lena-blue-dark text-lg uppercase">Mes expériences</h2>
-          </div>
-        )}
+      <div className="container flex flex-col space-y-8 py-16">
+        {isDesktop && <h2 className="font-bold text-lena-blue-dark text-2xl text-center">Mes expériences</h2>}
         <div className="flex flex-col items-center space-y-8">
           <div className="grid grid-cols-3 w-full lg:w-3/4 xl:w-1/2 gap-2 md:gap-4">
             {allExperienceTypes.map((v) => (

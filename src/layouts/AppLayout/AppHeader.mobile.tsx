@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ReactElement, ReactNode, useContext, useState } from 'react';
 import { ReactComponent as BurgerMenuSvg } from 'assets/svg/menu_mobile_burger.svg';
-import UserContext from '../common/contexts/UserContext';
+import UserContext from '../../common/contexts/UserContext';
 import { AppUserMenu } from './AppUserMenu';
 import AppDrawer from './AppDrawer';
 
-const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactElement }> = ({ left, center }) => {
+const AppHeaderMobile: FunctionComponent<{ left?: ReactNode; center?: ReactElement }> = ({ left, center }) => {
   const { user } = useContext(UserContext);
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -14,7 +14,7 @@ const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactE
         <div>
           <BurgerMenuSvg onClick={() => setShowDrawer(!showDrawer)} />
         </div>
-        <div className="font-bold text-lena-blue-dark">{document.title}</div>
+        <div className="font-bold text-lena-blue-dark text-xl">{document.title}</div>
         {user && <AppUserMenu />}
       </div>
       <AppDrawer open={showDrawer} onClose={() => setShowDrawer(false)} />
@@ -22,4 +22,4 @@ const MobileHeaderGeneric: FunctionComponent<{ left?: ReactNode; center?: ReactE
   );
 };
 
-export default MobileHeaderGeneric;
+export default AppHeaderMobile;

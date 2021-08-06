@@ -4,9 +4,9 @@ import PictoInterests from 'assets/svg/heart.svg';
 import PictoPlaceholder from 'assets/svg/cross3.svg';
 import { Link } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
-import LogoDiagoriente from '../assets/images/logo/diagoriente.svg';
-import RepubliqueSvg from '../assets/images/logo/republique.svg';
-import LogoBetagouv from '../assets/images/logo/betagouv.svg';
+import LogoDiagoriente from '../../assets/images/logo/diagoriente.svg';
+import RepubliqueSvg from '../../assets/images/logo/republique.svg';
+import LogoBetagouv from '../../assets/images/logo/betagouv.svg';
 
 const AppDrawer: FunctionComponent<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   const [showOverlay, setShowOverlay] = useState(false);

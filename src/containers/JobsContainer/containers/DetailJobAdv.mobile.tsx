@@ -5,7 +5,7 @@ import JobStatistics from '../components/JobStatistics';
 
 const DetailJobAdvForMobile: FunctionComponent = () => {
   return (
-    <JobsLayout mobileHeaderMode="back">
+    <JobsLayout>
       <JobHeader />
       <JobStatistics />
     </JobsLayout>

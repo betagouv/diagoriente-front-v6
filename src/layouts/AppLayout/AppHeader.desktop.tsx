@@ -3,11 +3,11 @@ import LogoDiagoriente from 'assets/images/logo/diagoriente.svg';
 import RepubliqueSvg from 'assets/images/logo/republique.svg';
 import LogoBetagouv from 'assets/images/logo/betagouv.svg';
 import { Link } from 'react-router-dom';
-import { AppUserMenu } from 'layouts/AppUserMenu';
-import UserContext from '../../../common/contexts/UserContext';
-import AppDesktopMenu from '../../AppDesktopMenu';
+import { AppUserMenu } from 'layouts/AppLayout/AppUserMenu';
+import UserContext from '../../common/contexts/UserContext';
+import AppDesktopMenu from './AppDesktopMenu';
 
-const AppHeader: FunctionComponent = () => {
+const AppHeaderDesktop: FunctionComponent = () => {
   const { user } = useContext(UserContext);
 
   return (
@@ -30,4 +30,4 @@ const AppHeader: FunctionComponent = () => {
   );
 };
 
-export default AppHeader;
+export default AppHeaderDesktop;

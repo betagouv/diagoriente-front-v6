@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
-import { ReactComponent as UserProfileIcon } from '../assets/svg/user_profile.svg';
-import StarSvg from '../assets/svg/star_m.svg';
-import HeartSvg from '../assets/svg/heart_m.svg';
-import CVSvg from '../assets/svg/cv_m.svg';
-import SettingsSvg from '../assets/svg/settings_m.svg';
-import LogoutSvg from '../assets/svg/logout.svg';
-import classNames from '../common/utils/classNames';
+import { ReactComponent as UserProfileIcon } from '../../assets/svg/user_profile.svg';
+import StarSvg from '../../assets/svg/star_m.svg';
+import HeartSvg from '../../assets/svg/heart_m.svg';
+import CVSvg from '../../assets/svg/cv_m.svg';
+import SettingsSvg from '../../assets/svg/settings_m.svg';
+import LogoutSvg from '../../assets/svg/logout.svg';
+import classNames from '../../common/utils/classNames';
 
 export const AppUserMenu = () => {
   const links = [
@@ -30,7 +30,7 @@ export const AppUserMenu = () => {
     ],
     [
       {
-        label: 'Réglages',
+        label: 'Mon compte',
         icon: SettingsSvg,
         link: '/profil/reglages',
       },

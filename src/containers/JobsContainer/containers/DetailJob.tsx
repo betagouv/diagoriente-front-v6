@@ -25,10 +25,13 @@ const DetailJob: FunctionComponent = () => {
   };
 
   return (
-    <JobsLayout mobileHeaderMode="back">
-      <div className="flex flex-col pb-8 md:pb-8">
+    <JobsLayout>
+      <div className="flex flex-col pb-8 md:pb-8 overflow-auto">
         <JobHeader />
-        <div className="px-4 md:px-8 md:px-16 2xl:px-64 py-8 space-y-4 divide-y divide-lena-blue-alt-light">
+        <div
+          className={`px-4 md:px-8 md:px-16 2xl:px-64 py-8 space-y-4 overflow-auto
+          divide-y divide-lena-blue-alt-light`}
+        >
           <div className="flex flex-col space-y-4">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat nisl erat, quis cursus felis
