@@ -16,19 +16,19 @@ import CardExperience from './components/CardExperience';
 
 const allExperienceTypes = [
   {
-    label: 'Professionnelles',
+    label: 'Mes expériences professionnelles',
     labelMobile: 'Pro',
     param: 'professional',
     icon: <ExpProSvg height={40} />,
   },
   {
-    label: 'Personnelles',
+    label: 'Mes expériences personnelles',
     labelMobile: 'Perso',
     param: 'personal',
     icon: <ExpPersoSvg height={40} />,
   },
   {
-    label: 'Bénévolat & volontariat',
+    label: 'Mes expériences Bénévolat & volontariat',
     labelMobile: 'Bénévolat\nvolontariat',
     param: 'voluntary',
     icon: <ExpBenevolatSvg height={40} />,
@@ -62,19 +62,19 @@ const MyExperiencesContainer: FunctionComponent = () => {
 
   return (
     <ProfileLayout>
-      <div className="container flex flex-col space-y-8 py-16">
-        {isDesktop && <h2 className="font-bold text-lena-blue-dark text-2xl text-center">Mes expériences</h2>}
+      <div className="flex flex-col space-y-8 p-6">
         <div className="flex flex-col items-center space-y-8">
-          <div className="grid grid-cols-3 w-full lg:w-3/4 xl:w-1/2 gap-2 md:gap-4">
+          <div className="grid grid-cols-3 w-full gap-2 md:gap-0">
             {allExperienceTypes.map((v) => (
               <button
                 key={v.param}
                 onClick={() => setSelectedType(v.param)}
                 className={classNames(
                   'flex flex-col justify-start items-center',
-                  'py-8 px-4 rounded-md cursor-pointer select-none',
-                  'focus:ring-0 focus:outline-none hover:bg-lena-blue-alt-light',
-                  selectedType === v.param ? 'bg-lena-blue-alt-light' : 'bg-lena-blue-light2',
+                  'py-8 px-4 rounded-md md:rounded-none cursor-pointer select-none',
+                  'focus:ring-0 focus:outline-none hover:bg-lena-blue-alt-light md:border',
+                  selectedType === v.param ? 'bg-lena-blue-alt-light ' : 'bg-lena-blue-light2',
+                  selectedType === v.param ? 'md:border-lena-blue' : 'md:border-transparent',
                 )}
               >
                 {v.icon}
