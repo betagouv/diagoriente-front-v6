@@ -155,6 +155,7 @@ const ChoixActivites = ({ activities, theme, extraAct, setExtraAct, setActivitie
                     key={activity.id}
                     onClick={(e) => handleCheck(activity.id, e)}
                     checked={activitiesChecked.find((v) => v.id === activity.id)}
+                    withCheckBox
                   >
                     {activity.title}
                   </SelectorTest>
