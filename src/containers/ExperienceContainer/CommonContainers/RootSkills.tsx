@@ -14,6 +14,7 @@ import DoneQuestions from 'containers/ExperienceContainer/CommonContainers/Quest
 import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers/ContainerCompetence';
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
+import RecommandationMobile from 'containers/ExperienceContainer/CommonContainers/RecommandationMobile';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -186,13 +187,8 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
-      <Route
-        exact
-        path="/experience/:id/sommaire"
-        render={() => (
-          <SommaireContainer theme={themeSelected} competencesValues={competencesValues} data={addSkillState.data} />
-        )}
-      />
+      <Route exact path="/experience/:id/sommaire" render={() => <SommaireContainer data={addSkillState.data} />} />
+      <Route exact path="/experience/:id/recommendation" render={() => <RecommandationMobile />} />
     </Switch>
   );
 };

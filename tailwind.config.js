@@ -1,4 +1,4 @@
-const plugin = require("tailwindcss/plugin");
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   purge: ['./public/**/*.html', './src/**/*.{js,jsx/ts,tsx}'],
@@ -18,14 +18,14 @@ module.exports = {
         '30p': '30.66667%',
         dateInputMd: '149px',
         dateInput: '192px',
-        logoExp:155
+        logoExp: 155,
       },
       divideColor: {
         blue: '#C4D2F8',
       },
       dropShadow: {
-        'sm': '0px 2px 2px rgba(0, 0, 0, 0.25)',
-        'md': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        sm: '0px 2px 2px rgba(0, 0, 0, 0.25)',
+        md: '0px 4px 4px rgba(0, 0, 0, 0.25)',
       },
       maxWidth: {
         '58p': '58.33333%',
@@ -39,11 +39,24 @@ module.exports = {
         '1/4': '25%',
         '1/2': '50%',
         '3/4': '75%',
-        'full': '100%',
-        '28p': '78px'
+        full: '100%',
+        '28p': '78px',
       },
-      height:{
-        logoExp:143
+      height: {
+        logoExp: 143,
+      },
+      zIndex:{
+        '0': 0,
+        '10': 10,
+        '20': 20,
+        '30': 30,
+        '40': 40,
+        '50': 50,
+        '25': 25,
+        '50': 50,
+        '75': 75,
+        '100': 100,
+        'auto': 'auto',
       },
       colors: {
         'lena-lightgray': '#F3F2F4',
@@ -71,6 +84,7 @@ module.exports = {
           'alt-dark': '#3C59A7', // used for button
           dark: '#223A7A',
           darkest: '#011A5E',
+          backdrop: '#1E2E58',
           inter: '#A3AFD3',
           light: '#E1E7F7',
         },
@@ -82,7 +96,7 @@ module.exports = {
         'lena-purple': {
           light: '#ECE8F0',
         },
-      }
+      },
     },
     fontFamily: {
       sans: ['Atkinson Hyperlegible', 'sans-serif'],
@@ -91,12 +105,15 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'),
-    plugin(function({ addVariant, e }) {
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    plugin(function ({ addVariant, e }) {
       addVariant('first-letter', ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
-          return `.${e(`first-letter${separator}${className}`)}::first-letter`
-        })
-      })
-    })],
+          return `.${e(`first-letter${separator}${className}`)}::first-letter`;
+        });
+      });
+    }),
+  ],
 };
