@@ -152,7 +152,20 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
-      <Route exact path="/experience/:id/Benevolat" render={() => <Benevolat />} />
+      <Route
+        exact
+        path="/experience/:id/Benevolat"
+        render={() => (
+          <Benevolat
+            isCreate={!selectedSkillId}
+            theme={themeSelected}
+            setOptionActivities={setOptionActivities}
+            optionActivities={optionActivities}
+            activity={activity}
+            setActivity={setActivity}
+          />
+        )}
+      />
       <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={themeSelected} />} />
       <Route
         exact
