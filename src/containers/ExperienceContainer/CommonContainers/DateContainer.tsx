@@ -34,7 +34,7 @@ const DateContainer = ({
   const mediaQueryMD = useMediaQuery('md');
   const history = useHistory();
   const onNavigate = () => {
-    if (theme?.title === 'Service civique') {
+    if (theme?.scope === 'volunteer') {
       history.push(`/experience/${theme?.id}/benevolat`);
     } else {
       history.push(`/experience/${theme?.id}/activite`);
