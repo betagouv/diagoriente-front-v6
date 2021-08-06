@@ -22,7 +22,7 @@ const HomeContainer = () => {
     { label: 'Ajouter une expérience BENEVOLAT', url: '/experience/theme?type=voluntary' },
     { label: "Mes centres d'intérêts", url: '/profil/mes-centres-d-interet/' },
     { label: "Ajouter mes centres d'intérêts", url: '/centres_interet/create' },
-    { label: 'Mon top métiers', url: '/mon-top-metiers' },
+    { label: 'Mon top métiers', url: '/metiers/mon-top-metiers' },
     { label: 'Rechercher une immersion', url: '/immersion/recherche' },
   ];
 

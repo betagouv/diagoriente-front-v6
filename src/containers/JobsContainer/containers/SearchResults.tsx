@@ -3,7 +3,7 @@ import { ReactComponent as ArrowLeftSvg } from 'assets/images/svg/picto/arrow-le
 import { ReactComponent as UserSvg } from 'assets/svg/user_profile.svg';
 import PeintureImg from 'assets/illu/topjob.svg';
 import { useHistory } from 'react-router-dom';
-import { CardJob } from '../../TopJobContainer/TopJobContainer';
+import { CardJob } from './TopJobContainer';
 
 const SearchResults = () => {
   const history = useHistory();

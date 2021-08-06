@@ -3,7 +3,6 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import React, { FunctionComponent, useState } from 'react';
 import { ReactComponent as PictoFormation } from 'assets/svg/picto_formation.svg';
 import { ReactComponent as GripIcon } from 'assets/svg/grip.svg';
-import { Transition } from '@headlessui/react';
 
 const ImmersionMarkerPopup: FunctionComponent<{ result: any }> = ({ result }) => {
   const isDesktop = useMediaQuery('md');
@@ -30,25 +29,29 @@ const ImmersionMarkerPopup: FunctionComponent<{ result: any }> = ({ result }) =>
         </div>
       )}
       <div>
-        <div className="text-lg text-lena-blue-dark font-bold">{result.name}</div>
-        <div>{result.naf_text}</div>
+        <div className="text-lg text-lena-blue-dark font-bold">{result.title}</div>
+        {result.apiData.naf_text && <div>{result.apiData.naf_text}</div>}
       </div>
       {(isDesktop || openMobile) && (
         <>
           <div>
-            <pre>{result.address.replaceAll(', ', '\n')}</pre>
-            <pre>{result.city}</pre>
+            <pre>{result.location.address.replaceAll(', ', '\n')}</pre>
+            <pre>{result.location.city}</pre>
           </div>
           <div className="flex flex-row justify-between space-x-8">
             <div className="space-y-2 text-sm">
-              <div className="flex items-center justify-start space-x-2">
-                <PictoFormation />
-                <div>{result.headcount_text}</div>
-              </div>
-              <div className="flex items-center justify-start space-x-2">
-                <PictoFormation />
-                <div>{result.distance} km du centre ville</div>
-              </div>
+              {result.apiData.headcount_text && (
+                <div className="flex items-center justify-start space-x-2">
+                  <PictoFormation />
+                  <div>{result.apiData.headcount_text}</div>
+                </div>
+              )}
+              {result.apiData.distance && (
+                <div className="flex items-center justify-start space-x-2">
+                  <PictoFormation />
+                  <div>{result.apiData.distance} km du centre ville</div>
+                </div>
+              )}
             </div>
             <div className="flex items-end text-sm font-bold text-lena-turquoise-dark py-1">Conseils de contact</div>
           </div>

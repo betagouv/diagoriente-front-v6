@@ -1,9 +1,9 @@
-import React from 'react';
-import { Competence, Theme } from 'common/requests/types';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import ModalContext from 'common/contexts/ModalContext';
+import ThemeContext from 'common/contexts/ThemeContext';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { decodeUri } from 'common/utils/url';
 import { capitalizeFirstLetter } from 'common/utils/capitalize';
-
 import { groupBy } from 'lodash';
 import Organiser from 'assets/svg/organiser.svg';
 import Help from 'assets/images/svg/picto/help_white.svg';
@@ -12,10 +12,9 @@ import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import useMediaQuery from 'hooks/useMediaQuery';
+import ModalReco from './Modals/Recommandation';
 
 interface Props {
-  competencesValues: string[];
-  theme: Theme | undefined;
   data: SkillAddResponse | undefined | null;
 }
 interface PropsBox {
@@ -27,10 +26,13 @@ interface PropsBox {
   }[];
 }
 
-const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
+const AddExperienceDone = ({ data }: Props) => {
   const history = useHistory();
+  const param: { idSkill: string } = useParams();
+  const { setChildrenModal, setOpenModal, setVariant, setBgColor } = useContext(ModalContext);
   const mediaQueryMD = useMediaQuery('md');
   const location = useLocation();
+  const { theme } = useContext(ThemeContext);
   const params = decodeUri(location.search);
   const groupedCmp = groupBy(data?.createSkill.ranks, 'competence.type');
   const renderTitle = (title: string) => {
@@ -77,7 +79,7 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
   };
 
   const RenderBox = ({ title, competences }: PropsBox) => (
-    <div className="rounded p-4 bg-lena-lightgray">
+    <div className="rounded p-4 bg-lena-lightgray" style={{ height: 'fit-content' }}>
       <div className="flex items-center mb-3">
         <img src={renderLogo(title)} alt="logo" />
         <p className="text-black ml-4 font-bold">{renderTitle(title)}</p>
@@ -131,9 +133,19 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
     }
     return text;
   };
+  const showModal = () => {
+    if (mediaQueryMD) {
+      setOpenModal(true);
+      setChildrenModal(<ModalReco isMobile={mediaQueryMD} onClose={() => setOpenModal(false)} param={param.idSkill} />);
+      setVariant('reco');
+      setBgColor('bg-lena-blue-backdrop');
+    } else {
+      history.push(`/experience/${theme?.id}/recommendation/${param.idSkill}`);
+    }
+  };
   return (
     <ParcoursExperienceLayout>
-      <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4">
+      <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4 relative">
         <div className="container mt-8 text-center lg:w-4/5">
           {mediaQueryMD ? (
             <p className="text-2xl font-bold leading-loose">Bravo ! </p>
@@ -167,8 +179,9 @@ const AddExperienceDone = ({ competencesValues, theme, data }: Props) => {
             <div className="flex flex-col space-y-4">
               <button
                 className={`mt-2 rounded-md focus:ring-0
-            focus:outline-none w-full bg-lena-yellow
-            text-lena-blue-darkest py-3 text-center font-bold text-lg px-16`}
+            focus:outline-none w-full bg-lena-pink-dark
+            text-white py-3 text-center font-bold text-lg px-16`}
+                onClick={showModal}
               >
                 Être recommandé.e
               </button>

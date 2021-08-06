@@ -14,6 +14,8 @@ import DoneQuestions from 'containers/ExperienceContainer/CommonContainers/Quest
 import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers/ContainerCompetence';
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
+import RecommandationMobile from 'containers/ExperienceContainer/CommonContainers/RecommandationMobile';
+import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -31,7 +33,8 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [yearStart, setYearStart] = useState('');
   const [monthEnd, setMonthEnd] = useState('Janvier');
   const [yearEnd, setYearEnd] = useState('');
-  const params = decodeUri(location.search);
+  const [optionActivities, setOptionActivities] = useState([[]] as { id: string; title: string }[][]);
+  const [activity, setActivity] = useState('');
 
   const themeSelected = useMemo(() => {
     if (dataTheme) return dataTheme.theme;
@@ -39,7 +42,6 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   }, [dataTheme]);
 
   const [callSkill, skillsState] = useSkill();
-
   useEffect(() => {
     if (selectedSkillId) callSkill({ variables: { id: selectedSkillId } });
     // eslint-disable-next-line
@@ -86,7 +88,7 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
 
   useEffect(() => {
     if (addSkillState.data) {
-      history.push(`/experience/${match.params.id}/sommaire`);
+      history.push(`/experience/${match.params.id}/sommaire/${addSkillState.data.createSkill.id}`);
     }
   }, [addSkillState.data]);
 
@@ -150,6 +152,20 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
           />
         )}
       />
+      <Route
+        exact
+        path="/experience/:id/Benevolat"
+        render={() => (
+          <Benevolat
+            isCreate={!selectedSkillId}
+            theme={themeSelected}
+            setOptionActivities={setOptionActivities}
+            optionActivities={optionActivities}
+            activity={activity}
+            setActivity={setActivity}
+          />
+        )}
+      />
       <Route exact path="/experience/:id/doneAct" render={() => <DoneActiviteContainer theme={themeSelected} />} />
       <Route
         exact
@@ -188,11 +204,10 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
       />
       <Route
         exact
-        path="/experience/:id/sommaire"
-        render={() => (
-          <SommaireContainer theme={themeSelected} competencesValues={competencesValues} data={addSkillState.data} />
-        )}
+        path="/experience/:id/sommaire/:idSkill"
+        render={() => <SommaireContainer data={addSkillState.data} />}
       />
+      <Route exact path="/experience/:id/recommendation/:idSkill" render={() => <RecommandationMobile />} />
     </Switch>
   );
 };

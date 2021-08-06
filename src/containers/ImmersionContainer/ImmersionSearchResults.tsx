@@ -48,6 +48,7 @@ const ImmersionSearchResults = () => {
           radius: 30,
           insee: '75000',
           caller: 'test',
+          filter: 'Formations', // why ?
         },
       });
     }
@@ -80,7 +81,7 @@ const ImmersionSearchResults = () => {
       const numEntries = formationState.data.formation.length;
       const formattedEntries = formationState.data.formation.map((v) => ({
         type: 'formation',
-        key: v.company.siret,
+        key: v.company.siret, // TODO generate hash here ...
         title: v.title,
         location: { address: v.place.fullAddress, city: v.place.city, lat: v.place.latitude, lng: v.place.longitude },
         apiData: v,

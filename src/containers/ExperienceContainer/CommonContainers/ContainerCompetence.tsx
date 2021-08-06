@@ -6,7 +6,7 @@ import Organiser from 'assets/svg/organiser.svg';
 import Communication from 'assets/svg/communiquer.svg';
 import Refleshir from 'assets/svg/reflechir.svg';
 import { groupBy } from 'lodash';
-import { Activity, Theme } from 'common/requests/types';
+import { Theme } from 'common/requests/types';
 import { capitalizeFirstLetter } from 'common/utils/capitalize';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { useHistory } from 'react-router-dom';
@@ -117,7 +117,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
         <div className="pb-10">
           {competences.map((q) => (
             <div className={`mt-3 mb-3 p-3 `}>
-              <SelectorTest key={q.id} onClick={() => onSelectCompetence(q.id)} checked={isExist(q.id)}>
+              <SelectorTest key={q.id} onClick={() => onSelectCompetence(q.id)} checked={isExist(q.id)} withCheckBox>
                 {capitalizeFirstLetter(q.title)}
               </SelectorTest>
             </div>
@@ -151,7 +151,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
           <span className="text-sm mt-1 ml-3 text-lena-blue-dark">Retour</span>
         </button>
       )}
-      <div className="w-full flex justify-center mt-2 md:mt-10">
+      <div className="w-full flex justify-center mt-2 md:mt-4">
         <RendQuestionStep title={types[step].title} competences={typesCompetences[types[step].sub]} />
       </div>
     </ParcoursExperienceLayout>

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import classesNames from 'common/utils/classNames';
 
 export const FormControl: FunctionComponent = ({ children }) => {
   return (
@@ -15,5 +16,19 @@ export const FormLabel: FunctionComponent<React.HTMLProps<HTMLLabelElement>> = (
     </div>
   );
 };
+export const FormControlReco: FunctionComponent = ({ children }) => {
+  return (
+    <div className="w-full m-0 flex flex-col">
+      <div className="w-full flex flex-col">{children}</div>
+    </div>
+  );
+};
+export const FormLabelReco: FunctionComponent<React.HTMLProps<HTMLLabelElement>> = ({ children, className }) => {
+  return (
+    <div className="text-left">
+      <div className={classesNames('font-bold items-end mr-4', className)}>{children}</div>
+    </div>
+  );
+};
 
-export default { FormControl, FormLabel };
+export default { FormControl, FormControlReco, FormLabel, FormLabelReco };
