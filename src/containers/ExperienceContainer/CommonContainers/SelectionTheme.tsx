@@ -18,6 +18,7 @@ import ReactTooltip from 'react-tooltip';
 import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursExperienceLayout';
 import { decodeUri } from 'common/utils/url';
 import translateExperienceType from '../../../utils/translateExperienceType';
+import AppLoader from '../../../components/ui/AppLoader';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -130,41 +131,45 @@ const WebDomainDisplay = ({ data }: WebChoiceDomainProps) => {
   };
   return (
     <>
-      <div className="mx-auto w-11/12">
-        <div className="flex flex-wrap mt-10 justify-start">
-          {data?.map((f) => (
-            <button
-              key={f.id}
-              onClick={() => controlSelected(f)}
-              className={classNames(
-                'rounded-xl m-2 cursor-pointer border-4 focus:ring-0 focus:outline-none w-logoExp h-logoExp justify-center',
-                selectedTheme?.id === f.id
-                  ? 'bg-lena-blue-light border-lena-blue-inter'
-                  : 'hover:bg-lena-turquoise-light border-transparent',
-              )}
-              data-tip="Info"
-              data-for={f.id}
-            >
-              <div className="flex flex-col items-center">
-                <LoveWhiteSvg />
-                <span className="block mt-5">{capitalizeFirstLetter(f.title)}</span>
-              </div>
-              <ReactTooltip id={f.id} place="right" type="light" effect="solid">
-                <ul className="list-disc text-left">
-                  {f.activities.map((a: any) => (
-                    <li>{a.title}</li>
-                  ))}
-                </ul>
-              </ReactTooltip>
-            </button>
-          ))}
-        </div>
+      <div className="w-11/12">
+        {!data && <AppLoader />}
+        {data && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-2 justify-start">
+            {data?.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => controlSelected(f)}
+                className={classNames(
+                  'rounded-xl cursor-pointer border-4 focus:ring-0 focus:outline-none',
+                  'flex flex-col items-start justify-around',
+                  selectedTheme?.id === f.id
+                    ? 'bg-lena-blue-light border-lena-blue-inter'
+                    : 'hover:bg-lena-turquoise-light border-transparent',
+                )}
+                data-tip="Info"
+                data-for={f.id}
+              >
+                <div className="flex flex-col items-center flex-1 w-full justify-start space-y-2 py-1">
+                  <LoveWhiteSvg />
+                  <span className="block">{capitalizeFirstLetter(f.title)}</span>
+                </div>
+                <ReactTooltip id={f.id} place="right" type="light" effect="solid">
+                  <ul className="list-disc text-left">
+                    {f.activities.map((a: any) => (
+                      <li>{a.title}</li>
+                    ))}
+                  </ul>
+                </ReactTooltip>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <button
         className={classNames(
           `focus:ring-0 focus:outline-none w-full bg-lena-blue
-          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg mt-4`,
+          text-white py-3 text-center font-bold text-lg md:w-72 md:rounded-lg`,
           isEmpty(selectedTheme) && 'bg-gray-300',
         )}
         onClick={handleNext}
@@ -182,7 +187,7 @@ const SelectionTheme = () => {
   const mediaQueryMD = useMediaQuery('md');
   const location = useLocation();
   const params = decodeUri(location.search);
-  const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only' });
+  const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only', variables: { sort: 'title' } });
 
   useDidMount(() => {
     if (params.type) {
@@ -192,10 +197,10 @@ const SelectionTheme = () => {
 
   return !showMobileChoice ? (
     <ParcoursExperienceLayout>
-      <div className="container py-8 flex flex-col flex-1 items-center justify-start space-y-8 md:p-14 bg-lena-blue-dark md:bg-transparent">
+      <div className="container py-8 flex flex-col flex-1 items-center justify-start space-y-8 md:px-14 bg-lena-blue-dark md:bg-transparent">
         <div className="flex flex-col items-center flex-1 space-y-8 md:space-y-5 w-full">
           {mediaQueryMD ? (
-            <div className="flex flex-col w-full items-center">
+            <div className="flex flex-col w-full items-center justify-between flex-1 space-y-6">
               <h2 className="text-lena-blue-dark text-center font-bold text-xl leading-10">
                 Sélectionnez le domaine de l’expérience {translateExperienceType(params.type).singular} que vous
                 souhaitez ajouter :
