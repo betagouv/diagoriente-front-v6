@@ -22,7 +22,7 @@ const ModalCardExport = ({ open, onClose, onSelect }: ModalExportProps) => {
     <ModalComponent onClose={() => onClose.call(null)} open={open}>
       <div className="flex flex-col justify-center items-center py-10">
         {exporting ? (
-          <AppLoader variant="pink" text="Génération de votre PDF ..." />
+          <AppLoader text="Génération de votre PDF ..." />
         ) : (
           <>
             <img className="mb-6" src={ExportModalSvg} alt="Export Icon" />

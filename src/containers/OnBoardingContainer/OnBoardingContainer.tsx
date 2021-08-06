@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import OnBoardingBg from 'assets/images/bg/onboarding.jpg';
 import OnBoardingWebBg from 'assets/images/bg/onboarding-web.jpg';
 import OnBoardingChoiceHeader from 'assets/images/header/onboarding_choice_header.jpg';
@@ -126,7 +126,9 @@ const ChoiceComponent = () => {
               </div>
             </div>
             <div>
-              <button className="text-lena-blue-dark focus:ring-0 focus:outline-none">Je n'ai aucune expérience</button>
+              <Link className="text-lena-blue-dark cursor-pointer" to="/centres_interet/create">
+                Je n'ai aucune expérience
+              </Link>
             </div>
           </div>
         </div>

@@ -1,34 +1,26 @@
 import AppLayout from 'layouts/AppLayout/AppLayout';
 import React, { FunctionComponent } from 'react';
-import ButtonWithPopover from '../../components/misc/ButtonWithPopover';
+import { Link } from 'react-router-dom';
+import classNames from 'common/utils/classNames';
 
 const ExperienceIntroContainer: FunctionComponent = () => {
   return (
     <AppLayout>
-      <div className="text-center flex flex-1 flex-col items-center justify-center px-4 w-full">
-        <div className="w-full">
-          <h2 className="text-lena-blue-dark font-bold text-lg">Ajouter une expérience...</h2>
-          <div className="mt-5 md:flex md:flex-col md:w-auto md:mt-10">
-            <ButtonWithPopover
-              path="/experience/theme-pro"
-              popover={`Même si vous voulez changer de voie,
-                  vos expériences professionnelles vous ont fait gagner en compétence.`}
-            >
-              Professionnelle
-            </ButtonWithPopover>
-            <ButtonWithPopover
-              path="/experience/theme?type=voluntary"
-              popover="Garder des enfants, des animaux, aider un voisin, organiser un événement..."
-            >
-              Personnelle
-            </ButtonWithPopover>
-            <ButtonWithPopover
-              path="/experience/theme?type=voluntary"
-              popover="Service civique, bénévolat, vie associative..."
-            >
-              De bénévolat
-            </ButtonWithPopover>
-          </div>
+      <div className="flex flex-1 items-center justify-center px-2">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {[0, 1, 2, 3].map((v) => (
+            <Link key={v} to="/">
+              <div
+                className={classNames(
+                  'bg-lena-blue-dark font-bold text-xl text-white px-2 py-16 text-center space-y-2',
+                  'md:py-64 md:hover:bg-lena-blue-alt-dark',
+                )}
+              >
+                <div className="text-lena-turquoise-dark">icon</div>
+                <div>Expérience professionnelle</div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </AppLayout>

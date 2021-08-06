@@ -6,8 +6,8 @@ import { Theme } from 'common/requests/types';
 import { useLazyThemes, useLazyTheme, ThemeListItem } from 'common/requests/themes';
 import { useDidMount } from 'common/hooks/useLifeCycle';
 import { isEmpty } from 'lodash';
-import { ReactComponent as PictoExpPerso } from 'assets/svg/exp_perso_lg.svg';
-import { ReactComponent as PictoExpBenevolat } from 'assets/svg/exp-benevolat.svg';
+import { ReactComponent as PictoExpPerso } from 'assets/svg/picto-ajout-xp-perso.svg';
+import { ReactComponent as PictoExpBenevolat } from 'assets/svg/picto-ajout-xp-benevolat.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/svg/arrow_down.svg';
 import { ReactComponent as LoveWhiteSvg } from 'assets/svg/love_white.svg';
 import { ReactComponent as CrossSvg } from 'assets/svg/cross.svg';
@@ -183,15 +183,19 @@ const SelectionTheme = () => {
   const location = useLocation();
   const params = decodeUri(location.search);
   const [loadThemes, stateLoadTheme] = useLazyThemes({ fetchPolicy: 'network-only' });
+
   useDidMount(() => {
     if (params.type) {
       loadThemes({ variables: { domain: params.type as 'personal' | 'professional' | 'voluntary' } });
     }
   });
+
+  const fxColor = params.type === 'voluntary' ? 'bg-parcours-voluntary' : 'bg-parcours-perso';
+
   return !showMobileChoice ? (
     <ParcoursExperienceLayout>
-      <div className="container py-8 flex flex-col items-center justify-start space-y-8 md:p-14">
-        <div className="md:flex md:flex-col md:items-start flex flex-col items-center space-y-8 md:space-y-5 w-full">
+      <div className="container py-8 flex flex-col flex-1 items-center justify-start space-y-8 md:p-14 bg-lena-blue-dark md:bg-transparent">
+        <div className="flex flex-col items-center flex-1 space-y-8 md:space-y-5 w-full">
           {mediaQueryMD ? (
             <div className="flex flex-col w-full items-center">
               <h2 className="text-lena-blue-dark text-center font-bold text-xl leading-10">
@@ -201,33 +205,48 @@ const SelectionTheme = () => {
               <WebDomainDisplay data={stateLoadTheme.data?.themes.data} />
             </div>
           ) : (
-            <>
+            <div className="relative flex-1 h-full">
               <div
-                className={`flex flex-col justify-center items-center
-              bg-lena-lightgray rounded-full h-56 w-56 space-y-2 p-4 md:hidden`}
-              >
-                {params.type === 'voluntary' ? (
-                  <PictoExpBenevolat style={{ height: 60 }} />
-                ) : (
-                  <PictoExpPerso style={{ height: 60 }} />
+                className={classNames(
+                  'absolute -right-16 -top-0 h-32 w-32',
+                  params.type === 'voluntary' ? 'bg-parcours-voluntary' : 'bg-parcours-perso',
                 )}
-                <div className="text-center text-lena-blue-dark font-bold text-xl">
-                  Mes expériences {params.type === 'voluntary' ? 'de bénévolat et volontariat' : 'personnelles'}
+                style={{ borderRadius: 50 }}
+              />
+              <div
+                className={classNames(
+                  'absolute -left-16 bottom-44 h-32 w-32',
+                  params.type === 'voluntary' ? 'bg-parcours-voluntary' : 'bg-parcours-perso',
+                )}
+                style={{ borderRadius: 50 }}
+              />
+              <div
+                className="absolute right-16 bottom-24"
+                style={{ borderRadius: 50, transform: 'scaleX(-0.5) scaleY(0.5)' }}
+              >
+                {params.type === 'voluntary' ? <PictoExpBenevolat /> : <PictoExpPerso />}
+              </div>
+              <div className="flex flex-col items-center justify-center space-y-8 pt-8 z-20">
+                <div className="flex flex-col items-center justify-center space-y-8">
+                  {params.type === 'voluntary' ? <PictoExpBenevolat /> : <PictoExpPerso />}
+                  <div className="text-center text-white font-bold text-4xl">
+                    Ajout d'expérience {params.type === 'voluntary' ? 'en bénévolat et volontariat' : 'personnelle'}
+                  </div>
+                </div>
+                <div className="flex flex-col justify-start items-center w-full px-5 z-20">
+                  <div className="text-white mb-5">Sélectionnez un domaine :</div>
+                  <button
+                    onClick={() => setShowMobileChoice(true)}
+                    className={`border-2 w-full py-4 rounded-md focus:ring-0
+                  focus:outline-none flex items-center bg-white justify-between px-8`}
+                    style={{ borderColor: '#e1e7f7' }}
+                  >
+                    <span className="text-lena-blue-dark">Aucun domaine choisi</span>
+                    <ArrowDownSvg />
+                  </button>
                 </div>
               </div>
-              <div className="flex flex-col justify-start w-full px-5">
-                <div className="text-lena-blue-dark mb-5">Selectionnez un domaine :</div>
-                <button
-                  onClick={() => setShowMobileChoice(true)}
-                  className={`border-2 w-full py-4 rounded-md focus:ring-0
-                  focus:outline-none flex items-center justify-between px-8`}
-                  style={{ borderColor: '#e1e7f7' }}
-                >
-                  <span className="text-lena-blue-dark">Aucun domaine choisi</span>
-                  <ArrowDownSvg />
-                </button>
-              </div>
-            </>
+            </div>
           )}
         </div>
       </div>

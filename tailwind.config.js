@@ -96,7 +96,11 @@ module.exports = {
         'lena-purple': {
           light: '#ECE8F0',
         },
-      },
+        'modal-blue': '#1E2E58',
+        'parcours-pro': '#FF705D',
+        'parcours-perso': '#4DC5AF',
+        'parcours-voluntary': '#F06597'
+      }
     },
     fontFamily: {
       sans: ['Atkinson Hyperlegible', 'sans-serif'],

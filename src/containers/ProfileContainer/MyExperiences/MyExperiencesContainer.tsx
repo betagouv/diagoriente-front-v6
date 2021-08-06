@@ -61,10 +61,6 @@ const MyExperiencesContainer: FunctionComponent = () => {
 
   const localizedExperienceType = translateExperienceType(selectedType || '');
 
-  const handleSelectCard = (param: string) => {
-    return setSelectedType(param);
-  };
-
   return (
     <ProfileLayout>
       <div className="container flex flex-col space-y-8 py-8">
@@ -79,7 +75,7 @@ const MyExperiencesContainer: FunctionComponent = () => {
             {allExperienceTypes.map((v) => (
               <button
                 key={v.param}
-                onClick={() => handleSelectCard(v.param)}
+                onClick={() => setSelectedType(v.param)}
                 className={classNames(
                   'flex flex-col justify-start items-center',
                   'py-8 px-4 rounded-md cursor-pointer select-none',
@@ -98,9 +94,9 @@ const MyExperiencesContainer: FunctionComponent = () => {
           {selectedType && (
             <>
               {skillsState.loading && <AppLoader />}
-              {skillsState.data && (
-                <div className="grid md:grid-cols-2 gap-4">
-                  {skillsState.data?.skills.data.map((exp) => (
+              {skillsState.data && skillsState.data.skills.data.length > 0 && (
+                <div className="grid md:grid-cols-2 gap-4 w-full md:w-auto">
+                  {skillsState.data.skills.data.map((exp) => (
                     <CardExperience
                       key={exp.id}
                       title={exp.theme.title}

@@ -7,7 +7,7 @@ const FullScreenLoader = () => (
   opacity-80 flex items-center justify-center z-50`}
   >
     <div className="flex flex-col justify-center items-center space-y-8">
-      <AppLoader variant="blue" />
+      <AppLoader />
       <div className="text-2xl text-lena-black">Chargement ...</div>
     </div>
   </div>

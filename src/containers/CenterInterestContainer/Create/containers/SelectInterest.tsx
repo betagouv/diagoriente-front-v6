@@ -238,8 +238,8 @@ const SelectInterest = ({ onStep, onBack, familyId }: Props) => {
           </h2>
         </header>
 
-        <div className={classNames('container flex-1', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'py-8')}>
-          {getInterestState.loading && <AppLoader variant="yellow" />}
+        <div className={classNames('flex-1', mediaQueryMD ? 'bg-lena-gray-light-2 py-14' : 'container py-8')}>
+          {getInterestState.loading && <AppLoader />}
           {getInterestState.data && (
             <>
               <div className="relative">

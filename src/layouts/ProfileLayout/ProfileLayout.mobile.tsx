@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import MobileHeaderGeneric from '../MobileHeaderGeneric';
+import AppLayout from '../AppLayout/AppLayout';
 
 const ProfileLayoutForMobile: FunctionComponent = ({ children }) => {
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <MobileHeaderGeneric center={<div className="font-bold text-lena-blue-dark text-lg">Mon profil</div>} />
+    <AppLayout>
       <div className="flex flex-col flex-1 bg-lena-lightgray">{children}</div>
-    </div>
+    </AppLayout>
   );
 };
 

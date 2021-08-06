@@ -11,8 +11,8 @@ import LogoBetagouv from '../assets/images/logo/betagouv.svg';
 const AppDrawer: FunctionComponent<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const links = [
-    { label: 'Ajouter une expérience', icon: PictoExperience, link: '/experience' },
-    { label: "Ajouter mes centres d'intérêt", icon: PictoInterests, link: '/interests/create' },
+    { label: 'Ajouter une expérience', icon: PictoExperience, link: '/ajout-exp' },
+    { label: "Ajouter mes centres d'intérêt", icon: PictoInterests, link: '/centres_interet/create' },
     { label: 'Rechercher engagement', icon: PictoPlaceholder, link: '/immersion/recherche' },
     { label: 'Rechercher métier', icon: PictoPlaceholder, link: '/metiers/recherche' },
   ];

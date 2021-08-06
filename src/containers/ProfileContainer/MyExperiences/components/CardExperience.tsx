@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import classNames from 'common/utils/classNames';
 import MedailleSvg from 'assets/svg/medaille.svg';
 import { ReactComponent as EditSvg } from 'assets/svg/edit.svg';
 

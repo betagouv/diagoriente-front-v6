@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { ReactComponent as SearchIcon } from 'assets/svg/search_job.svg';
 import ImmersionSearchForm from 'containers/ImmersionContainer/components/ImmersionSearchForm';
-import AppHeader from '../AppLayout/components/AppHeader';
+import AppLayout from '../AppLayout/AppLayout';
 
 const ImmersionLayoutForDesktop: FunctionComponent<{ showSearch: boolean }> = ({ showSearch, children }) => {
   return (
-    <div className="min-h-screen h-full flex flex-col">
-      <AppHeader />
+    <AppLayout>
       <div className="flex flex-row flex-1">
         <div className="w-96 bg-lena-lightgray flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
           <div className="flex flex-col justify-between flex-grow">
@@ -27,7 +26,7 @@ const ImmersionLayoutForDesktop: FunctionComponent<{ showSearch: boolean }> = ({
         </div>
         <div className="w-full flex flex-col md:relative">{children}</div>
       </div>
-    </div>
+    </AppLayout>
   );
 };
 
