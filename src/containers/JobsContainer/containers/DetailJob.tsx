@@ -51,7 +51,7 @@ const DetailJob: FunctionComponent = () => {
             <div className="order-1 lg:order-2">
               <div className="p-6 bg-lena-lightgray rounded-lg flex-1">
                 <div className="flex flex-col items-center text-center space-y-4">
-                  <SearchSvg />
+                  <SearchSvg height={48} width={48} />
                   <div className="text-lena-blue-dark font-bold w-3/4 block mb-4">
                     Trouver une immersion ou une formation pour ce métier
                   </div>
@@ -96,7 +96,7 @@ const DetailJob: FunctionComponent = () => {
             <div className="order-2 lg:order-1">
               <div className="p-6 bg-lena-lightgray rounded-lg flex-1">
                 <div className="flex flex-col text-center items-center space-y-4">
-                  <LoveTSvg />
+                  <LoveTSvg height={48} width={48} />
                   <div className="font-bold text-lena-blue-dark">Les centres d'intérêt associés à ce métier</div>
                 </div>
                 <div className="py-4 divide-y divide-lena-blue-alt-light">

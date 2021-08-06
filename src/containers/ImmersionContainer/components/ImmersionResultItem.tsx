@@ -3,7 +3,10 @@ import { ReactComponent as PictoFormation } from 'assets/svg/picto_formation.svg
 import Pill from '../../../components/design-system/Pill';
 
 const ImmersionResultItem: FunctionComponent<{ result: any }> = ({ result }) => {
-  const tags = [result.pmsmp && 'immersion en entreprise'].filter(Boolean);
+  const tags = [
+    result.type === 'formation' && result.apiData.ideaType === 'formation' && 'Formation',
+    result.type === 'formation' && result.apiData.ideaType === 'lba' && 'Entreprise',
+  ].filter(Boolean) as string[];
 
   return (
     <div
@@ -18,24 +21,28 @@ const ImmersionResultItem: FunctionComponent<{ result: any }> = ({ result }) => 
         </div>
       )}
       <div>
-        <div className="text-lg text-lena-blue-dark font-bold">{result.name}</div>
-        <div>{result.naf_text}</div>
+        <div className="text-lena-blue-dark font-bold">{result.title}</div>
+        {result.apiData.naf_text && <div>{result.apiData.naf_text}</div>}
       </div>
       <div>
-        <pre>{result.address.replaceAll(', ', '\n')}</pre>
-        <pre>{result.city}</pre>
+        <pre>{result.location.address.replaceAll(', ', '\n')}</pre>
+        <pre>{result.location.city}</pre>
       </div>
-      <div className="flex flex-row justify-between">
-        <div className="space-y-2 text-sm">
+      <div className="flex flex-row items-center justify-between">
+        {result.apiData.headcount_text && (
           <div className="flex items-center justify-start space-x-2">
             <PictoFormation />
-            <div>{result.headcount_text}</div>
+            <div>{result.apiData.headcount_text}</div>
           </div>
+        )}
+        {result.apiData.distance && (
           <div className="flex items-center justify-start space-x-2">
             <PictoFormation />
-            <div>{result.distance} km du centre ville</div>
+            <div>{result.apiData.distance} km du centre ville</div>
           </div>
-        </div>
+        )}
+      </div>
+      <div>
         <div className="flex items-end text-sm font-bold text-lena-turquoise-dark py-1">Conseils de contact</div>
       </div>
     </div>

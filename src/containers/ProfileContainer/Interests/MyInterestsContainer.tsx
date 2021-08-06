@@ -26,7 +26,7 @@ const MyInterestsContainer: FunctionComponent = () => {
           <div
             className={classNames(
               'divide-y divide-lena-blue-alt-light',
-              ' md:grid lg:grid-cols-2 md:gap-4 lg:px-48 w-full lg:w-auto',
+              ' md:grid lg:grid-cols-2 md:gap-4 w-full xl:w-auto xl:container',
             )}
           >
             {myInterestsState.data.me.interests.map((v) =>
