@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState, useRef } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import MarkerIcon from 'assets/svg/leaflet_marker_icon.svg';
 import MarkerIconActive from 'assets/svg/leaflet_marker_icon_active.svg';
@@ -21,11 +21,10 @@ const iconMarkerActive = new Leaflet.Icon({
 const ImmersionMapView: FunctionComponent<{ results: any }> = ({ results }) => {
   const [center, setCenter] = useState<LatLngTuple>([48.8584, 2.2945]);
   const [zoom, setZoom] = useState(14);
-  const mapRef = useRef<any>();
   const [selectedCompany, setSelectedCompany] = useState<any>(null);
 
   useEffect(() => {
-    if (selectedCompany) setCenter([selectedCompany.lat, selectedCompany.lon]);
+    if (selectedCompany) setCenter([selectedCompany.location.lat, selectedCompany.location.lng]);
   }, [selectedCompany]);
 
   return (
@@ -41,9 +40,9 @@ const ImmersionMapView: FunctionComponent<{ results: any }> = ({ results }) => {
         {results &&
           results.map((v: any) => (
             <Marker
-              key={v.siret}
-              position={[v.lat, v.lon]}
-              icon={v.siret === selectedCompany?.siret ? iconMarkerActive : iconMarker}
+              key={v.key}
+              position={[v.location.lat, v.location.lng]}
+              icon={v.key === selectedCompany?.key ? iconMarkerActive : iconMarker}
               onclick={() => setSelectedCompany(v)}
             />
           ))}
