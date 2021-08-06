@@ -15,7 +15,7 @@ import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
 import RecommandationMobile from 'containers/ExperienceContainer/CommonContainers/RecommandationMobile';
-import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
+// import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
