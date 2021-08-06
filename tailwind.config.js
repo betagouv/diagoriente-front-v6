@@ -40,7 +40,8 @@ module.exports = {
         '1/2': '50%',
         '3/4': '75%',
         'full': '100%',
-        '28p': '78px'
+        '28p': '78px',
+        44: '11rem',
       },
       height:{
         logoExp:143
