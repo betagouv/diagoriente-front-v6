@@ -30,10 +30,9 @@ const TopJobContainer = () => {
 
   return (
     <JobsLayout>
-      <div className="container flex flex-col items-center py-8 space-y-8 md:overflow-auto">
+      <div className="container flex flex-col items-center py-8 space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
-          {!isDesktop && <TopJobSvg />}
-          <h2 className="text-lena-blue-dark font-bold text-xl">10 métiers pour vous</h2>
+          <h2 className="text-lena-blue-dark font-bold text-xl">12 métiers pour vous</h2>
           <p className="text-lena-blue-dark text-sm text-center md:w-3/4">
             En fonction des expériences, compétences et centres d’intérets que vous avez renseignés
           </p>
@@ -43,7 +42,9 @@ const TopJobContainer = () => {
         className="flex flex-1"
         style={{ background: `url(${PeintureImg}) no-repeat fixed`, backgroundSize: 'cover' }}
       >
-        <div className="flex-1 px-4 xl:px-8 py-8 grid md:grid-cols-5 gap-2">
+        <div className="flex-1 px-4 xl:px-8 py-8 grid lg:grid-cols-2 xl:grid-cols-4 gap-2">
+          <CardJob />
+          <CardJob />
           <CardJob />
           <CardJob />
           <CardJob />

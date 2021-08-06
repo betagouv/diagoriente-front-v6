@@ -22,7 +22,7 @@ const ProfileSidebar: FunctionComponent = () => {
               <Link className="text-lena-blue-dark" to="/mon-cv-competences">
                 Mon CV compétences
               </Link>
-              <Link className="text-lena-blue-dark" to="/mon-top-metiers">
+              <Link className="text-lena-blue-dark" to="/metiers/mon-top-metiers">
                 Mon top métiers
               </Link>
             </div>
