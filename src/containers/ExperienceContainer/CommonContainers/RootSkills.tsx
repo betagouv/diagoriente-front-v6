@@ -15,7 +15,7 @@ import CompetenceContainer from 'containers/ExperienceContainer/CommonContainers
 import SommaireContainer from 'containers/ExperienceContainer/CommonContainers/AddExperienceDone';
 import DateContainer from 'containers/ExperienceContainer/CommonContainers/DateContainer';
 import RecommandationMobile from 'containers/ExperienceContainer/CommonContainers/RecommandationMobile';
-// import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
+import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
 import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
@@ -33,7 +33,8 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   const [yearStart, setYearStart] = useState('');
   const [monthEnd, setMonthEnd] = useState('Janvier');
   const [yearEnd, setYearEnd] = useState('');
-  const params = decodeUri(location.search);
+  const [optionActivities, setOptionActivities] = useState([[]] as { id: string; title: string }[][]);
+  const [activity, setActivity] = useState('');
 
   const themeSelected = useMemo(() => {
     if (dataTheme) return dataTheme.theme;
@@ -41,7 +42,6 @@ const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) =>
   }, [dataTheme]);
 
   const [callSkill, skillsState] = useSkill();
-
   useEffect(() => {
     if (selectedSkillId) callSkill({ variables: { id: selectedSkillId } });
     // eslint-disable-next-line
