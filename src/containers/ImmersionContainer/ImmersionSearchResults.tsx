@@ -16,20 +16,20 @@ type ImmersionSearchUrlProps = {
   lat: string;
   lng: string;
   distance?: string;
+  view?: string;
 };
 
 const ImmersionSearchResults = () => {
   const location = useLocation();
+  const params = decodeUri(location.search) as ImmersionSearchUrlProps;
   const [openFilters, setOpenFilters] = useState(false);
-  const [viewMode, setViewMode] = useState<string>('list');
+  const [viewMode, setViewMode] = useState<string>(params.view || 'list');
   const [immersionCall, immersionState] = useImmersion({ fetchPolicy: 'network-only' });
   const [formationCall, formationState] = useFormation({ fetchPolicy: 'network-only' });
   const [searchResults, setSearchResults] = useState<{ length: number; entries: any[] }>({
     length: 0,
     entries: [],
   });
-
-  const params = decodeUri(location.search) as ImmersionSearchUrlProps;
 
   useEffect(() => {
     if (params.type === 'immersion') {
@@ -49,7 +49,7 @@ const ImmersionSearchResults = () => {
           latitude: Number.parseFloat(params.lat),
           longitude: Number.parseFloat(params.lng),
           radius: params.distance ? Number.parseInt(params.distance, 10) : 30,
-          insee: '',
+          insee: '75000',
           caller: 'test',
         },
       });

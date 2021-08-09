@@ -9,7 +9,10 @@ const ImmersionMarkerPopup: FunctionComponent<{ result: any }> = ({ result }) =>
   const isDesktop = useMediaQuery('md');
   const [openMobile, setOpenMobile] = useState(false);
 
-  const tags = [result.pmsmp && 'immersion en entreprise'].filter(Boolean);
+  const tags = [
+    result.type === 'formation' && result.apiData.ideaType === 'lba' && 'Entreprise',
+    result.type === 'formation' && result.apiData.ideaType === 'formation' && 'Formation',
+  ].filter(Boolean) as string[];
 
   return (
     <div className="shadow-md bg-white md:rounded-lg px-4 py-4 pb-8 md:p-4 flex flex-col space-y-4 md:max-w-md">
