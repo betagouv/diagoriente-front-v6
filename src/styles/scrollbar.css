@@ -1,0 +1,13 @@
+/* Thin scroll for sidebars ... */
+
+.scroll-thin::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+    @apply bg-lena-gray-light-2;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+    @apply bg-lena-gray-light;
+}

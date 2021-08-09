@@ -146,7 +146,7 @@ const ImmersionSearchForm: FunctionComponent<Props> = ({ mode = 'simple', romeCo
   };
 
   const handleRemoveRome = (labelToRemove: string) => {
-    setSearchRomeCodes(romeCodes.filter((v) => v.label !== labelToRemove));
+    setSearchRomeCodes(searchRomeCodes.filter((v) => v.label !== labelToRemove));
   };
 
   const renderSearchMode = (label: string, value: string) => {
@@ -171,21 +171,26 @@ const ImmersionSearchForm: FunctionComponent<Props> = ({ mode = 'simple', romeCo
         {renderSearchMode('Avancée', 'advanced')}
       </div>
       <div className={classNames('flex flex-col', searchMode === 'advanced' && 'divide-y divide-lena-lightgray2')}>
-        <div className="space-y-2 p-4">
+        <div className="space-y-4 p-4">
           <div className="space-y-2">
             <div className={classNames('text-lena-blue-dark', isVariantBold && 'font-bold')}>Que cherchez-vous ?</div>
             <ChoiceDropdown choices={searchOptions} onChange={(value) => setSearchType(value)} value={searchType} />
           </div>
-          {searchMode === 'advanced' && (
+          {searchMode === 'advanced' && searchType === 'immersion' && (
             <div className="space-y-2">
-              {sizeOptions.map((v) => (
-                <RadioButton
-                  label={v.label}
-                  value={v.value}
-                  onChange={(e) => setSearchCompanySize(e.currentTarget.value)}
-                  checked={searchCompanySize === v.value}
-                />
-              ))}
+              <div className={classNames('text-lena-blue-dark', isVariantBold && 'font-bold')}>
+                Taille de l'entreprise
+              </div>
+              <div className="space-y-2">
+                {sizeOptions.map((v) => (
+                  <RadioButton
+                    label={v.label}
+                    value={v.value}
+                    onChange={(e) => setSearchCompanySize(e.currentTarget.value)}
+                    checked={searchCompanySize === v.value}
+                  />
+                ))}
+              </div>
             </div>
           )}
         </div>

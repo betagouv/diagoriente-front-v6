@@ -85,7 +85,7 @@ const ParcoursExperienceSidebar: FunctionComponent = () => {
   };
 
   return (
-    <div className="w-80 bg-lena-blue-dark flex flex-col top-0 left-0 relative filter drop-shadow-sm z-10">
+    <div className="w-80 bg-lena-blue-dark flex flex-col top-0 left-0 relative filter drop-shadow-sm scroll-thin z-10">
       <div className="flex flex-col justify-between flex-grow">
         <div className="flex flex-col space-y-8 p-8">
           <div className="flex items-center justify-center mt-10">
