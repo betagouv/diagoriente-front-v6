@@ -11,11 +11,11 @@ const ImmersionSearch: FunctionComponent = () => {
   return (
     <ImmersionLayout>
       <div
-        className="flex flex-1 items-center justify-center bg-cover"
+        className="flex flex-1 items-center justify-center bg-cover py-8"
         style={{ backgroundImage: `url(${BgImmersion})`, backgroundSize: 'cover' }}
       >
         <div className="flex flex-col items-center justify-center w-full px-4 sm:w-3/4 lg:w-1/2 2xl:w-1/3">
-          <div className="w-full bg-lena-lightgray rounded-lg flex flex-col justify-center space-y-8 md:space-y-4">
+          <div className="w-full bg-lena-lightgray rounded-lg flex flex-col justify-center space-y-2">
             {!isDesktop && (
               <div className="p-4 md:hidden flex flex-col items-center justify-center space-y-4">
                 <SearchJobIcon />

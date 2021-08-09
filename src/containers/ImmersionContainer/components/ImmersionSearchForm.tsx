@@ -44,6 +44,7 @@ type Props = {
 
 // TODO : move to typings file
 type ImmersionSearchUrlProps = {
+  mode: 'simple' | 'advanced';
   type: string;
   romeCodes: any;
   lat: number;
@@ -72,6 +73,7 @@ const ImmersionSearchForm: FunctionComponent<Props> = ({ mode = 'simple', romeCo
 
   const handleStartSearch = () => {
     const params = JSON.stringify({
+      mode: searchMode,
       type: searchType,
       romeCodes: searchRomeCodes,
       location: searchLocation.name,
@@ -89,6 +91,7 @@ const ImmersionSearchForm: FunctionComponent<Props> = ({ mode = 'simple', romeCo
     const params = decodeUri(location.search) as { query: string; view?: string };
     if (params.query) {
       const options = JSON.parse(params.query) as ImmersionSearchUrlProps;
+      setSearchMode(options.mode);
       setSearchType(options.type);
       setSearchLocation({
         lat: options.lat,

@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import BgImmersion from 'assets/images/bg/bg-immersion.jpg';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ImmersionLayout from 'layouts/ImmersionLayout/ImmersionLayout';
 import classNames from 'common/utils/classNames';
 import { decodeUri } from 'common/utils/url';
 import { useFormation, useImmersion } from 'common/requests/immersion';
 import AppLoader from 'components/ui/AppLoader';
+import useMediaQuery from 'hooks/useMediaQuery';
 import ImmersionSearchFilters from './ImmersionSearchFilters';
 import ImmersionResultItem from './components/ImmersionResultItem';
 import ImmersionMapView from './components/ImmersionMapView';
@@ -20,6 +21,7 @@ type ImmersionSearchUrlProps = {
 };
 
 const ImmersionSearchResults = () => {
+  const isDesktop = useMediaQuery('md');
   const location = useLocation();
   const params = decodeUri(location.search) as { query: string; view?: string };
   const [openFilters, setOpenFilters] = useState(false);
@@ -123,10 +125,19 @@ const ImmersionSearchResults = () => {
   return (
     <ImmersionLayout showSearch={true}>
       {searchResults.entries && !isLoading && (
-        <div className="flex flex-row items-center justify-between px-4 md:px-8 py-8 filter drop-shadow-md">
+        <div className="flex flex-row items-center justify-between px-4 md:px-8 py-4 md:py-8 shadow">
           <div className="hidden md:block md:invisible" />
-          <div className="text-lena-blue-dark text-center text-lg font-bold">
-            {searchResults?.length} engagements trouvés
+          <div className="text-lena-blue-dark">
+            {isDesktop ? (
+              <span className="text-center text-lg font-bold">{searchResults?.length} engagements trouvés</span>
+            ) : (
+              <Link
+                className="bg-lena-lightgray py-2 px-4 rounded text-sm"
+                to={`/immersion/recherche/${location.search}`}
+              >
+                Modifier ma recherche
+              </Link>
+            )}
           </div>
           <div className="flex flex-row justify-center items-center space-x-2 text-lena-pink-dark">
             {renderViewMode('Liste', 'list')}
