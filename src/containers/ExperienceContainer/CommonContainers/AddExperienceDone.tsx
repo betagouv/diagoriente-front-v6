@@ -144,7 +144,7 @@ const AddExperienceDone = ({ data }: Props) => {
     }
   };
   return (
-    <ParcoursExperienceLayout>
+    <ParcoursExperienceLayout showMobileHeader={false}>
       <div className="bg-lena-blue-dark text-white flex flex-col text-center justify-center flex-1 py-4 relative">
         <div className="container mt-8 text-center lg:w-4/5">
           {mediaQueryMD ? (
@@ -179,7 +179,7 @@ const AddExperienceDone = ({ data }: Props) => {
             <div className="flex flex-col space-y-4">
               <button
                 className={`mt-2 rounded-md focus:ring-0
-            focus:outline-none w-full bg-lena-pink-dark
+            focus:outline-none w-full bg-lena-yellow text-lena-blue-darkest
             text-white py-3 text-center font-bold text-lg px-16`}
                 onClick={showModal}
               >

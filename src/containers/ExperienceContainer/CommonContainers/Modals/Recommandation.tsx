@@ -101,7 +101,7 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="nom" className="text-lena-blue-dark">
-                      Nom <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Nom <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.nom}
@@ -112,7 +112,6 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                       checked={true}
                       type="text"
                       isInvalid={formik.touched.nom && !!formik.errors.nom}
-                      placeholder="nom"
                       required
                       fullWidth
                     />
@@ -131,7 +130,7 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="prenom" className="text-lena-blue-dark">
-                      Prénom <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Prénom <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.prenom}
@@ -160,7 +159,7 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="email" className="text-lena-blue-dark">
-                      Email <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Email <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.email}
@@ -171,7 +170,6 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                       checked={true}
                       type="email"
                       isInvalid={formik.touched.email && !!formik.errors.email}
-                      placeholder="test@test.dev"
                       required
                       fullWidth
                     />
@@ -190,7 +188,7 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="confirmEmail" className="text-lena-blue-dark">
-                      Confirmation de l'email <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Confirmation de l'email <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.confirmEmail}
@@ -201,7 +199,6 @@ const InfoQuestionnaire = ({ isMobile, param, onClose }: ModalArgs) => {
                       checked={true}
                       type="email"
                       isInvalid={formik.touched.confirmEmail && !!formik.errors.confirmEmail}
-                      placeholder="test@test.dev"
                       required
                       fullWidth
                     />

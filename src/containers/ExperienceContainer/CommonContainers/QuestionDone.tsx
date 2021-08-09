@@ -104,7 +104,7 @@ const QuestionDone = ({ theme }: Props) => {
     </div>
   );
   return (
-    <ParcoursExperienceLayout>
+    <ParcoursExperienceLayout showMobileHeader={false}>
       <div className="bg-lena-blue-dark flex flex-col flex-1 w-full h-screen">
         <div className="w-full text-white flex flex-col flex-1 items-center justify-center">
           <MobileContainer />

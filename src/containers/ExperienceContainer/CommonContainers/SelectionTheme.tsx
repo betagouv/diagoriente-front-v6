@@ -19,6 +19,7 @@ import ParcoursExperienceLayout from 'layouts/ParcoursExperienceLayout/ParcoursE
 import { decodeUri } from 'common/utils/url';
 import translateExperienceType from '../../../utils/translateExperienceType';
 import AppLoader from '../../../components/ui/AppLoader';
+import { ReactComponent as CloseIcon } from '../../../assets/svg/cross3.svg';
 
 type MobileChoiceDomainProps = {
   onClose: () => void;
@@ -59,52 +60,48 @@ const MobileChoiceDomain = ({ onClose, data }: MobileChoiceDomainProps) => {
   };
 
   return (
-    <div className="pb-20">
-      <ul>
-        <li>
-          {data?.map((d) => (
-            <div className="border-b border-lena-lightgray2">
-              <button
-                onClick={() => controlSelected(d)}
-                key={d.id}
-                className={classNames(
-                  'w-full py-3 flex items-center px-6 focus:outline-none focus:ring-0 relative',
-                  selectedDomain?.id === d.id ? 'bg-lena-turquoise-light' : '',
-                )}
-              >
-                <LoveWhiteSvg />
-                <p className={classNames('ml-6 text-base truncate', selectedDomain?.id === d.id && 'font-bold')}>
-                  {capitalizeFirstLetter(d.title.replaceAll('/', ','))}
-                </p>
-                {selectedDomain?.id === d.id && (
-                  <div className="absolute right-4 ">
-                    <ArrowDownSvg className="transform rotate-180 " />
-                  </div>
-                )}
-              </button>
-              {activeDomain === d.id && selectedDomain?.id === d.id && themeState.data?.theme.activities.length !== 0 && (
-                <div className="px-14 py-4">
-                  <ul className="list-disc">
-                    {themeState.data?.theme.activities.map((a) => (
-                      <li>{a.title}</li>
-                    ))}
-                  </ul>
+    <div className="pb-16">
+      <div className="sticky top-0 left-0 right-0 py-4 bg-lena-lightgray shadow border-b border-lena-lightgray2 z-10">
+        <div className="flex flex-row justify-between px-4">
+          <div className="text-lena-blue-dark font-bold text-lg">Choix du domaine</div>
+          <button onClick={() => onClose?.()}>
+            <CloseIcon className="fill-current text-lena-blue-dark" />
+          </button>
+        </div>
+      </div>
+      <div>
+        {data?.map((d) => (
+          <div className="border-b border-lena-lightgray2">
+            <button
+              onClick={() => controlSelected(d)}
+              key={d.id}
+              className={classNames(
+                'w-full py-3 flex items-center px-6 focus:outline-none focus:ring-0 relative',
+                selectedDomain?.id === d.id ? 'bg-lena-turquoise-light' : '',
+              )}
+            >
+              <LoveWhiteSvg />
+              <p className={classNames('ml-6 text-base truncate', selectedDomain?.id === d.id && 'font-bold')}>
+                {capitalizeFirstLetter(d.title.replaceAll('/', ','))}
+              </p>
+              {selectedDomain?.id === d.id && (
+                <div className="absolute right-4 ">
+                  <ArrowDownSvg className="transform rotate-180 " />
                 </div>
               )}
-            </div>
-          ))}
-        </li>
-      </ul>
-      <div className="fixed top-3 right-5">
-        <button
-          onClick={() => onClose.call(null)}
-          className="bg-lena-blue p-2 rounded-full focus:ring-0 focus:outline-none"
-          style={{ filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15))' }}
-        >
-          <CrossSvg fill="#fff" />
-        </button>
+            </button>
+            {activeDomain === d.id && selectedDomain?.id === d.id && themeState.data?.theme.activities.length !== 0 && (
+              <div className="px-14 py-4">
+                <ul className="list-disc">
+                  {themeState.data?.theme.activities.map((a) => (
+                    <li>{a.title}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
-
       <div className="fixed bottom-0 left-0 right-0">
         {selectedDomain && (
           <button onClick={handleValidate} className="bg-lena-blue py-3 font-bold w-full text-white">

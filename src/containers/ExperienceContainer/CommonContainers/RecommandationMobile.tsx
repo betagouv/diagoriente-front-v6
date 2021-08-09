@@ -9,7 +9,7 @@ import InputComponent from 'components/Register/Input';
 import FormComment from 'components/Register/FormComment';
 import Button from 'components/design-system/Button';
 import { ReactComponent as ArrowLeftSvg } from 'assets/svg/picto_mail.svg';
-import { ReactComponent as CrossIcon } from 'assets/svg/cross.svg';
+import { ReactComponent as CrossIcon } from 'assets/svg/cross3.svg';
 
 const RecommandationMobile = () => {
   const history = useHistory();
@@ -73,10 +73,10 @@ const RecommandationMobile = () => {
         return (
           <>
             <div>
-              <p className="text-lena-blue-dark font-bold border-b-2 p-4 flex justify-between">
-                Demande de recommandation
-                <CrossIcon className="text-lena-blue-dark" onClick={() => history.goBack()} />{' '}
-              </p>
+              <div className="text-lena-blue-dark font-bold border-b-2 p-4 flex text-lg items-center justify-between">
+                <span>Demande de recommandation</span>
+                <CrossIcon className="text-lena-blue-dark" onClick={() => history.goBack()} />
+              </div>
             </div>
             <div className="mt-4">
               <p className="text-center text-lena-blue-dark">Pour mon expérience:</p>
@@ -87,7 +87,7 @@ const RecommandationMobile = () => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="nom" className="text-lena-blue-dark">
-                      Nom <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Nom <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.nom}
@@ -98,7 +98,6 @@ const RecommandationMobile = () => {
                       checked={true}
                       type="text"
                       isInvalid={formik.touched.nom && !!formik.errors.nom}
-                      placeholder="nom"
                       required
                       fullWidth
                     />
@@ -117,7 +116,7 @@ const RecommandationMobile = () => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="prenom" className="text-lena-blue-dark">
-                      Prénom <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Prénom <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.prenom}
@@ -146,7 +145,7 @@ const RecommandationMobile = () => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="email" className="text-lena-blue-dark">
-                      Email <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Email <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.email}
@@ -157,7 +156,6 @@ const RecommandationMobile = () => {
                       checked={true}
                       type="email"
                       isInvalid={formik.touched.email && !!formik.errors.email}
-                      placeholder="test@test.dev"
                       required
                       fullWidth
                     />
@@ -176,7 +174,7 @@ const RecommandationMobile = () => {
                 <div className="mb-4">
                   <FormControlReco>
                     <FormLabelReco htmlFor="confirmEmail" className="text-lena-blue-dark">
-                      Confirmation de l'email <span className="text-lena-turquoise-DEFAULT">*</span>
+                      Confirmation de l'email <span className="text-lena-pink-dark">*</span>
                     </FormLabelReco>
                     <InputComponent
                       value={formik.values.confirmEmail}
@@ -187,7 +185,6 @@ const RecommandationMobile = () => {
                       checked={true}
                       type="email"
                       isInvalid={formik.touched.confirmEmail && !!formik.errors.confirmEmail}
-                      placeholder="test@test.dev"
                       required
                       fullWidth
                     />

@@ -5,7 +5,7 @@ import useOnclickOutside from 'common/hooks/useOnclickOutside';
 import { ReactComponent as CrossIcon } from 'assets/svg/cross3.svg';
 import ProgressBar from 'components/design-system/ProgressBar';
 
-const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
+const ParcoursExperienceLayoutForMobile: FunctionComponent<{ showHeader: boolean }> = ({ showHeader, children }) => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const step = location.pathname.split('/').pop();
@@ -16,33 +16,34 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
     let ind: number;
     switch (step) {
       case 'domaine': {
-        title = '> Domaine';
+        title = 'Domaine';
         ind = 1;
         break;
       }
       case 'date': {
-        title = '> Dates';
+        title = 'Période';
         ind = 2;
         break;
       }
-      case 'activite': {
-        title = '> Activités';
+      case 'activite':
+      case 'doneAct': {
+        title = 'Activités';
         ind = 3;
         break;
       }
-      case 'question': {
-        title = '> Sélection des questions';
+      case 'question':
+      case 'questions': {
+        title = 'Caractéristiques';
         ind = 4;
         break;
       }
       case 'competences': {
-        title = '> Compétences';
+        title = 'Compétences';
         ind = 5;
         break;
       }
-
       default: {
-        title = '> Domaine';
+        title = 'Domaine';
         ind = 1;
         break;
       }
@@ -92,12 +93,10 @@ const ParcoursExperienceLayoutForMobile: FunctionComponent = ({ children }) => {
   }, []);
   return (
     <div className="min-h-screen md:min-h-0 h-full flex flex-col">
-      {!(step === 'doneAct' || step === 'questions' || step === 'sommaire') && (
+      {showHeader && (
         <div className="sticky top-0 shadow-md z-50">
           <div className="h-14 p-2 bg-lena-blue-dark text-white flex flex-row items-center justify-between">
-            <div>
-              <span className="font-bold uppercase">{title}</span> {renderStep().title}
-            </div>
+            <div className="px-4 font-bold text-lg">{renderStep().title}</div>
             <CrossIcon onClick={() => setShowMenu(!showMenu)} />
           </div>
           <ProgressBar color={progressColor} value={renderStep().ind} maxValue={5} />
