@@ -5,7 +5,7 @@ const Pill: FunctionComponent<{ size?: 'sm' }> = ({ size, children }) => {
   return (
     <div
       className={classNames(
-        'bg-lena-blue-lightest text-lena-blue-dark rounded-full px-3 py-1 text-center',
+        'inline-block bg-lena-blue-lightest text-lena-blue-dark rounded-full px-3 py-1 text-center',
         size === 'sm' && 'text-sm',
       )}
     >

@@ -7,7 +7,7 @@ type Props = {
 const RadioButton: FunctionComponent<Props> = ({ label, required, ...rest }: Props) => {
   return (
     <div>
-      <label className="cursor-pointer flex gap-x-4 items-center">
+      <label className="cursor-pointer flex space-x-2 items-center">
         <input
           type="radio"
           className="cursor-pointer h-4 w-4 text-lena-blue-dark focus:ring-0"

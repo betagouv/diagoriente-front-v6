@@ -27,7 +27,7 @@ const InputWrapper: FunctionComponent<Props> = ({ fullWidth, selectShow = false,
                 className={`absolute z-30 bg-white w-full mt-1 border
               border-lena-lightgray2 rounded-md overflow-y-auto max-h-80`}
               >
-                <ul>{withSelect}</ul>
+                <div>{withSelect}</div>
               </div>
             )}
           </div>

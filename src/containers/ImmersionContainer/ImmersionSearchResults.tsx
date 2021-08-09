@@ -10,18 +10,19 @@ import ImmersionSearchFilters from './ImmersionSearchFilters';
 import ImmersionResultItem from './components/ImmersionResultItem';
 import ImmersionMapView from './components/ImmersionMapView';
 
+// TODO : move to typings file
 type ImmersionSearchUrlProps = {
   type: string;
-  romeCodes: string;
-  lat: string;
-  lng: string;
+  romeCodes: { romes: string[]; label: string }[];
+  lat: number;
+  lng: number;
   distance?: string;
-  view?: string;
 };
 
 const ImmersionSearchResults = () => {
   const location = useLocation();
-  const params = decodeUri(location.search) as ImmersionSearchUrlProps;
+  const params = decodeUri(location.search) as { query: string; view?: string };
+  const options = JSON.parse(params.query) as ImmersionSearchUrlProps;
   const [openFilters, setOpenFilters] = useState(false);
   const [viewMode, setViewMode] = useState<string>(params.view || 'list');
   const [immersionCall, immersionState] = useImmersion({ fetchPolicy: 'network-only' });
@@ -32,23 +33,31 @@ const ImmersionSearchResults = () => {
   });
 
   useEffect(() => {
-    if (params.type === 'immersion') {
+    if (options.type === 'immersion') {
       immersionCall({
         variables: {
-          rome_codes: params.romeCodes,
-          latitude: Number.parseFloat(params.lat),
-          longitude: Number.parseFloat(params.lng),
-          distance: params.distance ? Number.parseInt(params.distance, 10) : 30,
+          rome_codes: options.romeCodes
+            .map((v) => v.romes)
+            .flat()
+            .join(','),
+          latitude: options.lat,
+          longitude: options.lng,
+          distance: options.distance ? Number.parseInt(options.distance, 10) : 30,
           sort: 'distance',
         },
       });
-    } else if (params.type === 'formation') {
+    } else if (options.type === 'formation') {
       formationCall({
         variables: {
-          romes: JSON.stringify(params.romeCodes.split(',')),
-          latitude: Number.parseFloat(params.lat),
-          longitude: Number.parseFloat(params.lng),
-          radius: params.distance ? Number.parseInt(params.distance, 10) : 30,
+          romes: JSON.stringify(
+            options.romeCodes
+              .map((v) => v.romes)
+              .flat()
+              .join(','),
+          ),
+          latitude: options.lat,
+          longitude: options.lng,
+          radius: options.distance ? Number.parseInt(options.distance, 10) : 30,
           insee: '75000',
           caller: 'test',
         },
@@ -65,7 +74,7 @@ const ImmersionSearchResults = () => {
   }, [immersionState.loading, formationState.loading]);
 
   useEffect(() => {
-    if (params.type === 'immersion' && immersionState.data) {
+    if (options.type === 'immersion' && immersionState.data) {
       const numEntries = immersionState.data.immersions.companies_count;
       const formattedEntries = immersionState.data.immersions.companies.map((v) => ({
         type: 'immersion',
@@ -79,7 +88,7 @@ const ImmersionSearchResults = () => {
   }, [immersionState.data]);
 
   useEffect(() => {
-    if (params.type === 'formation' && formationState.data) {
+    if (options.type === 'formation' && formationState.data) {
       const numEntries = formationState.data.formation.length;
       const formattedEntries = formationState.data.formation.map((v) => ({
         type: 'formation',
@@ -139,7 +148,7 @@ const ImmersionSearchResults = () => {
             </div>
           )}
           {viewMode === 'map' && (
-            <ImmersionMapView initialCenter={{ lat: params.lat, lng: params.lng }} results={searchResults.entries} />
+            <ImmersionMapView initialCenter={{ lat: options.lat, lng: options.lng }} results={searchResults.entries} />
           )}
         </div>
       )}

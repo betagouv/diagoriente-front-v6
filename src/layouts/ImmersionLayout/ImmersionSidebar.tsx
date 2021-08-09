@@ -12,7 +12,7 @@ const ImmersionSidebar: FunctionComponent<{ showSearch: boolean }> = ({ showSear
             <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">Engagements</div>
           </div>
           {showSearch && (
-            <div className="flex flex-col p-4">
+            <div className="flex flex-col">
               <ImmersionSearchForm />
             </div>
           )}
