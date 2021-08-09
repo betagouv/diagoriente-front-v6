@@ -36,9 +36,8 @@ const DomainSelect = ({ theme }: Props) => {
           </div>
           {themeState.data && themeState.data?.theme.activities.length > 0 && (
             <ul className="list-disc list-inside">
-              {themeState.data?.theme.activities.map((v, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <li key={index}>{v.title}</li>
+              {themeState.data?.theme.activities.map((v) => (
+                <li key={v.id}>{v.title}</li>
               ))}
             </ul>
           )}

@@ -1,6 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { ReactComponent as PictoFormation } from 'assets/svg/picto_formation.svg';
-import Pill from '../../../components/design-system/Pill';
+import { ReactComponent as InfoIcon } from 'assets/svg/info2.svg';
+import { ReactComponent as ContactIcon } from 'assets/svg/contact.svg';
+import { ReactComponent as HeadIcon } from 'assets/svg/user_profile.svg';
+import { ReactComponent as PinpointIcon } from 'assets/svg/pinpoint.svg';
+import Pill from 'components/design-system/Pill';
 
 const ImmersionResultItem: FunctionComponent<{ result: any }> = ({ result }) => {
   const tags = [result.pmsmp && 'immersion en entreprise'].filter(Boolean);
@@ -25,21 +28,33 @@ const ImmersionResultItem: FunctionComponent<{ result: any }> = ({ result }) => 
         <div className="whitespace-pre-line">{result.location.address.replaceAll(', ', '\n')}</div>
         <div>{result.location.city}</div>
       </div>
-      <div className="flex flex-row items-center justify-between space-x-2 text-sm">
+      <div
+        className={`flex flex-row items-center justify-between space-x-2
+      text-sm border-b border-t border-lena-lightgray2 py-2`}
+      >
         {result.apiData.headcount_text && (
           <div className="flex items-center justify-start space-x-2">
-            <PictoFormation />
+            <HeadIcon height={16} width={16} />
             <div>{result.apiData.headcount_text}</div>
           </div>
         )}
         {result.apiData.distance && (
           <div className="flex items-center justify-start space-x-2">
-            <PictoFormation />
+            <PinpointIcon height={16} width={16} />
             <div>{result.apiData.distance} km du centre ville</div>
           </div>
         )}
       </div>
-      <div className="flex items-end text-sm font-bold text-lena-turquoise-dark py-1">Conseils de contact</div>
+      <div className="flex items-center justify-start text-lena-blue-dark space-x-2">
+        <div className="flex items-center space-x-2 bg-lena-pink-light py-2 px-4 cursor-pointer rounded">
+          <InfoIcon height={20} width={20} />
+          <span>Conseils</span>
+        </div>
+        <div className="flex items-center space-x-2 bg-lena-pink-light py-2 px-4 cursor-pointer rounded">
+          <ContactIcon height={20} width={20} />
+          <span>Contacter</span>
+        </div>
+      </div>
     </div>
   );
 };

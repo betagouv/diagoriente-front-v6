@@ -18,7 +18,7 @@ import RecommandationMobile from 'containers/ExperienceContainer/CommonContainer
 import Benevolat from 'containers/ExperienceContainer/CommonContainers/Benevolat';
 
 import PageNotFoundContainer from 'containers/PageNotFoundContainer';
-import DomainSelect from '../XPPro/ParcoursContainer/containers/DomainSelect';
+import DomainSelect from '../XPPro/DomainSelect';
 
 const SkillRoute = ({ match, location }: RouteComponentProps<{ id: string }>) => {
   const history = useHistory();

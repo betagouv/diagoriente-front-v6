@@ -24,45 +24,32 @@ const ParcoursExperienceSidebar: FunctionComponent = () => {
   const stepsUrl = ['create', 'date', 'activite', 'doneAct', 'question', 'questions', 'competences', 'sommaire'];
 
   const path = () => {
-    let text = '';
-    if (theme) {
-      switch (theme.domain) {
-        case 'professional': {
-          text = 'professionnelles';
-          break;
-        }
-        case 'personal': {
-          text = 'personnelles';
-          break;
-        }
-        case 'voluntary': {
-          text = 'bénévolat';
-          break;
-        }
-        default: {
-          text = 'personnelles';
-          break;
-        }
-      }
+    const domain = theme?.domain || params.type;
+    switch (domain) {
+      case 'professional':
+        return 'professionnelles';
+      case 'personal':
+        return 'personnelles';
+      case 'voluntary':
+        return 'bénévolat';
+      default:
+        return 'professionnelles';
     }
-    return text;
   };
 
   const progressColor = useMemo(() => {
-    if (theme) {
-      switch (theme.domain) {
-        case 'professional':
-          return 'bg-parcours-pro';
-        case 'personal':
-          return 'bg-parcours-perso';
-        case 'voluntary':
-          return 'bg-parcours-voluntary';
-        default:
-          break;
-      }
+    const domain = theme?.domain || params.type;
+    switch (domain) {
+      case 'professional':
+        return 'bg-parcours-pro';
+      case 'personal':
+        return 'bg-parcours-perso';
+      case 'voluntary':
+        return 'bg-parcours-voluntary';
+      default:
+        return 'bg-lena-blue';
     }
-    return 'bg-lena-blue';
-  }, [theme]);
+  }, [theme, params]);
 
   const renderPicto = () => {
     switch (params.type) {

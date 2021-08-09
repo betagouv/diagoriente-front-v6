@@ -12,7 +12,10 @@ import ImmersionMapView from './components/ImmersionMapView';
 
 type ImmersionSearchUrlProps = {
   type: string;
-  rome_codes: string;
+  romeCodes: string;
+  lat: string;
+  lng: string;
+  distance?: string;
 };
 
 const ImmersionSearchResults = () => {
@@ -32,23 +35,22 @@ const ImmersionSearchResults = () => {
     if (params.type === 'immersion') {
       immersionCall({
         variables: {
-          rome_codes: 'M1805',
-          latitude: 48.8584,
-          longitude: 2.2945,
-          distance: 30,
+          rome_codes: params.romeCodes,
+          latitude: Number.parseFloat(params.lat),
+          longitude: Number.parseFloat(params.lng),
+          distance: params.distance ? Number.parseInt(params.distance, 10) : 30,
           sort: 'distance',
         },
       });
     } else if (params.type === 'formation') {
       formationCall({
         variables: {
-          romes: JSON.stringify(['M1805']),
-          latitude: 48.8584,
-          longitude: 2.2945,
-          radius: 30,
-          insee: '75000',
+          romes: JSON.stringify(params.romeCodes.split(',')),
+          latitude: Number.parseFloat(params.lat),
+          longitude: Number.parseFloat(params.lng),
+          radius: params.distance ? Number.parseInt(params.distance, 10) : 30,
+          insee: '',
           caller: 'test',
-          filter: 'Formations', // why ?
         },
       });
     }
@@ -81,7 +83,7 @@ const ImmersionSearchResults = () => {
       const numEntries = formationState.data.formation.length;
       const formattedEntries = formationState.data.formation.map((v) => ({
         type: 'formation',
-        key: v.company.siret, // TODO generate hash here ...
+        key: v.company.siret,
         title: v.title,
         location: { address: v.place.fullAddress, city: v.place.city, lat: v.place.latitude, lng: v.place.longitude },
         apiData: v,

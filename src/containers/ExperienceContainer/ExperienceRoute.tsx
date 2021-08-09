@@ -6,7 +6,7 @@ import ThemeContext from 'common/contexts/ThemeContext';
 import RootSkills from './CommonContainers/RootSkills';
 import PageNotFoundContainer from '../PageNotFoundContainer';
 import SelectionTheme from './CommonContainers/SelectionTheme';
-import SelectionThemePro from './XPPro/ParcoursContainer/containers/SelectionTheme';
+import SelectionThemePro from './XPPro/SelectionThemePro';
 
 const ExperienceRoute = () => {
   const [theme, setTheme] = useState<Theme | null>(null);

@@ -21,7 +21,7 @@ const AppDesktopMenu: FunctionComponent = () => {
         <div
           className={classNames(
             'flex flex-row items-center space-x-2 text-lena-blue-dark',
-            'hover:bg-lena-lightgray2 rounded px-4 py-2',
+            'hover:bg-lena-turquoise-light active:bg-lena-turquoise rounded px-4 py-2',
           )}
         >
           {icon && <img src={icon} alt={label} height={16} width={16} />}

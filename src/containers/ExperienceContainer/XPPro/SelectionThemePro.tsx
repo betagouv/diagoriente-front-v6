@@ -125,7 +125,7 @@ type SearchProps = {
   text: string;
 };
 
-const WIPSearchTheme: FunctionComponent<SearchProps> = ({
+const SearchThemePro: FunctionComponent<SearchProps> = ({
   open,
   onClose,
   setTheme,
@@ -278,7 +278,7 @@ type SelectionProps = {
   setTheme: (theme: ThemeListItem) => void;
   theme: ThemeListItem;
 };
-const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
+const SelectionThemePro = ({ setTheme, theme }: SelectionProps) => {
   const [showSearch, setShowSearch] = useState(false);
   const mediaQueryMD = useMediaQuery('md');
   const mediaQueryLG = useMediaQuery('lg');
@@ -320,7 +320,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
             <div className="text-center text-lena-blue-dark font-bold text-xl">Mes expériences professionnelles</div>
           </div>
           <div className="text-lena-blue-dark md:text-xl md:font-bold">
-            Décrivez en quelques mots votre expérience professionnelle :{' '}
+            Décrivez en quelques mots votre expérience professionnelle :
           </div>
           <div className="flex items-center w-3/4 border border-gray-200 rounded px-2">
             <img src={LoupeSvg} alt="loupe" className="w-5" />
@@ -340,7 +340,7 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
       </div>
     </ParcoursExperienceLayout>
   ) : (
-    <WIPSearchTheme
+    <SearchThemePro
       themes={themes}
       tags={tags}
       text={text}
@@ -353,4 +353,4 @@ const SelectionTheme = ({ setTheme, theme }: SelectionProps) => {
   );
 };
 
-export default SelectionTheme;
+export default SelectionThemePro;
