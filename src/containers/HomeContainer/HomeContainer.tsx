@@ -27,7 +27,9 @@ const HomeContainer = () => {
       name: 'Métiers / Immersion',
       paths: [
         { label: 'Mon top métiers', url: '/metiers/mon-top-metiers' },
-        { label: 'Example fiche métier', url: '/metiers/123-example' },
+        { label: 'Fiche métier', url: '/metiers/123-example' },
+        { label: 'Rechercher un métier (mobile-only)', url: '/metiers/recherche' },
+        { label: 'Résultats recherche métiers', url: '/metiers/recherche/resultats?query=développeur' },
         { label: 'Rechercher une immersion', url: '/immersion/recherche' },
       ],
     },

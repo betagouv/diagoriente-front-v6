@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ReactComponent as JobsIcon } from 'assets/svg/picto_metiers.svg';
 import { Link } from 'react-router-dom';
+import JobSearchForm from 'containers/JobsContainer/components/JobSearchForm';
 
 const JobsSidebar: FunctionComponent = () => {
   return (
@@ -11,10 +12,13 @@ const JobsSidebar: FunctionComponent = () => {
             <JobsIcon className="w-16 h-16" />
             <div className="text-center text-lena-blue-dark font-bold md:text-md xl:text-xl">Pistes Métiers</div>
           </div>
-          <div className="flex flex-col divide-y-2 divide-lena-lightgray2">
+          <div className="flex flex-col divide-y divide-lena-lightgray2">
             <Link className="p-4 font-bold text-lena-blue-dark" to="/metiers/mon-top-metiers">
               Mon top métiers
             </Link>
+            <div className="p-4">
+              <JobSearchForm />
+            </div>
           </div>
         </div>
       </div>
