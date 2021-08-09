@@ -175,10 +175,9 @@ const RegisterForm: FunctionComponent = () => {
               isInvalid={formik.touched.location && !!formik.errors.location}
               selectShow={openLocation}
               withSelect={data?.location.map((location) => (
-                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                <li key={location.citycode} className="p-1" onClick={() => onSelect(location)}>
+                <div key={location.citycode} className="p-1" onClick={() => onSelect(location)}>
                   {location.postcode} {location.label}
-                </li>
+                </div>
               ))}
             />
           </FormControl>

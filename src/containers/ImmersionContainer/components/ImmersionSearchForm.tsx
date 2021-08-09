@@ -74,9 +74,6 @@ const ImmersionSearchForm: FunctionComponent<Props> = ({ mode = 'simple', romeCo
     const params = JSON.stringify({
       type: searchType,
       romeCodes: searchRomeCodes,
-      /* .map((v) => v.romes)
-        .flat()
-        .join(',') */
       location: searchLocation.name,
       lat: searchLocation.lat,
       lng: searchLocation.lng,

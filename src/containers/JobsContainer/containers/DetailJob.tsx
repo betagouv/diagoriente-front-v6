@@ -1,40 +1,75 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import JobsLayout from 'layouts/JobsLayout/JobsLayout';
 import Button from 'components/design-system/Button';
 import { ReactComponent as SearchSvg } from 'assets/svg/search_job.svg';
 import { ReactComponent as LoveTSvg } from 'assets/svg/love_turquoise.svg';
 import classNames from 'common/utils/classNames';
-import { ReactComponent as ArrowBottomSvg } from 'assets/svg/arrow_down.svg';
-import { ReactComponent as SearchInputSvg } from 'assets/svg/search.svg';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import { ReactComponent as LessSvg } from 'assets/svg/less.svg';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ChoiceDropdown from 'components/design-system/ChoiceDropdown';
+import useMediaQuery from 'hooks/useMediaQuery';
+import Input from 'components/Register/Input';
+import { useLocation } from 'common/requests/location';
 import JobInterestItem from '../components/JobInterestItem';
 import JobStatistics from '../components/JobStatistics';
 import JobHeader from '../components/JobHeader';
-import useMediaQuery from '../../../hooks/useMediaQuery';
+
+const searchOptions = [
+  { label: 'une immersion en entreprise', value: 'immersion' },
+  { label: 'une formation ou un apprentissage', value: 'formation' },
+  { label: "une mission d'engagement", value: 'engagement' },
+  { label: 'un emploi', value: 'emploi' },
+];
 
 const DetailJob: FunctionComponent = () => {
   const history = useHistory();
   const [showAbout, setShowAbout] = useState(false);
   const isDesktop = useMediaQuery('md');
   const [searchType, setSearchType] = useState('immersion');
+  const [searchLocation, setSearchLocation] = useState({ lat: 0, lng: 0, name: '', userInput: '' });
+  const [showLocationAutocomplete, setShowLocationAutocomplete] = useState(false);
+  const [callLocation, locationState] = useLocation();
+  const params = useParams<{ id: string }>();
 
-  const searchOptions = [
-    { label: 'une immersion en entreprise', value: 'immersion' },
-    { label: 'une formation ou un apprentissage', value: 'formation' },
-    { label: "une mission d'engagement", value: 'engagement' },
-    { label: 'un emploi', value: 'emploi' },
-  ];
+  useEffect(() => {
+    if (locationState.data) setShowLocationAutocomplete(true);
+  }, [locationState.data]);
 
   const handleOpenStatistics = () => {
     if (isDesktop) setShowAbout(!showAbout);
-    else history.push('/metiers/123456789/statistiques');
+    else history.push(`/metiers/${params.id}/statistiques`);
   };
 
   const handleStartSearch = () => {
-    alert('Not Implemented');
+    alert('TODO: Remember to use real ROME codes ...');
+    const queryParams = JSON.stringify({
+      type: searchType,
+      romeCodes: [{ codes: ['M1805'], label: 'Example M1805' }],
+      location: searchLocation.name,
+      lat: searchLocation.lat,
+      lng: searchLocation.lng,
+    });
+
+    history.push(`/immersion/recherche/resultats?query=${encodeURI(queryParams)}`);
+  };
+
+  const handleChangeLocation = (e: any) => {
+    setSearchLocation({ ...searchLocation, userInput: e.currentTarget.value });
+
+    if (e.currentTarget.value.length >= 3) {
+      callLocation({ variables: { search: e.currentTarget.value } });
+    }
+  };
+
+  const handleSelectAutocomplete = (selectedLocation: any) => {
+    setSearchLocation({
+      lng: selectedLocation.coordinates[0],
+      lat: selectedLocation.coordinates[1],
+      name: `${selectedLocation.postcode} ${selectedLocation.label}`,
+      userInput: `${selectedLocation.postcode} ${selectedLocation.label}`,
+    });
+    setShowLocationAutocomplete(false);
   };
 
   return (
@@ -74,16 +109,22 @@ const DetailJob: FunctionComponent = () => {
                       onChange={(value) => setSearchType(value)}
                       value={searchType}
                     />
-                    <div
-                      className={`w-full border border-lena-gray-light
-                px-2 flex bg-white rounded-md flex items-center mb-5`}
-                    >
-                      <SearchInputSvg fill="#C9C9C7" />
-                      <input
-                        placeholder="à Paris, Dijon, Lille ..."
-                        className="w-full bg-transparent focus:ring-0 focus:outline-none py-3 ml-3"
-                      />
-                    </div>
+                    <Input
+                      fullWidth
+                      placeholder="à Paris, Dijon, Lille ..."
+                      value={searchLocation.userInput}
+                      onChange={(e) => handleChangeLocation(e)}
+                      selectShow={showLocationAutocomplete}
+                      withSelect={locationState.data?.location.map((l) => (
+                        <div
+                          key={l.citycode}
+                          className="p-1 cursor-pointer"
+                          onClick={() => handleSelectAutocomplete(l)}
+                        >
+                          {l.postcode} {l.label}
+                        </div>
+                      ))}
+                    />
                     <button
                       className={classNames(
                         `focus:ring-0 focus:outline-none w-full
