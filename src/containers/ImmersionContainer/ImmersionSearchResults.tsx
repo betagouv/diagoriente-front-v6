@@ -22,7 +22,6 @@ type ImmersionSearchUrlProps = {
 const ImmersionSearchResults = () => {
   const location = useLocation();
   const params = decodeUri(location.search) as { query: string; view?: string };
-  const options = JSON.parse(params.query) as ImmersionSearchUrlProps;
   const [openFilters, setOpenFilters] = useState(false);
   const [viewMode, setViewMode] = useState<string>(params.view || 'list');
   const [immersionCall, immersionState] = useImmersion({ fetchPolicy: 'network-only' });
@@ -31,6 +30,10 @@ const ImmersionSearchResults = () => {
     length: 0,
     entries: [],
   });
+
+  const options = useMemo(() => {
+    return JSON.parse(params.query) as ImmersionSearchUrlProps;
+  }, [location]);
 
   useEffect(() => {
     if (options.type === 'immersion') {
@@ -63,7 +66,7 @@ const ImmersionSearchResults = () => {
         },
       });
     }
-  }, [location]);
+  }, [options]);
 
   const hasReturnedData = useMemo(() => {
     return formationState.data || immersionState.data;
@@ -85,7 +88,7 @@ const ImmersionSearchResults = () => {
       }));
       setSearchResults({ length: parseInt(numEntries, 10), entries: formattedEntries });
     }
-  }, [immersionState.data]);
+  }, [options, immersionState.data]);
 
   useEffect(() => {
     if (options.type === 'formation' && formationState.data) {
@@ -99,7 +102,7 @@ const ImmersionSearchResults = () => {
       }));
       setSearchResults({ entries: formattedEntries, length: numEntries });
     }
-  }, [formationState.data]);
+  }, [options, formationState.data]);
 
   if (openFilters) return <ImmersionSearchFilters onClose={() => setOpenFilters(false)} />;
 
