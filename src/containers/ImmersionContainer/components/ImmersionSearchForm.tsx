@@ -1,10 +1,9 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import AccordionControlled from 'components/design-system/AccordionControlled';
-import Checkbox from 'components/design-system/Checkbox';
 import Input from 'components/Register/Input';
 import classNames from 'common/utils/classNames';
 import Button from 'components/design-system/Button';
+import ChoiceDropdown from 'components/design-system/ChoiceDropdown';
 
 const searchOptions = [
   { label: 'une immersion en entreprise', value: 'immersion' },
@@ -15,14 +14,8 @@ const searchOptions = [
 
 const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant }) => {
   const history = useHistory();
-  const [searchType, setSearchType] = useState<string>();
-  const [accordionOpened, setAccordionOpened] = useState(false);
+  const [searchType, setSearchType] = useState<string>('immersion');
   const isVariantBold = variant === 'bold';
-
-  const handleChangeSearchType = (value: string) => {
-    setSearchType(value);
-    setAccordionOpened(false);
-  };
 
   const handleStartSearch = () => {
     history.push(`/immersion/recherche/resultats?type=${searchType}`);
@@ -32,28 +25,7 @@ const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant 
     <div className="flex flex-col space-y-8">
       <div className="space-y-2">
         <div className={classNames('text-lena-blue-dark', isVariantBold && 'font-bold')}>Que cherchez-vous ?</div>
-        <AccordionControlled
-          label={
-            accordionOpened
-              ? 'Je recherche'
-              : searchOptions.find((v) => v.value === searchType)?.label || 'Je recherche'
-          }
-          open={accordionOpened}
-          onToggleOpen={() => setAccordionOpened(!accordionOpened)}
-        >
-          <div className="px-4 bg-white divide-y-2 py-2">
-            {searchOptions.map((v) => (
-              <div key={v.value} className="py-2">
-                <Checkbox
-                  checked={searchType === v.value}
-                  label={v.label}
-                  value={v.value}
-                  onChange={(e) => handleChangeSearchType(e.currentTarget.value)}
-                />
-              </div>
-            ))}
-          </div>
-        </AccordionControlled>
+        <ChoiceDropdown choices={searchOptions} onChange={(value) => setSearchType(value)} value={searchType} />
       </div>
       <div className="space-y-2">
         <div className={classNames('text-lena-blue-dark', isVariantBold && 'font-bold')}>

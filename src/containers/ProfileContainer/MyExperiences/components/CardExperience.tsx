@@ -18,12 +18,12 @@ type ExperienceProps = {
 };
 
 const CardExperience: FunctionComponent<ExperienceProps> = ({ title, startDate, endDate, description, certified }) => (
-  <div className="bg-white p-4 rounded-lg mb-2 shadow-md">
+  <div className="bg-white p-4 rounded-lg border-2 border-opacity-10 border-lena-blue-dark">
     <div className="flex justify-between items-start mb-4 space-x-4">
       <div className="flex flex-row items-center space-x-4">
         {certified && <img src={MedailleSvg} className="h-8 w-8" alt="Medaille Badge" />}
         <div>
-          <h3 className="text-sm font-bold">{title}</h3>
+          <h3 className="text-lg font-bold">{title}</h3>
           {startDate && <span className="font-bold text-xs text-lena-blue-dark">{startDate}</span>}
           {endDate && <span className="font-bold text-xs text-lena-blue-dark">{` - ${endDate}`}</span>}
         </div>
@@ -45,7 +45,7 @@ const CardExperience: FunctionComponent<ExperienceProps> = ({ title, startDate, 
       <div className="bg-lena-yellow-light mt-2 px-5 py-4 rounded-lg">
         <div
           className={`uppercase font-bold text-sm inline-block
-        bg-lena-yellow bg-opacity-50 px-2 pt-1 rounded-md uppercase`}
+        bg-lena-yellow bg-opacity-50 px-2 pt-1 rounded-md`}
         >
           Expérience recommandée
         </div>

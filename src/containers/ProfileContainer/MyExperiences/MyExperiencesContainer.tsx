@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
 import ProfileLayout from 'layouts/ProfileLayout/ProfileLayout';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { ReactComponent as ExpProSvg } from 'assets/svg/exp_professional.svg';
 import { ReactComponent as ExpBenevolatSvg } from 'assets/svg/exp-benevolat.svg';
 import { ReactComponent as ExpPersoSvg } from 'assets/svg/exp_perso_white.svg';
@@ -12,6 +12,7 @@ import translateExperienceType from 'utils/translateExperienceType';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import _ from 'lodash';
 import { useDidMount } from 'common/hooks/useLifeCycle';
+import Button from 'components/design-system/Button';
 import CardExperience from './components/CardExperience';
 
 const allExperienceTypes = [
@@ -38,7 +39,6 @@ const allExperienceTypes = [
 const MyExperiencesContainer: FunctionComponent = () => {
   const isDesktop = useMediaQuery('md');
   const location = useLocation();
-  const history = useHistory();
   const [callSkills, skillsState] = useListSkills();
   const [selectedType, setSelectedType] = useState<string>();
   const [callSkillCount, skillCountState] = useSkillCountPerDomain();
@@ -57,8 +57,6 @@ const MyExperiencesContainer: FunctionComponent = () => {
   const groupedExperiencesCount = useMemo(() => {
     return skillCountState.data ? _.groupBy(skillCountState.data.skills.data, (v) => v.domain) : {};
   }, [skillCountState.data]);
-
-  const localizedExperienceType = translateExperienceType(selectedType || '');
 
   return (
     <ProfileLayout>
@@ -85,32 +83,40 @@ const MyExperiencesContainer: FunctionComponent = () => {
               </button>
             ))}
           </div>
+          {!selectedType && (
+            <div>
+              <div className="italic">
+                Vous pouvez ici modifier les expériences que vous avez renseigné, ou bien ajouter de nouvelles
+                expériences.
+              </div>
+            </div>
+          )}
           {selectedType && (
-            <>
+            <div className="flex flex-col items-center w-full xl:w-5/6 2xl:w-4/6 mx-auto space-y-4">
               {skillsState.loading && <AppLoader />}
               {skillsState.data && skillsState.data.skills.data.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-4 w-full md:w-auto">
-                  {skillsState.data.skills.data.map((exp) => (
-                    <CardExperience
-                      key={exp.id}
-                      title={exp.theme.title}
-                      startDate={exp.startDate}
-                      endDate={exp.endDate}
-                      description={exp.activities}
-                    />
-                  ))}
-                </div>
+                <>
+                  <div className="flex flex-grow items-center justify-between w-full">
+                    <Link to="/ajout-exp">
+                      <Button variant="secondary" size="sm">
+                        Ajouter une expérience
+                      </Button>
+                    </Link>
+                  </div>
+                  <div className="grid lg:grid-cols-2 gap-2 md:gap-4 w-full">
+                    {skillsState.data.skills.data.map((exp) => (
+                      <CardExperience
+                        key={exp.id}
+                        title={exp.theme.title}
+                        startDate={exp.startDate}
+                        endDate={exp.endDate}
+                        description={exp.activities}
+                      />
+                    ))}
+                  </div>
+                </>
               )}
-              <button
-                onClick={() => history.push(`/experience/theme/?type=${selectedType}`)}
-                className="flex items-center focus:ring-0 focus:outline-none"
-              >
-                <PlusSvg />{' '}
-                <span className="ml-3 text-lena-blue-dark">
-                  Ajouter une expérience {localizedExperienceType.singular}
-                </span>
-              </button>
-            </>
+            </div>
           )}
         </div>
       </div>

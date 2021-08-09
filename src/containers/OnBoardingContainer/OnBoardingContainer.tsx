@@ -10,7 +10,7 @@ import ArrowLeftSvg from 'assets/images/svg/picto/arrow-left.svg';
 import classNames from 'common/utils/classNames';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ButtonWithPopover from 'components/misc/ButtonWithPopover';
-import AppLayout from '../../layouts/AppLayout/AppLayout';
+import AppLayout from 'layouts/AppLayout/AppLayout';
 
 type WelcomeProps = {
   onClick: () => void;
@@ -154,23 +154,13 @@ const ChoiceComponent = () => {
 };
 
 const OnBoardingContainer = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [showChoice, setShowCoice] = useState(false);
-  const mediaQueryMD = useMediaQuery('md');
-  return showChoice ? (
-    mediaQueryMD ? (
-      <AppLayout>
-        <ChoiceComponent />
-      </AppLayout>
-    ) : (
-      <ChoiceComponent />
-    )
-  ) : mediaQueryMD ? (
-    <AppLayout>
-      <WelcomeComponent onClick={() => setShowCoice(true)} />
+  const [showChoice, setShowChoice] = useState(false);
+  const isDesktop = useMediaQuery('md');
+
+  return (
+    <AppLayout showHeader={isDesktop}>
+      {showChoice ? <ChoiceComponent /> : <WelcomeComponent onClick={() => setShowChoice(true)} />}
     </AppLayout>
-  ) : (
-    <WelcomeComponent onClick={() => setShowCoice(true)} />
   );
 };
 

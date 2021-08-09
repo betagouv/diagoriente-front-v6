@@ -20,8 +20,8 @@ const HomeContainer = () => {
     { label: 'Ajouter une expérience PRO', url: '/experience/theme-pro' },
     { label: 'Ajouter une expérience PERSO', url: '/experience/theme?type=personal' },
     { label: 'Ajouter une expérience BENEVOLAT', url: '/experience/theme?type=voluntary' },
-    { label: "Mes centres d'intérêts", url: '/profil/mes-centres-d-interet/' },
-    { label: "Ajouter mes centres d'intérêts", url: '/centres_interet/create' },
+    { label: "Mes centres d'intérêt", url: '/profil/mes-centres-d-interet/' },
+    { label: "Ajouter mes centres d'intérêt", url: '/centres_interet/create' },
     { label: 'Mon top métiers', url: '/metiers/mon-top-metiers' },
     { label: 'Rechercher une immersion', url: '/immersion/recherche' },
   ];

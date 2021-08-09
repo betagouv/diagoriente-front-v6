@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useRef } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import LogoDiagoriente from 'assets/images/logo/diagoriente.svg';
 import RepubliqueSvg from 'assets/images/logo/republique.svg';
 import LogoBetagouv from 'assets/images/logo/betagouv.svg';
@@ -14,7 +14,7 @@ const AppHeaderDesktop: FunctionComponent = () => {
     <div className="sticky top-0 shadow-md z-50">
       <header
         className={`bg-white flex flex-row items-center justify-between px-4
-      md:px-8 py-4 space-x-4 shadow-md sticky top-0 z-50 h-14`}
+      md:px-8 py-4 space-x-4 shadow sticky top-0 z-50 h-14`}
       >
         <div className="flex flex-row items-center justify-center space-x-6">
           <Link to="/">

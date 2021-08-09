@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useContext, useEffect, useRef, useState, useMemo } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as PictoExpPro } from 'assets/svg/exp_professional.svg';
 import SearchSvg from 'assets/images/svg/picto/search.svg';
@@ -146,7 +146,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({
 
   // TODO: pass job object
   const handleSelectJob = (job: ThemeListItem) => {
-    setTheme(job);
+    // setTheme(job);
     if (job) {
       history.push(`${job?.id}/domaine`);
     }
@@ -154,14 +154,15 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({
 
   return (
     <div>
-      <div className="bg-lena-lightgray py-4 text-center px-7">
-        <div className="flex justify-end mb-3">
-          <button
+      <div className="bg-lena-blue-dark py-4 text-center px-8">
+        <div className="flex justify-center py-2 text-white">
+          Décrivez en quelques mots votre expérience :
+          {/* <button
             onClick={() => onClose.call(null)}
             className="focus:ring-0 focus:outline-none bg-white p-2 rounded-full shadow-lg"
           >
             <img src={CrossSvg} alt="Cross Svg" />
-          </button>
+          </button> */}
         </div>
         <div className="w-full border border-lena-gray-light px-2 flex bg-white rounded-md">
           <img src={SearchSvg} alt="Search Icon" className="mr-2" />
@@ -169,6 +170,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({
             value={text}
             onChange={(e) => handleThemes(e.currentTarget.value)}
             ref={inputRef}
+            placeholder="Ex : vente de fleurs"
             className="w-full bg-transparent focus:ring-0 focus:outline-none py-2"
           />
         </div>
@@ -194,7 +196,7 @@ const WIPSearchTheme: FunctionComponent<SearchProps> = ({
           </div>
         </div>
         <div>
-          <div className="py-1 px-7 bg-lena-turquoise-light bg-opacity-50 ">
+          <div className="py-1 px-8 bg-lena-turquoise-light bg-opacity-50 ">
             <strong>Tags</strong>
           </div>
           <div className="divide-y divide-lena-lightgray2 px-8">

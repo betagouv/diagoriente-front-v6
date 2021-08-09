@@ -22,27 +22,24 @@ const ImmersionResultItem: FunctionComponent<{ result: any }> = ({ result }) => 
         {result.apiData.naf_text && <div>{result.apiData.naf_text}</div>}
       </div>
       <div>
-        <div className="text-sm text-parcours-perso">{JSON.stringify(result.apiData)}</div>
-        <pre>{result.location.address.replaceAll(', ', '\n')}</pre>
-        <pre>{result.location.city}</pre>
+        <div className="whitespace-pre-line">{result.location.address.replaceAll(', ', '\n')}</div>
+        <div>{result.location.city}</div>
       </div>
-      <div className="flex flex-row justify-between">
-        <div className="space-y-2 text-sm">
-          {result.apiData.headcount_text && (
-            <div className="flex items-center justify-start space-x-2">
-              <PictoFormation />
-              <div>{result.apiData.headcount_text}</div>
-            </div>
-          )}
-          {result.apiData.distance && (
-            <div className="flex items-center justify-start space-x-2">
-              <PictoFormation />
-              <div>{result.apiData.distance} km du centre ville</div>
-            </div>
-          )}
-        </div>
-        <div className="flex items-end text-sm font-bold text-lena-turquoise-dark py-1">Conseils de contact</div>
+      <div className="flex flex-row items-center justify-between space-x-2 text-sm">
+        {result.apiData.headcount_text && (
+          <div className="flex items-center justify-start space-x-2">
+            <PictoFormation />
+            <div>{result.apiData.headcount_text}</div>
+          </div>
+        )}
+        {result.apiData.distance && (
+          <div className="flex items-center justify-start space-x-2">
+            <PictoFormation />
+            <div>{result.apiData.distance} km du centre ville</div>
+          </div>
+        )}
       </div>
+      <div className="flex items-end text-sm font-bold text-lena-turquoise-dark py-1">Conseils de contact</div>
     </div>
   );
 };

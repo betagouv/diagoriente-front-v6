@@ -9,6 +9,7 @@ import { ReactComponent as SearchInputSvg } from 'assets/svg/search.svg';
 import { ReactComponent as PlusSvg } from 'assets/svg/plus.svg';
 import { ReactComponent as LessSvg } from 'assets/svg/less.svg';
 import { useHistory } from 'react-router-dom';
+import ChoiceDropdown from 'components/design-system/ChoiceDropdown';
 import JobInterestItem from '../components/JobInterestItem';
 import JobStatistics from '../components/JobStatistics';
 import JobHeader from '../components/JobHeader';
@@ -18,10 +19,22 @@ const DetailJob: FunctionComponent = () => {
   const history = useHistory();
   const [showAbout, setShowAbout] = useState(false);
   const isDesktop = useMediaQuery('md');
+  const [searchType, setSearchType] = useState('immersion');
+
+  const searchOptions = [
+    { label: 'une immersion en entreprise', value: 'immersion' },
+    { label: 'une formation ou un apprentissage', value: 'formation' },
+    { label: "une mission d'engagement", value: 'engagement' },
+    { label: 'un emploi', value: 'emploi' },
+  ];
 
   const handleOpenStatistics = () => {
     if (isDesktop) setShowAbout(!showAbout);
     else history.push('/metiers/123456789/statistiques');
+  };
+
+  const handleStartSearch = () => {
+    alert('Not Implemented');
   };
 
   return (
@@ -55,21 +68,12 @@ const DetailJob: FunctionComponent = () => {
                   <div className="text-lena-blue-dark font-bold w-3/4 block mb-4">
                     Trouver une immersion ou une formation pour ce métier
                   </div>
-                  <div className="w-full">
-                    <button
-                      className={`border-2 border-lena-blue-lightest py-4 px-4
-                  w-full rounded-md flex justify-between items-center mb-3 bg-white focus:ring-0 focus:outline-none`}
-                      style={{ boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)' }}
-                    >
-                      <div className="flex items-center space-x-3 overflow-ellipsis overflow-hidden">
-                        <span className="text-lena-blue-dark text-left overflow-ellipsis overflow-hidden">
-                          Je recherche
-                        </span>
-                      </div>
-                      <div>
-                        <ArrowBottomSvg />
-                      </div>
-                    </button>
+                  <div className="w-full space-y-4">
+                    <ChoiceDropdown
+                      choices={searchOptions}
+                      onChange={(value) => setSearchType(value)}
+                      value={searchType}
+                    />
                     <div
                       className={`w-full border border-lena-gray-light
                 px-2 flex bg-white rounded-md flex items-center mb-5`}
@@ -86,6 +90,7 @@ const DetailJob: FunctionComponent = () => {
                   text-white py-3 text-center font-bold text-lg md:rounded-lg`,
                         'bg-lena-pink-dark rounded-md',
                       )}
+                      onClick={handleStartSearch}
                     >
                       Rechercher
                     </button>

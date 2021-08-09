@@ -30,7 +30,7 @@ const types = [
     sub: 'organizational',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les <strong>compétencesd’organisation</strong> que vous mettez en oeuvre ?
+        Quelles sont les <strong>compétences d'organisation</strong> que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -116,7 +116,7 @@ const QuestionsContainer = ({ theme, setCompetencesValues, competencesValues, on
         <div className="italic mt-2 text-left md:text-center text-sm">Plusieurs choix possibles</div>
         <div className="pb-10">
           {competences.map((q) => (
-            <div className={`mt-3 mb-3 p-3 `}>
+            <div className="my-4">
               <SelectorTest key={q.id} onClick={() => onSelectCompetence(q.id)} checked={isExist(q.id)} withCheckBox>
                 {capitalizeFirstLetter(q.title)}
               </SelectorTest>
