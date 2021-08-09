@@ -138,7 +138,9 @@ const ImmersionSearchResults = () => {
               </div>
             </div>
           )}
-          {viewMode === 'map' && <ImmersionMapView results={searchResults.entries} />}
+          {viewMode === 'map' && (
+            <ImmersionMapView initialCenter={{ lat: params.lat, lng: params.lng }} results={searchResults.entries} />
+          )}
         </div>
       )}
     </ImmersionLayout>

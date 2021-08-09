@@ -18,8 +18,16 @@ const iconMarkerActive = new Leaflet.Icon({
   iconSize: new Leaflet.Point(18, 29),
 });
 
-const ImmersionMapView: FunctionComponent<{ results: any }> = ({ results }) => {
-  const [center, setCenter] = useState<LatLngTuple>([48.8584, 2.2945]);
+type Props = {
+  initialCenter?: { lat: string; lng: string };
+  results: any;
+};
+
+const ImmersionMapView: FunctionComponent<Props> = ({ initialCenter, results }) => {
+  const [center, setCenter] = useState<LatLngTuple>([
+    Number.parseFloat(initialCenter?.lat || '0'),
+    Number.parseFloat(initialCenter?.lng || '0'),
+  ]);
   const [zoom, setZoom] = useState(14);
   const [selectedCompany, setSelectedCompany] = useState<any>(null);
 
