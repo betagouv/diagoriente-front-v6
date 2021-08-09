@@ -27,13 +27,13 @@ const ParcoursExperienceSidebar: FunctionComponent = () => {
     const domain = theme?.domain || params.type;
     switch (domain) {
       case 'professional':
-        return 'professionnelles';
+        return 'professionnelle';
       case 'personal':
-        return 'personnelles';
+        return 'personnelle';
       case 'voluntary':
         return 'bénévolat';
       default:
-        return 'professionnelles';
+        return 'professionnelle';
     }
   };
 
@@ -91,7 +91,7 @@ const ParcoursExperienceSidebar: FunctionComponent = () => {
           <div className="flex items-center justify-center mt-10">
             <div className="flex flex-col justify-center items-center space-y-4">
               {renderPicto()}
-              <div className="text-center text-white font-bold md:text-md xl:text-xl">Ajout d'expériences {path()}</div>
+              <div className="text-center text-white font-bold md:text-md xl:text-xl">Ajout d'expérience {path()}</div>
             </div>
           </div>
           <div className="flex flex-col space-y-2">

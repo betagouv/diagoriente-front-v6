@@ -30,7 +30,7 @@ const types = [
     sub: 'organizational',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les <strong>compétences d'organisation</strong> que vous mettez en oeuvre ?
+        Quelles sont les compétences d'organisation que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -40,7 +40,7 @@ const types = [
     sub: 'communication',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les <strong>compétences de communication</strong> que vous mettez en oeuvre ?
+        Quelles sont les compétences de communication que vous mettez en oeuvre ?
       </span>
     ),
   },
@@ -50,7 +50,7 @@ const types = [
     sub: 'reflective',
     text: (
       <span className="text-lena-blue-dark md:text-center md:font-bold md:text-xl md:leading-10">
-        Quelles sont les <strong>compétences de réflexion</strong> que vous mettez en oeuvre ?
+        Quelles sont les compétences de réflexion que vous mettez en oeuvre ?
       </span>
     ),
   },

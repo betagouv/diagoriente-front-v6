@@ -36,7 +36,7 @@ const MyInterestsContainer: FunctionComponent = () => {
         )}
         <div>
           <Button variant="primary" size="md" mobileStacked>
-            <Link to="/centres_interet/create">Modifier mes centres d'intérêt</Link>
+            <Link to="/centres_interet/create">Modifier</Link>
           </Button>
         </div>
       </div>

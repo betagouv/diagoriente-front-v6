@@ -18,26 +18,30 @@ import CardExperience from './components/CardExperience';
 const allExperienceTypes = [
   {
     label: 'Mes expériences professionnelles',
+    labelTablet: 'Mes expériences pro',
     labelMobile: 'Pro',
     param: 'professional',
     icon: <ExpProSvg height={40} />,
   },
   {
     label: 'Mes expériences personnelles',
+    labelTablet: 'Mes expériences perso',
     labelMobile: 'Perso',
     param: 'personal',
     icon: <ExpPersoSvg height={40} />,
   },
   {
     label: 'Mes expériences Bénévolat & volontariat',
-    labelMobile: 'Bénévolat\nvolontariat',
+    labelTablet: 'Mes expériences Bénévolat & volontariat',
+    labelMobile: 'Bénévolat & volontariat',
     param: 'voluntary',
     icon: <ExpBenevolatSvg height={40} />,
   },
 ];
 
 const MyExperiencesContainer: FunctionComponent = () => {
-  const isDesktop = useMediaQuery('md');
+  const isTablet = useMediaQuery('md');
+  const isDesktop = useMediaQuery('xl');
   const location = useLocation();
   const [callSkills, skillsState] = useListSkills();
   const [selectedType, setSelectedType] = useState<string>();
@@ -77,8 +81,8 @@ const MyExperiencesContainer: FunctionComponent = () => {
               >
                 {v.icon}
                 <div className="text-center mt-4 text-lena-blue-dark font-bold">
-                  <span className="inline-block">{isDesktop ? v.label : v.labelMobile}</span>
-                  {isDesktop && <span> ({groupedExperiencesCount[v.param]?.length || 0})</span>}
+                  <span className="inline-block">{isDesktop ? v.label : isTablet ? v.labelTablet : v.labelMobile}</span>
+                  <span> ({groupedExperiencesCount[v.param]?.length || 0})</span>
                 </div>
               </button>
             ))}
