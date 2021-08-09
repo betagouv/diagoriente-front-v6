@@ -1,9 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from 'components/Register/Input';
 import classNames from 'common/utils/classNames';
 import Button from 'components/design-system/Button';
 import ChoiceDropdown from 'components/design-system/ChoiceDropdown';
+import { useLocation } from 'common/requests/location';
 
 const searchOptions = [
   { label: 'une immersion en entreprise', value: 'immersion' },
@@ -12,13 +13,51 @@ const searchOptions = [
   { label: 'un emploi', value: 'emploi' },
 ];
 
-const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant }) => {
+const ImmersionSearchForm: FunctionComponent<{ romeCodes?: string[]; variant?: 'bold' }> = ({
+  romeCodes = [],
+  variant,
+}) => {
   const history = useHistory();
   const [searchType, setSearchType] = useState<string>('immersion');
+  const [searchLocation, setSearchLocation] = useState({ lat: 0, lng: 0, name: '', userInput: '' });
+  const [searchRomeCodes, setSearchRomeCodes] = useState(romeCodes);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [callLocation, locationState] = useLocation();
+
   const isVariantBold = variant === 'bold';
 
   const handleStartSearch = () => {
-    history.push(`/immersion/recherche/resultats?type=${searchType}`);
+    const params = new URLSearchParams({
+      type: searchType,
+      romeCodes: searchRomeCodes.join(','),
+      location: searchLocation.name,
+      lat: searchLocation.lat.toString(),
+      lng: searchLocation.lng.toString(),
+    });
+
+    history.push(`/immersion/recherche/resultats?${params.toString()}`);
+  };
+
+  useEffect(() => {
+    if (locationState.data) setShowAutocomplete(true);
+  }, [locationState.data]);
+
+  const handleChangeLocation = (e: any) => {
+    setSearchLocation({ ...searchLocation, userInput: e.currentTarget.value });
+
+    if (e.currentTarget.value.length >= 3) {
+      callLocation({ variables: { search: e.currentTarget.value } });
+    }
+  };
+
+  const handleSelectAutocomplete = (location: any) => {
+    setSearchLocation({
+      lat: location.coordinates[0],
+      lng: location.coordinates[1],
+      name: `${location.postcode} ${location.label}`,
+      userInput: `${location.postcode} ${location.label}`,
+    });
+    setShowAutocomplete(false);
   };
 
   return (
@@ -43,7 +82,23 @@ const ImmersionSearchForm: FunctionComponent<{ variant?: 'bold' }> = ({ variant 
           Dans quelle ville/région ?
         </div>
         <div>
-          <Input fullWidth={true} placeholder="à Paris, Dijon, Lille..." />
+          <Input
+            placeholder="à Paris, Dijon, Lille..."
+            value={searchLocation.userInput}
+            onChange={(e) => handleChangeLocation(e)}
+            selectShow={showAutocomplete}
+            fullWidth
+            withSelect={locationState.data?.location.map((location) => (
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              <li
+                key={location.citycode}
+                className="p-1 cursor-pointer"
+                onClick={() => handleSelectAutocomplete(location)}
+              >
+                {location.postcode} {location.label}
+              </li>
+            ))}
+          />
         </div>
       </div>
       <div>
